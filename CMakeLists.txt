@@ -153,3 +153,12 @@
     endforeach()
     add_custom_target("ui_copy_${project_name_lower}" DEPENDS ${uifiles_build})
     add_dependencies("${project_name_lower}" "ui_copy_${project_name_lower}")
+    add_custom_target(typelib ALL
+        COMMAND
+            g-ir-compiler --shared-library=liboparl.so OParl-${${project_name}_VERSION}.gir
+                          -o OParl-${${project_name}_VERSION}.typelib
+        DEPENDS
+            ${project_name_lower}
+        COMMENT
+            "Creating typelib"
+    )

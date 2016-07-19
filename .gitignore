@@ -5,6 +5,7 @@ Makefile
 *.so.*
 *.so
 *.gir
+*.typelib
 *.deps
 vala.stamp
 
