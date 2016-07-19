@@ -1,0 +1,13 @@
+prefix=@pc_prefix@
+exec_prefix=@pc_exec_prefix@
+libdir=@pc_libdir@
+includedir=@pc_includedir@
+datarootdir=@pc_datarootdir@
+vapidir=@pc_vapidir@
+
+Name: oparl
+Description: oparl
+Version: @pc_version@
+Requires: @pc_requirements@
+Libs: -L${libdir} -loparl
+Cflags: -I${includedir}/
