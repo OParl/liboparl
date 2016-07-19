@@ -38,6 +38,7 @@
     set(docdir "${datadir}/doc")
     set(mandir "${datarootdir}/man")
     set(mimedir "${datarootdir}/mime/packages")
+    set(typelibdir "${libdir}/girepository-1.0")
     if(CMAKE_INSTALL_PREFIX)
       set(install_prefix "${CMAKE_INSTALL_PREFIX}/")
     else()
@@ -138,6 +139,7 @@
     install(FILES ${vapi_files} DESTINATION "${VALA_VAPIDIR}")
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${project_name}-${${project_name}_VERSION}.gir" DESTINATION "${datarootdir}/gir-1.0")# Install user interface files if used and copy them to build directory.
     set(uifiles_build)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${project_name}-${API_VERSION}.typelib" DESTINATION "${typelibdir}")# Install user interface files if used and copy them to build directory.
     foreach(uifile ${uifiles})
       add_custom_command(
         OUTPUT
@@ -156,7 +158,7 @@
     add_custom_target(typelib ALL
         COMMAND
             g-ir-compiler --shared-library=liboparl.so OParl-${${project_name}_VERSION}.gir
-                          -o OParl-${${project_name}_VERSION}.typelib
+                          -o OParl-${API_VERSION}.typelib
         DEPENDS
             ${project_name_lower}
         COMMENT
