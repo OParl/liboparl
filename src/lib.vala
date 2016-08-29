@@ -51,6 +51,13 @@ namespace OParl {
         protected string web {get; set;}
         protected bool deleted {get; set;}
 
+        internal Client client;
+
+
+        public virtual void set_client(Client c) {
+            this.client = c;
+        }
+
         internal static void populate_name_map() {
             name_map = new HashTable<string,string>(str_hash, str_equal);
             name_map.insert("id","id");
@@ -139,11 +146,59 @@ namespace OParl {
         } 
     }
 
-    public class ObjectList : OParl.Object {
-    }
+    private class PageResolver<K> {
+        private string url;
+        private Client c;
 
-    private void resolve_object_list() {
-        
+        public PageResolver(Client c, string url) {
+            this.url = url;
+            this.c = c;
+        }
+
+        public List<K> resolve() {
+            string data = this.c.resolve_url(this.url);
+            var parser = new Json.Parser();
+            parser.load_from_data(data);
+            List<K> list = new List<K>();
+            this.parse(parser.get_root(), list);
+            return list;
+        }
+
+        private void next_page(Json.Node n, out List<K> list) {
+        }
+
+        private void parse(Json.Node n, out List<K> list) {
+            if (n.get_node_type() != Json.NodeType.OBJECT)
+                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+            
+            unowned Json.Object o = n.get_object();
+
+            // Read in Member values
+            foreach (unowned string name in o.get_members()) {
+                unowned Json.Node item = o.get_member(name);
+                switch(name) {
+                    case "data":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        var data_node = o.get_member(name);
+                        data_node.get_array().foreach_element((_,i,element) => {
+                            if (element.get_node_type() != Json.NodeType.OBJECT) {
+                                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                            }
+                            var el_obj = element.get_object();
+                            K target = new K();
+                            target.parse(el_obj);
+                            list.append(k);
+                        });
+                        break;
+                    case "pagination":
+                        break;
+                    case "links":
+                        break;
+                }
+            }
+        }
     }
 
     public class System : OParl.Object {
@@ -151,14 +206,26 @@ namespace OParl {
 
         public string oparl_version {get;set;}
         public string other_oparl_versions {get;set;}
-        public string body {get;set;}
-        public Body[]? bodies {get;set;}
         public string contact_email {get;set;}
         public string contact_name {get;set;}
         public string website {get;set;}
         public string vendor {get;set;}
         public string product {get;set;}
 
+        public string body_url {get;set;}
+        private bool body_resolved {get;set;}
+        private List<Body>? body_p = null;
+        public List<Body>? body {
+            get {
+                if (!body_resolved) {
+                    body = (new PageResolver<Body>(this.client, body_url)).resolve();
+                }
+            }
+            set{
+                this.body_p = value;
+            }
+        }
+    
         internal static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("oparlVersion", "oparl_version");
