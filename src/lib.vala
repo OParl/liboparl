@@ -28,6 +28,17 @@ namespace OParl {
     }*/
 
     public class Client : GLib.Object {
+        private static bool initialized = false;
+
+        public static void init() {
+            System.populate_name_map();
+        }
+
+        public Client() {
+            if (!Client.initialized)
+                Client.init();
+        }
+
         public System open(string url) {
             string data = this.resolve_url(url);
             if (data != null) {
@@ -44,16 +55,29 @@ namespace OParl {
     }
 
     public class Object : GLib.Object {
+        public static HashTable<string,string> name_map = new HashTable<string,string>(str_hash, str_equal);
         // Direct Read-In
         protected string id {get; set;}
         protected string name {get; set;}
-        protected string? shortName {get; set; default=null;}
+        protected string? short_name {get; set; default=null;}
         protected string license {get; set;}
         protected GLib.DateTime created {get; set;}
         protected GLib.DateTime modified {get; set;}
         protected string keyword {get; set;}
         protected string web {get; set;}
         protected bool deleted {get; set;}
+
+        internal void populate_name_map() {
+            name_map.insert("id","id");
+            name_map.insert("name","name");
+            name_map.insert("shortName","short_name");
+            name_map.insert("license","license");
+            name_map.insert("created","created");
+            name_map.insert("modified","modified");
+            name_map.insert("keyword","keyword");
+            name_map.insert("web","web");
+            name_map.insert("deleted","deleted");
+        }
 
         public virtual void parse(Object target, Json.Node n) {
             // Prepare object
@@ -77,7 +101,7 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         stdout.printf("foobar here\n");
-                        target.set(name, item.get_string(),null);
+                        target.set(Object.name_map.get(name), item.get_string(),null);
                         stdout.printf("after here\n");
                         break;
                     // - dates
@@ -89,14 +113,14 @@ namespace OParl {
                         var tv = new GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
-                        target.set_property(name, dt);
+                        target.set_property(Object.name_map.get(name), dt);
                         break;
                     // - booleans
                     case "deleted":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        target.set_property(name, item.get_boolean());
+                        target.set_property(Object.name_map.get(name), item.get_boolean());
                         break;
                     default:
                         break;
@@ -132,16 +156,31 @@ namespace OParl {
         } 
     }
 
+    public class ObjectList : Oparl.Object {
+    }
+
     public class System : OParl.Object {
-        public string oparlVersion {get;set;}
+        private static HashTable<string,string> name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
+
+        public string oparl_version {get;set;}
         public string other_oparl_versions {get;set;}
         public string body {get;set;}
         public Body[]? bodies {get;set;}
-        public string contactEmail {get;set;}
-        public string contactName {get;set;}
+        public string contact_email {get;set;}
+        public string contact_name {get;set;}
         public string website {get;set;}
         public string vendor {get;set;}
         public string product {get;set;}
+
+        internal static void populate_name_map() {
+            name_map.insert("oparlVersion", "oparl_version");
+            name_map.insert("otherOparlVersions", "other_oparl_versions");
+            name_map.insert("contactEmail", "contact_email");
+            name_map.insert("contactName", "contact_name");
+            name_map.insert("website", "website");
+            name_map.insert("vendor", "vendor");
+            name_map.insert("product", "product");
+        }
 
         public System() {
             base();
@@ -168,9 +207,7 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        stdout.printf("name: %s\n",name);
-                        this.set(name, item.get_string(),null);
-                        stdout.printf("after name: %s\n",name);
+                        this.set(System.name_map.get(name), item.get_string(),null);
                         break;
                     // To Resolve
                     case "body":
