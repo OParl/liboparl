@@ -74,7 +74,7 @@ namespace OParl {
                     case "keyword": 
                     case "web":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute must be a value");
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         stdout.printf("foobar here\n");
                         target.set(name, item.get_string(),null);
@@ -84,7 +84,7 @@ namespace OParl {
                     case "created":
                     case "modified":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute must be a value");
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         var tv = new GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
@@ -94,7 +94,7 @@ namespace OParl {
                     // - booleans
                     case "deleted":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute must be a value");
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         target.set_property(name, item.get_boolean());
                         break;
@@ -166,7 +166,7 @@ namespace OParl {
                     case "vendor": 
                     case "product": 
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute must be a value");
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         stdout.printf("name: %s\n",name);
                         this.set(name, item.get_string(),null);
@@ -175,7 +175,7 @@ namespace OParl {
                     // To Resolve
                     case "body":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute must be an array");
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
                         }
                         this.set_property("_"+name, item.get_boolean());
                         break;
