@@ -7,6 +7,7 @@ namespace OParl {
         MISSING_OPTIONAL,
         EMPTY_OPTIONAL,
         NO_DATA,
+        INVALID_TYPE
     }
 
     private const uint8 SEVERITY_MEDIUM= 0x1;
@@ -28,6 +29,7 @@ namespace OParl {
             if (data != null) {
                 var system = new System();
                 var parser = new Json.Parser();
+                system.set_client(this);
                 parser.load_from_data(data);
                 system.parse(parser.get_root());
                 return system;
@@ -136,68 +138,122 @@ namespace OParl {
             foreach (string name in optionals) {
                 this.get_property(name, ref v);
                 if (v.get_string() ==  null) {
-                    GLib.warning("Optional field %s must shoult not be null!", name);
+                    GLib.warning("Optional field %s must should not be null!", name);
                     error_severity |= SEVERITY_MEDIUM;
                 } else if (v.get_string() == "") {
-                    GLib.warning("Optional field %s must shoult not be empty!", name);
+                    GLib.warning("Optional field %s must should not be empty!", name);
                     error_severity |= SEVERITY_MEDIUM;
                 }
             }
         } 
     }
 
-    private class PageResolver<K> {
+    /**
+     * Resolves an objectlist-URL to a list of OParl.Objects
+     */
+    private class PageResolver {
+        private unowned List<Object> result;
         private string url;
         private Client c;
 
-        public PageResolver(Client c, string url) {
+        public PageResolver(Client c, string url, List<Object> l) {
             this.url = url;
             this.c = c;
+            this.result = l;
         }
 
-        public List<K> resolve() {
+        public unowned List<Object> resolve() {
             string data = this.c.resolve_url(this.url);
             var parser = new Json.Parser();
             parser.load_from_data(data);
-            List<K> list = new List<K>();
-            this.parse(parser.get_root(), list);
-            return list;
+            this.parse(parser.get_root());
+            return this.result; 
         }
 
-        private void next_page(Json.Node n, out List<K> list) {
+        private Object make_object(Json.Node n) {
+            Json.Object el_obj = n.get_object();
+            Json.Node type = el_obj.get_member("type");
+            if (type.get_node_type() != Json.NodeType.VALUE)
+                throw new ValidationError.EXPECTED_VALUE("I need a string-value as type");
+            string typestr = type.get_string();
+            switch (typestr) {
+                case "https://schema.oparl.org/1.0/Body":
+                    var target = new Body();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/AgendaItem":
+                    var target = new AgendaItem();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Consultation":
+                    var target = new Consultation();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/File":
+                    var target = new File();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/LegislativeTerm":
+                    var target = new LegislativeTerm();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Location":
+                    var target = new Location();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Meeting":
+                    var target = new Meeting();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Membership":
+                    var target = new Membership();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Organization":
+                    var target = new Organization();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Paper":
+                    var target = new Paper();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/Person":
+                    var target = new Person();
+                    target.parse(n);
+                    return target;
+                case "https://schema.oparl.org/1.0/System":
+                    var target = new System();
+                    target.parse(n);
+                    return target;
+            }
+            throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
+        } 
+
+        private void next_page(Json.Node n, out List<Object> list) {
         }
 
-        private void parse(Json.Node n, out List<K> list) {
+        private void parse(Json.Node n) {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
             
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
-            foreach (unowned string name in o.get_members()) {
-                unowned Json.Node item = o.get_member(name);
-                switch(name) {
-                    case "data":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
-                        }
-                        var data_node = o.get_member(name);
-                        data_node.get_array().foreach_element((_,i,element) => {
-                            if (element.get_node_type() != Json.NodeType.OBJECT) {
-                                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
-                            }
-                            var el_obj = element.get_object();
-                            K target = new K();
-                            target.parse(el_obj);
-                            list.append(k);
-                        });
-                        break;
-                    case "pagination":
-                        break;
-                    case "links":
-                        break;
-                }
+            unowned Json.Node item;
+            item = o.get_member("data");
+            if (item.get_node_type() != Json.NodeType.ARRAY) {
+                throw new ValidationError.EXPECTED_VALUE("Attribute data must be an array");
             }
+            item.get_array().foreach_element((_,i,element) => {
+                if (element.get_node_type() != Json.NodeType.OBJECT) {
+                    throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                }
+                Object target = (Object)make_object(item);
+                this.result.append(target);
+            });
+            item = o.get_member("pagination");
+            item = o.get_member("links");
+            //TODO: if pagination hints to more pages, load and call recurse results into this func
         }
     }
 
@@ -213,16 +269,18 @@ namespace OParl {
         public string product {get;set;}
 
         public string body_url {get;set;}
-        private bool body_resolved {get;set;}
+        private bool body_resolved {get;set; default=false;}
         private List<Body>? body_p = null;
         public List<Body>? body {
             get {
                 if (!body_resolved) {
-                    body = (new PageResolver<Body>(this.client, body_url)).resolve();
+                    stdout.printf("resolving"+this.body_url);
+                    this.body_p = new List<Body>();
+                    var pr = new PageResolver(this.client, this.body_url, this.body_p);
+                    pr.resolve();
+                    body_resolved = true;   
                 }
-            }
-            set{
-                this.body_p = value;
+                return this.body_p;
             }
         }
     
@@ -235,6 +293,7 @@ namespace OParl {
             name_map.insert("website", "website");
             name_map.insert("vendor", "vendor");
             name_map.insert("product", "product");
+            name_map.insert("body", "body");
         }
 
         public System() {
@@ -266,13 +325,10 @@ namespace OParl {
                         break;
                     // To Resolve
                     case "body":
-                        stdout.printf("name: %s\n",name);
-                        /*
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                        if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
                         }
-                        stdout.printf("after name: %s\n",name);
-                        this.set_property("_"+name, item.get_boolean());*/
+                        this.set(System.name_map.get(name)+"_url", item.get_string());
                         break;
                 }
             }
@@ -318,7 +374,7 @@ namespace OParl {
             name_map.insert("location","location");
         }
 
-        public void parse() {
+        public new void parse(Json.Node n) {
         }
     }
     public class Person : Object {
@@ -327,34 +383,43 @@ namespace OParl {
         }
         public override void validate () {
         }
-        private void parse() {
+        public new void parse(Json.Node n) {
         }
     }
     public class Membership : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class Organization : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class Meeting : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class AgendaItem : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class Consultation : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class Paper : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class File : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class Location : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
     public class LegislativeTerm : Object {
-
+        public new void parse(Json.Node n) {
+        }
     }
 }
