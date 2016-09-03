@@ -140,7 +140,7 @@ namespace OParl {
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
                     throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
                 }
-                Object target = (Object)make_object(item);
+                Object target = (Object)make_object(element);
                 this.result.append(target);
             });
             item = o.get_member("pagination");
