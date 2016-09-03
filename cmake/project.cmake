@@ -11,6 +11,10 @@ set(required_pkgs
 )
 set(srcfiles
   "src/lib.vala"
+  "src/unfinished.vala"
+  "src/body.vala"
+  "src/system.vala"
+  "src/object.vala"
 )
 set(vapifiles
 )
