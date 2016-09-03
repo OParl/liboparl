@@ -16,10 +16,11 @@ namespace OParl {
         public List<Body>? body {
             get {
                 if (!body_resolved) {
-                    stdout.printf("resolving"+this.body_url);
                     this.body_p = new List<Body>();
-                    var pr = new PageResolver(this.client, this.body_url, this.body_p);
-                    pr.resolve();
+                    var pr = new PageResolver(this.client, this.body_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.body_p.append((Body)o);
+                    }
                     body_resolved = true;   
                 }
                 return this.body_p;

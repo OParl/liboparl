@@ -44,14 +44,14 @@ namespace OParl {
      * Resolves an objectlist-URL to a list of OParl.Objects
      */
     private class PageResolver {
-        private unowned List<Object> result;
+        private List<Object> result;
         private string url;
         private Client c;
 
-        public PageResolver(Client c, string url, List<Object> l) {
+        public PageResolver(Client c, string url) {
             this.url = url;
             this.c = c;
-            this.result = l;
+            this.result = new List<Object>();
         }
 
         public unowned List<Object> resolve() {
