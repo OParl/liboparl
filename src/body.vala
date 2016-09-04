@@ -103,19 +103,9 @@ namespace OParl {
             }
         }
 
-        public string legislative_term_url {get;set;}
-        private bool legislative_term_resolved {get;set; default=false;}
-        private List<LegislativeTerm>? legislative_term_p = null;
+        private List<LegislativeTerm>? legislative_term_p = new List<LegislativeTerm>();
         public List<LegislativeTerm> legislative_term {
             get {
-                if (!legislative_term_resolved) {
-                    this.legislative_term_p = new List<LegislativeTerm>();
-                    var pr = new Resolver(this.client, this.legislative_term_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.legislative_term_p.append((LegislativeTerm)o);
-                    }
-                    legislative_term_resolved = true;
-                }
                 return this.legislative_term_p;
             }
         }
@@ -230,6 +220,10 @@ namespace OParl {
                     case "legislativeTerm":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        foreach (Object term in r.parse_data(item.get_array())) {
+                            this.legislative_term_p.append((LegislativeTerm)term);
                         }
                         break;
                 }
