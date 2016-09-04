@@ -21,7 +21,7 @@
 
 namespace OParl {
     public class System : OParl.Object {
-        private static HashTable<string,string> name_map;
+        private new static HashTable<string,string> name_map;
 
         public string oparl_version {get;set;}
         public string other_oparl_versions {get;set;}
