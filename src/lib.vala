@@ -154,7 +154,7 @@ namespace OParl {
             throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
         }
 
-        public void parse_data(Json.Array arr) {
+        public unowned List<Object> parse_data(Json.Array arr) {
             arr.foreach_element((_,i,element) => {
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
                     throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
@@ -162,6 +162,7 @@ namespace OParl {
                 Object target = (Object)make_object(element);
                 this.result.append(target);
             });
+            return this.result;
         }
 
         private void parse(Json.Node n) {
