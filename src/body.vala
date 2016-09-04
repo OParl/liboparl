@@ -42,7 +42,7 @@ namespace OParl {
             get {
                 if (!organization_resolved) {
                     this.organization_p = new List<Organization>();
-                    var pr = new PageResolver(this.client, this.organization_url);
+                    var pr = new Resolver(this.client, this.organization_url);
                     foreach (Object o in pr.resolve()) {
                         this.organization_p.append((Organization)o);
                     }
@@ -59,7 +59,7 @@ namespace OParl {
             get {
                 if (!person_resolved) {
                     this.person_p = new List<Person>();
-                    var pr = new PageResolver(this.client, this.person_url);
+                    var pr = new Resolver(this.client, this.person_url);
                     foreach (Object o in pr.resolve()) {
                         this.person_p.append((Person)o);
                     }
@@ -76,7 +76,7 @@ namespace OParl {
             get {
                 if (!meeting_resolved) {
                     this.meeting_p = new List<Meeting>();
-                    var pr = new PageResolver(this.client, this.meeting_url);
+                    var pr = new Resolver(this.client, this.meeting_url);
                     foreach (Object o in pr.resolve()) {
                         this.meeting_p.append((Meeting)o);
                     }
@@ -93,7 +93,7 @@ namespace OParl {
             get {
                 if (!paper_resolved) {
                     this.paper_p = new List<Paper>();
-                    var pr = new PageResolver(this.client, this.paper_url);
+                    var pr = new Resolver(this.client, this.paper_url);
                     foreach (Object o in pr.resolve()) {
                         this.paper_p.append((Paper)o);
                     }
@@ -110,7 +110,7 @@ namespace OParl {
             get {
                 if (!legislative_term_resolved) {
                     this.legislative_term_p = new List<LegislativeTerm>();
-                    var pr = new PageResolver(this.client, this.legislative_term_url);
+                    var pr = new Resolver(this.client, this.legislative_term_url);
                     foreach (Object o in pr.resolve()) {
                         this.legislative_term_p.append((LegislativeTerm)o);
                     }

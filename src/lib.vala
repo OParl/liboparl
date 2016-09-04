@@ -64,12 +64,12 @@ namespace OParl {
     /**
      * Resolves an objectlist-URL to a list of OParl.Objects
      */
-    private class PageResolver {
+    private class Resolver {
         private List<Object> result;
         private string url;
         private Client c;
 
-        public PageResolver(Client c, string url) {
+        public Resolver(Client c, string url="") {
             this.url = url;
             this.c = c;
             this.result = new List<Object>();
@@ -140,7 +140,17 @@ namespace OParl {
                     return target;
             }
             throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
-        } 
+        }
+
+        public void parse_data(Json.Array arr) {
+            arr.foreach_element((_,i,element) => {
+                if (element.get_node_type() != Json.NodeType.OBJECT) {
+                    throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                }
+                Object target = (Object)make_object(element);
+                this.result.append(target);
+            });
+        }
 
         private void parse(Json.Node n) {
             if (n.get_node_type() != Json.NodeType.OBJECT)
@@ -154,13 +164,7 @@ namespace OParl {
             if (item.get_node_type() != Json.NodeType.ARRAY) {
                 throw new ValidationError.EXPECTED_VALUE("Attribute data must be an array");
             }
-            item.get_array().foreach_element((_,i,element) => {
-                if (element.get_node_type() != Json.NodeType.OBJECT) {
-                    throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
-                }
-                Object target = (Object)make_object(element);
-                this.result.append(target);
-            });
+            this.parse_data(item.get_array());
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ValidationError.EXPECTED_VALUE("Attribute links must be an object");

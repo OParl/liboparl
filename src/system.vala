@@ -38,7 +38,7 @@ namespace OParl {
             get {
                 if (!body_resolved) {
                     this.body_p = new List<Body>();
-                    var pr = new PageResolver(this.client, this.body_url);
+                    var pr = new Resolver(this.client, this.body_url);
                     foreach (Object o in pr.resolve()) {
                         this.body_p.append((Body)o);
                     }
