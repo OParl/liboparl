@@ -166,7 +166,7 @@ namespace OParl {
                 throw new ValidationError.EXPECTED_VALUE("Attribute links must be an object");
             }
             Json.Object links = item.get_object();
-            if (!links.has_member("next")) {
+            if (links.has_member("next")) {
                 string data = this.c.resolve_url(links.get_string_member("next"));
                 var parser = new Json.Parser();
                 parser.load_from_data(data);
