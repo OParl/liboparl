@@ -40,7 +40,7 @@ namespace OParl {
         private List<Organization>? organization_p = null;
         public List<Organization> organization {
             get {
-                if (!organization_resolved) {
+                if (!organization_resolved && organization_url != null) {
                     this.organization_p = new List<Organization>();
                     var pr = new Resolver(this.client, this.organization_url);
                     foreach (Object o in pr.resolve()) {
@@ -57,7 +57,7 @@ namespace OParl {
         private List<Person>? person_p = null;
         public List<Person> person {
             get {
-                if (!person_resolved) {
+                if (!person_resolved && person_url != null) {
                     this.person_p = new List<Person>();
                     var pr = new Resolver(this.client, this.person_url);
                     foreach (Object o in pr.resolve()) {
@@ -74,7 +74,7 @@ namespace OParl {
         private List<Meeting>? meeting_p = null;
         public List<Meeting> meeting {
             get {
-                if (!meeting_resolved) {
+                if (!meeting_resolved && meeting_url != null) {
                     this.meeting_p = new List<Meeting>();
                     var pr = new Resolver(this.client, this.meeting_url);
                     foreach (Object o in pr.resolve()) {
@@ -91,7 +91,7 @@ namespace OParl {
         private List<Paper>? paper_p = null;
         public List<Paper> paper {
             get {
-                if (!paper_resolved) {
+                if (!paper_resolved && paper_url != null) {
                     this.paper_p = new List<Paper>();
                     var pr = new Resolver(this.client, this.paper_url);
                     foreach (Object o in pr.resolve()) {
