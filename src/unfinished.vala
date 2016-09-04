@@ -20,10 +20,6 @@
 *********************************************************************/
 
 namespace OParl {
-    public class Person : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
     public class Membership : Object {
         public new void parse(Json.Node n) {
         }

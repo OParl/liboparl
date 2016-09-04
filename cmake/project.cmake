@@ -13,6 +13,7 @@ set(srcfiles
   "src/lib.vala"
   "src/unfinished.vala"
   "src/body.vala"
+  "src/person.vala"
   "src/system.vala"
   "src/object.vala"
 )
