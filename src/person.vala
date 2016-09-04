@@ -29,8 +29,8 @@ namespace OParl {
         public string affix {get; set;}
         public string[] title {get; set;}
         public string gender {get; set;}
-        public string phone {get; set;}
-        public string email {get; set;}
+        public string[] phone {get; set;}
+        public string[] email {get; set;}
         public string[] status {get; set;}
         public string life {get; set;}
         public string life_source {get; set;}
@@ -87,6 +87,68 @@ namespace OParl {
         }
 
         public new void parse(Json.Node n) {
+            base.parse(this, n);
+            if (n.get_node_type() != Json.NodeType.OBJECT)
+                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+            unowned Json.Object o = n.get_object();
+
+            // Read in Member values
+            foreach (unowned string name in o.get_members()) {
+                unowned Json.Node item = o.get_member(name);
+                switch(name) {
+                    // Direct Read-In
+                    // - strings
+                    case "familyName":
+                    case "givenName":
+                    case "formOfAddress":
+                    case "affix":
+                    case "gender":
+                    case "life":
+                    case "lifeSource":
+                        if (item.get_node_type() != Json.NodeType.VALUE) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        this.set(Person.name_map.get(name), item.get_string(),null);
+                        break;
+                    // - string[]
+                    case "title":
+                    case "phone":
+                    case "email":
+                    case "status":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        Json.Array arr = item.get_array();
+                        string[] res = new string[arr.get_length()];
+                        item.get_array().foreach_element((_,i,element) => {
+                            if (element.get_node_type() != Json.NodeType.VALUE) {
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                return;
+                            }
+                            res[i] = element.get_string();
+                        });
+                        this.set(Person.name_map.get(name), res);
+                        break;
+                    // To Resolve as external objectlist
+                    case "body":
+                    case "location":
+                        if (item.get_node_type() != Json.NodeType.VALUE) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        this.set(Person.name_map.get(name)+"_url", item.get_string());
+                        break;
+                    // To Resolve as internal objectlist
+                    case "membership":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        foreach (Object term in r.parse_data(item.get_array())) {
+                            this.membership_p.append((Membership)term);
+                        }
+                        break;
+                }
+            }
         }
     }
 }
