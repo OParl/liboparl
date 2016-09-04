@@ -92,50 +92,62 @@ namespace OParl {
             switch (typestr) {
                 case "https://schema.oparl.org/1.0/Body":
                     var target = new Body();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/AgendaItem":
                     var target = new AgendaItem();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Consultation":
                     var target = new Consultation();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/File":
                     var target = new File();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/LegislativeTerm":
                     var target = new LegislativeTerm();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Location":
                     var target = new Location();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Meeting":
                     var target = new Meeting();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Membership":
                     var target = new Membership();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Organization":
                     var target = new Organization();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Paper":
                     var target = new Paper();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/Person":
                     var target = new Person();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
                 case "https://schema.oparl.org/1.0/System":
                     var target = new System();
+                    target.set_client(this.c);
                     target.parse(n);
                     return target;
             }
