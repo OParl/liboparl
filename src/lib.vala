@@ -66,10 +66,10 @@ namespace OParl {
      */
     private class Resolver {
         private List<Object> result;
-        private string url;
+        private string? url;
         private Client c;
 
-        public Resolver(Client c, string url="") {
+        public Resolver(Client c, string? url="") {
             this.url = url;
             this.c = c;
             this.result = new List<Object>();
