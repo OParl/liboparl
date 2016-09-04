@@ -42,7 +42,7 @@ namespace OParl {
                     foreach (Object o in pr.resolve()) {
                         this.body_p.append((Body)o);
                     }
-                    body_resolved = true;   
+                    body_resolved = true;
                 }
                 return this.body_p;
             }
