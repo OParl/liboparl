@@ -121,9 +121,6 @@ namespace OParl {
             throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
         } 
 
-        private void next_page(Json.Node n, out List<Object> list) {
-        }
-
         private void parse(Json.Node n) {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
@@ -143,9 +140,17 @@ namespace OParl {
                 Object target = (Object)make_object(element);
                 this.result.append(target);
             });
-            item = o.get_member("pagination");
             item = o.get_member("links");
-            //TODO: if pagination hints to more pages, load and call recurse results into this func
+            if (item.get_node_type() != Json.NodeType.OBJECT) {
+                throw new ValidationError.EXPECTED_VALUE("Attribute links must be an object");
+            }
+            Json.Object links = item.get_object();
+            if (!links.has_member("next")) {
+                string data = this.c.resolve_url(links.get_string_member("next"));
+                var parser = new Json.Parser();
+                parser.load_from_data(data);
+                this.parse(parser.get_root());
+            }
         }
     }
 }
