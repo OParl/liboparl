@@ -176,17 +176,31 @@ namespace OParl {
             foreach (unowned string name in o.get_members()) {
                 unowned Json.Node item = o.get_member(name);
                 switch(name) {
+                    //TODO: public string[] equivalent {get; set;}
+
                     // Direct Read-In
+                    // - strings
                     case "website":
                     case "ags":
                     case "rgs":
-                    case "contact_email":
-                    case "contact_url":
+                    case "contactEmail":
+                    case "contactUrl":
                     case "classification":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set(Body.name_map.get(name), item.get_string(),null);
+                        break;
+                    // - dates
+                    case "licenseValidSince":
+                    case "oparlSince":
+                        if (item.get_node_type() != Json.NodeType.VALUE) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        var tv = new GLib.TimeVal();
+                        tv.from_iso8601(item.get_string());
+                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        this.set_property(Object.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
                     case "organization":
@@ -209,9 +223,3 @@ namespace OParl {
         }
     }
 }
-/*
-    TODO:
-        public GLib.DateTime license_valid_since {get; set;}
-        public GLib.DateTime oparl_since {get; set;}
-        public string[] equivalent {get; set;}
-*/
