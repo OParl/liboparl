@@ -176,8 +176,6 @@ namespace OParl {
             foreach (unowned string name in o.get_members()) {
                 unowned Json.Node item = o.get_member(name);
                 switch(name) {
-                    //TODO: public string[] equivalent {get; set;}
-
                     // Direct Read-In
                     // - strings
                     case "website":
@@ -201,6 +199,22 @@ namespace OParl {
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
                         this.set_property(Object.name_map.get(name), dt);
+                        break;
+                    // - string[]
+                    case "equivalent":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        Json.Array arr = item.get_array();
+                        string[] res = new string[arr.get_length()];
+                        item.get_array().foreach_element((_,i,element) => {
+                            if (element.get_node_type() != Json.NodeType.VALUE) {
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                return;
+                            }
+                            res[i] = element.get_string();
+                        });
+                        this.set(Body.name_map.get(name), res);
                         break;
                     // To Resolve as external objectlist
                     case "organization":
