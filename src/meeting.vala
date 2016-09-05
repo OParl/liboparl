@@ -178,6 +178,8 @@ namespace OParl {
                     // To Resolve as external objectlist
                     case "organization":
                     case "participant":
+                        //TODO not gonna work. json-parse array, then enter values into
+                        //     corresponding url-array
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
