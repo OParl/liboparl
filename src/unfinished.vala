@@ -24,10 +24,6 @@ namespace OParl {
         public new void parse(Json.Node n) {
         }
     }
-    public class Meeting : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
     public class AgendaItem : Object {
         public new void parse(Json.Node n) {
         }

@@ -15,6 +15,7 @@ set(srcfiles
   "src/body.vala"
   "src/person.vala"
   "src/membership.vala"
+  "src/meeting.vala"
   "src/system.vala"
   "src/object.vala"
 )
