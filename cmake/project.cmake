@@ -18,6 +18,7 @@ set(srcfiles
   "src/meeting.vala"
   "src/system.vala"
   "src/object.vala"
+  "src/organization.vala"
 )
 set(vapifiles
 )
