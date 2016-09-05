@@ -85,7 +85,7 @@ namespace OParl {
             return this.result; 
         }
 
-        private Object make_object(Json.Node n) {
+        public Object make_object(Json.Node n) {
             Json.Object el_obj = n.get_object();
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE)
@@ -164,6 +164,17 @@ namespace OParl {
                 Object target = (Object)make_object(element);
                 this.result.append(target);
             });
+            return this.result;
+        }
+
+        public unowned List<Object> parse_url_array(string[] urls) {
+            foreach(string url in urls) {
+                string data = this.c.resolve_url(url);
+                var parser = new Json.Parser();
+                parser.load_from_data(data);
+                Object target = (Object)make_object(parser.get_root());
+                this.result.append(target);
+            }
             return this.result;
         }
 
