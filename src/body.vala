@@ -110,16 +110,10 @@ namespace OParl {
             }
         }
 
-        private string location_url {get;set; default="";}
-        private bool location_resolved {get;set; default=false;}
         private Location? location_p = null;
         public Location location {
             get {
-                if (!location_resolved) {
-                    // TODO: Resolve
-                    location_resolved = true;
-                }
-                return this.location;
+                return this.location_p;
             }
         }
 
@@ -225,6 +219,14 @@ namespace OParl {
                         foreach (Object term in r.parse_data(item.get_array())) {
                             this.legislative_term_p.append((LegislativeTerm)term);
                         }
+                        break;
+                    // To resolve as internal object
+                    case "location":
+                        if (item.get_node_type() != Json.NodeType.OBJECT) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        this.set(Body.name_map.get(name)+"_p", (Location)r.make_object(item));
                         break;
                 }
             }
