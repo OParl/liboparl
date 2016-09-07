@@ -34,10 +34,11 @@ namespace OParl {
         public Person person {
             get {
                 if (!person_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.person_p = (Person)r.parse_url(this.person_url);
                     person_resolved = true;
                 }
-                return this.person;
+                return this.person_p;
             }
         }
 
@@ -47,10 +48,11 @@ namespace OParl {
         public Organization organization {
             get {
                 if (!organization_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.organization_p = (Organization)r.parse_url(this.organization_url);
                     organization_resolved = true;
                 }
-                return this.organization;
+                return this.organization_p;
             }
         }
 
@@ -60,10 +62,11 @@ namespace OParl {
         public Organization on_behalf_of {
             get {
                 if (!on_behalf_of_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
                     on_behalf_of_resolved = true;
                 }
-                return this.on_behalf_of;
+                return this.on_behalf_of_p;
             }
         }
 

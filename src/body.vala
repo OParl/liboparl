@@ -123,10 +123,11 @@ namespace OParl {
         public System system {
             get {
                 if (!system_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.system_p = (System)r.parse_url(this.system_url);
                     system_resolved = true;
                 }
-                return this.system;
+                return this.system_p;
             }
         }
 

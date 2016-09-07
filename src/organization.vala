@@ -36,10 +36,11 @@ namespace OParl {
         public Body body {
             get {
                 if (!body_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.body_p = (Body)r.parse_url(this.body_url);
                     body_resolved = true;
                 }
-                return this.body;
+                return this.body_p;
             }
         }
 
@@ -49,10 +50,11 @@ namespace OParl {
         public Body external_body {
             get {
                 if (!external_body_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.external_body_p = (Body)r.parse_url(this.external_body_url);
                     external_body_resolved = true;
                 }
-                return this.external_body;
+                return this.external_body_p;
             }
         }
 
@@ -62,10 +64,11 @@ namespace OParl {
         public Organization sub_organization_of {
             get {
                 if (!sub_organization_of_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
                     sub_organization_of_resolved = true;
                 }
-                return this.sub_organization_of;
+                return this.sub_organization_of_p;
             }
         }
 

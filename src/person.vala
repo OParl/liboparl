@@ -41,10 +41,11 @@ namespace OParl {
         public Location location {
             get {
                 if (!location_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.location_p = (Location)r.parse_url(this.location_url);
                     location_resolved = true;
                 }
-                return this.location;
+                return this.location_p;
             }
         }
 
@@ -54,10 +55,11 @@ namespace OParl {
         public Body body {
             get {
                 if (!body_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.body_p = (Body)r.parse_url(this.body_url);
                     body_resolved = true;
                 }
-                return this.body;
+                return this.body_p;
             }
         }
 

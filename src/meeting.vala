@@ -42,10 +42,11 @@ namespace OParl {
         public File invitation {
             get {
                 if (!invitation_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.invitation_p = (File)r.parse_url(this.invitation_url);
                     invitation_resolved = true;
                 }
-                return this.invitation;
+                return this.invitation_p;
             }
         }
 
@@ -55,10 +56,11 @@ namespace OParl {
         public File results_protocol {
             get {
                 if (!results_protocol_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.results_protocol_p = (File)r.parse_url(this.results_protocol_url);
                     results_protocol_resolved = true;
                 }
-                return this.results_protocol;
+                return this.results_protocol_p;
             }
         }
 
@@ -68,10 +70,11 @@ namespace OParl {
         public File verbatim_protocol {
             get {
                 if (!verbatim_protocol_resolved) {
-                    // TODO: Resolve
+                    var r = new Resolver(this.client);
+                    this.verbatim_protocol_p = (File)r.parse_url(this.verbatim_protocol_url);
                     verbatim_protocol_resolved = true;
                 }
-                return this.verbatim_protocol;
+                return this.verbatim_protocol_p;
             }
         }
 
