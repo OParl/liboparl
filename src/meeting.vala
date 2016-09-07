@@ -29,51 +29,23 @@ namespace OParl {
         public GLib.DateTime end {get; set;}
         
 
-        private Location? location_p = null;
-        public Location location {
-            get {
-                return this.location_p;
-            }
-        }
-
-        private string invitation_url {get;set; default="";}
-        private bool invitation_resolved {get;set; default=false;}
         private File? invitation_p = null;
         public File invitation {
             get {
-                if (!invitation_resolved) {
-                    var r = new Resolver(this.client);
-                    this.invitation_p = (File)r.parse_url(this.invitation_url);
-                    invitation_resolved = true;
-                }
                 return this.invitation_p;
             }
         }
 
-        private string results_protocol_url {get;set; default="";}
-        private bool results_protocol_resolved {get;set; default=false;}
         private File? results_protocol_p = null;
         public File results_protocol {
             get {
-                if (!results_protocol_resolved) {
-                    var r = new Resolver(this.client);
-                    this.results_protocol_p = (File)r.parse_url(this.results_protocol_url);
-                    results_protocol_resolved = true;
-                }
                 return this.results_protocol_p;
             }
         }
 
-        private string verbatim_protocol_url {get;set; default="";}
-        private bool verbatim_protocol_resolved {get;set; default=false;}
         private File? verbatim_protocol_p = null;
         public File verbatim_protocol {
             get {
-                if (!verbatim_protocol_resolved) {
-                    var r = new Resolver(this.client);
-                    this.verbatim_protocol_p = (File)r.parse_url(this.verbatim_protocol_url);
-                    verbatim_protocol_resolved = true;
-                }
                 return this.verbatim_protocol_p;
             }
         }
