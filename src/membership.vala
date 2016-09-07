@@ -117,7 +117,7 @@ namespace OParl {
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
                         this.set_property(Object.name_map.get(name), dt);
                         break;
-                    // To Resolve as external objectlist
+                    // To Resolve as external object
                     case "organization":
                     case "person":
                     case "onBehalfOf":
