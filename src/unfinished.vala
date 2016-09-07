@@ -24,10 +24,6 @@ namespace OParl {
         public new void parse(Json.Node n) {
         }
     }
-    public class Paper : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
     public class File : Object {
         public new void parse(Json.Node n) {
         }

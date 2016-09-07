@@ -20,6 +20,7 @@ set(srcfiles
   "src/object.vala"
   "src/organization.vala"
   "src/agenda_item.vala"
+  "src/paper.vala"
 )
 set(vapifiles
 )
