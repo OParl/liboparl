@@ -24,8 +24,4 @@ namespace OParl {
         public new void parse(Json.Node n) {
         }
     }
-    public class Location : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
 }
