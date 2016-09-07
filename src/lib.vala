@@ -168,12 +168,17 @@ namespace OParl {
             return this.result;
         }
 
+        public Object parse_url(string url) {
+            string data = this.c.resolve_url(url);
+            var parser = new Json.Parser();
+            parser.load_from_data(data);
+            return (Object)make_object(parser.get_root());
+        }
+
+
         public unowned List<Object> parse_url_array(string[] urls) {
             foreach(string url in urls) {
-                string data = this.c.resolve_url(url);
-                var parser = new Json.Parser();
-                parser.load_from_data(data);
-                Object target = (Object)make_object(parser.get_root());
+                Object target = this.parse_url(url);
                 this.result.append(target);
             }
             return this.result;
