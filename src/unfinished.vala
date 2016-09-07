@@ -28,8 +28,4 @@ namespace OParl {
         public new void parse(Json.Node n) {
         }
     }
-    public class LegislativeTerm : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
 }

@@ -22,6 +22,7 @@ set(srcfiles
   "src/agenda_item.vala"
   "src/paper.vala"
   "src/consultation.vala"
+  "src/legislative_term.vala"
 )
 set(vapifiles
 )
