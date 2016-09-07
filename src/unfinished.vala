@@ -20,10 +20,6 @@
 *********************************************************************/
 
 namespace OParl {
-    public class Consultation : Object {
-        public new void parse(Json.Node n) {
-        }
-    }
     public class File : Object {
         public new void parse(Json.Node n) {
         }

@@ -47,6 +47,7 @@ namespace OParl {
             Organization.populate_name_map();
             AgendaItem.populate_name_map();
             Paper.populate_name_map();
+            Consultation.populate_name_map();
         }
 
         public System open(string url) {
