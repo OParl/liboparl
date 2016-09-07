@@ -1,5 +1,5 @@
 /********************************************************************
-# Copyright 2014 Daniel 'grindhold' Brendle
+# Copyright 2016 Daniel 'grindhold' Brendle
 #
 # This file is part of liboparl.
 #
