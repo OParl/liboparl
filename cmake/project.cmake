@@ -10,7 +10,7 @@ set(required_pkgs
   "json-glib-1.0"
 )
 set(srcfiles
-  "src/lib.vala"
+  "src/oparl.vala"
   "src/body.vala"
   "src/person.vala"
   "src/membership.vala"
