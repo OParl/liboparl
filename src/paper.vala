@@ -73,20 +73,20 @@ namespace OParl {
             }
         }
 
-        public string[] under_directionof_url {get;set;}
-        private bool under_directionof_resolved {get;set; default=false;}
-        private List<Organization>? under_directionof_p = null;
-        public List<Organization> under_directionof {
+        public string[] under_direction_of_url {get;set;}
+        private bool under_direction_of_resolved {get;set; default=false;}
+        private List<Organization>? under_direction_of_p = null;
+        public List<Organization> under_direction_of {
             get {
-                if (!under_directionof_resolved && under_directionof_url != null) {
-                    this.under_directionof_p = new List<Organization>();
+                if (!under_direction_of_resolved && under_direction_of_url != null) {
+                    this.under_direction_of_p = new List<Organization>();
                     var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.under_directionof_url)) {
-                        this.under_directionof_p.append((Organization)o);
+                    foreach (Object o in pr.parse_url_array(this.under_direction_of_url)) {
+                        this.under_direction_of_p.append((Organization)o);
                     }
-                    under_directionof_resolved = true;
+                    under_direction_of_resolved = true;
                 }
-                return this.under_directionof_p;
+                return this.under_direction_of_p;
             }
         }
 
@@ -185,7 +185,7 @@ namespace OParl {
             name_map.insert("auxiliaryFile","auxiliary_file");
             name_map.insert("location","location");
             name_map.insert("originatorPerson","originator_person");
-            name_map.insert("underDirectionof","under_directionof");
+            name_map.insert("underDirectionOf","under_direction_of");
             name_map.insert("originatorOrganization","originator_organization");
             name_map.insert("consultation","consultation");
         }
@@ -224,7 +224,7 @@ namespace OParl {
                     case "subordinatedPaper":
                     case "superordinatedPaper":
                     case "originatorPerson":
-                    case "underDirectionof":
+                    case "underDirectionOf":
                     case "originatorOrganization":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
