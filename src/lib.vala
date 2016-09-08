@@ -49,6 +49,7 @@ namespace OParl {
             Paper.populate_name_map();
             Consultation.populate_name_map();
             LegislativeTerm.populate_name_map();
+            File.populate_name_map();
         }
 
         public System open(string url) {
