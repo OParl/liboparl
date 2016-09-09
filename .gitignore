@@ -11,6 +11,7 @@ Makefile
 vala.stamp
 
 *.c
+tests
 
 oparl.h
 oparl.pc
