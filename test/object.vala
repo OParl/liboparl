@@ -26,8 +26,9 @@ namespace OParlTest {
         public static void add_tests () {
             Test.add_func ("/oparl/object", 
             () => {
+                var client = new Client();
                 assert (1337 == 1337);
             });
         }
     }
-}}
+}

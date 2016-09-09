@@ -164,3 +164,13 @@
         COMMENT
             "Creating typelib"
     )
+    # TODO: the tests only work when the library is installed. don't know why
+    #       it doesnt look for the library in the project root
+    add_custom_target(tests ALL
+        COMMAND
+            valac test/*.vala -o tests --pkg oparl  #-X -I.. -X -L.. -X -loparl
+        DEPENDS
+            ${project_name_lower}
+        COMMENT
+            "Compiling Tests"
+    )

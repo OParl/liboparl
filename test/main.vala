@@ -25,7 +25,7 @@ namespace OParlTest {
     class Main {
         public static int main (string[] args) {
             Test.init (ref args);
-            Object.add_tests ();
+            ObjectTest.add_tests ();
             Test.run ();
             return 0;
         }
