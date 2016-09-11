@@ -23,15 +23,15 @@ namespace OParl {
     public class Object : GLib.Object {
         public static HashTable<string,string> name_map;
         // Direct Read-In
-        protected string id {get; set;}
-        protected string name {get; set;}
-        protected string? short_name {get; set; default=null;}
-        protected string license {get; set;}
-        protected GLib.DateTime created {get; set;}
-        protected GLib.DateTime modified {get; set;}
-        protected string keyword {get; set;}
-        protected string web {get; set;}
-        protected bool deleted {get; set;}
+        public string id {get; protected set;}
+        public string name {get; protected set;}
+        public string? short_name {get; protected set; default=null;}
+        public string license {get; protected set;}
+        public GLib.DateTime created {get; protected set;}
+        public GLib.DateTime modified {get; protected set;}
+        public string keyword {get; protected set;}
+        public string web {get; protected set;}
+        public bool deleted {get; protected set;}
 
         internal Client client;
 
