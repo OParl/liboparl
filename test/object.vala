@@ -23,11 +23,33 @@ using OParl;
 
 namespace OParlTest {
     public class ObjectTest {
+        private static GLib.HashTable<string,string> test_input;
+
+        private static void init() {
+            ObjectTest.test_input = new GLib.HashTable<string,string>(GLib.str_hash, GLib.str_equal);
+
+            ObjectTest.test_input.insert("https://api.testoparl.invalid/oparl/v1/", """
+            {
+                "id": "https://api.testoparl.invalid/oparl/v1/",
+                "type": "https://schema.oparl.org/1.0/System",
+                "name": "Testsystem und so",
+                "shortName": "Testsystem"
+            }
+            """);
+        }
+
         public static void add_tests () {
-            Test.add_func ("/oparl/object", 
+            ObjectTest.init();
+            Test.add_func ("/oparl/object/sane_input",
             () => {
                 var client = new Client();
-                assert (1337 == 1337);
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url);
+                });
+                System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                assert (s.id == "https://api.testoparl.invalid/oparl/v1/");
+                assert (s.name == "Testsystem und so");
+                assert (s.short_name == "Testsystem");
             });
         }
     }
