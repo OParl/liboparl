@@ -69,12 +69,27 @@ namespace OParl {
                     case "name":
                     case "shortName":
                     case "license": 
-                    case "keyword": 
                     case "web":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         target.set(Object.name_map.get(name), item.get_string(),null);
+                        break;
+                    // - string[]
+                    case "keyword":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        Json.Array arr = item.get_array();
+                        string[] res = new string[arr.get_length()];
+                        item.get_array().foreach_element((_,i,element) => {
+                            if (element.get_node_type() != Json.NodeType.VALUE) {
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                return;
+                            }
+                            res[i] = element.get_string();
+                        });
+                        this.set(Object.name_map.get(name), res);
                         break;
                     // - dates
                     case "created":
