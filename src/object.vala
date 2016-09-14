@@ -29,7 +29,7 @@ namespace OParl {
         public string license {get; protected set;}
         public GLib.DateTime created {get; protected set;}
         public GLib.DateTime modified {get; protected set;}
-        public string keyword {get; protected set;}
+        public string[] keyword {get; protected set;}
         public string web {get; protected set;}
         public bool deleted {get; protected set;}
 
