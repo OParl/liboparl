@@ -39,7 +39,12 @@ namespace OParlTest {
                 client.resolve_url.connect((url)=>{
                     return ObjectTest.test_input.get(url);
                 });
-                System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                System s;
+                try {
+                    s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                } catch (ValidationError e) {
+                    GLib.assert_not_reached();
+                }
                 assert (s.id == "https://api.testoparl.invalid/oparl/v1/");
                 assert (s.name == "Testsystem und so");
                 assert (s.short_name == "Testsystem");
@@ -153,7 +158,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    client.open("https://api.testoparl.invalid/oparl/v1/");
                     GLib.assert_not_reached();
                 } catch (OParl.ValidationError e) {}
             });
