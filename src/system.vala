@@ -24,7 +24,7 @@ namespace OParl {
         private new static HashTable<string,string> name_map;
 
         public string oparl_version {get;set;}
-        public string other_oparl_versions {get;set;}
+        public string[] other_oparl_versions {get;set;}
         public string contact_email {get;set;}
         public string contact_name {get;set;}
         public string website {get;set;}
@@ -76,7 +76,6 @@ namespace OParl {
                 switch(name) {
                     // Direct Read-In
                     case "oparlVersion": 
-                    case "otherOparlVersion":
                     case "contactEmail": 
                     case "contactName": 
                     case "website": 
@@ -86,6 +85,22 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set(System.name_map.get(name), item.get_string(),null);
+                        break;
+                    // string[]
+                    case "otherOparlVersions":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        Json.Array arr = item.get_array();
+                        string[] res = new string[arr.get_length()];
+                        item.get_array().foreach_element((_,i,element) => {
+                            if (element.get_node_type() != Json.NodeType.VALUE) {
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                return;
+                            }
+                            res[i] = element.get_string();
+                        });
+                        this.set(System.name_map.get(name), res);
                         break;
                     // To Resolve
                     case "body":
