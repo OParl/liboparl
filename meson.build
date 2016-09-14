@@ -49,6 +49,7 @@ oparl_lib_source = [
 
 oparl_test_source = [
     'test/main.vala',
+    'test/fixtures.vala',
     'test/object.vala'
 ]
 
