@@ -23,25 +23,33 @@ using OParl;
 
 namespace OParlTest {
     public class ObjectTest {
+        private const string object_sane = """
+        {
+            "id": "https://api.testoparl.invalid/oparl/v1/",
+            "type": "https://schema.oparl.org/1.0/System",
+            "name": "Testsystem und so",
+            "shortName": "Testsystem",
+            "license": "CC-BY-SA",
+            "created": "2016-01-01T13:12:22+00:00",
+            "modified": "2016-05-23T21:18:29+00:00",
+            "keyword": ["some","neat","object"],
+            "web": "https://foobar.invalid",
+            "deleted": false
+        }
+        """;
+
         private static GLib.HashTable<string,string> test_input;
 
         private static void init() {
             ObjectTest.test_input = new GLib.HashTable<string,string>(GLib.str_hash, GLib.str_equal);
 
-            ObjectTest.test_input.insert("https://api.testoparl.invalid/oparl/v1/", """
-            {
-                "id": "https://api.testoparl.invalid/oparl/v1/",
-                "type": "https://schema.oparl.org/1.0/System",
-                "name": "Testsystem und so",
-                "shortName": "Testsystem"
-            }
-            """);
+            ObjectTest.test_input.insert("https://api.testoparl.invalid/oparl/v1/", object_sane);
         }
 
         public static void add_tests () {
             ObjectTest.init();
-            Test.add_func ("/oparl/object/sane_input",
-            () => {
+
+            Test.add_func ("/oparl/object/sane_input", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return ObjectTest.test_input.get(url);
@@ -50,7 +58,147 @@ namespace OParlTest {
                 assert (s.id == "https://api.testoparl.invalid/oparl/v1/");
                 assert (s.name == "Testsystem und so");
                 assert (s.short_name == "Testsystem");
+                assert (s.license == "CC-BY-SA");
+                assert (s.web == "https://foobar.invalid");
+                assert (!s.deleted);
+                assert (s.keyword[0] == "some" && s.keyword[1] == "neat" && s.keyword[2] == "object");
+                assert (s.created.to_string() == "2016-01-01T13:12:22+0000");
+                assert (s.modified.to_string() == "2016-05-23T21:18:29+0000");
             });
+
+            //TODO: These are tests that check acceptance of wrong types
+            //      Activate when type checking is completed
+            /*
+            Test.add_func ("/oparl/object/wrong_id_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"https://api.testoparl.invalid/oparl/v1/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_name_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"Testsystem und so\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_short_name_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"Testsystem\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_short_name_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"Testsystem\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_license_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"CC-BY-SA\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_created_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"2016-01-01T13:12:22+00:00\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_modified_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"2016-05-23T21:18:29+00:00\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+            */
+            Test.add_func ("/oparl/object/wrong_keyword_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "[\"some\",\"neat\",\"object\"]", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (OParl.ValidationError e) {}
+            });
+            /*
+            Test.add_func ("/oparl/object/wrong_web_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "\"https://foobar.invalid\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/object/wrong_web_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "false", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+            */
         }
     }
 }
