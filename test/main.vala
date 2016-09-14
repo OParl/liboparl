@@ -27,6 +27,7 @@ namespace OParlTest {
             Test.init (ref args);
             Test.set_nonfatal_assertions();
             ObjectTest.add_tests ();
+            SystemTest.add_tests ();
             Test.run ();
             return 0;
         }

@@ -36,4 +36,22 @@ namespace OParlTest.Fixtures {
         "deleted": false
     }
     """;
+
+    public const string system_sane = """
+    {
+        "id": "https://oparl.example.org/",
+        "type": "https://schema.oparl.org/1.0/System",
+        "oparlVersion": "https://schema.oparl.org/1.0/",
+        "body": "https://oparl.example.org/bodies",
+        "name": "Beispiel-System",
+        "contactEmail": "info@example.org",
+        "contactName": "Allgemeiner OParl Kontakt",
+        "website": "http://www.example.org/",
+        "vendor": "http://example-software.com/",
+        "product": "http://example-software.com/oparl-server/",
+        "otherOparlVersions": [
+            "https://oparl2.example.org/"
+        ]
+    }
+    """;
 }

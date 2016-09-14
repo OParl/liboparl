@@ -50,7 +50,8 @@ oparl_lib_source = [
 oparl_test_source = [
     'test/main.vala',
     'test/fixtures.vala',
-    'test/object.vala'
+    'test/object.vala',
+    'test/system.vala'
 ]
 
 oparl_lib = library('oparl-'+api, oparl_lib_source,
