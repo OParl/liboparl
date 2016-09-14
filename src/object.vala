@@ -53,7 +53,7 @@ namespace OParl {
             name_map.insert("deleted","deleted");
         }
 
-        public virtual void parse(Object target, Json.Node n) {
+        public virtual void parse(Object target, Json.Node n) throws ValidationError {
             // Prepare object
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");

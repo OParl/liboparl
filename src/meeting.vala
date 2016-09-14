@@ -114,7 +114,7 @@ namespace OParl {
             name_map.insert("agendaItem", "agenda_item");
         }
 
-        public new void parse(Json.Node n) {
+        public new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");

@@ -53,7 +53,7 @@ namespace OParl {
             Location.populate_name_map();
         }
 
-        public System open(string url) {
+        public System open(string url) throws ValidationError {
             if (!Client.initialized)
                 Client.init();
             string data = this.resolve_url(url);
@@ -85,7 +85,7 @@ namespace OParl {
             this.result = new List<Object>();
         }
 
-        public unowned List<Object> resolve() {
+        public unowned List<Object> resolve() throws ValidationError {
             string data = this.c.resolve_url(this.url);
             var parser = new Json.Parser();
             parser.load_from_data(data);
@@ -93,7 +93,7 @@ namespace OParl {
             return this.result; 
         }
 
-        public Object make_object(Json.Node n) {
+        public Object make_object(Json.Node n) throws ValidationError {
             Json.Object el_obj = n.get_object();
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE)
@@ -164,7 +164,7 @@ namespace OParl {
             throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
         }
 
-        public unowned List<Object> parse_data(Json.Array arr) {
+        public unowned List<Object> parse_data(Json.Array arr) throws ValidationError {
             arr.foreach_element((_,i,element) => {
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
                     throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
@@ -191,7 +191,7 @@ namespace OParl {
             return this.result;
         }
 
-        private void parse(Json.Node n) {
+        private void parse(Json.Node n) throws ValidationError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
             
