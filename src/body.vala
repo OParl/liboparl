@@ -183,7 +183,7 @@ namespace OParl {
                         var tv = new GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
-                        this.set_property(Object.name_map.get(name), dt);
+                        this.set_property(Body.name_map.get(name), dt);
                         break;
                     // - string[]
                     case "equivalent":
