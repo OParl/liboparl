@@ -117,7 +117,7 @@ namespace OParl {
             }
         }
 
-        private string system_url {get;set; default="";}
+        public string system_url {get;set; default="";}
         private bool system_resolved {get;set; default=false;}
         private System? system_p = null;
         public System system {
@@ -202,6 +202,7 @@ namespace OParl {
                         this.set(Body.name_map.get(name), res);
                         break;
                     // To Resolve as external objectlist
+                    case "system":
                     case "organization":
                     case "person":
                     case "meeting":
