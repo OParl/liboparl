@@ -25,8 +25,8 @@ namespace OParl {
 
         // Directly Resolvable
         public string website {get; set;}
-        public GLib.Date license_valid_since {get; set;}
-        public GLib.Date oparl_since {get; set;}
+        public GLib.DateTime license_valid_since {get; set;}
+        public GLib.DateTime oparl_since {get; set;}
         public string ags {get; set;}
         public string rgs {get; set;}
         public string[] equivalent {get; set;}
@@ -180,8 +180,9 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var dt = new GLib.Date();
-                        dt.set_parse(item.get_string());
+                        var tv = new GLib.TimeVal();
+                        tv.from_iso8601(item.get_string());
+                        var dt = new GLib.DateTime.from_timeval_utc(tv);
                         this.set_property(Body.name_map.get(name), dt);
                         break;
                     // - string[]
