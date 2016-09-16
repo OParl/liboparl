@@ -23,8 +23,8 @@ namespace OParl {
     public class LegislativeTerm : Object {
         private new static HashTable<string,string> name_map;
 
-        public GLib.DateTime start_date {get; set;}
-        public GLib.DateTime end_date {get; set;}
+        public GLib.Date start_date {get; set;}
+        public GLib.Date end_date {get; set;}
 
         public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
@@ -64,9 +64,8 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
-                        tv.from_iso8601(item.get_string());
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        var dt = new GLib.Date();
+                        dt.set_parse(item.get_string());
                         this.set_property(LegislativeTerm.name_map.get(name), dt);
                         break;
                     // External object
