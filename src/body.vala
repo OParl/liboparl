@@ -167,7 +167,7 @@ namespace OParl {
                     case "ags":
                     case "rgs":
                     case "contactEmail":
-                    case "contactUrl":
+                    case "contactName":
                     case "classification":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
