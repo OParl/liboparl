@@ -29,6 +29,7 @@ namespace OParlTest {
             SystemTest.test_input = new GLib.HashTable<string,string>(GLib.str_hash, GLib.str_equal);
 
             SystemTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
+            SystemTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
         }
 
         public static void add_tests () {
@@ -48,7 +49,9 @@ namespace OParlTest {
                 assert (s.id == "https://oparl.example.org/");
                 assert (s.name == "Beispiel-System");
                 assert (s.oparl_version == "https://schema.oparl.org/1.0/");
-                // TODO: test bodies
+                unowned List<Body> b = s.body;
+                assert (b != null);
+                assert (b.nth_data(0) is OParl.Body);
                 assert (s.short_name == null);
                 assert (s.license == null);
                 assert (s.web == null);
