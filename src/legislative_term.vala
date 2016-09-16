@@ -26,7 +26,7 @@ namespace OParl {
         public GLib.DateTime start_date {get; set;}
         public GLib.DateTime end_date {get; set;}
 
-        private string body_url {get;set; default="";}
+        public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
         public Body body {

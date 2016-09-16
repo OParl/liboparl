@@ -227,7 +227,7 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(Body.name_map.get(name)+"_p", (Location)r.make_object(item));
+                        this.location_p = (Location)r.make_object(item);
                         break;
                 }
             }
