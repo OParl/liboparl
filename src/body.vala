@@ -31,7 +31,7 @@ namespace OParl {
         public string rgs {get; set;}
         public string[] equivalent {get; set;}
         public string contact_email {get; set;}
-        public string contact_url {get; set;}
+        public string contact_name {get; set;}
         public string classification {get; set;}
 
         // Indirectly Resolvable
