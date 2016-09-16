@@ -64,6 +64,99 @@ namespace OParlTest {
                 assert (s.other_oparl_versions[0] == "https://oparl2.example.org/");
                 assert (s.other_oparl_versions.length == 1);
             });
+
+            //TODO: comment in when typechecks are in place
+            /*
+            Test.add_func ("/oparl/system/wrong_oparl_version_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"https://schema.oparl.org/1.0/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_contact_email_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"info@example.org\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_contact_name_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"Allgemeiner OParl Kontakt\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_website_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"http://www.example.org/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_vendor_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"http://example-software.com/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_product_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"http://example-software.com/oparl-server/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });
+
+            Test.add_func ("/oparl/system/wrong_other_oparl_versions_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return SystemTest.test_input.get(url).replace(
+                        "\"https://oparl2.example.org/\"", "1"
+                    );
+                });
+                try {
+                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    GLib.assert_not_reached();
+                } catch (ValidationError e) {}
+            });*/
         }
     }
 }
