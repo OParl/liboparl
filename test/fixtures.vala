@@ -233,4 +233,62 @@ namespace OParlTest.Fixtures {
         "links":{}
     }
     """;
+
+    public const string person_sane = """
+    {
+        "id": "https://oparl.example.org/person/0",
+        "type": "https://schema.oparl.org/1.0/Person",
+        "body": "https://oparl.example.org/body/0",
+        "name": "Prof. Dr. Max Mustermann",
+        "familyName": "Mustermann",
+        "givenName": "Max",
+        "title": [
+            "Prof.",
+            "Dr."
+        ],
+        "formOfAddress": "Ratsfrau",
+        "gender": "male",
+        "email": ["max@mustermann.de"],
+        "phone": ["+493012345678"],
+        "status": [
+            "Bezirksbürgermeister"
+        ],
+        "membership": [
+            {
+                "id": "https://oparl.example.org/memberships/0",
+                "type": "https://schema.oparl.org/1.0/Membership",
+                "organization": "https://oparl.example.org/organizations/0",
+                "role": "Vorsitzende",
+                "votingRight": true,
+                "startDate": "2013-12-03"
+            },
+            {
+                "id": "https://oparl.example.org/memberships/1",
+                "type": "https://schema.oparl.org/1.0/Membership",
+                "organization": "https://oparl.example.org/organizations/0",
+                "role": "Sachkundige Bürgerin",
+                "votingRight": false,
+                "startDate": "2013-12-03",
+                "endDate": "2014-07-28"
+            }
+        ],
+        "created": "2011-11-11T11:11:00+00:00",
+        "modified": "2012-08-16T14:05:27+00:00"
+    }
+    """;
+
+    public const string person_list_sane = """
+    {
+        "pagination": {
+            "totalElements":1,
+            "elementsPerPage":1,
+            "currentPage":1,
+            "totalPages":1
+        },
+        "data": [
+            """ + person_sane + """
+        ],
+        "links":{}
+    }
+    """;
 }

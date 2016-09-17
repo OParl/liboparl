@@ -32,6 +32,7 @@ namespace OParlTest {
             LegislativeTermTest.add_tests ();
             LocationTest.add_tests ();
             OrganizationTest.add_tests ();
+            PersonTest.add_tests ();
             Test.run ();
             return 0;
         }
