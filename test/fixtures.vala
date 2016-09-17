@@ -70,6 +70,7 @@ namespace OParlTest.Fixtures {
     }
     """;
 
+    // TODO: enter meeting organization and paper urls as soon as fixtures are available
     public const string body_sane = """
     {
         "id": "https://oparl.example.org/body/0",
@@ -104,10 +105,24 @@ namespace OParlTest.Fixtures {
         }
         ],
         "location": {
-            "id:": "https://oparl.example.org/location/0",
+            "id": "https://oparl.example.org/location/0",
             "type": "https://schema.oparl.org/1.0/Location",
             "description": "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt",
-            "geometry": {
+            "streetAddress": "Rathausplatz 1",
+            "room": "1337",
+            "postalCode": "13337",
+            "subLocality": "Beispielbezirk",
+            "locality": "Beispielstadt",
+            "bodies": [
+                "https://oparl.example.org/body/0"
+            ],
+            "organizations": [
+            ],
+            "meetings": [
+            ],
+            "papers": [
+            ],
+            "geojson": {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",

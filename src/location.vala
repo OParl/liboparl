@@ -31,7 +31,7 @@ namespace OParl {
         public string sub_locality {get; set;}
         public string locality {get; set;}
 
-        private string[] bodies_url {get; set; default={};}
+        public string[] bodies_url {get; set; default={};}
         private bool bodies_resolved {get;set; default=false;}
         private List<Body>? bodies_p = null;
         public List<Body> bodies {
@@ -48,7 +48,7 @@ namespace OParl {
             }
         }
 
-        private string[] organization_url {get; set; default={};}
+        public string[] organization_url {get; set; default={};}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         public List<Organization> organization {
@@ -65,7 +65,7 @@ namespace OParl {
             }
         }
 
-        private string[] meetings_url {get; set; default={};}
+        public string[] meetings_url {get; set; default={};}
         private bool meetings_resolved {get;set; default=false;}
         private List<Meeting>? meetings_p = null;
         public List<Meeting> meetings {
@@ -82,7 +82,7 @@ namespace OParl {
             }
         }
 
-        private string[] papers_url {get; set; default={};}
+        public string[] papers_url {get; set; default={};}
         private bool papers_resolved {get;set; default=false;}
         private List<Paper>? papers_p = null;
         public List<Paper> papers {
