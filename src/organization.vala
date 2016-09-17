@@ -27,8 +27,8 @@ namespace OParl {
         public string organization_type {get; set;}
         public string website {get; set;}
         public string classification {get; set;}
-        public GLib.DateTime start_date {get; set;}
-        public GLib.DateTime end_date {get; set;}
+        public GLib.Date start_date {get; set;}
+        public GLib.Date end_date {get; set;}
 
         public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
@@ -72,7 +72,7 @@ namespace OParl {
             }
         }
 
-        private string[] membership_url {get; set; default={};}
+        public string[] membership_url {get; set; default={};}
         private bool membership_resolved {get;set; default=false;}
         private List<Membership>? membership_p = null;
         public List<Membership> membership {
@@ -171,9 +171,8 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
-                        tv.from_iso8601(item.get_string());
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        var dt = new GLib.Date();
+                        dt.set_parse(item.get_string());
                         this.set_property(Organization.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
@@ -192,7 +191,7 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(Organization.name_map.get(name)+"_p", (Location)r.make_object(item));
+                        this.location_p = (Location)r.make_object(item);
                         break;
                     // Array of url
                     case "membership":
