@@ -33,6 +33,7 @@ namespace OParlTest {
             LocationTest.add_tests ();
             OrganizationTest.add_tests ();
             PersonTest.add_tests ();
+            MembershipTest.add_tests ();
             Test.run ();
             return 0;
         }

@@ -257,7 +257,7 @@ namespace OParlTest.Fixtures {
             {
                 "id": "https://oparl.example.org/memberships/0",
                 "type": "https://schema.oparl.org/1.0/Membership",
-                "organization": "https://oparl.example.org/organizations/0",
+                "organization": "https://oparl.example.org/organization/0",
                 "role": "Vorsitzende",
                 "votingRight": true,
                 "startDate": "2013-12-03"
@@ -265,7 +265,7 @@ namespace OParlTest.Fixtures {
             {
                 "id": "https://oparl.example.org/memberships/1",
                 "type": "https://schema.oparl.org/1.0/Membership",
-                "organization": "https://oparl.example.org/organizations/0",
+                "organization": "https://oparl.example.org/organization/0",
                 "role": "Sachkundige Bürgerin",
                 "votingRight": false,
                 "startDate": "2013-12-03",
