@@ -84,6 +84,15 @@ custom_target('oparl-typelib',
 
 test('testlib', oparl_test)
 
+valadoc = find_program('valadoc')
+custom_target('apidocs',
+               input: oparl_lib_source,
+               command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
+               '--pkg','json-glib-1.0', '--force'],
+#               depends: clear_apidocs,
+               output: 'devhelp',
+)
+
 libs = oparl_lib    # the library/libraries users need to link against
 h = ['..','pkgconfig'] # subdirectories of ${prefix}/${includedir} to add to header path
 pkgconfig.generate(libraries : libs,
@@ -96,5 +105,6 @@ pkgconfig.generate(libraries : libs,
               description : 'A library to access OParl civic information endpoints.')
 
 install_headers(meson.current_build_dir()+'/oparl-'+api+'.h')
+install_subdir(meson.current_build_dir()+'/devhelp/oparl-'+api+'/oparl-'+api, install_dir: get_option('datadir')+'/devhelp/books')
 
 meson.add_install_script('fix_permissions.sh')
