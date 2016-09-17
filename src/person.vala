@@ -145,8 +145,9 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        foreach (Object term in r.parse_data(item.get_array())) {
-                            this.membership_p.append((Membership)term);
+                        foreach (Object memb in r.parse_data(item.get_array())) {
+                            (memb as Membership).person = this;
+                            this.membership_p.append((Membership)memb);
                         }
                         break;
                 }

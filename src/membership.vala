@@ -40,6 +40,10 @@ namespace OParl {
                 }
                 return this.person_p;
             }
+            internal set {
+                person_resolved = true;
+                this.person_p = value;
+            }
         }
 
         public string organization_url {get;set; default="";}
