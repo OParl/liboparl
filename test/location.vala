@@ -33,6 +33,7 @@ namespace OParlTest {
             LocationTest.test_input.insert("https://oparl.example.org/body/0", Fixtures.body_sane);
             LocationTest.test_input.insert("https://oparl.example.org/organization/0", Fixtures.organization_sane);
             LocationTest.test_input.insert("https://oparl.example.org/meeting/0", Fixtures.meeting_sane);
+            LocationTest.test_input.insert("https://oparl.example.org/paper/0", Fixtures.paper_sane);
         }
 
         public static void add_tests () {
@@ -66,7 +67,8 @@ namespace OParlTest {
                 assert (l.organizations.length() == 1);
                 assert (l.meetings != null);
                 assert (l.meetings.length() == 1);
-                // TODO: check for papers
+                assert (l.papers != null);
+                assert (l.papers.length() == 1);
                 assert (l.geojson != null);
             });
 

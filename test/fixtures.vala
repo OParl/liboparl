@@ -70,7 +70,6 @@ namespace OParlTest.Fixtures {
     }
     """;
 
-    // TODO: enter paper urls as soon as fixtures are available
     public const string body_sane = """
     {
         "id": "https://oparl.example.org/body/0",
@@ -342,6 +341,7 @@ namespace OParlTest.Fixtures {
             "https://oparl.example.org/meeting/0"
         ],
         "papers": [
+            "https://oparl.example.org/paper/0"
         ],
         "geojson": {
             "type": "Feature",
