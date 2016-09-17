@@ -48,20 +48,20 @@ namespace OParl {
             }
         }
 
-        public string[] organization_url {get; set; default={};}
-        private bool organization_resolved {get;set; default=false;}
-        private List<Organization>? organization_p = null;
-        public List<Organization> organization {
+        public string[] organizations_url {get; set; default={};}
+        private bool organizations_resolved {get;set; default=false;}
+        private List<Organization>? organizations_p = null;
+        public List<Organization> organizations {
             get {
-                if (!organization_resolved && organization_url != null) {
-                    this.organization_p = new List<Organization>();
+                if (!organizations_resolved && organizations_url != null) {
+                    this.organizations_p = new List<Organization>();
                     var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.organization_url)) {
-                        this.organization_p.append((Organization)o);
+                    foreach (Object o in pr.parse_url_array(this.organizations_url)) {
+                        this.organizations_p.append((Organization)o);
                     }
-                    organization_resolved = true;
+                    organizations_resolved = true;
                 }
-                return this.organization_p;
+                return this.organizations_p;
             }
         }
 
@@ -109,7 +109,7 @@ namespace OParl {
             name_map.insert("subLocality", "sub_locality");
             name_map.insert("locality", "locality");
             name_map.insert("bodies", "bodies");
-            name_map.insert("organization", "organization");
+            name_map.insert("organizations", "organizations");
             name_map.insert("meetings", "meetings");
             name_map.insert("papers", "papers");
         }
@@ -139,7 +139,7 @@ namespace OParl {
                         break;
                     // Array of url
                     case "bodies":
-                    case "organization":
+                    case "organizations":
                     case "meetings":
                     case "papers":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {

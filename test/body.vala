@@ -30,6 +30,7 @@ namespace OParlTest {
 
             BodyTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             BodyTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
+            BodyTest.test_input.insert("https://oparl.example.org/body/0/organizations/", Fixtures.organization_list_sane);
         }
 
         public static void add_tests () {
@@ -65,8 +66,10 @@ namespace OParlTest {
                 assert (b.license == "http://creativecommons.org/licenses/by/4.0/");
                 assert (b.license_valid_since.to_string() == "2015-01-01T14:28:31+0000");
                 assert (b.oparl_since.to_string() == "2014-01-01T14:28:31+0000");
+                assert (b.organization != null);
+                assert (b.organization.nth_data(0) != null);
+                assert (b.organization.nth_data(0) is Organization);
 
-                // TODO: test organization when fixtures are ready
                 // TODO: test person when fixtures are ready
                 // TODO: test meeting when fixtures are ready
                 // TODO: test paper when fixtures are ready
