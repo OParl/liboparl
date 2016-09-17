@@ -38,6 +38,10 @@ namespace OParl {
                 }
                 return this.paper_p;
             }
+            internal set {
+                paper_resolved = true;
+                this.paper_p = value;
+            }
         }
 
         protected string agenda_item_url {get;set; default="";}

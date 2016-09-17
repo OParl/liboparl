@@ -255,6 +255,7 @@ namespace OParl {
                         }
                         var r = new Resolver(this.client);
                         foreach (Object cons in r.parse_data(item.get_array())) {
+                            (cons as Consultation).paper = this;
                             this.consultation_p.append((Consultation)cons);
                         }
                         break;
