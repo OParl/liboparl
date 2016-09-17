@@ -70,7 +70,7 @@ namespace OParlTest.Fixtures {
     }
     """;
 
-    // TODO: enter meeting organization and paper urls as soon as fixtures are available
+    // TODO: enter meeting and paper urls as soon as fixtures are available
     public const string body_sane = """
     {
         "id": "https://oparl.example.org/body/0",
@@ -117,6 +117,7 @@ namespace OParlTest.Fixtures {
                 "https://oparl.example.org/body/0"
             ],
             "organizations": [
+                "https://oparl.example.org/organization/0"
             ],
             "meetings": [
             ],
