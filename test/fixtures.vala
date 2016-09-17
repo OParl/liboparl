@@ -192,7 +192,7 @@ namespace OParlTest.Fixtures {
         ],
         "meeting": "https://oparl.example.org/organization/0/meetings",
         "membership": [
-            "https://oparl.example.org/memberships/27"
+            "https://oparl.example.org/membership/1"
         ],
         "classification": "Ausschuss",
         "keyword": [
@@ -255,7 +255,7 @@ namespace OParlTest.Fixtures {
         ],
         "membership": [
             {
-                "id": "https://oparl.example.org/memberships/0",
+                "id": "https://oparl.example.org/membership/0",
                 "type": "https://schema.oparl.org/1.0/Membership",
                 "organization": "https://oparl.example.org/organization/0",
                 "role": "Vorsitzende",
@@ -263,7 +263,7 @@ namespace OParlTest.Fixtures {
                 "startDate": "2013-12-03"
             },
             {
-                "id": "https://oparl.example.org/memberships/1",
+                "id": "https://oparl.example.org/membership/1",
                 "type": "https://schema.oparl.org/1.0/Membership",
                 "organization": "https://oparl.example.org/organization/0",
                 "role": "Sachkundige Bürgerin",
@@ -291,4 +291,18 @@ namespace OParlTest.Fixtures {
         "links":{}
     }
     """;
+
+    public const string membership_sane = """
+    {
+        "id": "https://oparl.example.org/membership/1",
+        "type": "https://schema.oparl.org/1.0/Membership",
+        "organization": "https://oparl.example.org/organization/0",
+        "person": "https://oparl.example.org/person/0",
+        "role": "Sachkundige Bürgerin",
+        "votingRight": false,
+        "startDate": "2013-12-03",
+        "endDate": "2014-07-28"
+    }
+    """;
+
 }

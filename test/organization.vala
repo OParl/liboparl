@@ -31,6 +31,7 @@ namespace OParlTest {
             OrganizationTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             OrganizationTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             OrganizationTest.test_input.insert("https://oparl.example.org/body/0", Fixtures.body_sane);
+            OrganizationTest.test_input.insert("https://oparl.example.org/membership/1", Fixtures.membership_sane);
             OrganizationTest.test_input.insert("https://oparl.example.org/body/0/organizations/", Fixtures.organization_list_sane);
         }
 
@@ -68,7 +69,8 @@ namespace OParlTest {
                 assert (o.post[1] == "1. Stellvertreter");
                 assert (o.post[2] == "Mitglied");
                 // TODO: check for meetings as soon as fixtures are available
-                // TODO: check for memberships as soon as fixtures  are available
+                assert (o.membership != null);
+                assert (o.membership.nth_data(0) is Membership);
                 assert (o.classification == "Ausschuss");
                 assert (o.keyword.length == 2);
                 assert (o.keyword[0] == "finanzen");

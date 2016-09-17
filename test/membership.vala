@@ -52,7 +52,7 @@ namespace OParlTest {
                 Person p = b.person.nth_data(0);
                 Membership m = p.membership.nth_data(1);
 
-                assert (m.id == "https://oparl.example.org/memberships/1");
+                assert (m.id == "https://oparl.example.org/membership/1");
                 assert (m.organization != null);
                 assert (m.organization is OParl.Organization);
                 assert (m.person != null);
