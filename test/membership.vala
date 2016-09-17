@@ -55,6 +55,8 @@ namespace OParlTest {
                 assert (m.id == "https://oparl.example.org/membership/1");
                 assert (m.organization != null);
                 assert (m.organization is OParl.Organization);
+                assert (m.on_behalf_of != null);
+                assert (m.on_behalf_of is OParl.Organization);
                 assert (m.person != null);
                 assert (m.person is OParl.Person);
                 assert (m.role == "Sachkundige Bürgerin");
