@@ -23,10 +23,10 @@ namespace OParl {
     public class AgendaItem : Object {
         private new static HashTable<string,string> name_map;
 
-        public int64 number {get; set;}
+        public string number {get; set;}
         public bool @public {get; set;}
         public string result {get; set;}
-        public string resolutionText {get; set;}
+        public string resolution_text {get; set;}
         public GLib.DateTime start {get; set;}
         public GLib.DateTime end {get; set;}
 
@@ -98,8 +98,9 @@ namespace OParl {
                 switch(name) {
                     // Direct Read-In
                     // - strings
-                    case "resolution":
+                    case "result":
                     case "resolutionText":
+                    case "number":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
@@ -111,13 +112,6 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set_property(AgendaItem.name_map.get(name), item.get_boolean());
-                        break;
-                    // - integera
-                    case "number":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
-                        }
-                        this.set_property(AgendaItem.name_map.get(name), item.get_int());
                         break;
                     // - dates
                     case "start":
@@ -154,7 +148,7 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(AgendaItem.name_map.get(name)+"_p", (File)r.make_object(item));
+                        this.resolution_file_p = (File)r.make_object(item);
                         break;
                 }
             }
