@@ -31,6 +31,7 @@ namespace OParlTest {
             AgendaItemTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             AgendaItemTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             AgendaItemTest.test_input.insert("https://oparl.example.org/meeting/0", Fixtures.meeting_sane);
+            AgendaItemTest.test_input.insert("https://oparl.example.org/consultation/0", Fixtures.consultation_sane);
             AgendaItemTest.test_input.insert("https://oparl.example.org/body/0/meetings/", Fixtures.meeting_list_sane);
         }
 
@@ -58,7 +59,8 @@ namespace OParlTest {
                 assert (a.number == "10.1");
                 assert (a.name == "Satzungsänderung für Ausschreibungen");
                 assert (a.@public == true);
-                // TODO: check for consultation as soon as fixture is available
+                assert (a.consultation != null);
+                assert (a.consultation is Consultation);
                 assert (a.result == "Geändert beschlossen");
                 assert (a.resolution_text == "Der Beschluss weicht wie folgt vom Antrag ab: ...");
                 assert (a.resolution_file != null);

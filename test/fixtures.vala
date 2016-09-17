@@ -282,25 +282,7 @@ namespace OParlTest.Fixtures {
             "modified": "2012-01-08T14:05:27+00:00"
         },
         "auxiliaryFile": ["""+ file_sane + """],
-        "agendaItem": [
-            {
-                "id": "https://oparl.example.org/agendaitem/0",
-                "type": "https://schema.oparl.org/1.0/AgendaItem",
-                "meeting": "https://oparl.example.org/meeting/0",
-                "number": "10.1",
-                "name": "Satzungsänderung für Ausschreibungen",
-                "public": true,
-                "consultation": "https://oparl.example.org/consultation/0",
-                "result": "Geändert beschlossen",
-                "resolutionText": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
-                "resolutionFile": """+ file_sane +""",
-                "auxiliaryFile": ["""+ file_sane +"""],
-                "start": "2012-01-06T12:01:00+00:00",
-                "end": "2012-01-08T14:05:27+00:00",
-                "created": "2012-01-06T12:01:00+00:00",
-                "modified": "2012-08-16T14:05:27+00:00"
-            }
-        ],
+        "agendaItem": ["""+ agenda_item_sane + """],
         "created": "2012-01-06T12:01:00+00:00",
         "modified": "2012-01-08T14:05:27+00:00"
     }
@@ -441,17 +423,7 @@ namespace OParlTest.Fixtures {
         "originatorOrganization": [
             "https://oparl.example.org/organization/0"
         ],
-        "consultation": [
-            {
-                "id": "https://oparl.example.org/consultation/0",
-                "type": "https://schema.oparl.org/1.0/Consultation",
-                "agendaItem": "https://oparl.example.org/agendaitem/0",
-                "meeting": "https://oparl.example.org/meeting/0",
-                "organization": ["https://oparl.example.org/organization/0"],
-                "authoritative": false,
-                "role": "Beschlussfassung"
-            }
-        ],
+        "consultation": [""" + consultation_sane + """],
         "underDirectionOf": [
             "https://oparl.example.org/organization/0"
         ],
@@ -472,6 +444,38 @@ namespace OParlTest.Fixtures {
             """+ paper_sane +"""
         ],
         "links":{}
+    }
+    """;
+
+    public const string agenda_item_sane = """
+    {
+        "id": "https://oparl.example.org/agendaitem/0",
+        "type": "https://schema.oparl.org/1.0/AgendaItem",
+        "meeting": "https://oparl.example.org/meeting/0",
+        "number": "10.1",
+        "name": "Satzungsänderung für Ausschreibungen",
+        "public": true,
+        "consultation": "https://oparl.example.org/consultation/0",
+        "result": "Geändert beschlossen",
+        "resolutionText": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
+        "resolutionFile": """+ file_sane +""",
+        "auxiliaryFile": ["""+ file_sane +"""],
+        "start": "2012-01-06T12:01:00+00:00",
+        "end": "2012-01-08T14:05:27+00:00",
+        "created": "2012-01-06T12:01:00+00:00",
+        "modified": "2012-08-16T14:05:27+00:00"
+    }
+    """;
+
+    public const string consultation_sane = """
+    {
+        "id": "https://oparl.example.org/consultation/0",
+        "type": "https://schema.oparl.org/1.0/Consultation",
+        "agendaItem": "https://oparl.example.org/agendaitem/0",
+        "meeting": "https://oparl.example.org/meeting/0",
+        "organization": ["https://oparl.example.org/organization/0"],
+        "authoritative": false,
+        "role": "Beschlussfassung"
     }
     """;
 }
