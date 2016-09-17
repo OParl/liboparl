@@ -374,4 +374,104 @@ namespace OParlTest.Fixtures {
         "modified": "2012-01-08T14:05:27+00:00"
     }
     """;
+
+    public const string paper_sane = """
+    {
+        "id": "https://oparl.example.org/paper/0",
+        "type": "https://schema.oparl.org/1.0/Paper",
+        "body": "https://oparl.example.org/body/0",
+        "name": "Antwort auf Anfrage 1200/2014",
+        "reference": "1234/2014",
+        "date": "2014-04-04",
+        "paperType": "Beantwortung einer Anfrage",
+        "relatedPaper": [
+            "https://oparl.example.org/paper/0"
+        ],
+        "mainFile": {
+            "id": "https://oparl.example.org/files/57737",
+            "type": "https://schema.oparl.org/1.0/File",
+            "name": "Anlage 1 zur Anfrage",
+            "fileName": "anlage_1_zur_anfrage.pdf",
+            "mimeType": "application/pdf",
+            "date": "2013-01-04",
+            "sha1Checksum": "d749751af44a32c818b9b1e1515251c67734f5d2",
+            "size": 82930,
+            "accessUrl": "https://oparl.example.org/files/57737.pdf",
+            "downloadUrl": "https://oparl.example.org/files/download/57737.pdf",
+            "license": "http://www.opendefinition.org/licenses/cc-by",
+            "created": "2013-01-04T07:54:13+01:00",
+            "modified": "2013-01-04T07:54:13+01:00"
+        },
+        "auxiliaryFile": [
+            {
+                "id": "https://oparl.example.org/files/57739",
+                "type": "https://schema.oparl.org/1.0/File",
+                "name": "Anlage 1 zur Anfrage",
+                "fileName": "anlage.pdf",
+                "mimeType": "application/pdf",
+                "date": "2013-01-04",
+                "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                "size": 82930,
+                "accessUrl": "https://oparl.example.org/files/57739.pdf",
+                "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
+                "text": "Der Übersichtsplan zeigt alle Ebenen des ...",
+                "masterFile": "https://oparl.example.org/files/57738",
+                "license": "http://www.opendefinition.org/licenses/cc-by",
+                "created": "2013-01-04T07:54:13+01:00",
+                "modified": "2013-01-04T07:54:13+01:00"
+            }
+        ],
+        "location": [
+            {
+                "id": "https://oparl.example.org/locations/0",
+                "type": "https://schema.oparl.org/1.0/Location",
+                "description": "Honschaftsstraße 312, Köln",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        7.03291,
+                        50.98249
+                    ]
+                }
+            }
+        ],
+        "originatorPerson": [
+            "https://oparl.example.org/person/0"
+        ],
+        "originatorOrganization": [
+            "https://oparl.example.org/organization/0"
+        ],
+        "consultation": [
+            {
+                "id": "https://oparl.example.org/consultation/0",
+                "type": "https://schema.oparl.org/1.0/Consultation",
+                "agendaItem": "https://oparl.example.org/agendaitem/0",
+                "meeting": "https://oparl.example.org/meeting/0",
+                "organization": ["https://oparl.example.org/organization/0"],
+                "authoritative": false,
+                "role": "Beschlussfassung"
+            }
+        ],
+        "underDirectionOf": [
+            "https://oparl.example.org/organization/0"
+        ],
+        "created": "2013-01-08T12:05:27+00:00",
+        "modified": "2013-01-08T12:05:27+00:00"
+    }
+    """;
+
+    public const string paper_list_sane = """
+    {
+        "pagination": {
+            "totalElements":1,
+            "elementsPerPage":1,
+            "currentPage":1,
+            "totalPages":1
+        },
+        "data": [
+            """+ paper_sane +"""
+        ],
+        "links":{}
+    }
+    """;
 }
