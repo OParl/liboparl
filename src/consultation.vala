@@ -40,7 +40,7 @@ namespace OParl {
             }
         }
 
-        private string agenda_item_url {get;set; default="";}
+        protected string agenda_item_url {get;set; default="";}
         private bool agenda_item_resolved {get;set; default=false;}
         private AgendaItem? agenda_item_p = null;
         public AgendaItem agenda_item {
@@ -54,7 +54,7 @@ namespace OParl {
             }
         }
 
-        private string meeting_url {get;set; default="";}
+        protected string meeting_url {get;set; default="";}
         private bool meeting_resolved {get;set; default=false;}
         private Meeting? meeting_p = null;
         public Meeting meeting {

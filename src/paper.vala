@@ -25,7 +25,7 @@ namespace OParl {
 
         public string reference {get;set;}
         public string paper_type {get;set;}
-        public GLib.DateTime date {get; set;}
+        public GLib.Date date {get; set;}
 
         private File? main_file_p = null;
         public File main_file {
@@ -158,7 +158,7 @@ namespace OParl {
             }
         }
 
-        private string body_url {get;set; default="";}
+        internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
         public Body body {
@@ -214,9 +214,8 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
-                        tv.from_iso8601(item.get_string());
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        var dt = new GLib.Date();
+                        dt.set_parse(item.get_string());
                         this.set_property(Paper.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
@@ -274,7 +273,7 @@ namespace OParl {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(Paper.name_map.get(name)+"_p", (File)r.make_object(item));
+                        this.main_file_p = (File)r.make_object(item);
                         break;
                     case "body":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
