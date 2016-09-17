@@ -28,6 +28,12 @@ namespace OParl {
         public GLib.DateTime start {get; set;}
         public GLib.DateTime end {get; set;}
         
+        private Location? location_p = new Location();
+        public Location location {
+            get {
+                return this.location_p;
+            }
+        }
 
         private File? invitation_p = null;
         public File invitation {
@@ -64,7 +70,7 @@ namespace OParl {
             }
         }
 
-        private string[] organization_url {get; set; default={};}
+        internal string[] organization_url {get; set; default={};}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         public List<Organization> organization {
@@ -177,22 +183,43 @@ namespace OParl {
                             this.agenda_item_p.append((AgendaItem)term);
                         }
                         break;
+                    case "auxiliaryFile":
+                        if (item.get_node_type() != Json.NodeType.ARRAY) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        foreach (Object file in r.parse_data(item.get_array())) {
+                            this.auxiliary_file_p.append((File)file);
+                        }
+                        break;
                     // To Resolve as internal object
                     case "location":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(Meeting.name_map.get(name)+"_p", (Location)r.make_object(item));
+                        this.location_p = (Location)r.make_object(item);
                         break;
                     case "resultsProtocol":
+                        if (item.get_node_type() != Json.NodeType.OBJECT) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        this.results_protocol_p = (File)r.make_object(item);
+                        break;
                     case "verbatimProtocol":
+                        if (item.get_node_type() != Json.NodeType.OBJECT) {
+                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                        }
+                        var r = new Resolver(this.client);
+                        this.verbatim_protocol_p = (File)r.make_object(item);
+                        break;
                     case "invitation":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
-                        this.set(Meeting.name_map.get(name)+"_p", (File)r.make_object(item));
+                        this.invitation_p = (File)r.make_object(item);
                         break;
                 }
             }

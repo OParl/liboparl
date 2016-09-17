@@ -44,7 +44,7 @@ namespace OParl {
             }
         }
 
-        private string meeting_url {get;set; default="";}
+        internal string meeting_url {get;set; default="";}
         private bool meeting_resolved {get;set; default=false;}
         private Meeting? meeting_p = null;
         public Meeting meeting {
@@ -58,7 +58,7 @@ namespace OParl {
             }
         }
 
-        private string consultation_url {get;set; default="";}
+        internal string consultation_url {get;set; default="";}
         private bool consultation_resolved {get;set; default=false;}
         private Consultation? consultation_p = null;
         public Consultation consultation {
