@@ -242,45 +242,9 @@ namespace OParlTest.Fixtures {
         "participant": [
             "https://oparl.example.org/person/0"
         ],
-        "invitation": {
-            "id": "https://oparl.example.org/files/57739",
-            "type": "https://schema.oparl.org/1.0/File",
-            "name": "Einladung",
-            "fileName": "einladung.pdf",
-            "mimeType": "application/pdf",
-            "date": "2012-01-08",
-            "modified": "2012-01-08T14:05:27+00:00",
-            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-            "size": 82930,
-            "accessUrl": "https://oparl.example.org/files/57739.pdf",
-            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf"
-        },
-        "resultsProtocol": {
-            "id": "https://oparl.example.org/files/57739",
-            "type": "https://schema.oparl.org/1.0/File",
-            "name": "Protokoll",
-            "fileName": "protokoll.pdf",
-            "mimeType": "application/pdf",
-            "date": "2012-01-08",
-            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-            "size": 82930,
-            "accessUrl": "https://oparl.example.org/files/57739.pdf",
-            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
-            "modified": "2012-01-08T14:05:27+00:00"
-        },
-        "verbatimProtocol": {
-            "id": "https://oparl.example.org/files/57739",
-            "type": "https://schema.oparl.org/1.0/File",
-            "name": "Wortprotokoll",
-            "fileName": "wortprotokoll.pdf",
-            "mimeType": "application/pdf",
-            "date": "2012-01-08",
-            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-            "size": 82930,
-            "accessUrl": "https://oparl.example.org/files/57739.pdf",
-            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
-            "modified": "2012-01-08T14:05:27+00:00"
-        },
+        "invitation": """ + file_sane + """,
+        "resultsProtocol": """ + file_sane + """,
+        "verbatimProtocol": """ + file_sane + """,
         "auxiliaryFile": ["""+ file_sane + """],
         "agendaItem": ["""+ agenda_item_sane + """],
         "created": "2012-01-06T12:01:00+00:00",
@@ -343,7 +307,7 @@ namespace OParlTest.Fixtures {
 
     public const string file_sane = """
     {
-        "id": "https://oparl.example.org/files/0",
+        "id": "https://oparl.example.org/file/0",
         "type": "https://schema.oparl.org/1.0/File",
         "name": "Nachtrags-Tagesordnung",
         "fileName": "nachtrag-TO.pdf",
@@ -351,9 +315,17 @@ namespace OParlTest.Fixtures {
         "date": "2012-01-08",
         "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
         "size": 82930,
-        "accessUrl": "https://oparl.example.org/files/0.pdf",
-        "downloadUrl": "https://oparl.example.org/files/download/0.pdf",
-        "modified": "2012-01-08T14:05:27+00:00"
+        "accessUrl": "https://oparl.example.org/file/0.pdf",
+        "downloadUrl": "https://oparl.example.org/file/download/0.pdf",
+        "externalServiceUrl": "https://www.youtube.com/watch?v=MKp30C3MwVk",
+        "masterFile" : "https://oparl.example.org/file/0",
+        "derivativeFile" : ["https://oparl.example.org/file/0"],
+        "fileLicense": "http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png",
+        "modified": "2012-01-08T14:05:27+00:00",
+        "text": "blablatextblabla",
+        "meeting": [ "https://oparl.example.org/meeting/0"],
+        "agendaItem": [ "https://oparl.example.org/agendaitem/0"],
+        "paper": [ "https://oparl.example.org/paper/0"]
     }
     """;
 
@@ -370,7 +342,7 @@ namespace OParlTest.Fixtures {
             "https://oparl.example.org/paper/0"
         ],
         "mainFile": {
-            "id": "https://oparl.example.org/files/57737",
+            "id": "https://oparl.example.org/file/57737",
             "type": "https://schema.oparl.org/1.0/File",
             "name": "Anlage 1 zur Anfrage",
             "fileName": "anlage_1_zur_anfrage.pdf",
@@ -378,31 +350,13 @@ namespace OParlTest.Fixtures {
             "date": "2013-01-04",
             "sha1Checksum": "d749751af44a32c818b9b1e1515251c67734f5d2",
             "size": 82930,
-            "accessUrl": "https://oparl.example.org/files/57737.pdf",
-            "downloadUrl": "https://oparl.example.org/files/download/57737.pdf",
+            "accessUrl": "https://oparl.example.org/file/57737.pdf",
+            "downloadUrl": "https://oparl.example.org/file/download/57737.pdf",
             "license": "http://www.opendefinition.org/licenses/cc-by",
             "created": "2013-01-04T07:54:13+01:00",
             "modified": "2013-01-04T07:54:13+01:00"
         },
-        "auxiliaryFile": [
-            {
-                "id": "https://oparl.example.org/files/57739",
-                "type": "https://schema.oparl.org/1.0/File",
-                "name": "Anlage 1 zur Anfrage",
-                "fileName": "anlage.pdf",
-                "mimeType": "application/pdf",
-                "date": "2013-01-04",
-                "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-                "size": 82930,
-                "accessUrl": "https://oparl.example.org/files/57739.pdf",
-                "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
-                "text": "Der Übersichtsplan zeigt alle Ebenen des ...",
-                "masterFile": "https://oparl.example.org/files/57738",
-                "license": "http://www.opendefinition.org/licenses/cc-by",
-                "created": "2013-01-04T07:54:13+01:00",
-                "modified": "2013-01-04T07:54:13+01:00"
-            }
-        ],
+        "auxiliaryFile": [ """ + file_sane + """ ],
         "location": [
             {
                 "id": "https://oparl.example.org/locations/0",

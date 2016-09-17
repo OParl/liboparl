@@ -38,6 +38,7 @@ namespace OParlTest {
             AgendaItemTest.add_tests ();
             PaperTest.add_tests ();
             ConsultationTest.add_tests ();
+            FileTest.add_tests ();
             Test.run ();
             return 0;
         }

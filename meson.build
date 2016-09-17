@@ -61,7 +61,8 @@ oparl_test_source = [
     'test/meeting.vala',
     'test/agenda_item.vala',
     'test/paper.vala',
-    'test/consultation.vala'
+    'test/consultation.vala',
+    'test/file.vala'
 ]
 
 oparl_lib = library('oparl-'+api, oparl_lib_source,
