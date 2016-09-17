@@ -66,13 +66,6 @@ namespace OParlTest {
                 assert (b.license_valid_since.to_string() == "2015-01-01T14:28:31+0000");
                 assert (b.oparl_since.to_string() == "2014-01-01T14:28:31+0000");
 
-                /* TODO: this is a note on how to test on GLib.Dates.
-                         remove when it is being used elsewhere
-                var lvs = b.license_valid_since;
-                assert("%04u-%02u-%02u".printf(lvs.get_year(), lvs.get_month(), lvs.get_day()) == "2014-01-01");
-                var ops = b.oparl_since;
-                assert("%04u-%02u-%02u".printf(ops.get_year(), ops.get_month(), ops.get_day()) == "2013-01-01");           */
-
                 // TODO: test organization when fixtures are ready
                 // TODO: test person when fixtures are ready
                 // TODO: test meeting when fixtures are ready
