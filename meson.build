@@ -57,7 +57,8 @@ oparl_test_source = [
     'test/location.vala',
     'test/organization.vala',
     'test/person.vala',
-    'test/membership.vala'
+    'test/membership.vala',
+    'test/meeting.vala'
 ]
 
 oparl_lib = library('oparl-'+api, oparl_lib_source,

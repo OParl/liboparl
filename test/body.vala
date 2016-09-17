@@ -31,6 +31,7 @@ namespace OParlTest {
             BodyTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             BodyTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             BodyTest.test_input.insert("https://oparl.example.org/body/0/organizations/", Fixtures.organization_list_sane);
+            BodyTest.test_input.insert("https://oparl.example.org/body/0/meetings/", Fixtures.meeting_list_sane);
             BodyTest.test_input.insert("https://oparl.example.org/body/0/people/", Fixtures.person_list_sane);
         }
 
@@ -73,8 +74,10 @@ namespace OParlTest {
                 assert (b.person != null);
                 assert (b.person.nth_data(0) != null);
                 assert (b.person.nth_data(0) is Person);
+                assert (b.meeting != null);
+                assert (b.meeting.nth_data(0) != null);
+                assert (b.meeting.nth_data(0) is Meeting);
 
-                // TODO: test meeting when fixtures are ready
                 // TODO: test paper when fixtures are ready
             });
 

@@ -70,7 +70,7 @@ namespace OParlTest.Fixtures {
     }
     """;
 
-    // TODO: enter meeting and paper urls as soon as fixtures are available
+    // TODO: enter paper urls as soon as fixtures are available
     public const string body_sane = """
     {
         "id": "https://oparl.example.org/body/0",
@@ -104,39 +104,7 @@ namespace OParlTest.Fixtures {
             "endDate": "2013-12-03"
         }
         ],
-        "location": {
-            "id": "https://oparl.example.org/location/0",
-            "type": "https://schema.oparl.org/1.0/Location",
-            "description": "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt",
-            "streetAddress": "Rathausplatz 1",
-            "room": "1337",
-            "postalCode": "13337",
-            "subLocality": "Beispielbezirk",
-            "locality": "Beispielstadt",
-            "bodies": [
-                "https://oparl.example.org/body/0"
-            ],
-            "organizations": [
-                "https://oparl.example.org/organization/0"
-            ],
-            "meetings": [
-            ],
-            "papers": [
-            ],
-            "geojson": {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [
-                        50.1234,
-                        10.4321
-                    ]
-                },
-                "properties": {
-                    "name": "Rathausplatz"
-                }
-            }
-        },
+        "location": """+ location_sane +""",
         "classification": "Kreisfreie Stadt",
         "created": "2014-01-08T14:28:31.568+0100",
         "modified": "2014-01-08T14:28:31.568+0100"
@@ -153,38 +121,7 @@ namespace OParlTest.Fixtures {
         "startDate": "2012-07-17",
         "endDate": "2014-07-17",
         "organizationType": "Gremium",
-        "location": {
-            "id": "https://oparl.example.org/location/0",
-            "type": "https://schema.oparl.org/1.0/Location",
-            "description": "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt",
-            "streetAddress": "Rathausplatz 1",
-            "room": "1337",
-            "postalCode": "13337",
-            "subLocality": "Beispielbezirk",
-            "locality": "Beispielstadt",
-            "bodies": [
-                "https://oparl.example.org/body/0"
-            ],
-            "organizations": [
-            ],
-            "meetings": [
-            ],
-            "papers": [
-            ],
-            "geojson": {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [
-                        50.1234,
-                        10.4321
-                    ]
-                },
-                "properties": {
-                    "name": "Rathausplatz"
-                }
-            }
-        },
+        "location": """ + location_sane + """,
         "post": [
             "Vorsitzender",
             "1. Stellvertreter",
@@ -214,21 +151,6 @@ namespace OParlTest.Fixtures {
         },
         "data": [
             """+ organization_sane +"""
-        ],
-        "links":{}
-    }
-    """;
-
-    // TODO: add meeting when fixture is available
-    public const string meeting_list_sane = """
-    {
-        "pagination": {
-            "totalElements":1,
-            "elementsPerPage":1,
-            "currentPage":1,
-            "totalPages":1
-        },
-        "data": [
         ],
         "links":{}
     }
@@ -307,4 +229,139 @@ namespace OParlTest.Fixtures {
     }
     """;
 
+    public const string meeting_sane = """
+    {
+        "id": "https://oparl.example.org/meeting/0",
+        "type": "https://schema.oparl.org/1.0/Meeting",
+        "name": "4. Sitzung des Finanzausschusses",
+        "start": "2013-01-04T08:00:00+00:00",
+        "end": "2013-01-04T12:00:00+00:00",
+        "location": """ + location_sane + """,
+        "organization": [
+            "https://oparl.example.org/organization/0"
+        ],
+        "invitation": {
+            "id": "https://oparl.example.org/files/57739",
+            "type": "https://schema.oparl.org/1.0/File",
+            "name": "Einladung",
+            "fileName": "einladung.pdf",
+            "mimeType": "application/pdf",
+            "date": "2012-01-08",
+            "modified": "2012-01-08T14:05:27+00:00",
+            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            "size": 82930,
+            "accessUrl": "https://oparl.example.org/files/57739.pdf",
+            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf"
+        },
+        "resultsProtocol": {
+            "id": "https://oparl.example.org/files/57739",
+            "type": "https://schema.oparl.org/1.0/File",
+            "name": "Protokoll",
+            "fileName": "protokoll.pdf",
+            "mimeType": "application/pdf",
+            "date": "2012-01-08",
+            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            "size": 82930,
+            "accessUrl": "https://oparl.example.org/files/57739.pdf",
+            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
+            "modified": "2012-01-08T14:05:27+00:00"
+        },
+        "verbatimProtocol": {
+            "id": "https://oparl.example.org/files/57739",
+            "type": "https://schema.oparl.org/1.0/File",
+            "name": "Wortprotokoll",
+            "fileName": "wortprotokoll.pdf",
+            "mimeType": "application/pdf",
+            "date": "2012-01-08",
+            "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            "size": 82930,
+            "accessUrl": "https://oparl.example.org/files/57739.pdf",
+            "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
+            "modified": "2012-01-08T14:05:27+00:00"
+        },
+        "auxiliaryFile": [
+            {
+                "id": "https://oparl.example.org/files/57739",
+                "type": "https://schema.oparl.org/1.0/File",
+                "name": "Nachtrags-Tagesordnung",
+                "fileName": "nachtrag-TO.pdf",
+                "mimeType": "application/pdf",
+                "date": "2012-01-08",
+                "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                "size": 82930,
+                "accessUrl": "https://oparl.example.org/files/57739.pdf",
+                "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
+                "modified": "2012-01-08T14:05:27+00:00"
+            }
+        ],
+        "agendaItem": [
+            {
+                "id": "https://oparl.example.org/agendaitem/3271",
+                "type": "https://schema.oparl.org/1.0/AgendaItem",
+                "meeting": "https://oparl.example.org/meeting/281",
+                "number": "10.1",
+                "name": "Satzungsänderung für Ausschreibungen",
+                "public": true,
+                "consultation": "https://oparl.example.org/consultation/1034",
+                "result": "Geändert beschlossen",
+                "resolution": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
+                "modified": "2012-08-16T14:05:27+00:00"
+            }
+        ],
+        "created": "2012-01-06T12:01:00+00:00",
+        "modified": "2012-01-08T14:05:27+00:00"
+    }
+    """;
+
+    public const string meeting_list_sane = """
+    {
+        "pagination": {
+            "totalElements":1,
+            "elementsPerPage":1,
+            "currentPage":1,
+            "totalPages":1
+        },
+        "data": [
+            """ + meeting_sane + """
+        ],
+        "links":{}
+    }
+    """;
+
+    public const string location_sane = """
+    {
+        "id": "https://oparl.example.org/location/0",
+        "type": "https://schema.oparl.org/1.0/Location",
+        "description": "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt",
+        "streetAddress": "Rathausplatz 1",
+        "room": "1337",
+        "postalCode": "13337",
+        "subLocality": "Beispielbezirk",
+        "locality": "Beispielstadt",
+        "bodies": [
+            "https://oparl.example.org/body/0"
+        ],
+        "organizations": [
+            "https://oparl.example.org/organization/0"
+        ],
+        "meetings": [
+            "https://oparl.example.org/meeting/0"
+        ],
+        "papers": [
+        ],
+        "geojson": {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    50.1234,
+                    10.4321
+                ]
+            },
+            "properties": {
+                "name": "Rathausplatz"
+            }
+        }
+    }
+    """;
 }
