@@ -25,7 +25,7 @@ namespace OParl {
 
         public string file_name {get; set;}
         public string mime_type {get; set;}
-        public GLib.DateTime date {get; set;}
+        public GLib.Date date {get; set;}
         public int size {get; set;}
         public string sha1_checksum {get; set;}
         public string text {get; set;}
@@ -48,7 +48,7 @@ namespace OParl {
             }
         }
 
-        private string[] derivative_file_url {get; set; default={};}
+        protected string[] derivative_file_url {get; set; default={};}
         private bool derivative_file_resolved {get;set; default=false;}
         private List<File>? derivative_file_p = null;
         public List<File> derivative_file {
@@ -65,7 +65,7 @@ namespace OParl {
             }
         }
 
-        private string[] meeting_url {get; set; default={};}
+        protected string[] meeting_url {get; set; default={};}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
         public List<Meeting> meeting {
@@ -82,7 +82,7 @@ namespace OParl {
             }
         }
 
-        private string[] agenda_item_url {get; set; default={};}
+        protected string[] agenda_item_url {get; set; default={};}
         private bool agenda_item_resolved {get;set; default=false;}
         private List<AgendaItem>? agenda_item_p = null;
         public List<AgendaItem> agenda_item {
@@ -99,7 +99,7 @@ namespace OParl {
             }
         }
 
-        private string[] paper_url {get; set; default={};}
+        protected string[] paper_url {get; set; default={};}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
         public List<Paper> paper {
@@ -165,9 +165,8 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
-                        tv.from_iso8601(item.get_string());
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        var dt = new GLib.Date();
+                        dt.set_parse(item.get_string());
                         this.set_property(File.name_map.get(name), dt);
                         break;
                     // - integers
