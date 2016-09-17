@@ -282,32 +282,23 @@ namespace OParlTest.Fixtures {
             "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
             "modified": "2012-01-08T14:05:27+00:00"
         },
-        "auxiliaryFile": [
-            {
-                "id": "https://oparl.example.org/files/57739",
-                "type": "https://schema.oparl.org/1.0/File",
-                "name": "Nachtrags-Tagesordnung",
-                "fileName": "nachtrag-TO.pdf",
-                "mimeType": "application/pdf",
-                "date": "2012-01-08",
-                "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-                "size": 82930,
-                "accessUrl": "https://oparl.example.org/files/57739.pdf",
-                "downloadUrl": "https://oparl.example.org/files/download/57739.pdf",
-                "modified": "2012-01-08T14:05:27+00:00"
-            }
-        ],
+        "auxiliaryFile": ["""+ file_sane + """],
         "agendaItem": [
             {
-                "id": "https://oparl.example.org/agendaitem/3271",
+                "id": "https://oparl.example.org/agendaitem/0",
                 "type": "https://schema.oparl.org/1.0/AgendaItem",
-                "meeting": "https://oparl.example.org/meeting/281",
+                "meeting": "https://oparl.example.org/meeting/0",
                 "number": "10.1",
                 "name": "Satzungsänderung für Ausschreibungen",
                 "public": true,
-                "consultation": "https://oparl.example.org/consultation/1034",
+                "consultation": "https://oparl.example.org/consultation/0",
                 "result": "Geändert beschlossen",
-                "resolution": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
+                "resolutionText": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
+                "resolutionFile": """+ file_sane +""",
+                "auxiliaryFile": ["""+ file_sane +"""],
+                "start": "2012-01-06T12:01:00+00:00",
+                "end": "2012-01-08T14:05:27+00:00",
+                "created": "2012-01-06T12:01:00+00:00",
                 "modified": "2012-08-16T14:05:27+00:00"
             }
         ],
@@ -365,6 +356,22 @@ namespace OParlTest.Fixtures {
                 "name": "Rathausplatz"
             }
         }
+    }
+    """;
+
+    public const string file_sane = """
+    {
+        "id": "https://oparl.example.org/files/0",
+        "type": "https://schema.oparl.org/1.0/File",
+        "name": "Nachtrags-Tagesordnung",
+        "fileName": "nachtrag-TO.pdf",
+        "mimeType": "application/pdf",
+        "date": "2012-01-08",
+        "sha1Checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "size": 82930,
+        "accessUrl": "https://oparl.example.org/files/0.pdf",
+        "downloadUrl": "https://oparl.example.org/files/download/0.pdf",
+        "modified": "2012-01-08T14:05:27+00:00"
     }
     """;
 }
