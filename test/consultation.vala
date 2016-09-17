@@ -77,7 +77,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
@@ -93,7 +93,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
@@ -109,7 +109,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
@@ -125,7 +125,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
@@ -141,7 +141,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);

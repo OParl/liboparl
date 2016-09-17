@@ -70,7 +70,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     LegislativeTerm l = b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
@@ -85,7 +85,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     LegislativeTerm l = b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
@@ -100,7 +100,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     LegislativeTerm l = b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
@@ -115,7 +115,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     LegislativeTerm l = b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
@@ -130,7 +130,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     LegislativeTerm l = b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();

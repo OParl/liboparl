@@ -24,7 +24,7 @@ using OParl;
 namespace OParlTest.Fixtures {
     public const string object_sane = """
     {
-        "id": "https://api.testoparl.invalid/oparl/v1/",
+        "id": "https://oparl.example.org/",
         "type": "https://schema.oparl.org/1.0/System",
         "name": "Testsystem und so",
         "shortName": "Testsystem",

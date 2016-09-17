@@ -28,7 +28,7 @@ namespace OParlTest {
         private static void init() {
             ObjectTest.test_input = new GLib.HashTable<string,string>(GLib.str_hash, GLib.str_equal);
 
-            ObjectTest.test_input.insert("https://api.testoparl.invalid/oparl/v1/", Fixtures.object_sane);
+            ObjectTest.test_input.insert("https://oparl.example.org/", Fixtures.object_sane);
         }
 
         public static void add_tests () {
@@ -41,11 +41,11 @@ namespace OParlTest {
                 });
                 System s;
                 try {
-                    s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    s = client.open("https://oparl.example.org/");
                 } catch (ValidationError e) {
                     GLib.assert_not_reached();
                 }
-                assert (s.id == "https://api.testoparl.invalid/oparl/v1/");
+                assert (s.id == "https://oparl.example.org/");
                 assert (s.name == "Testsystem und so");
                 assert (s.short_name == "Testsystem");
                 assert (s.license == "CC-BY-SA");
@@ -63,11 +63,11 @@ namespace OParlTest {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return ObjectTest.test_input.get(url).replace(
-                        "\"https://api.testoparl.invalid/oparl/v1/\"", "1"
+                        "\"https://oparl.example.org/\"", "1"
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -80,7 +80,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -93,7 +93,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -106,7 +106,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -119,7 +119,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -132,7 +132,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -145,7 +145,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -158,7 +158,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    client.open("https://api.testoparl.invalid/oparl/v1/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (OParl.ValidationError e) {}
             });
@@ -171,7 +171,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
@@ -184,7 +184,7 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://api.testoparl.invalid/oparl/v1/");
+                    System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
                 } catch (ValidationError e) {}
             });
