@@ -240,6 +240,9 @@ namespace OParlTest.Fixtures {
         "organization": [
             "https://oparl.example.org/organization/0"
         ],
+        "participant": [
+            "https://oparl.example.org/person/0"
+        ],
         "invitation": {
             "id": "https://oparl.example.org/files/57739",
             "type": "https://schema.oparl.org/1.0/File",

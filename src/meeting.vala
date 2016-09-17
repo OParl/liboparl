@@ -87,7 +87,7 @@ namespace OParl {
             }
         }
 
-        private string[] participant_url {get; set; default={};}
+        internal string[] participant_url {get; set; default={};}
         private bool participant_resolved {get;set; default=false;}
         private List<Person>? participant_p = null;
         public List<Person> participant {

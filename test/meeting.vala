@@ -31,6 +31,7 @@ namespace OParlTest {
             MeetingTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             MeetingTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             MeetingTest.test_input.insert("https://oparl.example.org/organization/0", Fixtures.organization_sane);
+            MeetingTest.test_input.insert("https://oparl.example.org/person/0", Fixtures.person_sane);
             MeetingTest.test_input.insert("https://oparl.example.org/body/0/meetings/", Fixtures.meeting_list_sane);
         }
 
@@ -59,6 +60,8 @@ namespace OParlTest {
                 assert (m.location is Location);
                 assert (m.organization != null);
                 assert (m.organization.nth_data(0) is Organization);
+                assert (m.participant != null);
+                assert (m.participant.nth_data(0) is Person);
                 assert (m.invitation != null);
                 assert (m.invitation is OParl.File);
                 assert (m.results_protocol != null);
