@@ -141,4 +141,95 @@ namespace OParlTest.Fixtures {
         "modified": "2014-01-08T14:28:31.568+0100"
     }
     """;
+
+    public const string organization_sane = """
+    {
+        "id": "https://oparl.example.org/organization/0",
+        "type": "https://schema.oparl.org/1.0/Organization",
+        "body": "https://oparl.example.org/body/0",
+        "name": "Ausschuss für Haushalt und Finanzen",
+        "shortName": "Finanzausschuss",
+        "startDate": "2012-07-17",
+        "endDate": "2014-07-17",
+        "organizationType": "Gremium",
+        "location": {
+            "id": "https://oparl.example.org/location/0",
+            "type": "https://schema.oparl.org/1.0/Location",
+            "description": "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt",
+            "streetAddress": "Rathausplatz 1",
+            "room": "1337",
+            "postalCode": "13337",
+            "subLocality": "Beispielbezirk",
+            "locality": "Beispielstadt",
+            "bodies": [
+                "https://oparl.example.org/body/0"
+            ],
+            "organizations": [
+            ],
+            "meetings": [
+            ],
+            "papers": [
+            ],
+            "geojson": {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        50.1234,
+                        10.4321
+                    ]
+                },
+                "properties": {
+                    "name": "Rathausplatz"
+                }
+            }
+        },
+        "post": [
+            "Vorsitzender",
+            "1. Stellvertreter",
+            "Mitglied"
+        ],
+        "meeting": "https://oparl.example.org/organization/0/meetings",
+        "membership": [
+            "https://oparl.example.org/memberships/27"
+        ],
+        "classification": "Ausschuss",
+        "keyword": [
+            "finanzen",
+            "haushalt"
+        ],
+        "created": "2012-07-16",
+        "modified": "2012-08-16"
+    }
+    """;
+
+    public const string organization_list_sane = """
+    {
+        "pagination": {
+            "totalElements":1,
+            "elementsPerPage":1,
+            "currentPage":1,
+            "totalPages":1
+        },
+        "data": [
+            """+ organization_sane +"""
+        ],
+        "links":{}
+    }
+    """;
+
+    // TODO: add meeting when fixture is available
+    public const string meeting_list_sane = """
+    {
+        "pagination": {
+            "totalElements":1,
+            "elementsPerPage":1,
+            "currentPage":1,
+            "totalPages":1
+        },
+        "data": [
+        ],
+        "links":{}
+    }
+    """;
 }
