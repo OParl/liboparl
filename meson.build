@@ -89,7 +89,6 @@ custom_target('apidocs',
                input: oparl_lib_source,
                command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
                '--pkg','json-glib-1.0', '--force'],
-#               depends: clear_apidocs,
                output: 'devhelp',
 )
 
