@@ -7,6 +7,10 @@ chmod 644 /usr/local/lib/girepository-1.0/OParl-0.2.typelib
 # via release.
 mv /usr/local/lib/x86_64-linux-gnu/pkgconfig/oparl-0.2.pc /usr/local/lib/pkgconfig/
 chmod 644 /usr/local/lib/pkgconfig/oparl-0.2.pc
+
+chmod 644 /usr/local/share/vala/vapi/oparl-0.2.deps
+chmod 644 /usr/local/share/vala/vapi/oparl-0.2.vapi
+
 chmod -R 644 /usr/local/share/devhelp/books/oparl-0.2
 chmod 755 /usr/local/share/devhelp/books/oparl-0.2
 chmod 755 /usr/local/share/devhelp/books/oparl-0.2/img

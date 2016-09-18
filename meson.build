@@ -105,5 +105,7 @@ pkgconfig.generate(libraries : libs,
 
 install_headers(meson.current_build_dir()+'/oparl-'+api+'.h')
 install_subdir(meson.current_build_dir()+'/devhelp/oparl-'+api+'/oparl-'+api, install_dir: get_option('datadir')+'/devhelp/books')
+install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
+install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
 
 meson.add_install_script('fix_permissions.sh')
