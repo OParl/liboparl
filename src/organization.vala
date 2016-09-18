@@ -61,7 +61,7 @@ namespace OParl {
          */
         public GLib.Date end_date {get; set;}
 
-        public string body_url {get;set; default="";}
+        internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
         /**
@@ -78,7 +78,7 @@ namespace OParl {
             }
         }
 
-        public string external_body_url {get;set; default="";}
+        internal string external_body_url {get;set; default="";}
         private bool external_body_resolved {get;set; default=false;}
         private Body? external_body_p = null;
         /**
@@ -97,7 +97,7 @@ namespace OParl {
             }
         }
 
-        public string sub_organization_of_url {get;set; default="";}
+        internal string sub_organization_of_url {get;set; default="";}
         private bool sub_organization_of_resolved {get;set; default=false;}
         private Organization? sub_organization_of_p = null;
         /**
@@ -115,7 +115,7 @@ namespace OParl {
             }
         }
 
-        public string[] membership_url {get; set; default={};}
+        internal string[] membership_url {get; set; default={};}
         private bool membership_resolved {get;set; default=false;}
         private List<Membership>? membership_p = null;
         /**
@@ -145,7 +145,7 @@ namespace OParl {
             }
         }
 
-        public string meeting_url {get;set;}
+        internal string meeting_url {get;set;}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
         /**
@@ -181,7 +181,7 @@ namespace OParl {
             name_map.insert("externalBody", "external_body");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
