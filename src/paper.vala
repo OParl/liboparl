@@ -20,14 +20,34 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represents any kind of written document used in processes
+     * described through OParl.
+     */
     public class Paper : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * Idenitification number of the document.
+         */
         public string reference {get;set;}
+
+        /**
+         * Type of document
+         */
         public string paper_type {get;set;}
+
+        /**
+         * Date used as the start for ultimatums e.t.c
+         */
         public GLib.Date date {get; set;}
 
         private File? main_file_p = null;
+        /**
+         * The file-representation of this document
+         *
+         * May be ommited if there is no file representing the document
+         */
         public File main_file {
             get {
                 return this.main_file_p;
@@ -35,6 +55,9 @@ namespace OParl {
         }
 
         private List<Consultation>? consultation_p = new List<Consultation>();
+        /**
+         * Consultations in which this document has been discussed.
+         */
         public List<Consultation> consultation {
             get {
                 return this.consultation_p;
@@ -43,6 +66,9 @@ namespace OParl {
 
 
         private List<Location>? location_p = new List<Location>();
+        /**
+         * If the document has any spatial references this locations descibe them.
+         */
         public List<Location> location {
             get {
                 return this.location_p;
@@ -50,6 +76,9 @@ namespace OParl {
         }
 
         private List<File>? auxiliary_file_p = new List<File>();
+        /**
+         * Related files to the document
+         */
         public List<File> auxiliary_file {
             get {
                 return this.auxiliary_file_p;
@@ -59,6 +88,9 @@ namespace OParl {
         public string[] originator_person_url {get;set;}
         private bool originator_person_resolved {get;set; default=false;}
         private List<Person>? originator_person_p = null;
+        /**
+         * The person(s) that created this document
+         */
         public List<Person> originator_person {
             get {
                 if (!originator_person_resolved && originator_person_url != null) {
@@ -76,6 +108,9 @@ namespace OParl {
         public string[] under_direction_of_url {get;set;}
         private bool under_direction_of_resolved {get;set; default=false;}
         private List<Organization>? under_direction_of_p = null;
+        /**
+         * Organizations that are responsible for the content
+         */
         public List<Organization> under_direction_of {
             get {
                 if (!under_direction_of_resolved && under_direction_of_url != null) {
@@ -93,6 +128,9 @@ namespace OParl {
         public string[] originator_organization_url {get;set;}
         private bool originator_organization_resolved {get;set; default=false;}
         private List<Organization>? originator_organization_p = null;
+        /**
+         * If the creator of the document is one or more organization(s), they will be in this field.
+         */
         public List<Organization> originator_organization {
             get {
                 if (!originator_organization_resolved && originator_organization_url != null) {
@@ -110,6 +148,9 @@ namespace OParl {
         public string[] superordinated_paper_url {get;set;}
         private bool superordinated_paper_resolved {get;set; default=false;}
         private List<Paper>? superordinated_paper_p = null;
+        /**
+         * Documents to be regarded superordinated to this document.
+         */
         public List<Paper> superordinated_paper {
             get {
                 if (!superordinated_paper_resolved && superordinated_paper_url != null) {
@@ -127,6 +168,9 @@ namespace OParl {
         public string[] subordinated_paper_url {get;set;}
         private bool subordinated_paper_resolved {get;set; default=false;}
         private List<Paper>? subordinated_paper_p = null;
+        /**
+         * Documents to be regarded subordinated to this document.
+         */
         public List<Paper> subordinated_paper {
             get {
                 if (!subordinated_paper_resolved && subordinated_paper_url != null) {
@@ -144,6 +188,9 @@ namespace OParl {
         public string[] related_paper_url {get;set;}
         private bool related_paper_resolved {get;set; default=false;}
         private List<Paper>? related_paper_p = null;
+        /**
+         * Related documents.
+         */
         public List<Paper> related_paper {
             get {
                 if (!related_paper_resolved && related_paper_url != null) {
@@ -161,6 +208,9 @@ namespace OParl {
         internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
+        /**
+         * The body that this document belongs to
+         */
         public Body body {
             get {
                 if (!body_resolved) {
