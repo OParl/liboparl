@@ -20,15 +20,27 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represents a legislative term
+     */
     public class LegislativeTerm : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The date at which the legislative term started
+         */
         public GLib.Date start_date {get; set;}
+        /**
+         * The date at which the legislative term ended
+         */
         public GLib.Date end_date {get; set;}
 
         public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
+        /**
+         * The body that references this legislative term
+         */
         public Body body {
             get {
                 if (!body_resolved) {
