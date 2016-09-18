@@ -39,7 +39,7 @@ namespace OParl {
          */
         public bool authoritative {get; set;}
 
-        private string paper_url {get;set; default="";}
+        internal string paper_url {get;set; default="";}
         private bool paper_resolved {get;set; default=false;}
         private Paper? paper_p = null;
         /**
@@ -60,7 +60,7 @@ namespace OParl {
             }
         }
 
-        protected string agenda_item_url {get;set; default="";}
+        internal string agenda_item_url {get;set; default="";}
         private bool agenda_item_resolved {get;set; default=false;}
         private AgendaItem? agenda_item_p = null;
         /**
@@ -77,7 +77,7 @@ namespace OParl {
             }
         }
 
-        protected string meeting_url {get;set; default="";}
+        internal string meeting_url {get;set; default="";}
         private bool meeting_resolved {get;set; default=false;}
         private Meeting? meeting_p = null;
         /**
@@ -94,7 +94,7 @@ namespace OParl {
             }
         }
 
-        public string[] organization_url {get;set;}
+        internal string[] organization_url {get;set;}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         /**
@@ -124,7 +124,7 @@ namespace OParl {
             name_map.insert("role","role");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
