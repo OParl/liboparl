@@ -20,24 +20,78 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Any natural person that does parliamentary work and is a member
+     * of an {@link OParl.Organization} will be represented as a Person.
+     */
     public class Person : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The person's family name
+         */
         public string family_name {get; set;}
+
+        /**
+         * The person's given name
+         */
         public string given_name {get; set;}
+
+        /**
+         * Determines how the person is to be addressed
+         */
         public string form_of_address {get; set;}
+
+        /**
+         * Affix to be printed behind the name
+         */
         public string affix {get; set;}
+
+        /**
+         * Academic titles
+         */
         public string[] title {get; set;}
+
+        /**
+         * The gender of this person.
+         *
+         * If the gender of a person is unknown, it will likely be omitted
+         */
         public string gender {get; set;}
+
+        /**
+         * Public phone numbers of the person
+         */
         public string[] phone {get; set;}
+
+        /**
+         * Contact email addresses of the person
+         */
         public string[] email {get; set;}
+
+        /**
+         * Stati / roles that the person fulfills in the municipality
+         */
         public string[] status {get; set;}
+
+        /**
+         * A short biography / infotext regarding the person.
+         *
+         * You can expect this text to be maximum ~300 characters long.
+         */
         public string life {get; set;}
+
+        /**
+         * Hints to where the information about the person's {@link OParl.Person.life} come from.
+         */
         public string life_source {get; set;}
 
         public string location_url {get;set; default="";}
         private bool location_resolved {get;set; default=false;}
         private Location? location_p = null;
+        /**
+         * The contact address of this Person
+         */
         public Location location {
             get {
                 if (!location_resolved) {
@@ -52,6 +106,9 @@ namespace OParl {
         public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
+        /**
+         * The body that this person belongs to
+         */
         public Body body {
             get {
                 if (!body_resolved) {
@@ -64,6 +121,9 @@ namespace OParl {
         }
 
         private List<Membership>? membership_p = new List<Membership>();
+        /**
+         * All memberships that this person has.
+         */
         public List<Membership> membership {
             get {
                 return this.membership_p;
