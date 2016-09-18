@@ -40,10 +40,6 @@ namespace OParl {
     public errordomain ParsingError {
         EXPECTED_OBJECT,
         EXPECTED_VALUE,
-        MISSING_MANDATORY,
-        EMPTY_MANDATORY,
-        MISSING_OPTIONAL,
-        EMPTY_OPTIONAL,
         NO_DATA,
         INVALID_TYPE
     }
