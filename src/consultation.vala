@@ -20,15 +20,31 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * A Consultation represents the consultation of a
+     * {@link OParl.Paper} in regards of an {@link OParl.AgendaItem}
+     */
     public class Consultation : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The function of this consultation.
+         *
+         * Coud be //hearing// for example.
+         */
         public string role {get; set;}
+
+        /**
+         * If this consultation bears decisive power, the flag shall be true
+         */
         public bool authoritative {get; set;}
 
         private string paper_url {get;set; default="";}
         private bool paper_resolved {get;set; default=false;}
         private Paper? paper_p = null;
+        /**
+         * The paper that this consultation references
+         */
         public Paper paper {
             get {
                 if (!paper_resolved) {
@@ -47,6 +63,9 @@ namespace OParl {
         protected string agenda_item_url {get;set; default="";}
         private bool agenda_item_resolved {get;set; default=false;}
         private AgendaItem? agenda_item_p = null;
+        /**
+         * The agenda item that this consultation references
+         */
         public AgendaItem agenda_item {
             get {
                 if (!agenda_item_resolved) {
@@ -61,6 +80,9 @@ namespace OParl {
         protected string meeting_url {get;set; default="";}
         private bool meeting_resolved {get;set; default=false;}
         private Meeting? meeting_p = null;
+        /**
+         * The meeting that this consultation happen(s/ed) at
+         */
         public Meeting meeting {
             get {
                 if (!meeting_resolved) {
@@ -75,6 +97,9 @@ namespace OParl {
         public string[] organization_url {get;set;}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
+        /**
+         * The organizations conducting the consultation.
+         */
         public List<Organization> organization {
             get {
                 if (!organization_resolved && organization_url != null) {
