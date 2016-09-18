@@ -53,7 +53,7 @@ namespace OParl {
          */
         public GLib.Date end_date {get; set;}
 
-        public string person_url {get;set; default="";}
+        internal string person_url {get;set; default="";}
         private bool person_resolved {get;set; default=false;}
         private Person? person_p = null;
         /**
@@ -74,7 +74,7 @@ namespace OParl {
             }
         }
 
-        public string organization_url {get;set; default="";}
+        internal string organization_url {get;set; default="";}
         private bool organization_resolved {get;set; default=false;}
         private Organization? organization_p = null;
         /**
@@ -91,7 +91,7 @@ namespace OParl {
             }
         }
 
-        public string on_behalf_of_url {get;set; default="";}
+        internal string on_behalf_of_url {get;set; default="";}
         private bool on_behalf_of_resolved {get;set; default=false;}
         private Organization? on_behalf_of_p = null;
         /**
