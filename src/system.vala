@@ -71,7 +71,7 @@ namespace OParl {
          */
         public string product {get;set;}
 
-        public string body_url {get;set;}
+        internal string body_url {get;set;}
         private bool body_resolved {get;set; default=false;}
         private List<Body>? body_p = null;
         /**
