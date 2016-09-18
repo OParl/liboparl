@@ -37,7 +37,7 @@ namespace OParl {
     public class Client : GLib.Object {
         private static bool initialized = false;
 
-        public static void init() {
+        private static void init() {
             Object.populate_name_map();
             System.populate_name_map();
             Body.populate_name_map();
