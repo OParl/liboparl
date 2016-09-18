@@ -38,7 +38,7 @@ namespace OParl {
 
         /**
          * If the {@link OParl.Membership.person} has the right
-         * to vote in {@link OParl.Consulation}s of
+         * to vote on resolutions {@link OParl.AgendaItem}s in {@link OParl.Meeting}s of
          * {@link OParl.Membership.organization}, this flag is true
          */
         public bool voting_right {get; set;}

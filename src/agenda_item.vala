@@ -20,17 +20,68 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * A specific topic to be discussed in a {@link OParl.Meeting}
+     *
+     * Agenda items are components of Meetings. Each agenda item deals
+     * with a specific topic. Discussing this topic usually involves
+     * working through several {@link OParl.Paper}s. The link between a
+     * {@link OParl.Paper} and an agenda item is expressed throug
+     * a {@link OParl.Consultation}
+     */
     public class AgendaItem : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * Ordering number of this AgendaItem
+         *
+         * Be aware that the actual ordering from a developers view
+         * is determined by the order of the objects in {@link OParl.Meeting.agenda_item}
+         */
         public string number {get; set;}
+
+        /**
+         * Determines wheter this agenda item is to be discussed in public
+         */
         public bool @public {get; set;}
+
+        /**
+         * Categorical information on which result the Consultations yielded
+         *
+         * Could be something like "accepted", "accepted with changes", "rejected"
+         * "postponed" or similar stati.
+         */
         public string result {get; set;}
+
+        /**
+         * More fine-grained text about how the agenda items resolution has been made.
+         */
         public string resolution_text {get; set;}
+
+        /**
+         * Point-in-time when the discussion of this agenda item started
+         *
+         * Depending on wheter the agenda item is planned to happen in the
+         * future or is designated to have happened in the past, this respectively
+         * represents the //planned// start or ''could'' contain the actual
+         * start.
+         */
         public GLib.DateTime start {get; set;}
+
+        /**
+         * Point-in-time when the discussion of this agenda item ended
+         *
+         * Depending on wheter the agenda item is planned to happen in the
+         * future or is designated to have happened in the past, this respectively
+         * represents the //planned// end or ''could'' contain the actual
+         * end.
+         */
         public GLib.DateTime end {get; set;}
 
         private List<File>? auxiliary_file_p = new List<File>();
+        /**
+         * Miscellaneous files concerning this agenda item
+         */
         public List<File> auxiliary_file {
             get {
                 return this.auxiliary_file_p;
@@ -38,6 +89,9 @@ namespace OParl {
         }
 
         private File? resolution_file_p = null;
+        /**
+         * A file representing the resolution
+         */
         public File resolution_file {
             get {
                 return this.resolution_file_p;
@@ -47,6 +101,9 @@ namespace OParl {
         internal string meeting_url {get;set; default="";}
         private bool meeting_resolved {get;set; default=false;}
         private Meeting? meeting_p = null;
+        /**
+         * The meeting this agenda item is discussed in
+         */
         public Meeting meeting {
             get {
                 if (!meeting_resolved) {
@@ -61,6 +118,10 @@ namespace OParl {
         internal string consultation_url {get;set; default="";}
         private bool consultation_resolved {get;set; default=false;}
         private Consultation? consultation_p = null;
+        /**
+         * Represents all consulting that has been done in order
+         * to make a resolution to this agenda item.
+         */
         public Consultation consultation {
             get {
                 if (!consultation_resolved) {
