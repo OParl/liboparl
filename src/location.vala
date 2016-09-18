@@ -20,20 +20,54 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represents physical locations.
+     */
     public class Location : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * Textual description of the location
+         */
         public string description {get; set;}
+
+        /**
+         * Represents the location through spatial data in the
+         * geojson format.
+         */
         public Json.Object geojson {get; set;}
+
+        /**
+         * Street and house number of the address
+         */
         public string street_address {get; set;}
+
+        /**
+         * Room number if the addressed house has such.
+         */
         public string room {get; set;}
+
+        /**
+         * Postal code of the address
+         */
         public string postal_code {get; set;}
+
+        /**
+         * Sub-part of the locality e.g. district
+         */
         public string sub_locality {get; set;}
+
+        /**
+         * The locality
+         */
         public string locality {get; set;}
 
         public string[] bodies_url {get; set; default={};}
         private bool bodies_resolved {get;set; default=false;}
         private List<Body>? bodies_p = null;
+        /**
+         * Backreferences to bodies
+         */
         public List<Body> bodies {
             get {
                 if (!bodies_resolved && bodies_url != null) {
@@ -51,6 +85,9 @@ namespace OParl {
         public string[] organizations_url {get; set; default={};}
         private bool organizations_resolved {get;set; default=false;}
         private List<Organization>? organizations_p = null;
+        /**
+         * Backreferences to organizations
+         */
         public List<Organization> organizations {
             get {
                 if (!organizations_resolved && organizations_url != null) {
@@ -68,6 +105,9 @@ namespace OParl {
         public string[] meetings_url {get; set; default={};}
         private bool meetings_resolved {get;set; default=false;}
         private List<Meeting>? meetings_p = null;
+        /**
+         * Backreferences to meetings
+         */
         public List<Meeting> meetings {
             get {
                 if (!meetings_resolved && meetings_url != null) {
@@ -85,6 +125,9 @@ namespace OParl {
         public string[] papers_url {get; set; default={};}
         private bool papers_resolved {get;set; default=false;}
         private List<Paper>? papers_p = null;
+        /**
+         * Backreferences to papers
+         */
         public List<Paper> papers {
             get {
                 if (!papers_resolved && papers_url != null) {
