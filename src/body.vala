@@ -86,8 +86,7 @@ namespace OParl {
          */
         public string classification {get; set;}
 
-        // Indirectly Resolvable
-        public string organization_url {get;set;}
+        internal string organization_url {get;set;}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         /**
@@ -107,7 +106,7 @@ namespace OParl {
             }
         }
 
-        public string person_url {get;set;}
+        internal string person_url {get;set;}
         private bool person_resolved {get;set; default=false;}
         private List<Person>? person_p = null;
         /**
@@ -127,7 +126,7 @@ namespace OParl {
             }
         }
 
-        public string meeting_url {get;set;}
+        internal string meeting_url {get;set;}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
         /**
@@ -147,7 +146,7 @@ namespace OParl {
             }
         }
 
-        public string paper_url {get;set;}
+        internal string paper_url {get;set;}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
         /**
@@ -187,7 +186,7 @@ namespace OParl {
             }
         }
 
-        public string system_url {get;set; default="";}
+        internal string system_url {get;set; default="";}
         private bool system_resolved {get;set; default=false;}
         private System? system_p = null;
         /**
@@ -224,7 +223,7 @@ namespace OParl {
             name_map.insert("location","location");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
