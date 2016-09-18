@@ -86,7 +86,7 @@ namespace OParl {
          */
         public string life_source {get; set;}
 
-        public string location_url {get;set; default="";}
+        internal string location_url {get;set; default="";}
         private bool location_resolved {get;set; default=false;}
         private Location? location_p = null;
         /**
@@ -103,7 +103,7 @@ namespace OParl {
             }
         }
 
-        public string body_url {get;set; default="";}
+        internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
         /**
@@ -148,7 +148,7 @@ namespace OParl {
             name_map.insert("membership", "membership");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
