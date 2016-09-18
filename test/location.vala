@@ -47,7 +47,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -86,7 +86,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/location/wrong_street_address_type", () => {
@@ -101,7 +101,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/location/wrong_room_type", () => {
@@ -116,7 +116,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/location/wrong_postal_code_type", () => {
@@ -131,7 +131,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/location/wrong_sub_locality_type", () => {
@@ -146,7 +146,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/location/wrong_locality_type", () => {
@@ -161,7 +161,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Location l = b.location;
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             */
        }

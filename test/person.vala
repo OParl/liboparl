@@ -45,7 +45,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -88,7 +88,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Person p = b.person.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/person/wrong_family_name_type", () => {
@@ -103,7 +103,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Person p = b.person.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/person/wrong_given_name_type", () => {
@@ -118,7 +118,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Person p = b.person.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             // TODO: check titles
@@ -135,7 +135,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Person p = b.person.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/person/wrong_gender_type", () => {
@@ -150,7 +150,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Person p = b.person.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             */
         }

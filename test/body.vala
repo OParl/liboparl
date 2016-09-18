@@ -47,7 +47,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -96,7 +96,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_system_type", () => {
@@ -110,7 +110,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_contact_email_type", () => {
@@ -124,7 +124,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_contact_name_type", () => {
@@ -138,7 +138,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_ags_type", () => {
@@ -152,7 +152,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_rgs_type", () => {
@@ -166,7 +166,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_classification_type", () => {
@@ -180,7 +180,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wronga_equivalent_type", () => {
@@ -198,7 +198,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_license_type", () => {
@@ -212,7 +212,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_license_valid_since_type", () => {
@@ -226,7 +226,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/body/wrong_oparl_since_type", () => {
@@ -240,7 +240,7 @@ namespace OParlTest {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.body.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             */
         }

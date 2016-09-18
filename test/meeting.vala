@@ -46,7 +46,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -90,7 +90,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Meeting m = b.meeting.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/meeting/wrong_start_type", () => {
@@ -105,7 +105,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Meeting m = b.meeting.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/meeting/wrong_end_type", () => {
@@ -120,7 +120,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Meeting m = b.meeting.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             // TODO: maybe check for all fields with composite types
             */

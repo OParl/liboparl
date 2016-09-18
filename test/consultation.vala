@@ -47,7 +47,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -82,7 +82,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/consultation/wrong_agenda_item_type", () => {
@@ -98,7 +98,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/consultation/wrong_meeting_type", () => {
@@ -114,7 +114,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/consultation/wrong_authoritative_type", () => {
@@ -130,7 +130,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/consultation/wrong_role_type", () => {
@@ -146,7 +146,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             // TODO: maybe check composite types
             */

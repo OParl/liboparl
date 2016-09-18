@@ -43,7 +43,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 assert (s.id == "https://oparl.example.org/");
@@ -80,7 +80,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_contact_email_type", () => {
@@ -93,7 +93,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_contact_name_type", () => {
@@ -106,7 +106,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_website_type", () => {
@@ -119,7 +119,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_vendor_type", () => {
@@ -132,7 +132,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_product_type", () => {
@@ -145,7 +145,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/system/wrong_other_oparl_versions_type", () => {
@@ -158,7 +158,7 @@ namespace OParlTest {
                 try {
                     System s = client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });*/
         }
     }

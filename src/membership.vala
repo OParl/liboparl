@@ -121,10 +121,10 @@ namespace OParl {
             name_map.insert("onBehalfOf","on_behalf_of");
         }
 
-        internal new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -135,14 +135,14 @@ namespace OParl {
                     // - strings
                     case "role":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set(Membership.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "votingRight":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set_property(Membership.name_map.get(name), item.get_boolean());
                         break;
@@ -150,7 +150,7 @@ namespace OParl {
                     case "startDate":
                     case "endDate":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         var dt = new GLib.Date();
                         dt.set_parse(item.get_string());
@@ -161,7 +161,7 @@ namespace OParl {
                     case "person":
                     case "onBehalfOf":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set(Membership.name_map.get(name)+"_url", item.get_string());
                         break;

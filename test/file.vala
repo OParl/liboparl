@@ -48,7 +48,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -96,7 +96,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_name_type", () => {
@@ -112,7 +112,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_file_name_type", () => {
@@ -128,7 +128,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_mime_type_type", () => {
@@ -144,7 +144,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_date_type", () => {
@@ -160,7 +160,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_sha1_checksum_type", () => {
@@ -176,7 +176,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_size_type", () => {
@@ -192,7 +192,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_access_url_type", () => {
@@ -208,7 +208,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_download_url_type", () => {
@@ -224,7 +224,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_external_service_url_type", () => {
@@ -240,7 +240,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/file/wrong_text_type", () => {
@@ -256,7 +256,7 @@ namespace OParlTest {
                     Paper p = b.paper.nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             // TODO: maybe also check composite types
             */

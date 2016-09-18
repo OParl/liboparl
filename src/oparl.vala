@@ -37,7 +37,7 @@ namespace OParl {
      */
     //TODO: Implement validation, replace all current 'validationerrors'
     //      With appropriate parsing errors. Eliminate unused Errorcodes
-    public errordomain ValidationError {
+    public errordomain ParsingError {
         EXPECTED_OBJECT,
         EXPECTED_VALUE,
         MISSING_MANDATORY,
@@ -46,13 +46,6 @@ namespace OParl {
         EMPTY_OPTIONAL,
         NO_DATA,
         INVALID_TYPE
-    }
-
-    /**
-     * Errors that may occur while parsing OParl objects from JSON
-     */
-    public errordomain ParsingError {
-        IMPLEMENT_ME
     }
 
     private const uint8 SEVERITY_MEDIUM= 0x1;
@@ -93,7 +86,7 @@ namespace OParl {
          * The url you pass to the method must be the URL of a valid
          * OParl endpoint.
          */
-        public System open(string url) throws ValidationError {
+        public System open(string url) throws ParsingError {
             if (!Client.initialized)
                 Client.init();
             string data = this.resolve_url(url);
@@ -105,7 +98,7 @@ namespace OParl {
                 system.parse(parser.get_root());
                 return system;
             }
-            throw new ValidationError.NO_DATA("You did not supply valid data");
+            throw new ParsingError.NO_DATA("You did not supply valid data");
         }
 
         /**
@@ -138,7 +131,7 @@ namespace OParl {
             this.result = new List<Object>();
         }
 
-        public unowned List<Object> resolve() throws ValidationError {
+        public unowned List<Object> resolve() throws ParsingError {
             string data = this.c.resolve_url(this.url);
             var parser = new Json.Parser();
             parser.load_from_data(data);
@@ -146,11 +139,11 @@ namespace OParl {
             return this.result; 
         }
 
-        public Object make_object(Json.Node n) throws ValidationError {
+        public Object make_object(Json.Node n) throws ParsingError {
             Json.Object el_obj = n.get_object();
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE)
-                throw new ValidationError.EXPECTED_VALUE("I need a string-value as type");
+                throw new ParsingError.EXPECTED_VALUE("I need a string-value as type");
             string typestr = type.get_string();
             switch (typestr) {
                 case "https://schema.oparl.org/1.0/Body":
@@ -214,13 +207,13 @@ namespace OParl {
                     target.parse(n);
                     return target;
             }
-            throw new ValidationError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
+            throw new ParsingError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
         }
 
-        public unowned List<Object> parse_data(Json.Array arr) throws ValidationError {
+        public unowned List<Object> parse_data(Json.Array arr) throws ParsingError {
             arr.foreach_element((_,i,element) => {
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
-                    throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                    throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
                 }
                 Object target = (Object)make_object(element);
                 this.result.append(target);
@@ -244,9 +237,9 @@ namespace OParl {
             return this.result;
         }
 
-        private void parse(Json.Node n) throws ValidationError {
+        private void parse(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
             
             unowned Json.Object o = n.get_object();
 
@@ -254,12 +247,12 @@ namespace OParl {
             unowned Json.Node item;
             item = o.get_member("data");
             if (item.get_node_type() != Json.NodeType.ARRAY) {
-                throw new ValidationError.EXPECTED_VALUE("Attribute data must be an array");
+                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array");
             }
             this.parse_data(item.get_array());
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ValidationError.EXPECTED_VALUE("Attribute links must be an object");
+                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object");
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {

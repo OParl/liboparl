@@ -45,7 +45,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -82,7 +82,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/membership/wrong_organization_type", () => {
@@ -98,7 +98,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/membership/wrong_role_type", () => {
@@ -114,7 +114,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/membership/wrong_voting_right_type", () => {
@@ -130,7 +130,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/membership/wrong_start_date_type", () => {
@@ -146,7 +146,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/membership/wrong_end_date_type", () => {
@@ -162,7 +162,7 @@ namespace OParlTest {
                     Person p = b.person.nth_data(0);
                     Membership m = p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             */
         }

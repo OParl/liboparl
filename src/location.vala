@@ -157,10 +157,10 @@ namespace OParl {
             name_map.insert("papers", "papers");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        public new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -176,7 +176,7 @@ namespace OParl {
                     case "subLocality":
                     case "locality":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
                         this.set(Location.name_map.get(name), item.get_string(),null);
                         break;
@@ -186,7 +186,7 @@ namespace OParl {
                     case "meetings":
                     case "papers":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
@@ -202,7 +202,7 @@ namespace OParl {
                     // Json object
                     case "geojson":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ValidationError.EXPECTED_VALUE("Attribute '%s' must be a object".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a object".printf(name));
                         }
                         this.set(Location.name_map.get(name), item.get_object());
                         break;

@@ -49,7 +49,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -97,7 +97,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/paper/wrong_body_type", () => {
@@ -112,7 +112,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/paper/wrong_name_type", () => {
@@ -127,7 +127,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/paper/wrong_reference_type", () => {
@@ -142,7 +142,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/paper/wrong_date_type", () => {
@@ -157,7 +157,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/paper/wrong_paper_type_type", () => {
@@ -172,7 +172,7 @@ namespace OParlTest {
                     Body b = s.body.nth_data(0);
                     Paper p = b.paper.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             // TODO: add tests for wrong composite types?
             */

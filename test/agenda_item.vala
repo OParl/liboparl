@@ -46,7 +46,7 @@ namespace OParlTest {
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
-                } catch (ValidationError e) {
+                } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
                 Body b = s.body.nth_data(0);
@@ -86,7 +86,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_meeting_type", () => {
@@ -102,7 +102,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_number_type", () => {
@@ -118,7 +118,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_name_type", () => {
@@ -134,7 +134,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_public_type", () => {
@@ -150,7 +150,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_consultation_type", () => {
@@ -166,7 +166,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_result_type", () => {
@@ -182,7 +182,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_resolution_text_type", () => {
@@ -198,7 +198,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_start_type", () => {
@@ -214,7 +214,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_end_type", () => {
@@ -230,7 +230,7 @@ namespace OParlTest {
                     Meeting m = b.meeting.nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ValidationError e) {}
+                } catch (ParsingError e) {}
             });
             // TODO: maybe check for composite types
             */
