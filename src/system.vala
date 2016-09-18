@@ -20,20 +20,63 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * The System object represents one OParl endpoint for a
+     * specific version of OParl.
+     *
+     * It's also the entrypoint for access to a server.
+     */
     public class System : OParl.Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The URL of the OParl specification that this
+         * server implements.
+         */
         public string oparl_version {get;set;}
+
+        /**
+         * A list of URLs to other OParl endpoints of this
+         * server that support other versions of OParl
+         */
         public string[] other_oparl_versions {get;set;}
+
+        /**
+         * An email address for requests regarding OParl.
+         * If any questions to this endpoint arise, an email to this address
+         * should get you in contact with an administrator / other responsible
+         * person.
+         */
         public string contact_email {get;set;}
+
+        /**
+         * The name of a contact person that is responsible for this OParl
+         * endpoint.
+         */
         public string contact_name {get;set;}
+
+        /**
+         * URL of the parliamentarian information system that feeds this
+         * OParl endpoint.
+         */
         public string website {get;set;}
+
+        /**
+         * URL of the vendor of this OParl server software
+         */
         public string vendor {get;set;}
+
+        /**
+         * URL to the product page of this OParl server software
+         */
         public string product {get;set;}
 
         public string body_url {get;set;}
         private bool body_resolved {get;set; default=false;}
         private List<Body>? body_p = null;
+        /**
+         * A list of all bodies that exist on this system.
+         */
         public List<Body>? body {
             get {
                 if (!body_resolved) {
