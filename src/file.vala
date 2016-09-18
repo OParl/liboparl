@@ -81,8 +81,8 @@ namespace OParl {
          * The license the file is published under
          */
         public string file_license {get; set;}
-        
-        public string master_file_url {get;set; default="";}
+
+        internal string master_file_url {get;set; default="";}
         private bool master_file_resolved {get;set; default=false;}
         private File? master_file_p = null;
         /**
@@ -99,7 +99,7 @@ namespace OParl {
             }
         }
 
-        protected string[] derivative_file_url {get; set; default={};}
+        internal string[] derivative_file_url {get; set; default={};}
         private bool derivative_file_resolved {get;set; default=false;}
         private List<File>? derivative_file_p = null;
         /**
@@ -119,7 +119,7 @@ namespace OParl {
             }
         }
 
-        protected string[] meeting_url {get; set; default={};}
+        internal string[] meeting_url {get; set; default={};}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
         /**
@@ -141,7 +141,7 @@ namespace OParl {
             }
         }
 
-        protected string[] agenda_item_url {get; set; default={};}
+        internal string[] agenda_item_url {get; set; default={};}
         private bool agenda_item_resolved {get;set; default=false;}
         private List<AgendaItem>? agenda_item_p = null;
         /**
@@ -163,7 +163,7 @@ namespace OParl {
             }
         }
 
-        protected string[] paper_url {get; set; default={};}
+        internal string[] paper_url {get; set; default={};}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
         /**
@@ -204,7 +204,7 @@ namespace OParl {
             name_map.insert("paper", "paper");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
