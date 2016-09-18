@@ -20,24 +20,75 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represents a file, e.g. a PDF, RTF or ODF-file and holds a set
+     * of metadata as well as URLs to access the file.
+     */
     public class File : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The name that this file uses in a filesystem.
+         *
+         * This field is ''mandatory''
+         */
         public string file_name {get; set;}
+
+        /**
+         * The mime-type of the file
+         */
         public string mime_type {get; set;}
+
+        /**
+         * Date used for ultimatums e.t.c
+         */
         public GLib.Date date {get; set;}
+
+        /**
+         * Size of the file in bytes
+         */
         public int size {get; set;}
+
+        /**
+         * The sha1sum of the file
+         */
         public string sha1_checksum {get; set;}
+
+        /**
+         * If it is feasible, this contains a plain-text representation of
+         * the contents of the file.
+         */
         public string text {get; set;}
+
+        /**
+         * URL to access the file
+         */
         public string access_url {get; set;}
+
+        /**
+         * URL to download the file
+         */
         public string download_url {get; set;}
+
+        /**
+         * External URL providing additional access possibilites
+         *
+         * Could be for example a link to a video streaming platform
+         */
         public string external_service_url {get; set;}
+
+        /**
+         * The license the file is published under
+         */
         public string file_license {get; set;}
         
         public string master_file_url {get;set; default="";}
         private bool master_file_resolved {get;set; default=false;}
         private File? master_file_p = null;
-        public File master_file {
+        /**
+         * The file that was used to derive this file from.
+         */
+        public File? master_file {
             get {
                 if (!master_file_resolved) {
                     var r = new Resolver(this.client);
@@ -51,6 +102,9 @@ namespace OParl {
         protected string[] derivative_file_url {get; set; default={};}
         private bool derivative_file_resolved {get;set; default=false;}
         private List<File>? derivative_file_p = null;
+        /**
+         * Files that have been derived from this file.
+         */
         public List<File> derivative_file {
             get {
                 if (!derivative_file_resolved && derivative_file_url != null) {
@@ -68,6 +122,11 @@ namespace OParl {
         protected string[] meeting_url {get; set; default={};}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
+        /**
+         * Backreferences to meeting object
+         *
+         * This field if only set if the file was embedded in a {@link OParl.Meeting}
+         */
         public List<Meeting> meeting {
             get {
                 if (!meeting_resolved && meeting_url != null) {
@@ -85,6 +144,11 @@ namespace OParl {
         protected string[] agenda_item_url {get; set; default={};}
         private bool agenda_item_resolved {get;set; default=false;}
         private List<AgendaItem>? agenda_item_p = null;
+        /**
+         * Backreferences to agenda item object
+         *
+         * This field if only set if the file was embedded in a {@link OParl.AgendaItem}
+         */
         public List<AgendaItem> agenda_item {
             get {
                 if (!agenda_item_resolved && agenda_item_url != null) {
@@ -102,6 +166,11 @@ namespace OParl {
         protected string[] paper_url {get; set; default={};}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
+        /**
+         * Backreferences to paper object
+         *
+         * This field if only set if the file was embedded in a {@link OParl.Paper}
+         */
         public List<Paper> paper {
             get {
                 if (!paper_resolved && paper_url != null) {
