@@ -20,24 +20,79 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Respresents a legislative body.
+     */
     public class Body : Object {
         private new static HashTable<string,string> name_map;
 
-        // Directly Resolvable
+        /**
+         * URL to the Website of the body
+         */
         public string website {get; set;}
+
+        /**
+         * The date and time since the license that is
+         * set in {@link OParl.Object.license} is valid.
+         */
         public GLib.DateTime license_valid_since {get; set;}
+
+        /**
+         * The point in time since this body provides OParl
+         *
+         * Useful to estimate the quality of the delivered data.
+         * As only from the time OParl setup happend, it can be
+         * said for sure that all values are present in the
+         * original sources.
+         */
         public GLib.DateTime oparl_since {get; set;}
+
+        /**
+         * 8-digit municipality key. - It's a German thing.
+         */
         public string ags {get; set;}
+
+        /**
+         * 12-digit regional key. - It's a German thing.
+         */
         public string rgs {get; set;}
+
+        /**
+         * Additional URLs of websites representing the same
+         * body.
+         *
+         * In here could e.g. be corresponding entries in
+         * state libraries or the wikipedia.
+         */
         public string[] equivalent {get; set;}
+
+        /**
+         * A contact email address.
+         *
+         * This address should at least provide contact to officials
+         * of this body. Ideally it also provides contact to persons
+         * responsible for the parliamentarian information system.
+         */
         public string contact_email {get; set;}
+
+        /**
+         * Name or Idenitifier of the person/office that is descibed
+         * in {@link OParl.Body.contact_email}.
+         */
         public string contact_name {get; set;}
+
+        /**
+         * Type of the body
+         */
         public string classification {get; set;}
 
         // Indirectly Resolvable
         public string organization_url {get;set;}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
+        /**
+         * All groups of persons inside this body
+         */
         public List<Organization> organization {
             get {
                 if (!organization_resolved && organization_url != null) {
@@ -55,6 +110,9 @@ namespace OParl {
         public string person_url {get;set;}
         private bool person_resolved {get;set; default=false;}
         private List<Person>? person_p = null;
+        /**
+         * All persons inside this body
+         */
         public List<Person> person {
             get {
                 if (!person_resolved && person_url != null) {
@@ -72,6 +130,9 @@ namespace OParl {
         public string meeting_url {get;set;}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
+        /**
+         * All meetings conducted by this body
+         */
         public List<Meeting> meeting {
             get {
                 if (!meeting_resolved && meeting_url != null) {
@@ -89,6 +150,9 @@ namespace OParl {
         public string paper_url {get;set;}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
+        /**
+         * All papers ever used by this body
+         */
         public List<Paper> paper {
             get {
                 if (!paper_resolved && paper_url != null) {
@@ -104,6 +168,9 @@ namespace OParl {
         }
 
         private List<LegislativeTerm>? legislative_term_p = new List<LegislativeTerm>();
+        /**
+         * All legislative terms of this body
+         */
         public List<LegislativeTerm> legislative_term {
             get {
                 return this.legislative_term_p;
@@ -111,6 +178,9 @@ namespace OParl {
         }
 
         private Location? location_p = null;
+        /**
+         * The location that this body officially resides at.
+         */
         public Location location {
             get {
                 return this.location_p;
@@ -120,6 +190,9 @@ namespace OParl {
         public string system_url {get;set; default="";}
         private bool system_resolved {get;set; default=false;}
         private System? system_p = null;
+        /**
+         * The system that this body belongs to
+         */
         public System system {
             get {
                 if (!system_resolved) {
