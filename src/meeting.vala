@@ -20,15 +20,48 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represent a gathering of one or more {@link OParl.Organization}s
+     * at a specific point in time and a specific {@link OParl.Location}
+     */
     public class Meeting : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * Current state of the meeting.
+         *
+         * Values may be //planned//, //invitations sent//
+         * or //conducted//
+         */
         public string meeting_state {get; set;}
+
+        /**
+         * If this meeting has been cancelled this field will be set to true
+         */
         public bool cancelled {get;set;}
+
+        /**
+         * The beginning of this meeting
+         *
+         * If the meeting is set in the future, this is the planned
+         * starting time of the meeting. If the meeting has already
+         * been conducted, it ''may be'' the actual starting time.
+         */
         public GLib.DateTime start {get; set;}
+
+        /**
+         * The end of this meeting
+         *
+         * If the meeting is set in the future, this is the planned
+         * ending time of the meeting. If the meeting has already
+         * been conducted, it ''may be'' the actual ending time.
+         */
         public GLib.DateTime end {get; set;}
         
         private Location? location_p = new Location();
+        /**
+         * The location this meeting takes place at.
+         */
         public Location location {
             get {
                 return this.location_p;
@@ -36,6 +69,9 @@ namespace OParl {
         }
 
         private File? invitation_p = null;
+        /**
+         * The invitation that has been sent to prospective attendants
+         */
         public File invitation {
             get {
                 return this.invitation_p;
@@ -43,20 +79,33 @@ namespace OParl {
         }
 
         private File? results_protocol_p = null;
-        public File results_protocol {
+        /**
+         * A protocol containing the results of the meeting.
+         *
+         * This is only present after the meeting has been conducted
+         */
+        public File? results_protocol {
             get {
                 return this.results_protocol_p;
             }
         }
 
         private File? verbatim_protocol_p = null;
-        public File verbatim_protocol {
+        /**
+         * A protocol containing a transcript of the speeches given atthe meeting.
+         *
+         * This is only present after the meeting has been conducted
+         */
+        public File? verbatim_protocol {
             get {
                 return this.verbatim_protocol_p;
             }
         }
 
         private List<File>? auxiliary_file_p = new List<File>();
+        /**
+         * Auxiliary files concerning the meeting
+         */
         public List<File> auxiliary_file {
             get {
                 return this.auxiliary_file_p;
@@ -64,6 +113,10 @@ namespace OParl {
         }
 
         private List<AgendaItem>? agenda_item_p = new List<AgendaItem>();
+        /**
+         * A well structured list of topics that are to be discussed
+         * or have been discussed.
+         */
         public List<AgendaItem> agenda_item {
             get {
                 return this.agenda_item_p;
@@ -73,6 +126,9 @@ namespace OParl {
         internal string[] organization_url {get; set; default={};}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
+        /**
+         * All organizations that attend the meeting
+         */
         public List<Organization> organization {
             get {
                 if (!organization_resolved && organization_url != null) {
@@ -90,6 +146,9 @@ namespace OParl {
         internal string[] participant_url {get; set; default={};}
         private bool participant_resolved {get;set; default=false;}
         private List<Person>? participant_p = null;
+        /**
+         * All persons that participate in the meeting
+         */
         public List<Person> participant {
             get {
                 if (!participant_resolved && participant_url != null) {
@@ -120,7 +179,7 @@ namespace OParl {
             name_map.insert("agendaItem", "agenda_item");
         }
 
-        public new void parse(Json.Node n) throws ValidationError {
+        internal new void parse(Json.Node n) throws ValidationError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
