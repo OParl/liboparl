@@ -20,17 +20,45 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Represents the membership of an {@link OParl.Person} in
+     * an {@link OParl.Organization}.
+     */
     public class Membership : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * The role that the {@link OParl.Membership.person}
+         * fulfills in {@link OParl.Membership.organization}
+         *
+         * May be used to distinguish different kinds of membership
+         * of the same person in the same organization.
+         */
         public string role {get; set;}
+
+        /**
+         * If the {@link OParl.Membership.person} has the right
+         * to vote in {@link OParl.Consulation}s of
+         * {@link OParl.Membership.organization}, this flag is true
+         */
         public bool voting_right {get; set;}
+
+        /**
+         * The date at which the membership commenced
+         */
         public GLib.Date start_date {get; set;}
+
+        /**
+         * The date at which the membership ended
+         */
         public GLib.Date end_date {get; set;}
 
         public string person_url {get;set; default="";}
         private bool person_resolved {get;set; default=false;}
         private Person? person_p = null;
+        /**
+         * The person that this membership concerns
+         */
         public Person person {
             get {
                 if (!person_resolved) {
@@ -49,6 +77,9 @@ namespace OParl {
         public string organization_url {get;set; default="";}
         private bool organization_resolved {get;set; default=false;}
         private Organization? organization_p = null;
+        /**
+         * The organization that this membership concerns
+         */
         public Organization organization {
             get {
                 if (!organization_resolved) {
@@ -63,7 +94,12 @@ namespace OParl {
         public string on_behalf_of_url {get;set; default="";}
         private bool on_behalf_of_resolved {get;set; default=false;}
         private Organization? on_behalf_of_p = null;
-        public Organization on_behalf_of {
+        /**
+         * If {@link OParl.Membership.person} represents another {@link OParl.Organization}
+         * in {@link OParl.Membership.organization}, this field will contain the represented
+         * organization.
+         */
+        public Organization? on_behalf_of {
             get {
                 if (!on_behalf_of_resolved) {
                     var r = new Resolver(this.client);
