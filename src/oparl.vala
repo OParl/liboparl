@@ -19,7 +19,24 @@
 # If not, see http://www.gnu.org/licenses/.
 *********************************************************************/
 
+/**
+ * OParl
+ *
+ * The library that equips you with anything you need to acces RIS systems.
+ *
+ * This library implements the OParl specification in version 1.0. OParl
+ * is the definition of JSON-endpoints that provide their users with
+ * valuable data about political decision-making processes.
+ *
+ * Specification [PLAIN]: [[https://oparl.org/wp-content/themes/oparl/spec/OParl-1.0.txt]]
+ * Specification [PDF]: [[https://oparl.org/wp-content/themes/oparl/spec/OParl-1.0.pdf]]
+ */
 namespace OParl {
+    /**
+     * Errors that may occur while validating an OParl object
+     */
+    //TODO: Implement validation, replace all current 'validationerrors'
+    //      With appropriate parsing errors. Eliminate unused Errorcodes
     public errordomain ValidationError {
         EXPECTED_OBJECT,
         EXPECTED_VALUE,
@@ -31,9 +48,25 @@ namespace OParl {
         INVALID_TYPE
     }
 
+    /**
+     * Errors that may occur while parsing OParl objects from JSON
+     */
+    public errordomain ParsingError {
+        IMPLEMENT_ME
+    }
+
     private const uint8 SEVERITY_MEDIUM= 0x1;
     private const uint8 SEVERITY_BAD = 0x2;
 
+    /**
+     * The programmer's entrypoint into OParl endpoints
+     *
+     * When you want to start to work with OParl endpoints, the first
+     * thing that you do is creating a client. From here on you can
+     * retrieve your first {@link OParl.System}-Object. From this
+     * object you can explore all other objects simply by following
+     * the relations.
+     */
     public class Client : GLib.Object {
         private static bool initialized = false;
 
@@ -53,6 +86,13 @@ namespace OParl {
             Location.populate_name_map();
         }
 
+        /**
+         * Opens a connection to a new OParl-endpoint and yields
+         * it as an {@link OParl.System} Object.
+         *
+         * The url you pass to the method must be the URL of a valid
+         * OParl endpoint.
+         */
         public System open(string url) throws ValidationError {
             if (!Client.initialized)
                 Client.init();
@@ -68,6 +108,19 @@ namespace OParl {
             throw new ValidationError.NO_DATA("You did not supply valid data");
         }
 
+        /**
+         * This signal is being triggered anytime an OParl.Client must resolve a url.
+         *
+         * It's up to you, to connect to this singal and implement it. Otherwise OParl
+         * will have no data to operate on.
+         * As this library is introspectable, it can potentially be used in many
+         * programming languages. Any of those have their own best-practice patterns
+         * and various methods of resolving an url by placing a HTTP request. In order
+         * to not limit you as a programmer and not pull in dependencies by relying on
+         * one single library, we let you decide how to handle HTTP requests in the
+         * application.
+         * Please be aware that liboparl likes to be feeded with nice unicode-strings.
+         */
         public signal string? resolve_url (string url);
     }
 
