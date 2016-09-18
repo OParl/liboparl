@@ -26,19 +26,77 @@ namespace OParl {
      */
     public abstract class Object : GLib.Object {
         public static HashTable<string,string> name_map;
-        // Direct Read-In
+
+        /**
+         * Contains a unique identifier, the object's URL to be precise.
+         * This field is ''mandatory'' for any Object
+         */
         public string id {get; protected set;}
+
+        /**
+         * Used to contain the name of an object. This field is mandatory
+         * for most objects.
+         */
         public string name {get; protected set;}
+
+        /**
+         * Contains a short form of the object's name when this is
+         * convenient. An example may be "Congress" instead of "United
+         * States Congress"
+         */
         public string? short_name {get; protected set; default=null;}
+
+        /**
+         * Determines which license the data of the object is published
+         * under.
+         *
+         * If license is used in a {@link OParl.System} or an
+         * {@link OParl.Body} object, it means that all their subordinated
+         * objects are published under the same license.
+         * Single objects may override this collective license by specifying
+         * their own license-property.
+         * It is ''recommended'' to use one license per {@link OParl.System}
+         */
         public string license {get; protected set;}
+
+        /**
+         * A timestamp that determines when the object has been
+         * created. This is ''mandatory'' for all objects
+         */
         public GLib.DateTime created {get; protected set;}
+
+        /**
+         * A timestamp that determines when the object has last been changed.
+         * Servers guarantee that this timestamp is always accurate. For a
+         * client it's the best way to check for changes in objects.
+         * It's ''mandatory'' for all objects.
+         */
+        /* TODO: Verify and append to docblock if true:
+         * If an object has been deleted, this timestamp contains the date and
+         * time of deletion.
+         */
         public GLib.DateTime modified {get; protected set;}
+
+        /**
+         * Contains an array of tags that are meant to ''optionally'' categorize
+         * the object.
+         */
         public string[] keyword {get; protected set;}
+
+        /**
+         * Represents a hyperlink to this object in the parliamentarian information
+         * system that feeds the OParl endpoint. This is ''optional'' as not every
+         * OParl endpoint must have a webbased parliamentarian information system
+         * behind it.
+         */
         public string web {get; protected set;}
+
+        /**
+         * Determines whether the object has been deleted. ''mandatory''
+         */
         public bool deleted {get; protected set;}
 
         internal Client client;
-
 
         public virtual void set_client(Client c) {
             this.client = c;
@@ -119,6 +177,10 @@ namespace OParl {
             }
         }
 
+        /**
+         * ''NOT IMPLEMENTED YET'' - Will yield a detailed report on where
+         * an Object violates the OParl 1.0 specification.
+         */
         public virtual void validate() {
             uint8 error_severity = 0x0;
             GLib.Value v = new GLib.Value(typeof(string));
