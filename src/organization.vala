@@ -20,19 +20,53 @@
 *********************************************************************/
 
 namespace OParl {
+    /**
+     * Used to map groups of people that have a functional role inside
+     * a body. This may e.g. be fractions or committees
+     */
     public class Organization : Object {
         private new static HashTable<string,string> name_map;
 
+        /**
+         * Positions that this organization is destined to.
+         */
         public string[] post {get; set;}
+
+        /**
+         * Rough categorisation of this organization.
+         *
+         * Values may be "commitee", "party", "fraction"
+         * or similar. "miscellaneous" is also an option
+         */
         public string organization_type {get; set;}
+
+        /**
+         * URL to a website of the organization
+         */
         public string website {get; set;}
+
+        /**
+         * More fine-grained  categorisation of this
+         * organization.
+         */
         public string classification {get; set;}
+
+        /**
+         * The date on which this organization was founded
+         */
         public GLib.Date start_date {get; set;}
+
+        /**
+         * The date on which this organization ceased to exist
+         */
         public GLib.Date end_date {get; set;}
 
         public string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
         private Body? body_p = null;
+        /**
+         * The body that this organization belongs to.
+         */
         public Body body {
             get {
                 if (!body_resolved) {
@@ -47,6 +81,11 @@ namespace OParl {
         public string external_body_url {get;set; default="";}
         private bool external_body_resolved {get;set; default=false;}
         private Body? external_body_p = null;
+        /**
+         * An external OParl body that also represents this organization
+         *
+         * Links to an external OParl-System.
+         */
         public Body external_body {
             get {
                 if (!external_body_resolved) {
@@ -61,6 +100,10 @@ namespace OParl {
         public string sub_organization_of_url {get;set; default="";}
         private bool sub_organization_of_resolved {get;set; default=false;}
         private Organization? sub_organization_of_p = null;
+        /**
+         * Returns the organization that is superordinated to this
+         * organization
+         */
         public Organization sub_organization_of {
             get {
                 if (!sub_organization_of_resolved) {
@@ -75,6 +118,9 @@ namespace OParl {
         public string[] membership_url {get; set; default={};}
         private bool membership_resolved {get;set; default=false;}
         private List<Membership>? membership_p = null;
+        /**
+         * All memberships that are known for this organization
+         */
         public List<Membership> membership {
             get {
                 if (!membership_resolved && membership_url != null) {
@@ -90,6 +136,9 @@ namespace OParl {
         }
 
         private Location? location_p = null;
+        /**
+         * The location that this organization resides at.
+         */
         public Location location {
             get {
                 return this.location_p;
@@ -99,6 +148,9 @@ namespace OParl {
         public string meeting_url {get;set;}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
+        /**
+         * All meetings that this organization participated in
+         */
         public List<Meeting> meeting {
             get {
                 if (!meeting_resolved && meeting_url != null) {
