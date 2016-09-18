@@ -85,7 +85,7 @@ namespace OParl {
             }
         }
 
-        public string[] originator_person_url {get;set;}
+        internal string[] originator_person_url {get;set;}
         private bool originator_person_resolved {get;set; default=false;}
         private List<Person>? originator_person_p = null;
         /**
@@ -105,7 +105,7 @@ namespace OParl {
             }
         }
 
-        public string[] under_direction_of_url {get;set;}
+        internal string[] under_direction_of_url {get;set;}
         private bool under_direction_of_resolved {get;set; default=false;}
         private List<Organization>? under_direction_of_p = null;
         /**
@@ -125,7 +125,7 @@ namespace OParl {
             }
         }
 
-        public string[] originator_organization_url {get;set;}
+        internal string[] originator_organization_url {get;set;}
         private bool originator_organization_resolved {get;set; default=false;}
         private List<Organization>? originator_organization_p = null;
         /**
@@ -145,7 +145,7 @@ namespace OParl {
             }
         }
 
-        public string[] superordinated_paper_url {get;set;}
+        internal string[] superordinated_paper_url {get;set;}
         private bool superordinated_paper_resolved {get;set; default=false;}
         private List<Paper>? superordinated_paper_p = null;
         /**
@@ -165,7 +165,7 @@ namespace OParl {
             }
         }
 
-        public string[] subordinated_paper_url {get;set;}
+        internal string[] subordinated_paper_url {get;set;}
         private bool subordinated_paper_resolved {get;set; default=false;}
         private List<Paper>? subordinated_paper_p = null;
         /**
@@ -240,7 +240,7 @@ namespace OParl {
             name_map.insert("consultation","consultation");
         }
 
-        public new void parse(Json.Node n) throws ValidationError{
+        internal new void parse(Json.Node n) throws ValidationError{
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ValidationError.EXPECTED_OBJECT("I need an Object to parse");
