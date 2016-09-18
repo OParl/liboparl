@@ -20,7 +20,11 @@
 *********************************************************************/
 
 namespace OParl {
-    public class Object : GLib.Object {
+    /**
+     * This class represents aspects that are common to any
+     * Object yielded by an OParl endpoint.
+     */
+    public abstract class Object : GLib.Object {
         public static HashTable<string,string> name_map;
         // Direct Read-In
         public string id {get; protected set;}
