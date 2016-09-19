@@ -151,7 +151,7 @@ namespace OParl {
         /**
          * Resolves the body this person orginiates from
          */
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.body;
         }
 

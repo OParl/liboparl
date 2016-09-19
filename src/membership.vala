@@ -121,7 +121,7 @@ namespace OParl {
             name_map.insert("onBehalfOf","on_behalf_of");
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.person.body;
         }
 

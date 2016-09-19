@@ -184,7 +184,93 @@ namespace OParl {
          * ''NOT IMPLEMENTED YET'' - Will yield a detailed report on where
          * an Object violates the OParl 1.0 specification.
          */
-        public virtual void validate() {
+        public virtual List<ValidationResult> validate() {
+            var results = new List<ValidationResult>();
+            if (this.id == null) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'id'",
+                               "The 'id'-field contains no id. The id field must contain a valid"+
+                               "url that can be used to retrieve the object via HTTP.",
+                               "<id invalid>"
+                ));
+            }
+            if (this.id == "") {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'id'",
+                               "The 'id'-field is an empty string. The id field must contain a valid"+
+                               "url that can be used to retrieve the object via HTTP.",
+                               "<id invalid>"
+                ));
+            }
+            if (this.name == null && !(this is Membership || 
+                                       this is Consultation)) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'name'",
+                               "The 'name'-field does not contain any value. Each object must "+
+                               " contain a human readable name.",
+                               this.id
+                ));
+            }
+            if (this.name == "" && !(this is Membership || 
+                                     this is Consultation)) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'name'",
+                               "The 'name'-field contains an empty string. Each object must "+
+                               " contain a human readable name.",
+                               this.id
+                ));
+            }
+            if (this.license == null && (this is System || this is Body)) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.WARNING,
+                               "Invalid 'license'",
+                               "The 'license'-field does not contain any value. It is recommended to "+
+                               "specify the license for all subordinated objects either in the System"+
+                               " object or in the Body objects",
+                               this.id
+                ));
+            }
+            if (this.license == "") {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'license'",
+                               "The 'license'-field contains an empty string. Please specify a valid "+
+                               "license",
+                               this.id
+                ));
+            }
+            if (this.license == null && !(this is System || this is Body)
+                && this.root_body().license == null && this.root_system().license == null ) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Invalid 'license'",
+                               "Neither the superordinated Body nor the superordinated Body "+
+                               "specify a license for this object. Please either add a license "+
+                               "to this object or add one to the containing System or Body",
+                               this.id
+                ));
+            }
+            if (this.keyword == new string[] {} ) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.WARNING,
+                               "Empty 'keyword' list",
+                               "The object did not supply any keywords. That's sad.",
+                               this.id
+                ));
+            }
+            if (this.keyword == null) {
+                results.append(new ValidationResult(
+                               ErrorSeverity.WARNING,
+                               "No 'shortName'",
+                               "The object did not contain a shortName.",
+                               this.id
+                ));
+            }
+            return results;
         } 
 
         public void complete() {
@@ -194,7 +280,7 @@ namespace OParl {
          * Each object should implement this method as means to resolve the
          * body that this object originates from
          */
-        internal abstract unowned Body? root_body();
+        internal abstract Body? root_body();
 
         /**
          * Tries to resolve which system this object
@@ -202,7 +288,7 @@ namespace OParl {
          * This method leverages the root_body method
          * to get the system.
          */
-        internal virtual unowned System? root_system() {
+        internal virtual System? root_system() {
             Body? b = root_body();
             return b == null ? null : b.system;
         }

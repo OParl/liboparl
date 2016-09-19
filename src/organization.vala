@@ -181,7 +181,7 @@ namespace OParl {
             name_map.insert("externalBody", "external_body");
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.body;
         }
 

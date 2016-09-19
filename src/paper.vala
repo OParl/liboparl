@@ -240,7 +240,7 @@ namespace OParl {
             name_map.insert("consultation","consultation");
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.body;
         }
 

@@ -142,7 +142,7 @@ namespace OParl {
             }
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             if (this.bodies.length() > 0) {
                 return this.bodies.nth_data(0).root_body();
             } else if (this.organizations.length() > 0) {

@@ -185,7 +185,7 @@ namespace OParl {
             }
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             if (this.paper.length() > 0) {
                 return this.paper.nth_data(0).root_body();
             } else if (this.meeting.length() > 0) {

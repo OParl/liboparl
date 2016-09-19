@@ -114,7 +114,7 @@ namespace OParl {
             }
         }
 
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.meeting.root_body();
         }
 

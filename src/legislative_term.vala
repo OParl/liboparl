@@ -62,7 +62,7 @@ namespace OParl {
         /**
          * determines the body this object originates from
          */
-        internal override unowned Body? root_body() {
+        internal override Body? root_body() {
             return this.body;
         }
 
