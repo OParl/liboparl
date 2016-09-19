@@ -33,15 +33,39 @@
  */
 namespace OParl {
     /**
-     * Errors that may occur while validating an OParl object
+     * Syntactical errors that may occur when parsing an {@link OParl.Object}
      */
-    //TODO: Implement validation, replace all current 'validationerrors'
-    //      With appropriate parsing errors. Eliminate unused Errorcodes
     public errordomain ParsingError {
         EXPECTED_OBJECT,
         EXPECTED_VALUE,
         NO_DATA,
         INVALID_TYPE
+    }
+
+    /**
+     * Represents severities of semantical errors / artefacts that do not conform with
+     * the OParl 1.0 specification
+     */
+    public enum ErrorSeverity {
+        WARNING,
+        ERROR
+    }
+
+    /**
+     * Represents a semantical inconsistency errors/warnings that may occur in an {@link OParl.Object}
+     */
+    public class ValidationResult {
+        public ErrorSeverity severity {get; internal set; default=ErrorSeverity.WARNING;}
+        public string description {get; internal set; default="";}
+        public string long_description {get; internal set; default="";}
+        public string object_id {get; internal set; default="";}
+
+        private ValidationResult(ErrorSeverity s, string desc, string longdesc, string id) {
+            this.severity = s;
+            this.description = desc;
+            this.long_description = longdesc;
+            this.object_id = id;
+        }
     }
 
     private const uint8 SEVERITY_MEDIUM= 0x1;
