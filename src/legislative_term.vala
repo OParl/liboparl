@@ -76,7 +76,7 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var dt = new GLib.Date();
+                        var dt = GLib.Date();
                         dt.set_parse(item.get_string());
                         this.set_property(LegislativeTerm.name_map.get(name), dt);
                         break;
