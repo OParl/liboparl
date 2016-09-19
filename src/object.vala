@@ -98,7 +98,7 @@ namespace OParl {
 
         internal Client client;
 
-        public virtual void set_client(Client c) {
+        internal virtual void set_client(Client c) {
             this.client = c;
         }
 
