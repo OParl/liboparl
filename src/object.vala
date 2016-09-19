@@ -96,6 +96,9 @@ namespace OParl {
          */
         public bool deleted {get; protected set;}
 
+        /**
+         * A reference to the client that made this object.
+         */
         internal Client client;
 
         internal virtual void set_client(Client c) {
