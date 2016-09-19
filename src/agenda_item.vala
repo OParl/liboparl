@@ -180,7 +180,7 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
+                        var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
                         this.set_property(AgendaItem.name_map.get(name), dt);

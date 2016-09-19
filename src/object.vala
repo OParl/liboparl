@@ -159,7 +159,7 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
-                        var tv = new GLib.TimeVal();
+                        var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
                         target.set_property(Object.name_map.get(name), dt);
@@ -182,30 +182,6 @@ namespace OParl {
          * an Object violates the OParl 1.0 specification.
          */
         public virtual void validate() {
-            uint8 error_severity = 0x0;
-            GLib.Value v = new GLib.Value(typeof(string));
-            string[] mandatories = {"id", "name", "license", "keyword"};
-            foreach (string name in mandatories) {
-                this.get_property(name, ref v);
-                if (v.get_string() ==  null) {
-                    GLib.warning("Mandatory field %s must not be null!", name);
-                    error_severity |= SEVERITY_BAD;
-                } else if (v.get_string() == "") {
-                    GLib.warning("Mandatory field %s must not be empty!", name);
-                    error_severity |= SEVERITY_BAD;
-                }
-            }
-            string[] optionals =  {"shortName"};
-            foreach (string name in optionals) {
-                this.get_property(name, ref v);
-                if (v.get_string() ==  null) {
-                    GLib.warning("Optional field %s must should not be null!", name);
-                    error_severity |= SEVERITY_MEDIUM;
-                } else if (v.get_string() == "") {
-                    GLib.warning("Optional field %s must should not be empty!", name);
-                    error_severity |= SEVERITY_MEDIUM;
-                }
-            }
         } 
     }
 }
