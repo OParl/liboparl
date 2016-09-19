@@ -157,7 +157,7 @@ namespace OParl {
             name_map.insert("papers", "papers");
         }
 
-        public new void parse(Json.Node n) throws ParsingError {
+        internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
