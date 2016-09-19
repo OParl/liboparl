@@ -114,6 +114,10 @@ namespace OParl {
             }
         }
 
+        internal override unowned Body? root_body() {
+            return this.meeting.root_body();
+        }
+
         internal new static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("paper","paper");

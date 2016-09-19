@@ -90,7 +90,11 @@ namespace OParl {
                 return this.body_p;
             }
         }
-    
+
+        internal override unowned Body? root_body() {
+            return null;
+        }
+
         internal new static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("oparlVersion", "oparl_version");

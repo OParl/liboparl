@@ -121,6 +121,11 @@ namespace OParl {
             name_map.insert("onBehalfOf","on_behalf_of");
         }
 
+        internal override unowned Body? root_body() {
+            return this.person.body;
+        }
+
+
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)

@@ -142,6 +142,20 @@ namespace OParl {
             }
         }
 
+        internal override unowned Body? root_body() {
+            if (this.bodies.length() > 0) {
+                return this.bodies.nth_data(0).root_body();
+            } else if (this.organizations.length() > 0) {
+                return this.organizations.nth_data(0).root_body();
+            } else if (this.meetings.length() > 0) {
+                return this.meetings.nth_data(0).root_body();
+            } else if (this.papers.length() > 0) {
+                return this.papers.nth_data(0).root_body();
+            }  else {
+                return null;
+            }
+        }
+
         internal new static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("description", "description");

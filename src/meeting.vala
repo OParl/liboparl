@@ -143,6 +143,22 @@ namespace OParl {
             }
         }
 
+        /**
+         * Tries to determine which system this object originates from
+         *
+         * It is to be noted that the OParl system currently does not
+         * explicitly specify which system an object originates from when
+         * there is more than one backreference inside the object
+         */
+        internal override unowned Body? root_body() {
+            if (this.organization.length() > 0)
+                return this.organization.nth_data(0).body;
+            else if (this.participant.length() > 0)
+                return this.participant.nth_data(0).body;
+            else
+                return null;
+        }
+
         internal string[] participant_url {get; set; default={};}
         private bool participant_resolved {get;set; default=false;}
         private List<Person>? participant_p = null;

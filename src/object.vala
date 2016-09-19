@@ -183,5 +183,25 @@ namespace OParl {
          */
         public virtual void validate() {
         } 
+
+        public void complete() {
+        }
+
+        /**
+         * Each object should implement this method as means to resolve the
+         * body that this object originates from
+         */
+        internal abstract unowned Body? root_body();
+
+        /**
+         * Tries to resolve which system this object
+         * belongs to.
+         * This method leverages the root_body method
+         * to get the system.
+         */
+        internal virtual unowned System? root_system() {
+            Body? b = root_body();
+            return b == null ? null : b.system;
+        }
     }
 }

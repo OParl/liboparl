@@ -185,6 +185,18 @@ namespace OParl {
             }
         }
 
+        internal override unowned Body? root_body() {
+            if (this.paper.length() > 0) {
+                return this.paper.nth_data(0).root_body();
+            } else if (this.meeting.length() > 0) {
+                return this.meeting.nth_data(0).root_body();
+            } else if (this.agenda_item.length() > 0) {
+                return this.agenda_item.nth_data(0).root_body();
+            } else {
+                return null;
+            }
+        }
+
         internal new static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("fileName", "file_name");

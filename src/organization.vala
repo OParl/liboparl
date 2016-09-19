@@ -181,6 +181,10 @@ namespace OParl {
             name_map.insert("externalBody", "external_body");
         }
 
+        internal override unowned Body? root_body() {
+            return this.body;
+        }
+
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)

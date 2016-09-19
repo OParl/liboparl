@@ -147,6 +147,10 @@ namespace OParl {
             name_map.insert("end","end");
         }
 
+        internal override unowned Body? root_body() {
+            return this.meeting.root_body();
+        }
+
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
