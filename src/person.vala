@@ -130,7 +130,7 @@ namespace OParl {
             }
         }
 
-        internal static void populate_name_map() {
+        internal new static void populate_name_map() {
             name_map = new GLib.HashTable<string,string>(str_hash, str_equal);
             name_map.insert("familyName", "family_name");
             name_map.insert("givenName", "given_name");
