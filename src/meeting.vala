@@ -129,18 +129,34 @@ namespace OParl {
         /**
          * All organizations that attend the meeting
          */
-        public List<Organization> organization {
-            get {
-                if (!organization_resolved && organization_url != null) {
-                    this.organization_p = new List<Organization>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.organization_url)) {
-                        this.organization_p.append((Organization)o);
-                    }
-                    organization_resolved = true;
+        public unowned List<Organization> get_organization() throws ParsingError {
+            if (!organization_resolved && organization_url != null) {
+                this.organization_p = new List<Organization>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.organization_url)) {
+                    this.organization_p.append((Organization)o);
                 }
-                return this.organization_p;
+                organization_resolved = true;
             }
+            return this.organization_p;
+        }
+
+        internal string[] participant_url {get; set; default={};}
+        private bool participant_resolved {get;set; default=false;}
+        private List<Person>? participant_p = null;
+        /**
+         * All persons that participate in the meeting
+         */
+        public unowned List<Person> get_participant() throws ParsingError {
+            if (!participant_resolved && participant_url != null) {
+                this.participant_p = new List<Person>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.participant_url)) {
+                    this.participant_p.append((Person)o);
+                }
+                participant_resolved = true;
+            }
+            return this.participant_p;
         }
 
         /**
@@ -151,32 +167,12 @@ namespace OParl {
          * there is more than one backreference inside the object
          */
         internal override Body? root_body() {
-            if (this.organization.length() > 0)
-                return this.organization.nth_data(0).body;
-            else if (this.participant.length() > 0)
-                return this.participant.nth_data(0).body;
+            if (this.get_organization().length() > 0)
+                return this.get_organization().nth_data(0).get_body();
+            else if (this.get_participant().length() > 0)
+                return this.get_participant().nth_data(0).get_body();
             else
                 return null;
-        }
-
-        internal string[] participant_url {get; set; default={};}
-        private bool participant_resolved {get;set; default=false;}
-        private List<Person>? participant_p = null;
-        /**
-         * All persons that participate in the meeting
-         */
-        public List<Person> participant {
-            get {
-                if (!participant_resolved && participant_url != null) {
-                    this.participant_p = new List<Person>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.participant_url)) {
-                        this.participant_p.append((Person)o);
-                    }
-                    participant_resolved = true;
-                }
-                return this.participant_p;
-            }
         }
 
         internal new static void populate_name_map() {

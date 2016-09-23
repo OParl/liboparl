@@ -104,15 +104,13 @@ namespace OParl {
         /**
          * The meeting this agenda item is discussed in
          */
-        public Meeting meeting {
-            get {
-                if (!meeting_resolved) {
-                    var r = new Resolver(this.client);
-                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
-                    meeting_resolved = true;
-                }
-                return this.meeting_p;
+        public Meeting get_meeting() throws ParsingError {
+            if (!meeting_resolved) {
+                var r = new Resolver(this.client);
+                this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                meeting_resolved = true;
             }
+            return this.meeting_p;
         }
 
         internal string consultation_url {get;set; default="";}
@@ -122,15 +120,13 @@ namespace OParl {
          * Represents all consulting that has been done in order
          * to make a resolution to this agenda item.
          */
-        public Consultation consultation {
-            get {
-                if (!consultation_resolved) {
-                    var r = new Resolver(this.client);
-                    this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
-                    consultation_resolved = true;
-                }
-                return this.consultation_p;
+        public Consultation get_consultation() throws ParsingError {
+            if (!consultation_resolved) {
+                var r = new Resolver(this.client);
+                this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
+                consultation_resolved = true;
             }
+            return this.consultation_p;
         }
 
         internal new static void populate_name_map() {
@@ -148,7 +144,7 @@ namespace OParl {
         }
 
         internal override Body? root_body() {
-            return this.meeting.root_body();
+            return this.get_meeting().root_body();
         }
 
         internal new void parse(Json.Node n) throws ParsingError {

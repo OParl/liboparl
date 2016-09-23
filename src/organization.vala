@@ -67,15 +67,13 @@ namespace OParl {
         /**
          * The body that this organization belongs to.
          */
-        public Body body {
-            get {
-                if (!body_resolved) {
-                    var r = new Resolver(this.client);
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                    body_resolved = true;
-                }
-                return this.body_p;
+        public Body get_body() throws ParsingError {
+            if (!body_resolved) {
+                var r = new Resolver(this.client);
+                this.body_p = (Body)r.parse_url(this.body_url);
+                body_resolved = true;
             }
+            return this.body_p;
         }
 
         internal string external_body_url {get;set; default="";}
@@ -86,15 +84,13 @@ namespace OParl {
          *
          * Links to an external OParl-System.
          */
-        public Body external_body {
-            get {
-                if (!external_body_resolved) {
-                    var r = new Resolver(this.client);
-                    this.external_body_p = (Body)r.parse_url(this.external_body_url);
-                    external_body_resolved = true;
-                }
-                return this.external_body_p;
+        public Body get_external_body() throws ParsingError {
+            if (!external_body_resolved) {
+                var r = new Resolver(this.client);
+                this.external_body_p = (Body)r.parse_url(this.external_body_url);
+                external_body_resolved = true;
             }
+            return this.external_body_p;
         }
 
         internal string sub_organization_of_url {get;set; default="";}
@@ -104,15 +100,13 @@ namespace OParl {
          * Returns the organization that is superordinated to this
          * organization
          */
-        public Organization sub_organization_of {
-            get {
-                if (!sub_organization_of_resolved) {
-                    var r = new Resolver(this.client);
-                    this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
-                    sub_organization_of_resolved = true;
-                }
-                return this.sub_organization_of_p;
+        public Organization get_sub_organization_of() throws ParsingError {
+            if (!sub_organization_of_resolved) {
+                var r = new Resolver(this.client);
+                this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
+                sub_organization_of_resolved = true;
             }
+            return this.sub_organization_of_p;
         }
 
         internal string[] membership_url {get; set; default={};}
@@ -121,18 +115,16 @@ namespace OParl {
         /**
          * All memberships that are known for this organization
          */
-        public List<Membership> membership {
-            get {
-                if (!membership_resolved && membership_url != null) {
-                    this.membership_p = new List<Membership>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.membership_url)) {
-                        this.membership_p.append((Membership)o);
-                    }
-                    membership_resolved = true;
+        public unowned List<Membership> get_membership() throws ParsingError {
+            if (!membership_resolved && membership_url != null) {
+                this.membership_p = new List<Membership>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.membership_url)) {
+                    this.membership_p.append((Membership)o);
                 }
-                return this.membership_p;
+                membership_resolved = true;
             }
+            return this.membership_p;
         }
 
         private Location? location_p = null;
@@ -151,18 +143,16 @@ namespace OParl {
         /**
          * All meetings that this organization participated in
          */
-        public List<Meeting> meeting {
-            get {
-                if (!meeting_resolved && meeting_url != null) {
-                    this.meeting_p = new List<Meeting>();
-                    var pr = new Resolver(this.client, this.meeting_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.meeting_p.append((Meeting)o);
-                    }
-                    meeting_resolved = true;
+        public unowned List<Meeting> get_meeting() throws ParsingError {
+            if (!meeting_resolved && meeting_url != null) {
+                this.meeting_p = new List<Meeting>();
+                var pr = new Resolver(this.client, this.meeting_url);
+                foreach (Object o in pr.resolve()) {
+                    this.meeting_p.append((Meeting)o);
                 }
-                return this.meeting_p;
+                meeting_resolved = true;
             }
+            return this.meeting_p;
         }
 
         internal new static void populate_name_map() {
@@ -182,7 +172,7 @@ namespace OParl {
         }
 
         internal override Body? root_body() {
-            return this.body;
+            return this.get_body();
         }
 
         internal new void parse(Json.Node n) throws ParsingError {

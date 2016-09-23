@@ -59,19 +59,22 @@ namespace OParl {
         /**
          * The person that this membership concerns
          */
-        public Person person {
-            get {
-                if (!person_resolved) {
-                    var r = new Resolver(this.client);
-                    this.person_p = (Person)r.parse_url(this.person_url);
-                    person_resolved = true;
-                }
-                return this.person_p;
-            }
-            internal set {
+        public Person get_person() throws ParsingError {
+            if (!person_resolved) {
+                var r = new Resolver(this.client);
+                this.person_p = (Person)r.parse_url(this.person_url);
                 person_resolved = true;
-                this.person_p = value;
             }
+            return this.person_p;
+        }
+
+        /**
+         * Set the person if this membership has been parsed as
+         * embedded object of a person
+         */
+        internal void set_person(Person p) {
+            person_resolved = true;
+            this.person_p = p;
         }
 
         internal string organization_url {get;set; default="";}
@@ -80,15 +83,13 @@ namespace OParl {
         /**
          * The organization that this membership concerns
          */
-        public Organization organization {
-            get {
-                if (!organization_resolved) {
-                    var r = new Resolver(this.client);
-                    this.organization_p = (Organization)r.parse_url(this.organization_url);
-                    organization_resolved = true;
-                }
-                return this.organization_p;
+        public Organization get_organization() throws ParsingError {
+            if (!organization_resolved) {
+                var r = new Resolver(this.client);
+                this.organization_p = (Organization)r.parse_url(this.organization_url);
+                organization_resolved = true;
             }
+            return this.organization_p;
         }
 
         internal string on_behalf_of_url {get;set; default="";}
@@ -96,18 +97,16 @@ namespace OParl {
         private Organization? on_behalf_of_p = null;
         /**
          * If {@link OParl.Membership.person} represents another {@link OParl.Organization}
-         * in {@link OParl.Membership.organization}, this field will contain the represented
+         * in {@link OParl.Membership.organization}, this method will yield the represented
          * organization.
          */
-        public Organization? on_behalf_of {
-            get {
-                if (!on_behalf_of_resolved) {
-                    var r = new Resolver(this.client);
-                    this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
-                    on_behalf_of_resolved = true;
-                }
-                return this.on_behalf_of_p;
+        public Organization? get_on_behalf_of() throws ParsingError {
+            if (!on_behalf_of_resolved) {
+                var r = new Resolver(this.client);
+                this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
+                on_behalf_of_resolved = true;
             }
+            return this.on_behalf_of_p;
         }
 
         internal new static void populate_name_map() {
@@ -122,7 +121,7 @@ namespace OParl {
         }
 
         internal override Body? root_body() {
-            return this.person.body;
+            return this.get_person().get_body();
         }
 
 

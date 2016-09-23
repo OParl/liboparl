@@ -77,18 +77,16 @@ namespace OParl {
         /**
          * A list of all bodies that exist on this system.
          */
-        public List<Body>? body {
-            get {
-                if (!body_resolved) {
-                    this.body_p = new List<Body>();
-                    var pr = new Resolver(this.client, this.body_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.body_p.append((Body)o);
-                    }
-                    body_resolved = true;
+        public unowned List<Body>? get_body() throws ParsingError {
+            if (!body_resolved) {
+                this.body_p = new List<Body>();
+                var pr = new Resolver(this.client, this.body_url);
+                foreach (Object o in pr.resolve()) {
+                    this.body_p.append((Body)o);
                 }
-                return this.body_p;
+                body_resolved = true;
             }
+            return this.body_p;
         }
 
         internal override Body? root_body() {

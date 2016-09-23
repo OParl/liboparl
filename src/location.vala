@@ -68,18 +68,16 @@ namespace OParl {
         /**
          * Backreferences to bodies
          */
-        public List<Body> bodies {
-            get {
-                if (!bodies_resolved && bodies_url != null) {
-                    this.bodies_p = new List<Body>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.bodies_url)) {
-                        this.bodies_p.append((Body)o);
-                    }
-                    bodies_resolved = true;
+        public unowned List<Body> get_bodies() throws ParsingError {
+            if (!bodies_resolved && bodies_url != null) {
+                this.bodies_p = new List<Body>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.bodies_url)) {
+                    this.bodies_p.append((Body)o);
                 }
-                return this.bodies_p;
+                bodies_resolved = true;
             }
+            return this.bodies_p;
         }
 
         internal string[] organizations_url {get; set; default={};}
@@ -88,18 +86,16 @@ namespace OParl {
         /**
          * Backreferences to organizations
          */
-        public List<Organization> organizations {
-            get {
-                if (!organizations_resolved && organizations_url != null) {
-                    this.organizations_p = new List<Organization>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.organizations_url)) {
-                        this.organizations_p.append((Organization)o);
-                    }
-                    organizations_resolved = true;
+        public unowned List<Organization> get_organizations() throws ParsingError {
+            if (!organizations_resolved && organizations_url != null) {
+                this.organizations_p = new List<Organization>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.organizations_url)) {
+                    this.organizations_p.append((Organization)o);
                 }
-                return this.organizations_p;
+                organizations_resolved = true;
             }
+            return this.organizations_p;
         }
 
         internal string[] meetings_url {get; set; default={};}
@@ -108,18 +104,16 @@ namespace OParl {
         /**
          * Backreferences to meetings
          */
-        public List<Meeting> meetings {
-            get {
-                if (!meetings_resolved && meetings_url != null) {
-                    this.meetings_p = new List<Meeting>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.meetings_url)) {
-                        this.meetings_p.append((Meeting)o);
-                    }
-                    meetings_resolved = true;
+        public unowned List<Meeting> get_meetings() throws ParsingError {
+            if (!meetings_resolved && meetings_url != null) {
+                this.meetings_p = new List<Meeting>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.meetings_url)) {
+                    this.meetings_p.append((Meeting)o);
                 }
-                return this.meetings_p;
+                meetings_resolved = true;
             }
+            return this.meetings_p;
         }
 
         internal string[] papers_url {get; set; default={};}
@@ -128,29 +122,27 @@ namespace OParl {
         /**
          * Backreferences to papers
          */
-        public List<Paper> papers {
-            get {
-                if (!papers_resolved && papers_url != null) {
-                    this.papers_p = new List<Paper>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.papers_url)) {
-                        this.papers_p.append((Paper)o);
-                    }
-                    papers_resolved = true;
+        public unowned List<Paper> get_papers() throws ParsingError {
+            if (!papers_resolved && papers_url != null) {
+                this.papers_p = new List<Paper>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.papers_url)) {
+                    this.papers_p.append((Paper)o);
                 }
-                return this.papers_p;
+                papers_resolved = true;
             }
+            return this.papers_p;
         }
 
         internal override Body? root_body() {
-            if (this.bodies.length() > 0) {
-                return this.bodies.nth_data(0).root_body();
-            } else if (this.organizations.length() > 0) {
-                return this.organizations.nth_data(0).root_body();
-            } else if (this.meetings.length() > 0) {
-                return this.meetings.nth_data(0).root_body();
-            } else if (this.papers.length() > 0) {
-                return this.papers.nth_data(0).root_body();
+            if (this.get_bodies().length() > 0) {
+                return this.get_bodies().nth_data(0).root_body();
+            } else if (this.get_organizations().length() > 0) {
+                return this.get_organizations().nth_data(0).root_body();
+            } else if (this.get_meetings().length() > 0) {
+                return this.get_meetings().nth_data(0).root_body();
+            } else if (this.get_papers().length() > 0) {
+                return this.get_papers().nth_data(0).root_body();
             }  else {
                 return null;
             }

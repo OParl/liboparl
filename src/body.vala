@@ -92,18 +92,16 @@ namespace OParl {
         /**
          * All groups of persons inside this body
          */
-        public List<Organization> organization {
-            get {
-                if (!organization_resolved && organization_url != null) {
-                    this.organization_p = new List<Organization>();
-                    var pr = new Resolver(this.client, this.organization_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.organization_p.append((Organization)o);
-                    }
-                    organization_resolved = true;
+        public unowned List<Organization> get_organization() throws ParsingError {
+            if (!organization_resolved && organization_url != null) {
+                this.organization_p = new List<Organization>();
+                var pr = new Resolver(this.client, this.organization_url);
+                foreach (Object o in pr.resolve()) {
+                    this.organization_p.append((Organization)o);
                 }
-                return this.organization_p;
+                organization_resolved = true;
             }
+            return this.organization_p;
         }
 
         internal string person_url {get;set;}
@@ -112,18 +110,16 @@ namespace OParl {
         /**
          * All persons inside this body
          */
-        public List<Person> person {
-            get {
-                if (!person_resolved && person_url != null) {
-                    this.person_p = new List<Person>();
-                    var pr = new Resolver(this.client, this.person_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.person_p.append((Person)o);
-                    }
-                    person_resolved = true;
+        public unowned List<Person> get_person() throws ParsingError {
+            if (!person_resolved && person_url != null) {
+                this.person_p = new List<Person>();
+                var pr = new Resolver(this.client, this.person_url);
+                foreach (Object o in pr.resolve()) {
+                    this.person_p.append((Person)o);
                 }
-                return this.person_p;
+                person_resolved = true;
             }
+            return this.person_p;
         }
 
         internal string meeting_url {get;set;}
@@ -132,18 +128,16 @@ namespace OParl {
         /**
          * All meetings conducted by this body
          */
-        public List<Meeting> meeting {
-            get {
-                if (!meeting_resolved && meeting_url != null) {
-                    this.meeting_p = new List<Meeting>();
-                    var pr = new Resolver(this.client, this.meeting_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.meeting_p.append((Meeting)o);
-                    }
-                    meeting_resolved = true;
+        public unowned List<Meeting> get_meeting() throws ParsingError {
+            if (!meeting_resolved && meeting_url != null) {
+                this.meeting_p = new List<Meeting>();
+                var pr = new Resolver(this.client, this.meeting_url);
+                foreach (Object o in pr.resolve()) {
+                    this.meeting_p.append((Meeting)o);
                 }
-                return this.meeting_p;
+                meeting_resolved = true;
             }
+            return this.meeting_p;
         }
 
         internal string paper_url {get;set;}
@@ -152,18 +146,16 @@ namespace OParl {
         /**
          * All papers ever used by this body
          */
-        public List<Paper> paper {
-            get {
-                if (!paper_resolved && paper_url != null) {
-                    this.paper_p = new List<Paper>();
-                    var pr = new Resolver(this.client, this.paper_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.paper_p.append((Paper)o);
-                    }
-                    paper_resolved = true;
+        public unowned List<Paper> get_paper() throws ParsingError {
+            if (!paper_resolved && paper_url != null) {
+                this.paper_p = new List<Paper>();
+                var pr = new Resolver(this.client, this.paper_url);
+                foreach (Object o in pr.resolve()) {
+                    this.paper_p.append((Paper)o);
                 }
-                return this.paper_p;
+                paper_resolved = true;
             }
+            return this.paper_p;
         }
 
         private List<LegislativeTerm>? legislative_term_p = new List<LegislativeTerm>();
@@ -192,15 +184,13 @@ namespace OParl {
         /**
          * The system that this body belongs to
          */
-        public System system {
-            get {
-                if (!system_resolved) {
-                    var r = new Resolver(this.client);
-                    this.system_p = (System)r.parse_url(this.system_url);
-                    system_resolved = true;
-                }
-                return this.system_p;
+        public System get_system() throws ParsingError {
+            if (!system_resolved) {
+                var r = new Resolver(this.client);
+                this.system_p = (System)r.parse_url(this.system_url);
+                system_resolved = true;
             }
+            return this.system_p;
         }
 
         internal override Body? root_body() {

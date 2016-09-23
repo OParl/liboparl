@@ -43,38 +43,40 @@ namespace OParl {
         private bool paper_resolved {get;set; default=false;}
         private Paper? paper_p = null;
         /**
-         * The paper that this consultation references
+         * Returns paper that this consultation references
          */
-        public Paper paper {
-            get {
-                if (!paper_resolved) {
-                    var r = new Resolver(this.client);
-                    this.paper_p = (Paper)r.parse_url(this.paper_url);
-                    paper_resolved = true;
-                }
-                return this.paper_p;
-            }
-            internal set {
+        public Paper get_paper() throws ParsingError {
+            if (!paper_resolved) {
+                var r = new Resolver(this.client);
+                this.paper_p = (Paper)r.parse_url(this.paper_url);
                 paper_resolved = true;
-                this.paper_p = value;
             }
+            return this.paper_p;
+        }
+
+        /**
+         * Used to internally set the backreference to a paper
+         * when it is being parsed as an internal object of
+         * a paper
+         */
+        internal void set_paper(Paper p) {
+            paper_resolved = true;
+            this.paper_p = p;
         }
 
         internal string agenda_item_url {get;set; default="";}
         private bool agenda_item_resolved {get;set; default=false;}
         private AgendaItem? agenda_item_p = null;
         /**
-         * The agenda item that this consultation references
+         * Returns the agenda item that this consultation references
          */
-        public AgendaItem agenda_item {
-            get {
-                if (!agenda_item_resolved) {
-                    var r = new Resolver(this.client);
-                    this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
-                    agenda_item_resolved = true;
-                }
-                return this.agenda_item_p;
+        public AgendaItem get_agenda_item() throws ParsingError {
+            if (!agenda_item_resolved) {
+                var r = new Resolver(this.client);
+                this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
+                agenda_item_resolved = true;
             }
+            return this.agenda_item_p;
         }
 
         internal string meeting_url {get;set; default="";}
@@ -83,15 +85,13 @@ namespace OParl {
         /**
          * The meeting that this consultation happen(s/ed) at
          */
-        public Meeting meeting {
-            get {
-                if (!meeting_resolved) {
-                    var r = new Resolver(this.client);
-                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
-                    meeting_resolved = true;
-                }
-                return this.meeting_p;
+        public Meeting get_meeting() throws ParsingError {
+            if (!meeting_resolved) {
+                var r = new Resolver(this.client);
+                this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                meeting_resolved = true;
             }
+            return this.meeting_p;
         }
 
         internal string[] organization_url {get;set;}
@@ -100,22 +100,20 @@ namespace OParl {
         /**
          * The organizations conducting the consultation.
          */
-        public List<Organization> organization {
-            get {
-                if (!organization_resolved && organization_url != null) {
-                    this.organization_p = new List<Organization>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.organization_url)) {
-                        this.organization_p.append((Organization)o);
-                    }
-                    organization_resolved = true;
+        public unowned List<Organization> get_organization() throws ParsingError {
+            if (!organization_resolved && organization_url != null) {
+                this.organization_p = new List<Organization>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.organization_url)) {
+                    this.organization_p.append((Organization)o);
                 }
-                return this.organization_p;
+                organization_resolved = true;
             }
+            return this.organization_p;
         }
 
         internal override Body? root_body() {
-            return this.meeting.root_body();
+            return this.get_meeting().root_body();
         }
 
         internal new static void populate_name_map() {

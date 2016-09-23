@@ -92,15 +92,13 @@ namespace OParl {
         /**
          * The contact address of this Person
          */
-        public Location location {
-            get {
-                if (!location_resolved) {
-                    var r = new Resolver(this.client);
-                    this.location_p = (Location)r.parse_url(this.location_url);
-                    location_resolved = true;
-                }
-                return this.location_p;
+        public Location get_location() throws ParsingError {
+            if (!location_resolved) {
+                var r = new Resolver(this.client);
+                this.location_p = (Location)r.parse_url(this.location_url);
+                location_resolved = true;
             }
+            return this.location_p;
         }
 
         internal string body_url {get;set; default="";}
@@ -109,15 +107,13 @@ namespace OParl {
         /**
          * The body that this person belongs to
          */
-        public Body body {
-            get {
-                if (!body_resolved) {
-                    var r = new Resolver(this.client);
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                    body_resolved = true;
-                }
-                return this.body_p;
+        public Body get_body() throws ParsingError {
+            if (!body_resolved) {
+                var r = new Resolver(this.client);
+                this.body_p = (Body)r.parse_url(this.body_url);
+                body_resolved = true;
             }
+            return this.body_p;
         }
 
         private List<Membership>? membership_p = new List<Membership>();
@@ -152,7 +148,7 @@ namespace OParl {
          * Resolves the body this person orginiates from
          */
         internal override Body? root_body() {
-            return this.body;
+            return this.get_body();
         }
 
         internal new void parse(Json.Node n) throws ParsingError {
@@ -213,7 +209,7 @@ namespace OParl {
                         }
                         var r = new Resolver(this.client);
                         foreach (Object memb in r.parse_data(item.get_array())) {
-                            (memb as Membership).person = this;
+                            (memb as Membership).set_person(this);
                             this.membership_p.append((Membership)memb);
                         }
                         break;

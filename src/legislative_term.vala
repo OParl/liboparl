@@ -41,15 +41,13 @@ namespace OParl {
         /**
          * The body that references this legislative term
          */
-        public Body body {
-            get {
-                if (!body_resolved) {
-                    var r = new Resolver(this.client);
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                    body_resolved = true;
-                }
-                return this.body_p;
+        public Body get_body() throws ParsingError {
+            if (!body_resolved) {
+                var r = new Resolver(this.client);
+                this.body_p = (Body)r.parse_url(this.body_url);
+                body_resolved = true;
             }
+            return this.body_p;
         }
 
         internal new static void populate_name_map() {
@@ -63,7 +61,7 @@ namespace OParl {
          * determines the body this object originates from
          */
         internal override Body? root_body() {
-            return this.body;
+            return this.get_body();
         }
 
         internal new void parse(Json.Node n) throws ParsingError {

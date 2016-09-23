@@ -91,18 +91,16 @@ namespace OParl {
         /**
          * The person(s) that created this document
          */
-        public List<Person> originator_person {
-            get {
-                if (!originator_person_resolved && originator_person_url != null) {
-                    this.originator_person_p = new List<Person>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.originator_person_url)) {
-                        this.originator_person_p.append((Person)o);
-                    }
-                    originator_person_resolved = true;
+        public unowned List<Person> get_originator_person() throws ParsingError {
+            if (!originator_person_resolved && originator_person_url != null) {
+                this.originator_person_p = new List<Person>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.originator_person_url)) {
+                    this.originator_person_p.append((Person)o);
                 }
-                return this.originator_person_p;
+                originator_person_resolved = true;
             }
+            return this.originator_person_p;
         }
 
         internal string[] under_direction_of_url {get;set;}
@@ -111,18 +109,16 @@ namespace OParl {
         /**
          * Organizations that are responsible for the content
          */
-        public List<Organization> under_direction_of {
-            get {
-                if (!under_direction_of_resolved && under_direction_of_url != null) {
-                    this.under_direction_of_p = new List<Organization>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.under_direction_of_url)) {
-                        this.under_direction_of_p.append((Organization)o);
-                    }
-                    under_direction_of_resolved = true;
+        public unowned List<Organization> get_under_direction_of() throws ParsingError {
+            if (!under_direction_of_resolved && under_direction_of_url != null) {
+                this.under_direction_of_p = new List<Organization>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.under_direction_of_url)) {
+                    this.under_direction_of_p.append((Organization)o);
                 }
-                return this.under_direction_of_p;
+                under_direction_of_resolved = true;
             }
+            return this.under_direction_of_p;
         }
 
         internal string[] originator_organization_url {get;set;}
@@ -131,18 +127,16 @@ namespace OParl {
         /**
          * If the creator of the document is one or more organization(s), they will be in this field.
          */
-        public List<Organization> originator_organization {
-            get {
-                if (!originator_organization_resolved && originator_organization_url != null) {
-                    this.originator_organization_p = new List<Organization>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.originator_organization_url)) {
-                        this.originator_organization_p.append((Organization)o);
-                    }
-                    originator_organization_resolved = true;
+        public unowned List<Organization> get_originator_organization() throws ParsingError {
+            if (!originator_organization_resolved && originator_organization_url != null) {
+                this.originator_organization_p = new List<Organization>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.originator_organization_url)) {
+                    this.originator_organization_p.append((Organization)o);
                 }
-                return this.originator_organization_p;
+                originator_organization_resolved = true;
             }
+            return this.originator_organization_p;
         }
 
         internal string[] superordinated_paper_url {get;set;}
@@ -151,18 +145,16 @@ namespace OParl {
         /**
          * Documents to be regarded superordinated to this document.
          */
-        public List<Paper> superordinated_paper {
-            get {
-                if (!superordinated_paper_resolved && superordinated_paper_url != null) {
-                    this.superordinated_paper_p = new List<Paper>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.superordinated_paper_url)) {
-                        this.superordinated_paper_p.append((Paper)o);
-                    }
-                    superordinated_paper_resolved = true;
+        public unowned List<Paper> get_superordinated_paper() throws ParsingError {
+            if (!superordinated_paper_resolved && superordinated_paper_url != null) {
+                this.superordinated_paper_p = new List<Paper>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.superordinated_paper_url)) {
+                    this.superordinated_paper_p.append((Paper)o);
                 }
-                return this.superordinated_paper_p;
+                superordinated_paper_resolved = true;
             }
+            return this.superordinated_paper_p;
         }
 
         internal string[] subordinated_paper_url {get;set;}
@@ -171,18 +163,16 @@ namespace OParl {
         /**
          * Documents to be regarded subordinated to this document.
          */
-        public List<Paper> subordinated_paper {
-            get {
-                if (!subordinated_paper_resolved && subordinated_paper_url != null) {
-                    this.subordinated_paper_p = new List<Paper>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.subordinated_paper_url)) {
-                        this.subordinated_paper_p.append((Paper)o);
-                    }
-                    subordinated_paper_resolved = true;
+        public unowned List<Paper> get_subordinated_paper() throws ParsingError {
+            if (!subordinated_paper_resolved && subordinated_paper_url != null) {
+                this.subordinated_paper_p = new List<Paper>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.subordinated_paper_url)) {
+                    this.subordinated_paper_p.append((Paper)o);
                 }
-                return this.subordinated_paper_p;
+                subordinated_paper_resolved = true;
             }
+            return this.subordinated_paper_p;
         }
 
         public string[] related_paper_url {get;set;}
@@ -191,18 +181,16 @@ namespace OParl {
         /**
          * Related documents.
          */
-        public List<Paper> related_paper {
-            get {
-                if (!related_paper_resolved && related_paper_url != null) {
-                    this.related_paper_p = new List<Paper>();
-                    var pr = new Resolver(this.client);
-                    foreach (Object o in pr.parse_url_array(this.related_paper_url)) {
-                        this.related_paper_p.append((Paper)o);
-                    }
-                    related_paper_resolved = true;
+        public unowned List<Paper> get_related_paper() throws ParsingError {
+            if (!related_paper_resolved && related_paper_url != null) {
+                this.related_paper_p = new List<Paper>();
+                var pr = new Resolver(this.client);
+                foreach (Object o in pr.parse_url_array(this.related_paper_url)) {
+                    this.related_paper_p.append((Paper)o);
                 }
-                return this.related_paper_p;
+                related_paper_resolved = true;
             }
+            return this.related_paper_p;
         }
 
         internal string body_url {get;set; default="";}
@@ -211,15 +199,13 @@ namespace OParl {
         /**
          * The body that this document belongs to
          */
-        public Body body {
-            get {
-                if (!body_resolved) {
-                    var r = new Resolver(this.client);
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                    body_resolved = true;
-                }
-                return this.body_p;
+        public Body get_body() throws ParsingError {
+            if (!body_resolved) {
+                var r = new Resolver(this.client);
+                this.body_p = (Body)r.parse_url(this.body_url);
+                body_resolved = true;
             }
+            return this.body_p;
         }
 
         internal new static void populate_name_map() {
@@ -241,7 +227,7 @@ namespace OParl {
         }
 
         internal override Body? root_body() {
-            return this.body;
+            return this.get_body();
         }
 
         internal new void parse(Json.Node n) throws ParsingError{
@@ -309,7 +295,7 @@ namespace OParl {
                         }
                         var r = new Resolver(this.client);
                         foreach (Object cons in r.parse_data(item.get_array())) {
-                            (cons as Consultation).paper = this;
+                            (cons as Consultation).set_paper(this);
                             this.consultation_p.append((Consultation)cons);
                         }
                         break;

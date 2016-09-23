@@ -290,7 +290,7 @@ namespace OParl {
          */
         internal virtual System? root_system() {
             Body? b = root_body();
-            return b == null ? null : b.system;
+            return b == null ? null : b.get_system();
         }
     }
 }
