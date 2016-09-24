@@ -86,8 +86,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in as soon as typechecks are in place
-            /*
             Test.add_func ("/oparl/file/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -97,11 +95,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_name_type", () => {
@@ -113,11 +113,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'name'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_file_name_type", () => {
@@ -129,11 +131,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'fileName'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_mime_type_type", () => {
@@ -145,11 +149,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'mimeType'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_date_type", () => {
@@ -161,11 +167,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'date'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_sha1_checksum_type", () => {
@@ -177,11 +185,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'sha1Checksum'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_size_type", () => {
@@ -193,11 +203,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'size'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_access_url_type", () => {
@@ -209,11 +221,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'accessUrl'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_download_url_type", () => {
@@ -225,11 +239,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'downloadUrl'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_external_service_url_type", () => {
@@ -241,11 +257,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'externalServiceUrl'"));
+                }
             });
 
             Test.add_func ("/oparl/file/wrong_text_type", () => {
@@ -257,14 +275,15 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    OParl.File f = p.auxiliary_file.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'text'"));
+                }
             });
             // TODO: maybe also check composite types
-            */
         }
     }
 }

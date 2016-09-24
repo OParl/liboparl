@@ -229,12 +229,18 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(File.name_map.get(name), item.get_string(),null);
                         break;
                     // - dates
                     case "date":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         var dt = GLib.Date();
                         dt.set_parse(item.get_string());
@@ -245,12 +251,18 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(int64)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be an integer".printf(name));
+                        }
                         this.set_property(File.name_map.get(name), item.get_int());
                         break;
                     // Url
                     case "masterFile":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(File.name_map.get(name)+"_url", item.get_string());
                         break;
@@ -263,13 +275,16 @@ namespace OParl {
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
-                        arr.foreach_element((_,i,element) => {
+                        for (int i = 0; i < arr.get_length(); i++) {
+                            var element = arr.get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
-                                return;
+                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value".printf(name));
+                            }
+                            if (element.get_value_type() != typeof(string)) {
+                                throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string".printf(name));
                             }
                             res[i] = element.get_string();
-                        });
+                        }
                         this.set(File.name_map.get(name)+"_url", res);
                         break;
                 }
