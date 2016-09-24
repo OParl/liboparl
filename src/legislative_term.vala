@@ -81,6 +81,9 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         var dt = GLib.Date();
                         dt.set_parse(item.get_string());
                         this.set_property(LegislativeTerm.name_map.get(name), dt);
@@ -89,6 +92,9 @@ namespace OParl {
                     case "body":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(LegislativeTerm.name_map.get(name)+"_url", item.get_string());
                         break;

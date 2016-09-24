@@ -65,8 +65,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: uncomment when typechecking has been implemented
-            /*
             Test.add_func ("/oparl/legislative_term/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -76,10 +74,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    LegislativeTerm l = b.legislative_term.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/legislative_term/wrong_body_type", () => {
@@ -91,10 +91,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    LegislativeTerm l = b.legislative_term.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/legislative_term/wrong_name_type", () => {
@@ -106,10 +108,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    LegislativeTerm l = b.legislative_term.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'name'"));
+                }
             });
 
             Test.add_func ("/oparl/legislative_term/wrong_start_date_type", () => {
@@ -121,10 +125,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    LegislativeTerm l = b.legislative_term.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'startDate'"));
+                }
             });
 
             Test.add_func ("/oparl/legislative_term/wrong_end_date_type", () => {
@@ -136,12 +142,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    LegislativeTerm l = b.legislative_term.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'endDate'"));
+                }
             });
-            */
         }
     }
 }
