@@ -189,14 +189,16 @@ namespace OParl {
             }
         }
 
+        protected List<ValidationResult>? validation_results = null;
+
         /**
          * ''NOT IMPLEMENTED YET'' - Will yield a detailed report on where
          * an Object violates the OParl 1.0 specification.
          */
-        public virtual List<ValidationResult> validate() {
-            var results = new List<ValidationResult>();
+        public virtual unowned List<ValidationResult> validate() {
+            this.validation_results = new List<ValidationResult>();
             if (this.id == null) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'id'",
                                "The 'id'-field contains no id. The id field must contain a valid"+
@@ -205,7 +207,7 @@ namespace OParl {
                 ));
             }
             if (this.id == "") {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'id'",
                                "The 'id'-field is an empty string. The id field must contain a valid"+
@@ -215,7 +217,7 @@ namespace OParl {
             }
             if (this.name == null && !(this is Membership || 
                                        this is Consultation)) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'name'",
                                "The 'name'-field does not contain any value. Each object must "+
@@ -225,7 +227,7 @@ namespace OParl {
             }
             if (this.name == "" && !(this is Membership || 
                                      this is Consultation)) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'name'",
                                "The 'name'-field contains an empty string. Each object must "+
@@ -234,7 +236,7 @@ namespace OParl {
                 ));
             }
             if (this.license == null && (this is System || this is Body)) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                "Invalid 'license'",
                                "The 'license'-field does not contain any value. It is recommended to "+
@@ -244,7 +246,7 @@ namespace OParl {
                 ));
             }
             if (this.license == "") {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'license'",
                                "The 'license'-field contains an empty string. Please specify a valid "+
@@ -259,7 +261,7 @@ namespace OParl {
                 } catch (ParsingError e) {}
                 System rootsystem = this.root_system();
                 if (rootbody.license == null && rootsystem.license == null ) {
-                    results.append(new ValidationResult(
+                    this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'license'",
                                "Neither the superordinated Body nor the superordinated Body "+
@@ -270,7 +272,7 @@ namespace OParl {
                 }
             }
             if (this.keyword == new string[] {} ) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                "Empty 'keyword' list",
                                "The object did not supply any keywords. That's sad.",
@@ -278,14 +280,14 @@ namespace OParl {
                 ));
             }
             if (this.keyword == null) {
-                results.append(new ValidationResult(
+                this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                "No 'shortName'",
                                "The object did not contain a shortName.",
                                this.id
                 ));
             }
-            return results;
+            return this.validation_results;
         } 
 
         public void complete() {
