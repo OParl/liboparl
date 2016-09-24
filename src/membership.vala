@@ -28,8 +28,8 @@ namespace OParl {
         private new static HashTable<string,string> name_map;
 
         /**
-         * The role that the {@link OParl.Membership.person}
-         * fulfills in {@link OParl.Membership.organization}
+         * The role that the {@link OParl.Membership.get_person}
+         * fulfills in {@link OParl.Membership.get_organization}
          *
          * May be used to distinguish different kinds of membership
          * of the same person in the same organization.
@@ -37,9 +37,9 @@ namespace OParl {
         public string role {get; set;}
 
         /**
-         * If the {@link OParl.Membership.person} has the right
+         * If the {@link OParl.Membership.get_person} has the right
          * to vote on resolutions {@link OParl.AgendaItem}s in {@link OParl.Meeting}s of
-         * {@link OParl.Membership.organization}, this flag is true
+         * {@link OParl.Membership.get_organization}, this flag is true
          */
         public bool voting_right {get; set;}
 
@@ -96,8 +96,8 @@ namespace OParl {
         private bool on_behalf_of_resolved {get;set; default=false;}
         private Organization? on_behalf_of_p = null;
         /**
-         * If {@link OParl.Membership.person} represents another {@link OParl.Organization}
-         * in {@link OParl.Membership.organization}, this method will yield the represented
+         * If {@link OParl.Membership.get_person} represents another {@link OParl.Organization}
+         * in {@link OParl.Membership.get_organization}, this method will yield the represented
          * organization.
          */
         public Organization? get_on_behalf_of() throws ParsingError {
