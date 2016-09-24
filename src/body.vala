@@ -238,6 +238,9 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(Body.name_map.get(name), item.get_string(),null);
                         break;
                     // - dates
@@ -245,6 +248,9 @@ namespace OParl {
                     case "oparlSince":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
@@ -254,17 +260,21 @@ namespace OParl {
                     // - string[]
                     case "equivalent":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         Json.Array arr = item.get_array();
                         string[] res = new string[arr.get_length()];
-                        item.get_array().foreach_element((_,i,element) => {
+                        for (int i = 0; i < item.get_array().get_length(); i++ ) {
+                            var element = item.get_array().get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
                                 GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
                                 return;
                             }
+                            if (element.get_value_type() != typeof(string)) {
+                                throw new ParsingError.INVALID_TYPE("Arrayelement of '%s' must be a string".printf(name));
+                            }
                             res[i] = element.get_string();
-                        });
+                        }
                         this.set(Body.name_map.get(name), res);
                         break;
                     // To Resolve as external objectlist
@@ -275,6 +285,9 @@ namespace OParl {
                     case "paper":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(Body.name_map.get(name)+"_url", item.get_string());
                         break;
