@@ -77,8 +77,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in when typechecks are implemented
-            /*
             Test.add_func ("/oparl/location/wrong_description_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -88,25 +86,27 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'description'"));
+                }
             });
 
             Test.add_func ("/oparl/location/wrong_street_address_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return LocationTest.test_input.get(url).replace(
-                        "\"Ratshausplatz 1\"", "1"
+                        "\"Rathausplatz 1\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'streetAddress'"));
+                }
             });
 
             Test.add_func ("/oparl/location/wrong_room_type", () => {
@@ -118,10 +118,11 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'room'"));
+                }
             });
 
             Test.add_func ("/oparl/location/wrong_postal_code_type", () => {
@@ -133,10 +134,11 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'postalCode'"));
+                }
             });
 
             Test.add_func ("/oparl/location/wrong_sub_locality_type", () => {
@@ -148,10 +150,11 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'subLocality'"));
+                }
             });
 
             Test.add_func ("/oparl/location/wrong_locality_type", () => {
@@ -163,12 +166,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Location l = b.location;
+                    s.get_body().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'locality'"));
+                }
             });
-            */
        }
     }
 }

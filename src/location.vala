@@ -184,6 +184,9 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(Location.name_map.get(name), item.get_string(),null);
                         break;
                     // Array of url
