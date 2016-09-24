@@ -414,8 +414,8 @@ namespace OParlTest.Fixtures {
         "resolutionText": "Der Beschluss weicht wie folgt vom Antrag ab: ...",
         "resolutionFile": """+ file_sane +""",
         "auxiliaryFile": ["""+ file_sane +"""],
-        "start": "2012-01-06T12:01:00+00:00",
-        "end": "2012-01-08T14:05:27+00:00",
+        "start": "2012-02-06T12:01:00+00:00",
+        "end": "2012-02-08T14:05:27+00:00",
         "created": "2012-01-06T12:01:00+00:00",
         "modified": "2012-08-16T14:05:27+00:00"
     }

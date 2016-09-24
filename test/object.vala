@@ -56,9 +56,6 @@ namespace OParlTest {
                 assert (s.modified.to_string() == "2016-05-23T21:18:29+0000");
             });
 
-            //TODO: These are tests that check acceptance of wrong types
-            //      Activate when type checking is completed
-            /*
             Test.add_func ("/oparl/object/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -67,9 +64,11 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/object/wrong_name_type", () => {
@@ -80,9 +79,11 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'name'"));
+                }
             });
 
             Test.add_func ("/oparl/object/wrong_short_name_type", () => {
@@ -93,22 +94,11 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
-            });
-
-            Test.add_func ("/oparl/object/wrong_short_name_type", () => {
-                var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"Testsystem\"", "1"
-                    );
-                });
-                try {
-                    System s = client.open("https://oparl.example.org/");
-                    GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'shortName'"));
+                }
             });
 
             Test.add_func ("/oparl/object/wrong_license_type", () => {
@@ -119,9 +109,11 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'license'"));
+                }
             });
 
             Test.add_func ("/oparl/object/wrong_created_type", () => {
@@ -132,9 +124,11 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'created'"));
+                }
             });
 
             Test.add_func ("/oparl/object/wrong_modified_type", () => {
@@ -145,11 +139,13 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'modified'"));
+                }
             });
-            */
+
             Test.add_func ("/oparl/object/wrong_keyword_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -160,9 +156,11 @@ namespace OParlTest {
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (OParl.ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'keyword'"));
+                }
             });
-            /*
+
             Test.add_func ("/oparl/object/wrong_web_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -171,12 +169,14 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'web'"));
+                }
             });
 
-            Test.add_func ("/oparl/object/wrong_web_type", () => {
+            Test.add_func ("/oparl/object/wrong_deleted_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return ObjectTest.test_input.get(url).replace(
@@ -184,11 +184,12 @@ namespace OParlTest {
                     );
                 });
                 try {
-                    System s = client.open("https://oparl.example.org/");
+                    client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'deleted'"));
+                }
             });
-            */
         }
     }
 }

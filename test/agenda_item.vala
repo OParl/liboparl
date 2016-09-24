@@ -69,176 +69,193 @@ namespace OParlTest {
                     assert (a.resolution_file is OParl.File);
                     assert (a.auxiliary_file != null);
                     assert (a.auxiliary_file.nth_data(0) is OParl.File);
-                    assert (a.start.to_string() == "2012-01-06T12:01:00+0000");
-                    assert (a.end.to_string() == "2012-01-08T14:05:27+0000");
+                    assert (a.start.to_string() == "2012-02-06T12:01:00+0000");
+                    assert (a.end.to_string() == "2012-02-08T14:05:27+0000");
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
             });
 
-            // TODO: comment in as soon as typechecks are in place
-            /*
             Test.add_func ("/oparl/agenda_item/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/agendaitem/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_meeting_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/meeting/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_number_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"10.1\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'number'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_name_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"Satzungsänderung für Ausschreibungen\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'name'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_public_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "true", "\"1\""
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'public'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_consultation_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/consultation/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'consultation'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_result_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"Geändert beschlossen\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'result'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_resolution_text_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return AgendaItemTest.test_input.get(url).replace(
                         "\"Der Beschluss weicht wie folgt vom Antrag ab: ...\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'resolutionText'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_start_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"2012-01-06T12:01:00+00:00\"", "1"
+                    return AgendaItemTest.test_input.get(url).replace(
+                        "\"2012-02-06T12:01:00+00:00\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'start'"));
+                }
             });
 
             Test.add_func ("/oparl/agenda_item/wrong_end_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"2012-01-08T14:05:27+00:00\"", "1"
+                    return AgendaItemTest.test_input.get(url).replace(
+                        "\"2012-02-08T14:05:27+00:00\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
-                    AgendaItem a = m.agenda_item.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'end'"));
+                }
             });
             // TODO: maybe check for composite types
-            */
         }
     }
 }

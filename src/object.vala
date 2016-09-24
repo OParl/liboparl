@@ -138,12 +138,15 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         target.set(Object.name_map.get(name), item.get_string(),null);
                         break;
                     // - string[]
                     case "keyword":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         Json.Array arr = item.get_array();
                         string[] res = new string[arr.get_length()];
@@ -162,6 +165,9 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
                         var dt = new GLib.DateTime.from_timeval_utc(tv);
@@ -171,6 +177,9 @@ namespace OParl {
                     case "deleted":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(bool)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean ".printf(name));
                         }
                         target.set_property(Object.name_map.get(name), item.get_boolean());
                         break;

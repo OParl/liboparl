@@ -37,6 +37,7 @@ namespace OParl {
      */
     public errordomain ParsingError {
         EXPECTED_OBJECT,
+        EXPECTED_ARRAY,
         EXPECTED_VALUE,
         NO_DATA,
         INVALID_TYPE,
@@ -241,7 +242,7 @@ namespace OParl {
 
         public unowned List<Object> parse_data(Json.Array arr) throws ParsingError {
             for (int i = 0; i < arr.get_length(); i++) {
-                Json.Node element = arr.get_element(i);
+                var element = arr.get_element(i);
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
                     throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
                 }

@@ -247,7 +247,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "agendaItem":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object term in r.parse_data(item.get_array())) {
@@ -256,7 +256,7 @@ namespace OParl {
                         break;
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object file in r.parse_data(item.get_array())) {
@@ -266,14 +266,14 @@ namespace OParl {
                     // To Resolve as internal object
                     case "location":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
                         this.location_p = (Location)r.make_object(item);
                         break;
                     case "resultsProtocol":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
                         this.results_protocol_p = (File)r.make_object(item);
