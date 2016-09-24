@@ -247,12 +247,18 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(Paper.name_map.get(name), item.get_string(),null);
                         break;
                     // - dates
                     case "date":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         var dt = GLib.Date();
                         dt.set_parse(item.get_string());
@@ -270,19 +276,22 @@ namespace OParl {
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
-                        arr.foreach_element((_,i,element) => {
+                        for (int i = 0; i < arr.get_length(); i++) {
+                            var element = arr.get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
-                                return;
+                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value".printf(name));
+                            }
+                            if (element.get_value_type() != typeof(string)) {
+                                throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string".printf(name));
                             }
                             res[i] = element.get_string();
-                        });
+                        }
                         this.set(Paper.name_map.get(name)+"_url", res);
                         break;
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object af in r.parse_data(item.get_array())) {
@@ -291,7 +300,7 @@ namespace OParl {
                         break;
                     case "consultation":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object cons in r.parse_data(item.get_array())) {
@@ -301,7 +310,7 @@ namespace OParl {
                         break;
                     case "location":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object loc in r.parse_data(item.get_array())) {
@@ -311,7 +320,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "mainFile":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
                         }
                         var r = new Resolver(this.client);
                         this.main_file_p = (File)r.make_object(item);
@@ -319,6 +328,9 @@ namespace OParl {
                     case "body":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(Paper.name_map.get(name)+"_url", item.get_string());
                         break;

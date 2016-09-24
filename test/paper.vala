@@ -87,8 +87,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: uncomment when typechecking is in place
-            /*
             Test.add_func ("/oparl/paper/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -98,10 +96,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/paper/wrong_body_type", () => {
@@ -113,10 +113,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/paper/wrong_name_type", () => {
@@ -128,10 +130,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'name'"));
+                }
             });
 
             Test.add_func ("/oparl/paper/wrong_reference_type", () => {
@@ -143,10 +147,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'reference'"));
+                }
             });
 
             Test.add_func ("/oparl/paper/wrong_date_type", () => {
@@ -158,10 +164,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'date'"));
+                }
             });
 
             Test.add_func ("/oparl/paper/wrong_paper_type_type", () => {
@@ -173,13 +181,14 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'paperType'"));
+                }
             });
             // TODO: add tests for wrong composite types?
-            */
 
         }
     }
