@@ -84,8 +84,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in as soon as typechecks are in place
-            /*
             Test.add_func ("/oparl/organization/wrong_body_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -95,10 +93,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/organization/wrong_start_date_type", () => {
@@ -110,10 +110,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'startDate'"));
+                }
             });
 
             Test.add_func ("/oparl/organization/wrong_end_date_type", () => {
@@ -125,10 +127,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'endDate'"));
+                }
             });
 
             Test.add_func ("/oparl/organization/wrong_organization_type_type", () => {
@@ -140,10 +144,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'organizationType'"));
+                }
             });
 
             // TODO: maybe check post
@@ -157,10 +163,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'meeting'"));
+                }
             });
 
             // TODO: maybe check membership arrayy
@@ -174,12 +182,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Organization o = b.organization.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_organization().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'classification'"));
+                }
             });
-            */
         }
     }
 }
