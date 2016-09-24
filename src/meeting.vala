@@ -207,12 +207,18 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(Meeting.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "cancelled":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(bool)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean".printf(name));
                         }
                         this.set_property(Meeting.name_map.get(name), item.get_boolean());
                         break;
@@ -221,6 +227,9 @@ namespace OParl {
                     case "end":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());

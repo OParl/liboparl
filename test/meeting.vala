@@ -81,54 +81,74 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in as soon as typechecks are in place
-            /*
             Test.add_func ("/oparl/meeting/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return MeetingTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/meeting/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
+            });
+
+            Test.add_func ("/oparl/meeting/wrong_cancelled_type", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return MeetingTest.test_input.get(url).replace(
+                        "\"cancelled\": false", "\"cancelled\": \"1\""
+                    );
+                });
+                try {
+                    System s = client.open("https://oparl.example.org/");
+                    Body b = s.get_body().nth_data(0);
+                    b.get_meeting().nth_data(0);
+                    GLib.assert_not_reached();
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'cancelled'"));
+                }
             });
 
             Test.add_func ("/oparl/meeting/wrong_start_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return MeetingTest.test_input.get(url).replace(
                         "\"2013-01-04T08:00:00+00:00\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'start'"));
+                }
             });
 
             Test.add_func ("/oparl/meeting/wrong_end_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return MeetingTest.test_input.get(url).replace(
                         "\"2013-01-04T12:00:00+00:00\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Meeting m = b.meeting.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'end'"));
+                }
             });
             // TODO: maybe check for all fields with composite types
-            */
         }
     }
 }

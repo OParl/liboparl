@@ -233,6 +233,7 @@ namespace OParlTest.Fixtures {
         "id": "https://oparl.example.org/meeting/0",
         "type": "https://schema.oparl.org/1.0/Meeting",
         "name": "4. Sitzung des Finanzausschusses",
+        "cancelled": false,
         "start": "2013-01-04T08:00:00+00:00",
         "end": "2013-01-04T12:00:00+00:00",
         "location": """ + location_sane + """,
