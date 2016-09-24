@@ -171,7 +171,7 @@ namespace OParl {
             name_map.insert("externalBody", "external_body");
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_body();
         }
 

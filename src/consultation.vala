@@ -112,7 +112,7 @@ namespace OParl {
             return this.organization_p;
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_meeting().root_body();
         }
 

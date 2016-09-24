@@ -134,7 +134,7 @@ namespace OParl {
             return this.papers_p;
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             if (this.get_bodies().length() > 0) {
                 return this.get_bodies().nth_data(0).root_body();
             } else if (this.get_organizations().length() > 0) {

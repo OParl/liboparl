@@ -147,7 +147,7 @@ namespace OParl {
         /**
          * Resolves the body this person orginiates from
          */
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_body();
         }
 

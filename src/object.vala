@@ -243,16 +243,22 @@ namespace OParl {
                                this.id
                 ));
             }
-            if (this.license == null && !(this is System || this is Body)
-                && this.root_body().license == null && this.root_system().license == null ) {
-                results.append(new ValidationResult(
+            if (this.license == null && !(this is System || this is Body)) {
+                Body rootbody = null;
+                try {
+                    rootbody = this.root_body();
+                } catch (ParsingError e) {}
+                System rootsystem = this.root_system();
+                if (rootbody.license == null && rootsystem.license == null ) {
+                    results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'license'",
                                "Neither the superordinated Body nor the superordinated Body "+
                                "specify a license for this object. Please either add a license "+
                                "to this object or add one to the containing System or Body",
                                this.id
-                ));
+                    ));
+                }
             }
             if (this.keyword == new string[] {} ) {
                 results.append(new ValidationResult(
@@ -280,7 +286,7 @@ namespace OParl {
          * Each object should implement this method as means to resolve the
          * body that this object originates from
          */
-        internal abstract Body? root_body();
+        internal abstract Body? root_body() throws ParsingError;
 
         /**
          * Tries to resolve which system this object
@@ -289,8 +295,12 @@ namespace OParl {
          * to get the system.
          */
         internal virtual System? root_system() {
-            Body? b = root_body();
-            return b == null ? null : b.get_system();
+            try {
+                Body? b = root_body();
+                return b == null ? null : b.get_system();
+            } catch (ParsingError e) {
+                return null;
+            }
         }
     }
 }

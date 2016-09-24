@@ -226,7 +226,7 @@ namespace OParl {
             name_map.insert("consultation","consultation");
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_body();
         }
 

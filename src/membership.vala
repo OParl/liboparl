@@ -120,7 +120,7 @@ namespace OParl {
             name_map.insert("onBehalfOf","on_behalf_of");
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_person().get_body();
         }
 

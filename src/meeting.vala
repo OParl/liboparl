@@ -166,7 +166,7 @@ namespace OParl {
          * explicitly specify which system an object originates from when
          * there is more than one backreference inside the object
          */
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             if (this.get_organization().length() > 0)
                 return this.get_organization().nth_data(0).get_body();
             else if (this.get_participant().length() > 0)

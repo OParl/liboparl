@@ -175,7 +175,7 @@ namespace OParl {
             return this.paper_p;
         }
 
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             if (this.get_paper().length() > 0) {
                 return this.get_paper().nth_data(0).root_body();
             } else if (this.get_meeting().length() > 0) {

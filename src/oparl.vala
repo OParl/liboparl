@@ -39,7 +39,8 @@ namespace OParl {
         EXPECTED_OBJECT,
         EXPECTED_VALUE,
         NO_DATA,
-        INVALID_TYPE
+        INVALID_TYPE,
+        INVALID_JSON
     }
 
     /**
@@ -114,7 +115,11 @@ namespace OParl {
                 var system = new System();
                 var parser = new Json.Parser();
                 system.set_client(this);
-                parser.load_from_data(data);
+                try {
+                    parser.load_from_data(data);
+                } catch (GLib.Error e) {
+                    throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter".printf(url));
+                }
                 system.parse(parser.get_root());
                 return system;
             }
@@ -154,7 +159,11 @@ namespace OParl {
         public unowned List<Object> resolve() throws ParsingError {
             string data = this.c.resolve_url(this.url);
             var parser = new Json.Parser();
-            parser.load_from_data(data);
+            try {
+                parser.load_from_data(data);
+            } catch (GLib.Error e) {
+                throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(this.url));
+            }
             this.parse(parser.get_root());
             return this.result; 
         }
@@ -231,25 +240,30 @@ namespace OParl {
         }
 
         public unowned List<Object> parse_data(Json.Array arr) throws ParsingError {
-            arr.foreach_element((_,i,element) => {
+            for (int i = 0; i < arr.get_length(); i++) {
+                Json.Node element = arr.get_element(i);
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
                     throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
                 }
                 Object target = (Object)make_object(element);
                 this.result.append(target);
-            });
+            }
             return this.result;
         }
 
-        public Object parse_url(string url) {
+        public Object parse_url(string url) throws ParsingError {
             string data = this.c.resolve_url(url);
             var parser = new Json.Parser();
-            parser.load_from_data(data);
+            try {
+                parser.load_from_data(data);
+            } catch (GLib.Error e) {
+                throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(url));
+            }
             return (Object)make_object(parser.get_root());
         }
 
 
-        public unowned List<Object> parse_url_array(string[] urls) {
+        public unowned List<Object> parse_url_array(string[] urls) throws ParsingError {
             foreach(string url in urls) {
                 Object target = this.parse_url(url);
                 this.result.append(target);
@@ -278,7 +292,11 @@ namespace OParl {
             if (links.has_member("next")) {
                 string data = this.c.resolve_url(links.get_string_member("next"));
                 var parser = new Json.Parser();
-                parser.load_from_data(data);
+                try {
+                    parser.load_from_data(data);
+                } catch (GLib.Error e) {
+                    throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl pagination-list at '%s' against a linter".printf(url));
+                }
                 this.parse(parser.get_root());
             }
         }

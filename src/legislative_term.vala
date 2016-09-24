@@ -60,7 +60,7 @@ namespace OParl {
         /**
          * determines the body this object originates from
          */
-        internal override Body? root_body() {
+        internal override Body? root_body() throws ParsingError {
             return this.get_body();
         }
 
