@@ -129,12 +129,15 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(System.name_map.get(name), item.get_string(),null);
                         break;
                     // string[]
                     case "otherOparlVersions":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
                         }
                         Json.Array arr = item.get_array();
                         string[] res = new string[arr.get_length()];
@@ -151,6 +154,9 @@ namespace OParl {
                     case "body":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(System.name_map.get(name)+"_url", item.get_string());
                         break;

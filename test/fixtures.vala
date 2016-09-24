@@ -49,9 +49,7 @@ namespace OParlTest.Fixtures {
         "website": "http://www.example.org/",
         "vendor": "http://example-software.com/",
         "product": "http://example-software.com/oparl-server/",
-        "otherOparlVersions": [
-            "https://oparl2.example.org/"
-        ]
+        "otherOparlVersions": ["https://oparl2.example.org/"]
     }
     """;
 
