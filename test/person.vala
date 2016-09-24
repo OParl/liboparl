@@ -79,8 +79,6 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in when typechecks are implemented
-            /*
             Test.add_func ("/oparl/person/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
@@ -90,10 +88,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_person().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/person/wrong_family_name_type", () => {
@@ -105,10 +105,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_person().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'familyName'"));
+                }
             });
 
             Test.add_func ("/oparl/person/wrong_given_name_type", () => {
@@ -120,10 +122,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_person().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'givenName'"));
+                }
             });
 
             // TODO: check titles
@@ -137,10 +141,12 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_person().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'formOfAddress'"));
+                }
             });
 
             Test.add_func ("/oparl/person/wrong_gender_type", () => {
@@ -152,12 +158,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    b.get_person().nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'gender'"));
+                }
             });
-            */
         }
     }
 }
