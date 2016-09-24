@@ -2,7 +2,7 @@ liboparl
 ========
 
 You are laying eyes on liboparl. A client implementation of the OParl-1.0 specification.
-It's your easy way to access endpoints in a simple fashion.
+It's your easy way to access endpoints in a straightforward fashion.
 
 Features
 --------
@@ -21,7 +21,7 @@ Meta-Features
 Characteristics
 ---------------
 
-The librarie's objective is to abstract OParls object format away from you. You as someone
+The library's objective is to abstract OParls object format away from you. You as someone
 who develops an application for OParl does not need to know how to resolve the ids that
 objects yield to you and how to parse the objects themselves and check them for correctness.
 
