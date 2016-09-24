@@ -64,30 +64,30 @@ namespace OParlTest {
                     assert (m.role == "Sachkundige Bürgerin");
                     assert (m.voting_right == false);
                     GLib.Date x = m.start_date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2013-12-03");
+                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2013-12-02");
                     GLib.Date e = m.end_date;
-                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-28");
+                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-27");
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
             });
 
-            // TODO: comment in when typechecks are in place
-            /*
             Test.add_func ("/oparl/membership/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return MembershipTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/memberships/1\"", "1"
+                        "\"https://oparl.example.org/membership/1\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/membership/wrong_organization_type", () => {
@@ -99,11 +99,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'organization'"));
+                }
             });
 
             Test.add_func ("/oparl/membership/wrong_role_type", () => {
@@ -115,11 +117,13 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'role'"));
+                }
             });
 
             Test.add_func ("/oparl/membership/wrong_voting_right_type", () => {
@@ -131,45 +135,50 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'votingRight'"));
+                }
             });
 
             Test.add_func ("/oparl/membership/wrong_start_date_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return MembershipTest.test_input.get(url).replace(
-                        "\"2013-12-03\"", "1"
+                        "\"2013-12-02\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'startDate'"));
+                }
             });
 
             Test.add_func ("/oparl/membership/wrong_end_date_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
                     return MembershipTest.test_input.get(url).replace(
-                        "\"2014-07-28\"", "1"
+                        "\"2014-07-27\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Person p = b.person.nth_data(0);
-                    Membership m = p.membership.nth_data(1);
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    p.membership.nth_data(1);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'endDate'"));
+                }
             });
-            */
         }
     }
 }

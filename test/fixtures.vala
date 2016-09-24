@@ -188,8 +188,8 @@ namespace OParlTest.Fixtures {
                 "onBehalfOf": "https://oparl.example.org/organization/0",
                 "role": "Sachkundige Bürgerin",
                 "votingRight": false,
-                "startDate": "2013-12-03",
-                "endDate": "2014-07-28"
+                "startDate": "2013-12-02",
+                "endDate": "2014-07-27"
             }
         ],
         "created": "2011-11-11T11:11:00+00:00",
@@ -221,8 +221,8 @@ namespace OParlTest.Fixtures {
         "person": "https://oparl.example.org/person/0",
         "role": "Sachkundige Bürgerin",
         "votingRight": false,
-        "startDate": "2013-12-03",
-        "endDate": "2014-07-28"
+        "startDate": "2013-12-02",
+        "endDate": "2014-07-27"
     }
     """;
 
