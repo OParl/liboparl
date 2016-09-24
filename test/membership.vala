@@ -48,23 +48,28 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Person p = b.person.nth_data(0);
-                Membership m = p.membership.nth_data(1);
 
-                assert (m.id == "https://oparl.example.org/membership/1");
-                assert (m.organization != null);
-                assert (m.organization is OParl.Organization);
-                assert (m.on_behalf_of != null);
-                assert (m.on_behalf_of is OParl.Organization);
-                assert (m.person != null);
-                assert (m.person is OParl.Person);
-                assert (m.role == "Sachkundige Bürgerin");
-                assert (m.voting_right == false);
-                GLib.Date x = m.start_date;
-                assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2013-12-03");
-                GLib.Date e = m.end_date;
-                assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-28");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+                    Membership m = p.membership.nth_data(1);
+
+                    assert (m.id == "https://oparl.example.org/membership/1");
+                    assert (m.get_organization() != null);
+                    assert (m.get_organization() is OParl.Organization);
+                    assert (m.get_on_behalf_of() != null);
+                    assert (m.get_on_behalf_of() is OParl.Organization);
+                    assert (m.get_person() != null);
+                    assert (m.get_person() is OParl.Person);
+                    assert (m.role == "Sachkundige Bürgerin");
+                    assert (m.voting_right == false);
+                    GLib.Date x = m.start_date;
+                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2013-12-03");
+                    GLib.Date e = m.end_date;
+                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-28");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in when typechecks are in place

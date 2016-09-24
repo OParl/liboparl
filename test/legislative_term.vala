@@ -47,17 +47,22 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                LegislativeTerm l = b.legislative_term.nth_data(0);
 
-                assert (l.id == "https://oparl.example.org/term/21");
-                assert (l.body != null);
-                assert (l.body is OParl.Body);
-                assert (l.name == "21. Wahlperiode");
-                GLib.Date x = l.start_date;
-                assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2010-12-03");
-                GLib.Date e = l.end_date;
-                assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2013-12-03");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    LegislativeTerm l = b.legislative_term.nth_data(0);
+
+                    assert (l.id == "https://oparl.example.org/term/21");
+                    assert (l.get_body() != null);
+                    assert (l.get_body() is OParl.Body);
+                    assert (l.name == "21. Wahlperiode");
+                    GLib.Date x = l.start_date;
+                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2010-12-03");
+                    GLib.Date e = l.end_date;
+                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2013-12-03");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: uncomment when typechecking has been implemented

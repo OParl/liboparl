@@ -50,33 +50,38 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Organization o = b.organization.nth_data(0);
 
-                assert (o.id == "https://oparl.example.org/organization/0");
-                assert (o.body != null);
-                assert (o.body is OParl.Body);
-                assert (o.name == "Ausschuss für Haushalt und Finanzen");
-                assert (o.short_name == "Finanzausschuss");
-                GLib.Date x = o.start_date;
-                assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-07-17");
-                GLib.Date e = o.end_date;
-                assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-17");
-                assert (o.organization_type == "Gremium");
-                assert (o.location != null);
-                assert (o.location is Location);
-                assert (o.post.length == 3);
-                assert (o.post[0] == "Vorsitzender");
-                assert (o.post[1] == "1. Stellvertreter");
-                assert (o.post[2] == "Mitglied");
-                assert (o.meeting != null);
-                assert (o.meeting.nth_data(0) is Meeting);
-                assert (o.membership != null);
-                assert (o.membership.nth_data(0) is Membership);
-                assert (o.classification == "Ausschuss");
-                assert (o.keyword.length == 2);
-                assert (o.keyword[0] == "finanzen");
-                assert (o.keyword[1] == "haushalt");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Organization o = b.get_organization().nth_data(0);
+
+                    assert (o.id == "https://oparl.example.org/organization/0");
+                    assert (o.get_body() != null);
+                    assert (o.get_body() is OParl.Body);
+                    assert (o.name == "Ausschuss für Haushalt und Finanzen");
+                    assert (o.short_name == "Finanzausschuss");
+                    GLib.Date x = o.start_date;
+                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-07-17");
+                    GLib.Date e = o.end_date;
+                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-17");
+                    assert (o.organization_type == "Gremium");
+                    assert (o.location != null);
+                    assert (o.location is Location);
+                    assert (o.post.length == 3);
+                    assert (o.post[0] == "Vorsitzender");
+                    assert (o.post[1] == "1. Stellvertreter");
+                    assert (o.post[2] == "Mitglied");
+                    assert (o.get_meeting() != null);
+                    assert (o.get_meeting().nth_data(0) is Meeting);
+                    assert (o.get_membership() != null);
+                    assert (o.get_membership().nth_data(0) is Membership);
+                    assert (o.classification == "Ausschuss");
+                    assert (o.keyword.length == 2);
+                    assert (o.keyword[0] == "finanzen");
+                    assert (o.keyword[1] == "haushalt");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in as soon as typechecks are in place

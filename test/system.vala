@@ -46,26 +46,30 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                assert (s.id == "https://oparl.example.org/");
-                assert (s.name == "Beispiel-System");
-                assert (s.oparl_version == "https://schema.oparl.org/1.0/");
-                unowned List<Body> b = s.body;
-                assert (b != null);
-                assert (b.nth_data(0) is OParl.Body);
-                assert (s.short_name == null);
-                assert (s.license == null);
-                assert (s.web == null);
-                assert (!s.deleted);
-                assert (s.keyword.length == 0);
-                assert (s.created == null);
-                assert (s.modified == null);
-                assert (s.contact_email == "info@example.org");
-                assert (s.contact_name == "Allgemeiner OParl Kontakt");
-                assert (s.website == "http://www.example.org/");
-                assert (s.vendor == "http://example-software.com/");
-                assert (s.product == "http://example-software.com/oparl-server/");
-                assert (s.other_oparl_versions[0] == "https://oparl2.example.org/");
-                assert (s.other_oparl_versions.length == 1);
+
+                try {
+                    assert (s.id == "https://oparl.example.org/");
+                    assert (s.name == "Beispiel-System");
+                    assert (s.oparl_version == "https://schema.oparl.org/1.0/");
+                    assert (s.get_body() != null);
+                    assert (s.get_body().nth_data(0) is OParl.Body);
+                    assert (s.short_name == null);
+                    assert (s.license == null);
+                    assert (s.web == null);
+                    assert (!s.deleted);
+                    assert (s.keyword.length == 0);
+                    assert (s.created == null);
+                    assert (s.modified == null);
+                    assert (s.contact_email == "info@example.org");
+                    assert (s.contact_name == "Allgemeiner OParl Kontakt");
+                    assert (s.website == "http://www.example.org/");
+                    assert (s.vendor == "http://example-software.com/");
+                    assert (s.product == "http://example-software.com/oparl-server/");
+                    assert (s.other_oparl_versions[0] == "https://oparl2.example.org/");
+                    assert (s.other_oparl_versions.length == 1);
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             //TODO: comment in when typechecks are in place

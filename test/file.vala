@@ -51,34 +51,39 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Paper p = b.paper.nth_data(0);
-                OParl.File f = p.auxiliary_file.nth_data(0);
 
-                assert (f.id == "https://oparl.example.org/file/0");
-                assert (f.name == "Nachtrags-Tagesordnung");
-                assert (f.file_name == "nachtrag-TO.pdf");
-                assert (f.mime_type == "application/pdf");
-                GLib.Date x = f.date;
-                assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-01-08");
-                assert (f.sha1_checksum == "da39a3ee5e6b4b0d3255bfef95601890afd80709");
-                assert (f.size == 82930);
-                assert (f.access_url == "https://oparl.example.org/file/0.pdf");
-                assert (f.download_url  == "https://oparl.example.org/file/download/0.pdf");
-                assert (f.modified.to_string() == "2012-01-08T14:05:27+0000");
-                assert (f.external_service_url == "https://www.youtube.com/watch?v=MKp30C3MwVk");
-                assert (f.text == "blablatextblabla");
-                assert (f.master_file != null);
-                assert (f.master_file is OParl.File);
-                assert (f.derivative_file != null);
-                assert (f.derivative_file.nth_data(0) is OParl.File);
-                assert (f.meeting != null);
-                assert (f.meeting.nth_data(0) is Meeting);
-                assert (f.paper != null);
-                assert (f.paper.nth_data(0) is Paper);
-                assert (f.agenda_item != null);
-                assert (f.agenda_item.nth_data(0) is AgendaItem);
-                assert (f.file_license == "http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    OParl.File f = p.auxiliary_file.nth_data(0);
+
+                    assert (f.id == "https://oparl.example.org/file/0");
+                    assert (f.name == "Nachtrags-Tagesordnung");
+                    assert (f.file_name == "nachtrag-TO.pdf");
+                    assert (f.mime_type == "application/pdf");
+                    GLib.Date x = f.date;
+                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-01-08");
+                    assert (f.sha1_checksum == "da39a3ee5e6b4b0d3255bfef95601890afd80709");
+                    assert (f.size == 82930);
+                    assert (f.access_url == "https://oparl.example.org/file/0.pdf");
+                    assert (f.download_url  == "https://oparl.example.org/file/download/0.pdf");
+                    assert (f.modified.to_string() == "2012-01-08T14:05:27+0000");
+                    assert (f.external_service_url == "https://www.youtube.com/watch?v=MKp30C3MwVk");
+                    assert (f.text == "blablatextblabla");
+                    assert (f.get_master_file() != null);
+                    assert (f.get_master_file() is OParl.File);
+                    assert (f.get_derivative_file() != null);
+                    assert (f.get_derivative_file().nth_data(0) is OParl.File);
+                    assert (f.get_meeting() != null);
+                    assert (f.get_meeting().nth_data(0) is Meeting);
+                    assert (f.get_paper() != null);
+                    assert (f.get_paper().nth_data(0) is Paper);
+                    assert (f.get_agenda_item() != null);
+                    assert (f.get_agenda_item().nth_data(0) is AgendaItem);
+                    assert (f.file_license == "http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in as soon as typechecks are in place

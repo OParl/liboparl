@@ -49,31 +49,36 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Meeting m = b.meeting.nth_data(0);
 
-                assert (m.id == "https://oparl.example.org/meeting/0");
-                assert (m.name == "4. Sitzung des Finanzausschusses");
-                assert (m.start.to_string() == "2013-01-04T08:00:00+0000");
-                assert (m.end.to_string() == "2013-01-04T12:00:00+0000");
-                assert (m.location != null);
-                assert (m.location is Location);
-                assert (m.organization != null);
-                assert (m.organization.nth_data(0) is Organization);
-                assert (m.participant != null);
-                assert (m.participant.nth_data(0) is Person);
-                assert (m.invitation != null);
-                assert (m.invitation is OParl.File);
-                assert (m.results_protocol != null);
-                assert (m.results_protocol is OParl.File);
-                assert (m.verbatim_protocol != null);
-                assert (m.verbatim_protocol is OParl.File);
-                assert (m.auxiliary_file != null);
-                assert (m.auxiliary_file.nth_data(0) is OParl.File);
-                assert (m.agenda_item != null);
-                assert (m.agenda_item.nth_data(0) is AgendaItem);
-                assert (m.created.to_string() == "2012-01-06T12:01:00+0000");
-                assert (m.modified.to_string() == "2012-01-08T14:05:27+0000");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+
+                    assert (m.id == "https://oparl.example.org/meeting/0");
+                    assert (m.name == "4. Sitzung des Finanzausschusses");
+                    assert (m.start.to_string() == "2013-01-04T08:00:00+0000");
+                    assert (m.end.to_string() == "2013-01-04T12:00:00+0000");
+                    assert (m.location != null);
+                    assert (m.location is Location);
+                    assert (m.get_organization() != null);
+                    assert (m.get_organization().nth_data(0) is Organization);
+                    assert (m.get_participant() != null);
+                    assert (m.get_participant().nth_data(0) is Person);
+                    assert (m.invitation != null);
+                    assert (m.invitation is OParl.File);
+                    assert (m.results_protocol != null);
+                    assert (m.results_protocol is OParl.File);
+                    assert (m.verbatim_protocol != null);
+                    assert (m.verbatim_protocol is OParl.File);
+                    assert (m.auxiliary_file != null);
+                    assert (m.auxiliary_file.nth_data(0) is OParl.File);
+                    assert (m.agenda_item != null);
+                    assert (m.agenda_item.nth_data(0) is AgendaItem);
+                    assert (m.created.to_string() == "2012-01-06T12:01:00+0000");
+                    assert (m.modified.to_string() == "2012-01-08T14:05:27+0000");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in as soon as typechecks are in place

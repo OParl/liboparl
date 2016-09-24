@@ -49,26 +49,31 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Meeting m = b.meeting.nth_data(0);
-                AgendaItem a = m.agenda_item.nth_data(0);
 
-                assert (a.id == "https://oparl.example.org/agendaitem/0");
-                assert (a.meeting != null);
-                assert (a.meeting is Meeting);
-                assert (a.number == "10.1");
-                assert (a.name == "Satzungsänderung für Ausschreibungen");
-                assert (a.@public == true);
-                assert (a.consultation != null);
-                assert (a.consultation is Consultation);
-                assert (a.result == "Geändert beschlossen");
-                assert (a.resolution_text == "Der Beschluss weicht wie folgt vom Antrag ab: ...");
-                assert (a.resolution_file != null);
-                assert (a.resolution_file is OParl.File);
-                assert (a.auxiliary_file != null);
-                assert (a.auxiliary_file.nth_data(0) is OParl.File);
-                assert (a.start.to_string() == "2012-01-06T12:01:00+0000");
-                assert (a.end.to_string() == "2012-01-08T14:05:27+0000");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Meeting m = b.get_meeting().nth_data(0);
+                    AgendaItem a = m.agenda_item.nth_data(0);
+
+                    assert (a.id == "https://oparl.example.org/agendaitem/0");
+                    assert (a.get_meeting() != null);
+                    assert (a.get_meeting() is Meeting);
+                    assert (a.number == "10.1");
+                    assert (a.name == "Satzungsänderung für Ausschreibungen");
+                    assert (a.@public == true);
+                    assert (a.get_consultation() != null);
+                    assert (a.get_consultation() is Consultation);
+                    assert (a.result == "Geändert beschlossen");
+                    assert (a.resolution_text == "Der Beschluss weicht wie folgt vom Antrag ab: ...");
+                    assert (a.resolution_file != null);
+                    assert (a.resolution_file is OParl.File);
+                    assert (a.auxiliary_file != null);
+                    assert (a.auxiliary_file.nth_data(0) is OParl.File);
+                    assert (a.start.to_string() == "2012-01-06T12:01:00+0000");
+                    assert (a.end.to_string() == "2012-01-08T14:05:27+0000");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in as soon as typechecks are in place

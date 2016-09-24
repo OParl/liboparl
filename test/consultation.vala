@@ -50,21 +50,25 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Paper p = b.paper.nth_data(0);
-                Consultation c = p.consultation.nth_data(0);
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    Consultation c = p.consultation.nth_data(0);
 
-                assert (c.id == "https://oparl.example.org/consultation/0");
-                assert (c.agenda_item != null);
-                assert (c.agenda_item is AgendaItem);
-                assert (c.paper != null);
-                assert (c.paper is Paper);
-                assert (c.meeting != null);
-                assert (c.meeting is Meeting);
-                assert (c.organization != null);
-                assert (c.organization.nth_data(0) is Organization);
-                assert (c.authoritative == false);
-                assert (c.role == "Beschlussfassung");
+                    assert (c.id == "https://oparl.example.org/consultation/0");
+                    assert (c.get_agenda_item() != null);
+                    assert (c.get_agenda_item() is AgendaItem);
+                    assert (c.get_paper() != null);
+                    assert (c.get_paper() is Paper);
+                    assert (c.get_meeting() != null);
+                    assert (c.get_meeting() is Meeting);
+                    assert (c.get_organization() != null);
+                    assert (c.get_organization().nth_data(0) is Organization);
+                    assert (c.authoritative == false);
+                    assert (c.role == "Beschlussfassung");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in as soon as typechecks are in place

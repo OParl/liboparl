@@ -50,37 +50,42 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
 
-                assert (b.id == "https://oparl.example.org/body/0");
-                assert (b.system != null);
-                assert (b.system is OParl.System);
-                assert (b.contact_email == "ris@beispielstadt.de");
-                assert (b.contact_name == "RIS-Betreuung");
-                assert (b.ags == "05315000");
-                assert (b.rgs == "053150000000");
-                assert (b.classification == "Kreisfreie Stadt");
-                assert (b.equivalent.length == 2);
-                assert (b.equivalent[0] == "http://d-nb.info/gnd/2015732-0");
-                assert (b.equivalent[1] == "http://dbpedia.org/resource/Cologne");
-                assert (b.short_name == "Köln");
-                assert (b.name == "Stadt Köln, kreisfreie Stadt");
-                assert (b.website == "http://www.beispielstadt.de/");
-                assert (b.license == "http://creativecommons.org/licenses/by/4.0/");
-                assert (b.license_valid_since.to_string() == "2015-01-01T14:28:31+0000");
-                assert (b.oparl_since.to_string() == "2014-01-01T14:28:31+0000");
-                assert (b.organization != null);
-                assert (b.organization.nth_data(0) != null);
-                assert (b.organization.nth_data(0) is Organization);
-                assert (b.person != null);
-                assert (b.person.nth_data(0) != null);
-                assert (b.person.nth_data(0) is Person);
-                assert (b.meeting != null);
-                assert (b.meeting.nth_data(0) != null);
-                assert (b.meeting.nth_data(0) is Meeting);
-                assert (b.paper != null);
-                assert (b.paper.nth_data(0) != null);
-                assert (b.paper.nth_data(0) is Paper);
+                try {
+                    Body b = s.get_body().nth_data(0);
+
+                    assert (b.id == "https://oparl.example.org/body/0");
+                    assert (b.get_system() != null);
+                    assert (b.get_system() is OParl.System);
+                    assert (b.contact_email == "ris@beispielstadt.de");
+                    assert (b.contact_name == "RIS-Betreuung");
+                    assert (b.ags == "05315000");
+                    assert (b.rgs == "053150000000");
+                    assert (b.classification == "Kreisfreie Stadt");
+                    assert (b.equivalent.length == 2);
+                    assert (b.equivalent[0] == "http://d-nb.info/gnd/2015732-0");
+                    assert (b.equivalent[1] == "http://dbpedia.org/resource/Cologne");
+                    assert (b.short_name == "Köln");
+                    assert (b.name == "Stadt Köln, kreisfreie Stadt");
+                    assert (b.website == "http://www.beispielstadt.de/");
+                    assert (b.license == "http://creativecommons.org/licenses/by/4.0/");
+                    assert (b.license_valid_since.to_string() == "2015-01-01T14:28:31+0000");
+                    assert (b.oparl_since.to_string() == "2014-01-01T14:28:31+0000");
+                    assert (b.get_organization() != null);
+                    assert (b.get_organization().nth_data(0) != null);
+                    assert (b.get_organization().nth_data(0) is Organization);
+                    assert (b.get_person() != null);
+                    assert (b.get_person().nth_data(0) != null);
+                    assert (b.get_person().nth_data(0) is Person);
+                    assert (b.get_meeting() != null);
+                    assert (b.get_meeting().nth_data(0) != null);
+                    assert (b.get_meeting().nth_data(0) is Meeting);
+                    assert (b.get_paper() != null);
+                    assert (b.get_paper().nth_data(0) != null);
+                    assert (b.get_paper().nth_data(0) is Paper);
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: activate these tests as soon as typechecks are implemented

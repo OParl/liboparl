@@ -50,26 +50,31 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Location l = b.location;
 
-                assert (l != null);
-                assert (l.id == "https://oparl.example.org/location/0");
-                assert (l.description == "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt");
-                assert (l.street_address == "Rathausplatz 1");
-                assert (l.room == "1337");
-                assert (l.postal_code == "13337");
-                assert (l.sub_locality == "Beispielbezirk");
-                assert (l.locality == "Beispielstadt");
-                assert (l.bodies != null);
-                assert (l.bodies.length() == 1);
-                assert (l.organizations != null);
-                assert (l.organizations.length() == 1);
-                assert (l.meetings != null);
-                assert (l.meetings.length() == 1);
-                assert (l.papers != null);
-                assert (l.papers.length() == 1);
-                assert (l.geojson != null);
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Location l = b.location;
+
+                    assert (l != null);
+                    assert (l.id == "https://oparl.example.org/location/0");
+                    assert (l.description == "Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt");
+                    assert (l.street_address == "Rathausplatz 1");
+                    assert (l.room == "1337");
+                    assert (l.postal_code == "13337");
+                    assert (l.sub_locality == "Beispielbezirk");
+                    assert (l.locality == "Beispielstadt");
+                    assert (l.get_bodies() != null);
+                    assert (l.get_bodies().length() == 1);
+                    assert (l.get_organizations() != null);
+                    assert (l.get_organizations().length() == 1);
+                    assert (l.get_meetings() != null);
+                    assert (l.get_meetings().length() == 1);
+                    assert (l.get_papers() != null);
+                    assert (l.get_papers().length() == 1);
+                    assert (l.geojson != null);
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in when typechecks are implemented

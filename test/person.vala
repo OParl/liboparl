@@ -48,30 +48,35 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
-                Body b = s.body.nth_data(0);
-                Person p = b.person.nth_data(0);
 
-                assert (p.id == "https://oparl.example.org/person/0");
-                assert (p.body != null);
-                assert (p.body is OParl.Body);
-                assert (p.name == "Prof. Dr. Max Mustermann");
-                assert (p.family_name == "Mustermann");
-                assert (p.given_name == "Max");
-                assert (p.title != null);
-                assert (p.title[0] == "Prof.");
-                assert (p.title[1] == "Dr.");
-                assert (p.form_of_address == "Ratsfrau");
-                assert (p.gender == "male");
-                assert (p.email != null);
-                assert (p.email[0] == "max@mustermann.de");
-                assert (p.phone != null);
-                assert (p.phone[0] == "+493012345678");
-                assert (p.status != null);
-                assert (p.status[0] == "Bezirksbürgermeister");
-                assert (p.membership != null);
-                assert (p.membership.length() == 2);
-                assert (p.created.to_string() == "2011-11-11T11:11:00+0000");
-                assert (p.modified.to_string() == "2012-08-16T14:05:27+0000");
+                try {
+                    Body b = s.get_body().nth_data(0);
+                    Person p = b.get_person().nth_data(0);
+
+                    assert (p.id == "https://oparl.example.org/person/0");
+                    assert (p.get_body() != null);
+                    assert (p.get_body() is OParl.Body);
+                    assert (p.name == "Prof. Dr. Max Mustermann");
+                    assert (p.family_name == "Mustermann");
+                    assert (p.given_name == "Max");
+                    assert (p.title != null);
+                    assert (p.title[0] == "Prof.");
+                    assert (p.title[1] == "Dr.");
+                    assert (p.form_of_address == "Ratsfrau");
+                    assert (p.gender == "male");
+                    assert (p.email != null);
+                    assert (p.email[0] == "max@mustermann.de");
+                    assert (p.phone != null);
+                    assert (p.phone[0] == "+493012345678");
+                    assert (p.status != null);
+                    assert (p.status[0] == "Bezirksbürgermeister");
+                    assert (p.membership != null);
+                    assert (p.membership.length() == 2);
+                    assert (p.created.to_string() == "2011-11-11T11:11:00+0000");
+                    assert (p.modified.to_string() == "2012-08-16T14:05:27+0000");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
             });
 
             // TODO: comment in when typechecks are implemented
