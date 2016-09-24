@@ -71,89 +71,96 @@ namespace OParlTest {
                 }
             });
 
-            // TODO: comment in as soon as typechecks are in place
-            /*
             Test.add_func ("/oparl/consultation/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return ConsultationTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/consultation/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    Consultation c = p.consultation.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'id'"));
+                }
             });
 
             Test.add_func ("/oparl/consultation/wrong_agenda_item_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return ConsultationTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/agendaitem/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    Consultation c = p.consultation.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'agendaItem'"));
+                }
             });
 
             Test.add_func ("/oparl/consultation/wrong_meeting_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return ConsultationTest.test_input.get(url).replace(
                         "\"https://oparl.example.org/meeting/0\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    Consultation c = p.consultation.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'meeting'"));
+                }
             });
 
             Test.add_func ("/oparl/consultation/wrong_authoritative_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return ConsultationTest.test_input.get(url).replace(
                         "false", "\"1\""
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    Consultation c = p.consultation.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'authoritative'"));
+                }
             });
 
             Test.add_func ("/oparl/consultation/wrong_role_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
+                    return ConsultationTest.test_input.get(url).replace(
                         "\"Beschlussfassung\"", "1"
                     );
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.body.nth_data(0);
-                    Paper p = b.paper.nth_data(0);
-                    Consultation c = p.consultation.nth_data(0);
+                    Body b = s.get_body().nth_data(0);
+                    Paper p = b.get_paper().nth_data(0);
+                    p.consultation.nth_data(0);
                     GLib.assert_not_reached();
-                } catch (ParsingError e) {}
+                } catch (ParsingError e) {
+                    assert(e.message.contains("'role'"));
+                }
             });
             // TODO: maybe check composite types
-            */
         }
     }
 }

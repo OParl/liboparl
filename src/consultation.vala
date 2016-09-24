@@ -142,12 +142,18 @@ namespace OParl {
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
                         }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                        }
                         this.set(Consultation.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "authoritative":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(bool)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean".printf(name));
                         }
                         this.set_property(Consultation.name_map.get(name), item.get_boolean());
                         break;
@@ -158,13 +164,16 @@ namespace OParl {
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
-                        arr.foreach_element((_,i,element) => {
+                        for (int i = 0; i < arr.get_length(); i++) {
+                            var element = arr.get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
-                                return;
+                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value".printf(name));
+                            }
+                            if (element.get_value_type() != typeof(string)) {
+                                throw new ParsingError.INVALID_TYPE("Element '%s' must be a string".printf(name));
                             }
                             res[i] = element.get_string();
-                        });
+                        }
                         this.set(Consultation.name_map.get(name)+"_url", res);
                         break;
                     case "meeting":
@@ -172,6 +181,9 @@ namespace OParl {
                     case "paper":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                        }
+                        if (item.get_value_type() != typeof(string)) {
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         this.set(Consultation.name_map.get(name)+"_url", item.get_string());
                         break;
