@@ -39,6 +39,7 @@ namespace OParlTest {
             PaperTest.add_tests ();
             ConsultationTest.add_tests ();
             FileTest.add_tests ();
+            CacheTest.add_tests ();
             Test.run ();
             return 0;
         }
