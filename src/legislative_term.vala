@@ -29,11 +29,11 @@ namespace OParl {
         /**
          * The date at which the legislative term started
          */
-        public GLib.Date start_date {get; set;}
+        public GLib.Date start_date {get; internal set;}
         /**
          * The date at which the legislative term ended
          */
-        public GLib.Date end_date {get; set;}
+        public GLib.Date end_date {get; internal set;}
 
         internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}

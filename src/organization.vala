@@ -30,7 +30,7 @@ namespace OParl {
         /**
          * Positions that this organization is destined to.
          */
-        public string[] post {get; set;}
+        public string[] post {get; internal set;}
 
         /**
          * Rough categorisation of this organization.
@@ -38,28 +38,28 @@ namespace OParl {
          * Values may be "commitee", "party", "fraction"
          * or similar. "miscellaneous" is also an option
          */
-        public string organization_type {get; set;}
+        public string organization_type {get; internal set;}
 
         /**
          * URL to a website of the organization
          */
-        public string website {get; set;}
+        public string website {get; internal set;}
 
         /**
          * More fine-grained  categorisation of this
          * organization.
          */
-        public string classification {get; set;}
+        public string classification {get; internal set;}
 
         /**
          * The date on which this organization was founded
          */
-        public GLib.Date start_date {get; set;}
+        public GLib.Date start_date {get; internal set;}
 
         /**
          * The date on which this organization ceased to exist
          */
-        public GLib.Date end_date {get; set;}
+        public GLib.Date end_date {get; internal set;}
 
         internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}

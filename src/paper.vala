@@ -30,17 +30,17 @@ namespace OParl {
         /**
          * Idenitification number of the document.
          */
-        public string reference {get;set;}
+        public string reference {get; internal set;}
 
         /**
          * Type of document
          */
-        public string paper_type {get;set;}
+        public string paper_type {get; internal set;}
 
         /**
          * Date used as the start for ultimatums e.t.c
          */
-        public GLib.Date date {get; set;}
+        public GLib.Date date {get; internal set;}
 
         private File? main_file_p = null;
         /**

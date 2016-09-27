@@ -29,38 +29,38 @@ namespace OParl {
         /**
          * Textual description of the location
          */
-        public string description {get; set;}
+        public string description {get; internal set;}
 
         /**
          * Represents the location through spatial data in the
          * geojson format.
          */
-        public Json.Object geojson {get; set;}
+        public Json.Object geojson {get; internal set;}
 
         /**
          * Street and house number of the address
          */
-        public string street_address {get; set;}
+        public string street_address {get; internal set;}
 
         /**
          * Room number if the addressed house has such.
          */
-        public string room {get; set;}
+        public string room {get; internal set;}
 
         /**
          * Postal code of the address
          */
-        public string postal_code {get; set;}
+        public string postal_code {get; internal set;}
 
         /**
          * Sub-part of the locality e.g. district
          */
-        public string sub_locality {get; set;}
+        public string sub_locality {get; internal set;}
 
         /**
          * The locality
          */
-        public string locality {get; set;}
+        public string locality {get; internal set;}
 
         internal string[] bodies_url {get; set; default={};}
         private bool bodies_resolved {get;set; default=false;}

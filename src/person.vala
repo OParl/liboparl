@@ -30,61 +30,61 @@ namespace OParl {
         /**
          * The person's family name
          */
-        public string family_name {get; set;}
+        public string family_name {get; internal set;}
 
         /**
          * The person's given name
          */
-        public string given_name {get; set;}
+        public string given_name {get; internal set;}
 
         /**
          * Determines how the person is to be addressed
          */
-        public string form_of_address {get; set;}
+        public string form_of_address {get; internal set;}
 
         /**
          * Affix to be printed behind the name
          */
-        public string affix {get; set;}
+        public string affix {get; internal set;}
 
         /**
          * Academic titles
          */
-        public string[] title {get; set;}
+        public string[] title {get; internal set;}
 
         /**
          * The gender of this person.
          *
          * If the gender of a person is unknown, it will likely be omitted
          */
-        public string gender {get; set;}
+        public string gender {get; internal set;}
 
         /**
          * Public phone numbers of the person
          */
-        public string[] phone {get; set;}
+        public string[] phone {get; internal set;}
 
         /**
          * Contact email addresses of the person
          */
-        public string[] email {get; set;}
+        public string[] email {get; internal set;}
 
         /**
          * Stati / roles that the person fulfills in the municipality
          */
-        public string[] status {get; set;}
+        public string[] status {get; internal set;}
 
         /**
          * A short biography / infotext regarding the person.
          *
          * You can expect this text to be maximum ~300 characters long.
          */
-        public string life {get; set;}
+        public string life {get; internal set;}
 
         /**
          * Hints to where the information about the person's {@link OParl.Person.life} come from.
          */
-        public string life_source {get; set;}
+        public string life_source {get; internal set;}
 
         internal string location_url {get;set; default="";}
         private bool location_resolved {get;set; default=false;}

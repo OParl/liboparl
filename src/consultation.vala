@@ -32,12 +32,12 @@ namespace OParl {
          *
          * Coud be //hearing// for example.
          */
-        public string role {get; set;}
+        public string role {get; internal set;}
 
         /**
          * If this consultation bears decisive power, the flag shall be true
          */
-        public bool authoritative {get; set;}
+        public bool authoritative {get; internal set;}
 
         internal string paper_url {get;set; default="";}
         private bool paper_resolved {get;set; default=false;}

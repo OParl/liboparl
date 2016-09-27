@@ -38,12 +38,12 @@ namespace OParl {
          * Be aware that the actual ordering from a developers view
          * is determined by the order of the objects in {@link OParl.Meeting.agenda_item}
          */
-        public string number {get; set;}
+        public string number {get; internal set;}
 
         /**
          * Determines wheter this agenda item is to be discussed in public
          */
-        public bool @public {get; set;}
+        public bool @public {get; internal set;}
 
         /**
          * Categorical information on which result the Consultations yielded
@@ -51,12 +51,12 @@ namespace OParl {
          * Could be something like "accepted", "accepted with changes", "rejected"
          * "postponed" or similar stati.
          */
-        public string result {get; set;}
+        public string result {get; internal set;}
 
         /**
          * More fine-grained text about how the agenda items resolution has been made.
          */
-        public string resolution_text {get; set;}
+        public string resolution_text {get; internal set;}
 
         /**
          * Point-in-time when the discussion of this agenda item started
@@ -66,7 +66,7 @@ namespace OParl {
          * represents the //planned// start or ''could'' contain the actual
          * start.
          */
-        public GLib.DateTime start {get; set;}
+        public GLib.DateTime start {get; internal set;}
 
         /**
          * Point-in-time when the discussion of this agenda item ended
@@ -76,7 +76,7 @@ namespace OParl {
          * represents the //planned// end or ''could'' contain the actual
          * end.
          */
-        public GLib.DateTime end {get; set;}
+        public GLib.DateTime end {get; internal set;}
 
         private List<File>? auxiliary_file_p = new List<File>();
         /**

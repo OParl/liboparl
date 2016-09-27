@@ -33,13 +33,13 @@ namespace OParl {
          * The URL of the OParl specification that this
          * server implements.
          */
-        public string oparl_version {get;set;}
+        public string oparl_version {get; internal set;}
 
         /**
          * A list of URLs to other OParl endpoints of this
          * server that support other versions of OParl
          */
-        public string[] other_oparl_versions {get;set;}
+        public string[] other_oparl_versions {get; internal set;}
 
         /**
          * An email address for requests regarding OParl.
@@ -47,29 +47,29 @@ namespace OParl {
          * should get you in contact with an administrator / other responsible
          * person.
          */
-        public string contact_email {get;set;}
+        public string contact_email {get; internal set;}
 
         /**
          * The name of a contact person that is responsible for this OParl
          * endpoint.
          */
-        public string contact_name {get;set;}
+        public string contact_name {get; internal set;}
 
         /**
          * URL of the parliamentarian information system that feeds this
          * OParl endpoint.
          */
-        public string website {get;set;}
+        public string website {get; internal set;}
 
         /**
          * URL of the vendor of this OParl server software
          */
-        public string vendor {get;set;}
+        public string vendor {get; internal set;}
 
         /**
          * URL to the product page of this OParl server software
          */
-        public string product {get;set;}
+        public string product {get; internal set;}
 
         internal string body_url {get;set;}
         private bool body_resolved {get;set; default=false;}

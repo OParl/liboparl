@@ -29,13 +29,13 @@ namespace OParl {
         /**
          * URL to the Website of the body
          */
-        public string website {get; set;}
+        public string website {get; internal set;}
 
         /**
          * The date and time since the license that is
          * set in {@link OParl.Object.license} is valid.
          */
-        public GLib.DateTime license_valid_since {get; set;}
+        public GLib.DateTime license_valid_since {get; internal set;}
 
         /**
          * The point in time since this body provides OParl
@@ -45,17 +45,17 @@ namespace OParl {
          * said for sure that all values are present in the
          * original sources.
          */
-        public GLib.DateTime oparl_since {get; set;}
+        public GLib.DateTime oparl_since {get; internal set;}
 
         /**
          * 8-digit municipality key. - It's a German thing.
          */
-        public string ags {get; set;}
+        public string ags {get; internal set;}
 
         /**
          * 12-digit regional key. - It's a German thing.
          */
-        public string rgs {get; set;}
+        public string rgs {get; internal set;}
 
         /**
          * Additional URLs of websites representing the same
@@ -64,7 +64,7 @@ namespace OParl {
          * In here could e.g. be corresponding entries in
          * state libraries or the wikipedia.
          */
-        public string[] equivalent {get; set;}
+        public string[] equivalent {get; internal set;}
 
         /**
          * A contact email address.
@@ -73,18 +73,18 @@ namespace OParl {
          * of this body. Ideally it also provides contact to persons
          * responsible for the parliamentarian information system.
          */
-        public string contact_email {get; set;}
+        public string contact_email {get; internal set;}
 
         /**
          * Name or Idenitifier of the person/office that is descibed
          * in {@link OParl.Body.contact_email}.
          */
-        public string contact_name {get; set;}
+        public string contact_name {get; internal set;}
 
         /**
          * Type of the body
          */
-        public string classification {get; set;}
+        public string classification {get; internal set;}
 
         internal string organization_url {get;set;}
         private bool organization_resolved {get;set; default=false;}

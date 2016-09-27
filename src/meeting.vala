@@ -33,12 +33,12 @@ namespace OParl {
          * Values may be //planned//, //invitations sent//
          * or //conducted//
          */
-        public string meeting_state {get; set;}
+        public string meeting_state {get; internal set;}
 
         /**
          * If this meeting has been cancelled this field will be set to true
          */
-        public bool cancelled {get;set;}
+        public bool cancelled {get; internal set;}
 
         /**
          * The beginning of this meeting
@@ -47,7 +47,7 @@ namespace OParl {
          * starting time of the meeting. If the meeting has already
          * been conducted, it ''may be'' the actual starting time.
          */
-        public GLib.DateTime start {get; set;}
+        public GLib.DateTime start {get; internal set;}
 
         /**
          * The end of this meeting
@@ -56,7 +56,7 @@ namespace OParl {
          * ending time of the meeting. If the meeting has already
          * been conducted, it ''may be'' the actual ending time.
          */
-        public GLib.DateTime end {get; set;}
+        public GLib.DateTime end {get; internal set;}
         
         private Location? location_p = new Location();
         /**

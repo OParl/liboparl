@@ -32,55 +32,55 @@ namespace OParl {
          *
          * This field is ''mandatory''
          */
-        public string file_name {get; set;}
+        public string file_name {get; internal set;}
 
         /**
          * The mime-type of the file
          */
-        public string mime_type {get; set;}
+        public string mime_type {get; internal set;}
 
         /**
          * Date used for ultimatums e.t.c
          */
-        public GLib.Date date {get; set;}
+        public GLib.Date date {get; internal set;}
 
         /**
          * Size of the file in bytes
          */
-        public int size {get; set;}
+        public int size {get; internal set;}
 
         /**
          * The sha1sum of the file
          */
-        public string sha1_checksum {get; set;}
+        public string sha1_checksum {get; internal set;}
 
         /**
          * If it is feasible, this contains a plain-text representation of
          * the contents of the file.
          */
-        public string text {get; set;}
+        public string text {get; internal set;}
 
         /**
          * URL to access the file
          */
-        public string access_url {get; set;}
+        public string access_url {get; internal set;}
 
         /**
          * URL to download the file
          */
-        public string download_url {get; set;}
+        public string download_url {get; internal set;}
 
         /**
          * External URL providing additional access possibilites
          *
          * Could be for example a link to a video streaming platform
          */
-        public string external_service_url {get; set;}
+        public string external_service_url {get; internal set;}
 
         /**
          * The license the file is published under
          */
-        public string file_license {get; set;}
+        public string file_license {get; internal set;}
 
         internal string master_file_url {get;set; default="";}
         private bool master_file_resolved {get;set; default=false;}

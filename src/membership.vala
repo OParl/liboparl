@@ -34,24 +34,24 @@ namespace OParl {
          * May be used to distinguish different kinds of membership
          * of the same person in the same organization.
          */
-        public string role {get; set;}
+        public string role {get; internal set;}
 
         /**
          * If the {@link OParl.Membership.get_person} has the right
          * to vote on resolutions {@link OParl.AgendaItem}s in {@link OParl.Meeting}s of
          * {@link OParl.Membership.get_organization}, this flag is true
          */
-        public bool voting_right {get; set;}
+        public bool voting_right {get; internal set;}
 
         /**
          * The date at which the membership commenced
          */
-        public GLib.Date start_date {get; set;}
+        public GLib.Date start_date {get; internal set;}
 
         /**
          * The date at which the membership ended
          */
-        public GLib.Date end_date {get; set;}
+        public GLib.Date end_date {get; internal set;}
 
         internal string person_url {get;set; default="";}
         private bool person_resolved {get;set; default=false;}
