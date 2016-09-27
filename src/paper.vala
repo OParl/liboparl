@@ -175,7 +175,7 @@ namespace OParl {
             return this.subordinated_paper_p;
         }
 
-        public string[] related_paper_url {get;set;}
+        internal string[] related_paper_url {get;set;}
         private bool related_paper_resolved {get;set; default=false;}
         private List<Paper>? related_paper_p = null;
         /**
