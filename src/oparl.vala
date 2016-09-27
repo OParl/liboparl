@@ -101,6 +101,12 @@ namespace OParl {
             Location.populate_name_map();
         }
 
+        public OParl.Cache cache {public set; internal get;}
+
+        public Client() {
+            this.cache = new NoCache();
+        }
+
         /**
          * Opens a connection to a new OParl-endpoint and yields
          * it as an {@link OParl.System} Object.
@@ -253,6 +259,9 @@ namespace OParl {
         }
 
         public Object parse_url(string url) throws ParsingError {
+            if (this.c.cache.has_object(url)) {
+                return this.c.cache.get_object(url);
+            }
             string data = this.c.resolve_url(url);
             var parser = new Json.Parser();
             try {
@@ -260,7 +269,9 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(url));
             }
-            return (Object)make_object(parser.get_root());
+            var o = (Object)make_object(parser.get_root());
+            this.c.cache.set_object(o);
+            return o;
         }
 
 

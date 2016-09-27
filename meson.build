@@ -32,6 +32,7 @@ gio = dependency('gio-2.0')
 
 oparl_lib_source = [
     'src/oparl.vala',
+    'src/cache.vala',
     'src/body.vala',
     'src/person.vala',
     'src/membership.vala',
