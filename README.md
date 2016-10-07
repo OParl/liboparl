@@ -58,6 +58,7 @@ are the following:
   * valadoc - Vala documentation tool
   * g-ir-compiler - GObject introspection compiler
   * json-glib-dev - Dev headers for json-glib
+  * libgirepository1.0-dev - Dev headers for gobject introspection
 
 Clone and build the library as follows:
 
