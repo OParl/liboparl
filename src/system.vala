@@ -163,5 +163,43 @@ namespace OParl {
                 }
             }
         }
+
+        public new unowned List<ValidationResult> validate() {
+            base.validate();
+            if (this.oparl_version == null) {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Missing oparlVersion field",
+                               "The field 'oparlVersion' must be set.",
+                               this.id
+                ));
+            }
+            // TODO: check for all known valid values here?
+            if (this.oparl_version == "") {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Empty oparlVersion field",
+                               "The field 'oparlVersion' must not be an empty string.",
+                               this.id
+                ));
+            }
+            if (this.body_url == null) {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Missing body field",
+                               "The field 'body' must be set.",
+                               this.id
+                ));
+            }
+            if (this.body_url == "") {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Empty body field",
+                               "The field 'body' must not be an empty string.",
+                               this.id
+                ));
+            }
+            return this.validation_results;
+        }
     }
 }

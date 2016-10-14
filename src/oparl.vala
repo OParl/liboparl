@@ -49,8 +49,9 @@ namespace OParl {
      * the OParl 1.0 specification
      */
     public enum ErrorSeverity {
-        WARNING,
-        ERROR
+        INFO, // Nice to have
+        WARNING, // Does not fulfill recommended
+        ERROR // Violates the specification
     }
 
     /**

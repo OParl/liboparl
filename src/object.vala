@@ -215,27 +215,7 @@ namespace OParl {
                                "<id invalid>"
                 ));
             }
-            if (this.name == null && !(this is Membership || 
-                                       this is Consultation)) {
-                this.validation_results.append(new ValidationResult(
-                               ErrorSeverity.ERROR,
-                               "Invalid 'name'",
-                               "The 'name'-field does not contain any value. Each object must "+
-                               " contain a human readable name.",
-                               this.id
-                ));
-            }
-            if (this.name == "" && !(this is Membership || 
-                                     this is Consultation)) {
-                this.validation_results.append(new ValidationResult(
-                               ErrorSeverity.ERROR,
-                               "Invalid 'name'",
-                               "The 'name'-field contains an empty string. Each object must "+
-                               " contain a human readable name.",
-                               this.id
-                ));
-            }
-            if (this.license == null && (this is System || this is Body)) {
+            if (this.license == null && (this is System)) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                "Invalid 'license'",
@@ -244,6 +224,29 @@ namespace OParl {
                                " object or in the Body objects",
                                this.id
                 ));
+            }
+            if (this.license == null && this is Body) {
+                System rootsystem = null;
+                try {
+                    rootsystem = (this as Body).get_system();
+                } catch (ParsingError e) {
+                    this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Body with no 'system'",
+                               "This Body does not have a System.",
+                               this.id
+                    ));
+                }
+                if (rootsystem.license == null) {
+                    this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.WARNING,
+                               "Invalid 'license'",
+                               "The 'license'-field does not contain any value. It is recommended to "+
+                               "specify the license for all subordinated objects either in the System"+
+                               " object or in the Body objects",
+                               this.id
+                    ));
+                }
             }
             if (this.license == "") {
                 this.validation_results.append(new ValidationResult(
@@ -270,22 +273,6 @@ namespace OParl {
                                this.id
                     ));
                 }
-            }
-            if (this.keyword == new string[] {} ) {
-                this.validation_results.append(new ValidationResult(
-                               ErrorSeverity.WARNING,
-                               "Empty 'keyword' list",
-                               "The object did not supply any keywords. That's sad.",
-                               this.id
-                ));
-            }
-            if (this.keyword == null) {
-                this.validation_results.append(new ValidationResult(
-                               ErrorSeverity.WARNING,
-                               "No 'shortName'",
-                               "The object did not contain a shortName.",
-                               this.id
-                ));
             }
             return this.validation_results;
         } 
