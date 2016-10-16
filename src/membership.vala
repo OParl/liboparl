@@ -184,5 +184,21 @@ namespace OParl {
                 }
             }
         }
+
+        /**
+         * See {@link Object.validation}
+         */
+        public new unowned List<ValidationResult> validate() {
+            base.validate();
+            if (this.start_date.compare(this.end_date) > 0) {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.INFO,
+                               "Invalid period",
+                               "The startDate must be an earlier date than the endDate",
+                               this.id
+                ));
+            }
+            return this.validation_results;
+        }
     }
 }
