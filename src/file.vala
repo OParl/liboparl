@@ -290,5 +290,27 @@ namespace OParl {
                 }
             }
         }
+
+        public new unowned List<ValidationResult> validate() {
+            base.validate();
+            if (this.access_url == null) {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Missing 'accessUrl' field",
+                               "The 'accessUrl'-field must be present in each File",
+                               this.id
+                ));
+            }
+            if (this.access_url == "") {
+                this.validation_results.append(new ValidationResult(
+                               ErrorSeverity.ERROR,
+                               "Empty 'accessUrl'",
+                               "The 'accessUrl'-field contains an empty string. Each File must "+
+                               " supply an URL to access its contents.",
+                               this.id
+                ));
+            }
+            return this.validation_results;
+        }
     }
 }
