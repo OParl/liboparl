@@ -71,9 +71,6 @@ namespace OParl {
         }
     }
 
-    private const uint8 SEVERITY_MEDIUM= 0x1;
-    private const uint8 SEVERITY_BAD = 0x2;
-
     /**
      * The programmer's entrypoint into OParl endpoints
      *
