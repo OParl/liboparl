@@ -19,7 +19,7 @@
 # If not, see http://www.gnu.org/licenses/.
 #*********************************************************************
 
-project ('oparl', ['vala','c'])
+project ('oparl', 'vala','c')
 
 pkgconfig = import('pkgconfig')
 
