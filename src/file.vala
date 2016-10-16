@@ -291,6 +291,9 @@ namespace OParl {
             }
         }
 
+        /**
+         * See {@link Object.validation}
+         */
         public new unowned List<ValidationResult> validate() {
             base.validate();
             if (this.access_url == null) {

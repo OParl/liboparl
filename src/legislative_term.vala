@@ -102,6 +102,9 @@ namespace OParl {
             }
         }
 
+        /**
+         * See {@link Object.validation}
+         */
         public new unowned List<ValidationResult> validate() {
             base.validate();
             if (this.start_date.compare(this.end_date) > 0) {
