@@ -192,7 +192,7 @@ namespace OParl {
         protected List<ValidationResult>? validation_results = null;
 
         /**
-         * ''NOT IMPLEMENTED YET'' - Will yield a detailed report on where
+         * Will yield a detailed report on where
          * an Object violates the OParl 1.0 specification.
          */
         public virtual unowned List<ValidationResult> validate() {
