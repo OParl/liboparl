@@ -189,6 +189,25 @@ namespace OParlTest {
                     assert(e.message.contains("'classification'"));
                 }
             });
+
+            Test.add_func ("/oparl/organization/validation_date", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return OrganizationTest.test_input.get(url).replace(
+                        "\"2012-07-17\"","\"2016-01-04\""
+                    );
+                });
+                try {
+                    System s = client.open("https://oparl.example.org/");
+                    Body b = s.get_body().nth_data(0);
+                    Organization o = b.get_organization().nth_data(0);
+                    unowned List<ValidationResult> l = o.validate();
+                    stdout.printf(l.nth_data(0).description+"\n");
+                    assert (l.length() == 1);
+                    assert (l.nth_data(0).description == "Invalid period");
+                } catch (ParsingError e) {
+                }
+            });
         }
     }
 }
