@@ -1,0 +1,2 @@
+option('build_valadoc', type: 'boolean', value: true)
+option('build_test', type: 'boolean', value: true)

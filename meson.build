@@ -19,7 +19,11 @@
 # If not, see http://www.gnu.org/licenses/.
 #*********************************************************************
 
-project ('oparl', 'vala','c')
+project ('oparl', 'vala', 'c')
+
+# build options
+opt_build_valadoc = get_option('build_valadoc')
+opt_build_test    = get_option('build_test')
 
 pkgconfig = import('pkgconfig')
 
@@ -72,10 +76,6 @@ oparl_lib = library('oparl-'+api, oparl_lib_source,
                     vala_args: ['--gir=../OParl-'+api+'.gir'],
                     install:true)
 
-oparl_test = executable('oparl_test', oparl_test_source,
-                    dependencies: [glib,gobject, json_glib, gio],
-                    link_with: oparl_lib)
-
 g_ir_compiler = find_program('g-ir-compiler')
 custom_target('oparl-typelib',
                command: [g_ir_compiler, '--output', '@OUTPUT@', meson.current_build_dir() + '/OParl-'+api+'.gir', '--shared-library', get_option('prefix') + '/' + get_option('libdir') + '/liboparl-'+api+'.so'],
@@ -84,15 +84,23 @@ custom_target('oparl-typelib',
                install: true,
                install_dir: get_option('libdir') + '/../girepository-1.0')
 
-test('testlib', oparl_test)
+if opt_build_test == true
+  oparl_test = executable('oparl_test', oparl_test_source,
+                     dependencies: [glib,gobject, json_glib, gio],
+                     link_with: oparl_lib)
 
-valadoc = find_program('valadoc')
-custom_target('apidocs',
-               input: oparl_lib_source,
-               command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
-               '--pkg','json-glib-1.0', '--force'],
-               output: 'devhelp',
-)
+  test('testlib', oparl_test)
+endif
+
+if opt_build_valadoc == true
+  valadoc = find_program('valadoc')
+  custom_target('apidocs',
+                 input: oparl_lib_source,
+                 command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
+                '--pkg','json-glib-1.0', '--force'],
+                 output: 'devhelp',
+  )
+endif
 
 libs = oparl_lib    # the library/libraries users need to link against
 h = ['..','pkgconfig'] # subdirectories of ${prefix}/${includedir} to add to header path
