@@ -78,7 +78,11 @@ oparl_lib = library('oparl-'+api, oparl_lib_source,
 
 g_ir_compiler = find_program('g-ir-compiler')
 custom_target('oparl-typelib',
-               command: [g_ir_compiler, '--output', '@OUTPUT@', meson.current_build_dir() + '/OParl-'+api+'.gir', '--shared-library', get_option('prefix') + '/' + get_option('libdir') + '/liboparl-'+api+'.so'],
+               command: [
+                    g_ir_compiler,
+                    '--output', '@OUTPUT@', meson.current_build_dir() + '/OParl-'+api+'.gir',
+                    '--shared-library', get_option('prefix') + '/' + get_option('libdir') + '/liboparl-'+api+'.so'
+               ],
                output: 'OParl-'+api+'.typelib',
                depends: oparl_lib,
                install: true,
@@ -121,5 +125,3 @@ endif
 
 install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
 install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
-
-meson.add_install_script('fix_permissions.sh')
