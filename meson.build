@@ -28,6 +28,7 @@ opt_build_test    = get_option('build_test')
 pkgconfig = import('pkgconfig')
 
 api = '0.2'
+revision = api + '.1'
 
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
@@ -110,9 +111,9 @@ libs = oparl_lib    # the library/libraries users need to link against
 h = ['..','pkgconfig'] # subdirectories of ${prefix}/${includedir} to add to header path
 pkgconfig.generate(libraries : libs,
               subdirs : h,
-              version : api,
+              version : revision,
               name : 'liboparl',
-              filebase : meson.current_build_dir()+'/oparl-'+api,
+              filebase : meson.current_build_dir()+'/oparl-' + api,
               subdirs : h,
               requires : 'glib-2.0 gobject-2.0 gio-2.0 json-glib-1.0',
               description : 'A library to access OParl civic information endpoints.',
