@@ -30,5 +30,5 @@
 
 mkdir -p build
 cd build
-meson.py -Dbuild_valadoc=false ..
+meson -Dbuild_valadoc=false ..
 ninja
