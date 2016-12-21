@@ -97,6 +97,18 @@ namespace OParl {
         public bool deleted {get; protected set;}
 
         /**
+         * Vendor Attributes
+         *
+         * Vendor attributes allow OParl-providers to deliver additional data
+         * That has not been standadized in the OParl standard.
+         */
+        public HashTable<string, string> vendor_attributes {get; private set;}
+
+        internal Object() {
+            this.vendor_attributes = new HashTable<string,string>(str_hash, str_equal);
+        }
+
+        /**
          * A reference to the client that made this object.
          */
         internal Client client;
@@ -184,6 +196,11 @@ namespace OParl {
                         target.set_property(Object.name_map.get(name), item.get_boolean());
                         break;
                     default:
+                        if (item.get_node_type() == Json.NodeType.VALUE &&
+                                item.get_value_type() == typeof(string) &&
+                                ":" in name) {
+                            this.vendor_attributes.set(name, item.get_string());
+                        }
                         break;
                 }
             }

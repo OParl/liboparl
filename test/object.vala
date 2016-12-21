@@ -29,6 +29,7 @@ namespace OParlTest {
             ObjectTest.test_input = new GLib.HashTable<string,string>(GLib.str_hash, GLib.str_equal);
 
             ObjectTest.test_input.insert("https://oparl.example.org/", Fixtures.object_sane);
+            ObjectTest.test_input.insert("https://oparl.example.org/va", Fixtures.object_sane_vendor_attrs);
         }
 
         public static void add_tests () {
@@ -189,6 +190,21 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     assert(e.message.contains("'deleted'"));
                 }
+            });
+
+            Test.add_func ("/oparl/object/vendor_attributes", () => {
+                var client = new Client();
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url);
+                });
+                System s;
+                try {
+                    s = client.open("https://oparl.example.org/va");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
+                assert (s.vendor_attributes.get("ris:state") == "old");
+                assert (s.vendor_attributes.get("ris:vendor") == "somerisvendor");
             });
         }
     }

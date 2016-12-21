@@ -37,6 +37,23 @@ namespace OParlTest.Fixtures {
     }
     """;
 
+    public const string object_sane_vendor_attrs = """
+    {
+        "id": "https://oparl.example.org/",
+        "type": "https://schema.oparl.org/1.0/System",
+        "name": "Testsystem und so",
+        "shortName": "Testsystem",
+        "license": "CC-BY-SA",
+        "created": "2016-01-01T13:12:22+00:00",
+        "modified": "2016-05-23T21:18:29+00:00",
+        "keyword": ["some","neat","object"],
+        "web": "https://foobar.invalid",
+        "deleted": false,
+        "ris:state":"old",
+        "ris:vendor":"somerisvendor"
+    }
+    """;
+
     public const string system_sane = """
     {
         "id": "https://oparl.example.org/",
