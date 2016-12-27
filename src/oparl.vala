@@ -169,7 +169,6 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(this.url));
             }
-            this.parse(parser.get_root());
             return this.result; 
         }
 
@@ -288,36 +287,6 @@ namespace OParl {
             if (data.get_node_type() != Json.NodeType.ARRAY)
                 throw new ParsingError.EXPECTED_ARRAY("The 'data' attribute must be an array");
             return this.parse_data(data.get_array());
-        }
-
-        public void parse(Json.Node n) throws ParsingError {
-            if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
-            
-            unowned Json.Object o = n.get_object();
-
-            // Read in Member values
-            unowned Json.Node item;
-            item = o.get_member("data");
-            if (item.get_node_type() != Json.NodeType.ARRAY) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array");
-            }
-            this.parse_data(item.get_array());
-            item = o.get_member("links");
-            if (item.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object");
-            }
-            Json.Object links = item.get_object();
-            if (links.has_member("next")) {
-                string data = this.c.resolve_url(links.get_string_member("next"));
-                var parser = new Json.Parser();
-                try {
-                    parser.load_from_data(data);
-                } catch (GLib.Error e) {
-                    throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl pagination-list at '%s' against a linter".printf(url));
-                }
-                this.parse(parser.get_root());
-            }
         }
     }
 }
