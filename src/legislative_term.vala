@@ -85,7 +85,8 @@ namespace OParl {
                             throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
                         var dt = GLib.Date();
-                        dt.set_parse(item.get_string());
+                        var splitdate = item.get_string().split("T",2);
+                        dt.set_parse(splitdate[0]);
                         this.set_property(LegislativeTerm.name_map.get(name), dt);
                         break;
                     // External object
