@@ -293,12 +293,12 @@ namespace OParl {
                         break;
                     // To Resolve as internal objectlist
                     case "legislativeTerm":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                        if (item.get_node_type() != Json.NodeType.OBJECT) {
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
                         }
                         this.legislative_term_p = new List<LegislativeTerm>();
                         var r = new Resolver(this.client);
-                        foreach (Object term in r.parse_data(item.get_array())) {
+                        foreach (Object term in r.parse_embedded_list(item.get_object())) {
                             this.legislative_term_p.append((LegislativeTerm)term);
                         }
                         break;
