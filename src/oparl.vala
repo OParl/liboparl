@@ -281,16 +281,7 @@ namespace OParl {
             return this.result;
         }
 
-        public unowned List<Object> parse_embedded_list(Json.Object obj) throws ParsingError {
-            if (!obj.has_member("data"))
-                throw new ParsingError.NO_DATA("An embedded object list must contain a 'data' attribute");
-            var data = obj.get_member("data");
-            if (data.get_node_type() != Json.NodeType.ARRAY)
-                throw new ParsingError.EXPECTED_ARRAY("The 'data' attribute must be an array");
-            return this.parse_data(data.get_array());
-        }
-
-        public void parse(Json.Node n) throws ParsingError {
+        private void parse(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
             

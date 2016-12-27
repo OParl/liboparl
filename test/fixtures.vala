@@ -108,18 +108,16 @@ namespace OParlTest.Fixtures {
         "person": "https://oparl.example.org/body/0/people/",
         "meeting": "https://oparl.example.org/body/0/meetings/",
         "paper": "https://oparl.example.org/body/0/papers/",
-        "legislativeTerm": {
-            "data": [
-                {
-                    "id": "https://oparl.example.org/term/21",
-                    "type": "https://schema.oparl.org/1.0/LegislativeTerm",
-                    "body": "https://oparl.example.org/body/0",
-                    "name": "21. Wahlperiode",
-                    "startDate": "2010-12-03",
-                    "endDate": "2013-12-03"
-                }
-            ]
-        },
+        "legislativeTerm": [
+        {
+            "id": "https://oparl.example.org/term/21",
+            "type": "https://schema.oparl.org/1.0/LegislativeTerm",
+            "body": "https://oparl.example.org/body/0",
+            "name": "21. Wahlperiode",
+            "startDate": "2010-12-03",
+            "endDate": "2013-12-03"
+        }
+        ],
         "location": """+ location_sane +""",
         "classification": "Kreisfreie Stadt",
         "created": "2014-01-08T14:28:31.568+0100",
