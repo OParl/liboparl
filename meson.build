@@ -119,11 +119,13 @@ pkgconfig.generate(libraries : libs,
               description : 'A library to access OParl civic information endpoints.',
               install: true)
 
+run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.h')
 install_headers(meson.current_build_dir()+'/oparl-'+api+'.h')
 
 if opt_build_valadoc == true
   install_subdir(meson.current_build_dir()+'/devhelp/oparl-'+api+'/oparl-'+api, install_dir: get_option('datadir')+'/devhelp/books')
 endif
 
+run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.vapi')
 install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
 install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
