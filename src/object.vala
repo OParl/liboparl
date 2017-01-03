@@ -325,6 +325,11 @@ namespace OParl {
 
             Type type = updated_obj.get_type();
 
+            if (updated_obj.deleted) {
+                this.deleted = true;
+                return;
+            }
+
             foreach (var property in ((ObjectClass)type.class_ref()).list_properties()) {
                 if (property.name == "id") continue;
                 var v = Value(property.value_type);
