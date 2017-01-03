@@ -70,8 +70,6 @@ namespace OParl {
          * Servers guarantee that this timestamp is always accurate. For a
          * client it's the best way to check for changes in objects.
          * It's ''mandatory'' for all objects.
-         */
-        /* TODO: Verify and append to docblock if true:
          * If an object has been deleted, this timestamp contains the date and
          * time of deletion.
          */
