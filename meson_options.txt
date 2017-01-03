@@ -1,5 +1,5 @@
 #********************************************************************+
-# Copyright 2016 Stefan Graupner
+# Copyright 2016-2017 Stefan Graupner
 #
 # This file is part of liboparl.
 #
