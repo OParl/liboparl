@@ -206,6 +206,32 @@ namespace OParlTest {
                 assert (s.vendor_attributes.get("ris:state") == "old");
                 assert (s.vendor_attributes.get("ris:vendor") == "somerisvendor");
             });
+
+            Test.add_func ("/oparl/object/refresh", () => {
+                var client = new Client();
+                ulong handle = client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url);
+                });
+                System s;
+                try {
+                    s = client.open("https://oparl.example.org/va");
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
+                assert (s.name == "Testsystem und so");
+                client.disconnect(handle);
+                client.resolve_url.connect((url)=>{
+                    return ObjectTest.test_input.get(url).replace(
+                        "Testsystem und so", "Systemtest"
+                    );
+                });
+                try {
+                    s.refresh();
+                } catch (ParsingError e) {
+                    GLib.assert_not_reached();
+                }
+                assert (s.name == "Systemtest");
+            });
         }
     }
 }

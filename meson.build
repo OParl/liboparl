@@ -87,7 +87,7 @@ custom_target('oparl-typelib',
                output: 'OParl-'+api+'.typelib',
                depends: oparl_lib,
                install: true,
-               install_dir: get_option('libdir') + '/../girepository-1.0')
+               install_dir: get_option('libdir') + '/girepository-1.0')
 
 if opt_build_test == true
   oparl_test = executable('oparl_test', oparl_test_source,

@@ -102,7 +102,7 @@ namespace OParl {
          * Vendor attributes allow OParl-providers to deliver additional data
          * That has not been standadized in the OParl standard.
          */
-        public HashTable<string, string> vendor_attributes {get; private set;}
+        public HashTable<string, string> vendor_attributes {get; protected set;}
 
         internal Object() {
             this.vendor_attributes = new HashTable<string,string>(str_hash, str_equal);
@@ -294,9 +294,6 @@ namespace OParl {
             return this.validation_results;
         } 
 
-        public void complete() {
-        }
-
         /**
          * Each object should implement this method as means to resolve the
          * body that this object originates from
@@ -315,6 +312,26 @@ namespace OParl {
                 return b == null ? null : b.get_system();
             } catch (ParsingError e) {
                 return null;
+            }
+        }
+
+        /**
+         * Fetches the object again and overrides the properties by newly
+         * obtained values
+         */
+        public void refresh() throws OParl.ParsingError {
+            var r = new Resolver(this.client);
+            Object updated_obj = r.parse_url(this.id);
+
+            Type type = updated_obj.get_type();
+
+            foreach (var property in ((ObjectClass)type.class_ref()).list_properties()) {
+                if (property.name == "id") continue;
+                var v = Value(property.value_type);
+                updated_obj.get_property(property.name, ref v);
+                if (v.holds(property.value_type)) {
+                    this.set_property(property.name, v);
+                }
             }
         }
     }
