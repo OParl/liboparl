@@ -26,7 +26,7 @@ namespace OParl {
      *
      * It's also the entrypoint for access to a server.
      */
-    public class System : OParl.Object {
+    public class System : OParl.Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

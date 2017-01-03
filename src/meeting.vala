@@ -24,7 +24,7 @@ namespace OParl {
      * Represent a gathering of one or more {@link OParl.Organization}s
      * at a specific point in time and a specific {@link OParl.Location}
      */
-    public class Meeting : Object {
+    public class Meeting : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

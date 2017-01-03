@@ -24,7 +24,7 @@ namespace OParl {
      * Used to map groups of people that have a functional role inside
      * a body. This may e.g. be fractions or committees
      */
-    public class Organization : Object {
+    public class Organization : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

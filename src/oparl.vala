@@ -71,6 +71,10 @@ namespace OParl {
         }
     }
 
+    public interface Parsable {
+        internal abstract void parse (Json.Node n) throws ParsingError;
+    }
+
     /**
      * The programmer's entrypoint into OParl endpoints
      *
@@ -97,6 +101,20 @@ namespace OParl {
             LegislativeTerm.populate_name_map();
             File.populate_name_map();
             Location.populate_name_map();
+            Type t = typeof(Object);
+            t = typeof(Body);
+            t = typeof(AgendaItem);
+            t = typeof(Body);
+            t = typeof(Consultation);
+            t = typeof(File);
+            t = typeof(LegislativeTerm);
+            t = typeof(Location);
+            t = typeof(Meeting);
+            t = typeof(Membership);
+            t = typeof(Organization);
+            t = typeof(Paper);
+            t = typeof(Person);
+            t = typeof(System);
         }
 
         public OParl.Cache cache {public set; internal get;}
@@ -178,70 +196,16 @@ namespace OParl {
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE)
                 throw new ParsingError.EXPECTED_VALUE("I need a string-value as type");
-            string typestr = type.get_string();
-            switch (typestr) {
-                case "https://schema.oparl.org/1.0/Body":
-                    var target = new Body();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/AgendaItem":
-                    var target = new AgendaItem();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Consultation":
-                    var target = new Consultation();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/File":
-                    var target = new File();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/LegislativeTerm":
-                    var target = new LegislativeTerm();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Location":
-                    var target = new Location();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Meeting":
-                    var target = new Meeting();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Membership":
-                    var target = new Membership();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Organization":
-                    var target = new Organization();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Paper":
-                    var target = new Paper();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/Person":
-                    var target = new Person();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
-                case "https://schema.oparl.org/1.0/System":
-                    var target = new System();
-                    target.set_client(this.c);
-                    target.parse(n);
-                    return target;
+            string typestr = type.get_string().replace("https://schema.oparl.org/1.0/","");
+
+            Type t = Type.from_name("OParl"+typestr);
+            if (!(t.is_a(typeof(OParl.Object)))) {
+                throw new ParsingError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
             }
-            throw new ParsingError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
+            var target = (Object)GLib.Object.new(t);
+            target.set_client(this.c);
+            (target as Parsable).parse(n);
+            return target;
         }
 
         public unowned List<Object> parse_data(Json.Array arr) throws ParsingError {

@@ -24,7 +24,7 @@ namespace OParl {
      * Represents the membership of an {@link OParl.Person} in
      * an {@link OParl.Organization}.
      */
-    public class Membership : Object {
+    public class Membership : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

@@ -23,7 +23,7 @@ namespace OParl {
     /**
      * Represents physical locations.
      */
-    public class Location : Object {
+    public class Location : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

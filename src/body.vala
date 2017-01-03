@@ -23,7 +23,7 @@ namespace OParl {
     /**
      * Respresents a legislative body.
      */
-    public class Body : Object {
+    public class Body : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

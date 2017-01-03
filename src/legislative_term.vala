@@ -23,7 +23,7 @@ namespace OParl {
     /**
      * Represents a legislative term
      */
-    public class LegislativeTerm : Object {
+    public class LegislativeTerm : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

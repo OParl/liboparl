@@ -29,7 +29,7 @@ namespace OParl {
      * {@link OParl.Paper} and an agenda item is expressed throug
      * a {@link OParl.Consultation}
      */
-    public class AgendaItem : Object {
+    public class AgendaItem : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

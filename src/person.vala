@@ -24,7 +24,7 @@ namespace OParl {
      * Any natural person that does parliamentary work and is a member
      * of an {@link OParl.Organization} will be represented as a Person.
      */
-    public class Person : Object {
+    public class Person : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

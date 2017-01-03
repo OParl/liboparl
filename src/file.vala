@@ -24,7 +24,7 @@ namespace OParl {
      * Represents a file, e.g. a PDF, RTF or ODF-file and holds a set
      * of metadata as well as URLs to access the file.
      */
-    public class File : Object {
+    public class File : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

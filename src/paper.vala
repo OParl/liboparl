@@ -24,7 +24,7 @@ namespace OParl {
      * Represents any kind of written document used in processes
      * described through OParl.
      */
-    public class Paper : Object {
+    public class Paper : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**

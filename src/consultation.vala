@@ -24,7 +24,7 @@ namespace OParl {
      * A Consultation represents the consultation of a
      * {@link OParl.Paper} in regards of an {@link OParl.AgendaItem}
      */
-    public class Consultation : Object {
+    public class Consultation : Object, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
