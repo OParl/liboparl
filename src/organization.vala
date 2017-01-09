@@ -228,7 +228,8 @@ namespace OParl {
                         }
                         var dt = GLib.Date();
                         dt.set_parse(item.get_string());
-                        this.set_property(Organization.name_map.get(name), dt);
+                        if (dt.valid())
+                            this.set_property(Organization.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
                     case "meeting":

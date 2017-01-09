@@ -87,7 +87,8 @@ namespace OParl {
                         var dt = GLib.Date();
                         var splitdate = item.get_string().split("T",2);
                         dt.set_parse(splitdate[0]);
-                        this.set_property(LegislativeTerm.name_map.get(name), dt);
+                        if (dt.valid())
+                            this.set_property(LegislativeTerm.name_map.get(name), dt);
                         break;
                     // External object
                     case "body":

@@ -244,7 +244,8 @@ namespace OParl {
                         }
                         var dt = GLib.Date();
                         dt.set_parse(item.get_string());
-                        this.set_property(File.name_map.get(name), dt);
+                        if (dt.valid())
+                            this.set_property(File.name_map.get(name), dt);
                         break;
                     // - integers
                     case "size":
