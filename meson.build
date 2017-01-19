@@ -72,17 +72,22 @@ oparl_test_source = [
     'test/cache.vala'
 ]
 
+libtype = 'so'
+if (host_machine.system() == 'darwin')
+    libtype = 'dylib'
+endif
+
 oparl_lib = library('oparl-'+api, oparl_lib_source,
-                    dependencies: [glib, gobject, json_glib, gio],
+                    dependencies: [glib, gobject, gio, json_glib],
                     vala_args: ['--gir=../OParl-'+api+'.gir'],
-                    install:true)
+                    install: true)
 
 g_ir_compiler = find_program('g-ir-compiler')
 custom_target('oparl-typelib',
                command: [
                     g_ir_compiler,
                     '--output', '@OUTPUT@', meson.current_build_dir() + '/OParl-'+api+'.gir',
-                    '--shared-library', get_option('prefix') + '/' + get_option('libdir') + '/liboparl-'+api+'.so'
+                    '--shared-library', get_option('prefix') + '/' + get_option('libdir') + '/liboparl-'+api+'.'+libtype
                ],
                output: 'OParl-'+api+'.typelib',
                depends: oparl_lib,
