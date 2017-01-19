@@ -3,7 +3,7 @@
 *.gir
 *.typelib
 *.deps
-
+*.dylib
 *.c
 
 build*
