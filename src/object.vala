@@ -34,12 +34,6 @@ namespace OParl {
         public string id {get; protected set;}
 
         /**
-         * The object's OParl.type, can be used to validate the object
-         * against it's JSONSchema defintion
-         */
-        public string type {get; protected set;}
-
-        /**
          * Used to contain the name of an object. This field is mandatory
          * for most objects.
          */
@@ -146,11 +140,10 @@ namespace OParl {
                 switch(name) {
                     // Direct Read-in
                     // - strings
-                    case "id":
-                    case "type":
+                    case "id": 
                     case "name":
                     case "shortName":
-                    case "license":
+                    case "license": 
                     case "web":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
@@ -297,7 +290,7 @@ namespace OParl {
                 }
             }
             return this.validation_results;
-        }
+        } 
 
         /**
          * Each object should implement this method as means to resolve the
