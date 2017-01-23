@@ -152,7 +152,7 @@ namespace OParl {
         /**
          * This signal is being triggered anytime an OParl.Client must resolve a url.
          *
-         * It's up to you, to connect to this singal and implement it. Otherwise OParl
+         * It's up to you, to connect to this signal and implement it. Otherwise OParl
          * will have no data to operate on.
          * As this library is introspectable, it can potentially be used in many
          * programming languages. Any of those have their own best-practice patterns
@@ -188,7 +188,7 @@ namespace OParl {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(this.url));
             }
             this.parse(parser.get_root());
-            return this.result; 
+            return this.result;
         }
 
         public Object make_object(Json.Node n) throws ParsingError {
@@ -248,7 +248,7 @@ namespace OParl {
         private void parse(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
-            
+
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -264,6 +264,7 @@ namespace OParl {
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {
+                // TODO: if anything goes wrong with fetching the next url, this segfaults
                 string data = this.c.resolve_url(links.get_string_member("next"));
                 var parser = new Json.Parser();
                 try {
