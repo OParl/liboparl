@@ -290,5 +290,31 @@ namespace OParl {
             }
             return this.validation_results;
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new List<OParl.Object> get_neighbors() throws ParsingError {
+            var l = new List<OParl.Object>();
+
+            var body = this.get_body();
+            l.append(body);
+
+            foreach (Membership m in this.get_membership()) {
+                l.append(m);
+            }
+
+            foreach (Meeting m in this.get_meeting()) {
+                l.append(m);
+            }
+
+            var parentOrg = this.get_sub_organization_of();
+            l.append(parentOrg);
+
+            var location = this.location;
+            l.append(location);
+
+            return l;
+        }
     }
 }

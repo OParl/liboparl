@@ -242,5 +242,27 @@ namespace OParl {
             }
             return this.validation_results;
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new List<OParl.Object> get_neighbors() throws ParsingError {
+            var l = new List<OParl.Object>();
+
+            var meeting = this.get_meeting();
+            l.append(meeting);
+
+            var consultation = this.get_consultation();
+            l.append(consultation);
+
+            var resolution_file = this.resolution_file;
+            l.append(resolution_file);
+
+            foreach (File f in this.auxiliary_file) {
+                l.append(f);
+            }
+
+            return l;
+        }
     }
 }

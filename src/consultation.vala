@@ -191,5 +191,27 @@ namespace OParl {
                 }
             }
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new List<OParl.Object> get_neighbors() throws ParsingError {
+            var l = new List<OParl.Object>();
+
+            var paper = this.get_paper();
+            l.append(paper);
+
+            var agenda_item = this.get_agenda_item();
+            l.append(agenda_item);
+
+            var meeting = this.get_meeting();
+            l.append(meeting);
+
+            foreach (Organization o in this.get_organization()) {
+                l.append(o);
+            }
+
+            return l;
+        }
     }
 }

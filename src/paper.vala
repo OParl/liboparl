@@ -339,5 +339,52 @@ namespace OParl {
                 }
             }
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new List<OParl.Object> get_neighbors() throws ParsingError {
+            var l = new List<OParl.Object>();
+
+            var body = this.get_body();
+            l.append(body);
+
+            foreach (Paper p in this.get_related_paper()) {
+                l.append(p);
+            }
+            foreach (Paper p in this.get_subordinated_paper()) {
+                l.append(p);
+            }
+            foreach (Paper p in this.get_superordinated_paper()) {
+                l.append(p);
+            }
+
+            foreach (File f in this.auxiliary_file) {
+                l.append(f);
+            }
+
+            foreach (Organization o in this.get_originator_organization()) {
+                l.append(o);
+            }
+            foreach (Organization o in this.get_under_direction_of()) {
+                l.append(o);
+            }
+            foreach (Person p in this.get_originator_person()) {
+                l.append(p);
+            }
+
+            var main_file = this.main_file;
+            l.append(main_file);
+
+            foreach (Location lo in this.location) {
+                l.append(lo);
+            }
+
+            foreach (Consultation c in this.consultation) {
+                l.append(c);
+            }
+
+            return l;
+        }
     }
 }

@@ -414,5 +414,40 @@ namespace OParl {
             }
             return this.validation_results;
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new List<OParl.Object> get_neighbors() throws ParsingError {
+            var l = new List<OParl.Object>();
+
+            var system = this.get_system();
+            l.append(system);
+
+            foreach (LegislativeTerm lt in this.legislative_term) {
+                l.append(lt);
+            }
+
+            var lo = this.location;
+            l.append(lo);
+
+            foreach (Person p in this.get_person()) {
+                l.append(p);
+            }
+
+            foreach (Organization o in this.get_organization()) {
+                l.append(o);
+            }
+
+            foreach (Meeting m in this.get_meeting()) {
+                l.append(m);
+            }
+
+            foreach (Paper p in this.get_paper()) {
+                l.append(p);
+            }
+
+            return l;
+        }
     }
 }
