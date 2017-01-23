@@ -41,7 +41,8 @@ namespace OParl {
         EXPECTED_VALUE,
         NO_DATA,
         INVALID_TYPE,
-        INVALID_JSON
+        INVALID_JSON,
+        URL_NULL
     }
 
     /**
@@ -130,7 +131,7 @@ namespace OParl {
          * The url you pass to the method must be the URL of a valid
          * OParl endpoint.
          */
-        public System open(string url) throws ParsingError {
+        public System open(string url) throws ParsingError requires (url!=null) {
             if (!Client.initialized)
                 Client.init();
             string data = this.resolve_url(url);
@@ -180,6 +181,8 @@ namespace OParl {
         }
 
         public unowned List<Object> resolve() throws ParsingError {
+            if (this.url == null)
+                throw new ParsingError.URL_NULL("URLs must not be null.");
             string data = this.c.resolve_url(this.url);
             var parser = new Json.Parser();
             try {
@@ -220,7 +223,7 @@ namespace OParl {
             return this.result;
         }
 
-        public Object parse_url(string url) throws ParsingError {
+        public Object parse_url(string url) throws ParsingError requires (url != null) {
             if (this.c.cache.has_object(url)) {
                 return this.c.cache.get_object(url);
             }
@@ -264,8 +267,10 @@ namespace OParl {
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {
-                // TODO: if anything goes wrong with fetching the next url, this segfaults
-                string data = this.c.resolve_url(links.get_string_member("next"));
+                string url = links.get_string_member("next");
+                if (url != null)
+                    throw new ParsingError.URL_NULL("Next-links in lists must not be null.");
+                string data = this.c.resolve_url(url);
                 var parser = new Json.Parser();
                 try {
                     parser.load_from_data(data);
