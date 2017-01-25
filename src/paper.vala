@@ -335,7 +335,7 @@ namespace OParl {
                         }
                         this.set(Paper.name_map.get(name)+"_url", item.get_string());
                         break;
-    
+
                 }
             }
         }
@@ -347,7 +347,9 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var body = this.get_body();
-            l.append(body);
+            if (body != null) {
+                l.append(body);
+            }
 
             foreach (Paper p in this.get_related_paper()) {
                 l.append(p);
@@ -374,7 +376,9 @@ namespace OParl {
             }
 
             var main_file = this.main_file;
-            l.append(main_file);
+            if (main_file != null) {
+                l.append(main_file);
+            }
 
             foreach (Location lo in this.location) {
                 l.append(lo);

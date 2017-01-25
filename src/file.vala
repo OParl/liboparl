@@ -324,7 +324,9 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var master_file = this.get_master_file();
-            l.append(master_file);
+            if (master_file != null) {
+                l.append(master_file);
+            }
 
             foreach (File f in this.get_derivative_file()) {
                 l.append(f);

@@ -422,14 +422,18 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var system = this.get_system();
-            l.append(system);
+            if (system != null) {
+                l.append(system);
+            }
 
             foreach (LegislativeTerm lt in this.legislative_term) {
                 l.append(lt);
             }
 
             var lo = this.location;
-            l.append(lo);
+            if (lo != null) {
+              l.append(lo);
+            }
 
             foreach (Person p in this.get_person()) {
                 l.append(p);

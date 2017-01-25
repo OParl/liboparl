@@ -250,13 +250,19 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var meeting = this.get_meeting();
-            l.append(meeting);
+            if (meeting != null) {
+                l.append(meeting);
+            }
 
             var consultation = this.get_consultation();
-            l.append(consultation);
+            if (consultation != null) {
+                l.append(consultation);
+            }
 
             var resolution_file = this.resolution_file;
-            l.append(resolution_file);
+            if (resolution_file != null) {
+                l.append(resolution_file);
+            }
 
             foreach (File f in this.auxiliary_file) {
                 l.append(f);

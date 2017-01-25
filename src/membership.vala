@@ -209,13 +209,19 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var person = this.get_person();
-            l.append(person);
+            if (person != null) {
+                l.append(person);
+            }
 
             var on_behalf_of = this.get_on_behalf_of();
-            l.append(on_behalf_of);
+            if (on_behalf_of != null) {
+                l.append(on_behalf_of);
+            }
 
             var organization = this.get_organization();
-            l.append(organization);
+            if (organization != null) {
+                l.append(organization);
+            }
 
             return l;
         }

@@ -298,7 +298,9 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var body = this.get_body();
-            l.append(body);
+            if (body != null) {
+                l.append(body);
+            }
 
             foreach (Membership m in this.get_membership()) {
                 l.append(m);
@@ -309,10 +311,14 @@ namespace OParl {
             }
 
             var parentOrg = this.get_sub_organization_of();
-            l.append(parentOrg);
+            if (parentOrg != null) {
+                l.append(parentOrg);
+            }
 
             var location = this.location;
-            l.append(location);
+            if (location != null) {
+                l.append(location);
+            }
 
             return l;
         }

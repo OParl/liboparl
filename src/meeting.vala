@@ -57,7 +57,7 @@ namespace OParl {
          * been conducted, it ''may be'' the actual ending time.
          */
         public GLib.DateTime end {get; internal set;}
-        
+
         private Location? location_p = new Location();
         /**
          * The location this meeting takes place at.
@@ -328,7 +328,9 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var location = this.location;
-            l.append(location);
+            if (location != null) {
+              l.append(location);
+            }
 
             foreach (Organization o in this.get_organization()) {
                 l.append(o);
@@ -339,13 +341,19 @@ namespace OParl {
             }
 
             var invitation = this.invitation;
-            l.append(invitation);
+            if (invitation != null) {
+                l.append(invitation);
+            }
 
             var results_protocol = this.results_protocol;
-            l.append(results_protocol);
+            if (results_protocol != null) {
+                l.append(results_protocol);
+            }
 
             var verbatim_protocol = this.verbatim_protocol;
-            l.append(verbatim_protocol);
+            if (verbatim_protocol != null) {
+                l.append(verbatim_protocol);
+            }
 
             foreach (File f in this.auxiliary_file) {
                 l.append(f);

@@ -127,7 +127,9 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var body = this.get_body();
-            l.append(body);
+            if (body != null) {
+                l.append(body);
+            }
 
             return l;
         }

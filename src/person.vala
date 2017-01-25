@@ -233,10 +233,14 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var body = this.get_body();
-            l.append(body);
+            if (body != null) {
+                l.append(body);
+            }
 
             var location = this.get_location();
-            l.append(location);
+            if (location != null) {
+                l.append(location);
+            }
 
             foreach (Membership m in this.membership) {
                 l.append(m);

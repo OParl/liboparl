@@ -187,7 +187,7 @@ namespace OParl {
                         }
                         this.set(Consultation.name_map.get(name)+"_url", item.get_string());
                         break;
-    
+
                 }
             }
         }
@@ -199,13 +199,19 @@ namespace OParl {
             var l = new List<OParl.Object>();
 
             var paper = this.get_paper();
-            l.append(paper);
+            if (paper != null) {
+                l.append(paper);
+            }
 
             var agenda_item = this.get_agenda_item();
-            l.append(agenda_item);
+            if (agenda_item != null) {
+                l.append(agenda_item);
+            }
 
             var meeting = this.get_meeting();
-            l.append(meeting);
+            if (meeting != null) {
+                l.append(meeting);
+            }
 
             foreach (Organization o in this.get_organization()) {
                 l.append(o);
