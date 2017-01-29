@@ -151,6 +151,22 @@ namespace OParl {
         }
 
         /**
+         * Takes a json-encoded OParl object as string, parses it and
+         * returns the resulting OParl object
+         */
+        public OParl.Object hydrate(string json) throws OParl.ParsingError {
+            var parser = new Json.Parser();
+            try {
+                parser.load_from_data(json);
+            } catch (GLib.Error e) {
+                throw new ParsingError.INVALID_JSON("JSON could not be parsed:\n %s".printf(json));
+            }
+            // TODO: check wheter object belongs to this client. if it does not throw exception
+            var resolver = new Resolver(this);
+            return resolver.make_object(parser.get_root());
+        }
+
+        /**
          * This signal is being triggered anytime an OParl.Client must resolve a url.
          *
          * It's up to you, to connect to this signal and implement it. Otherwise OParl
