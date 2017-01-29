@@ -102,6 +102,9 @@ namespace OParl {
             LegislativeTerm.populate_name_map();
             File.populate_name_map();
             Location.populate_name_map();
+
+            // These calls are needed to register the types of
+            // every object-type against the glib type system.
             Type t = typeof(Object);
             t = typeof(Body);
             t = typeof(AgendaItem);
