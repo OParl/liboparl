@@ -103,7 +103,8 @@ namespace OParl {
         public Organization? get_on_behalf_of() throws ParsingError {
             if (!on_behalf_of_resolved) {
                 var r = new Resolver(this.client);
-                this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
+                if (this.on_behalf_of_url != "")
+                    this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
                 on_behalf_of_resolved = true;
             }
             return this.on_behalf_of_p;
