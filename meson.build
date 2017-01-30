@@ -37,7 +37,6 @@ gio = dependency('gio-2.0')
 
 oparl_lib_source = [
     'src/oparl.vala',
-    'src/cache.vala',
     'src/body.vala',
     'src/person.vala',
     'src/membership.vala',
@@ -69,7 +68,6 @@ oparl_test_source = [
     'test/paper.vala',
     'test/consultation.vala',
     'test/file.vala',
-    'test/cache.vala'
 ]
 
 libtype = 'so'

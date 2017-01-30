@@ -121,12 +121,6 @@ namespace OParl {
             t = typeof(System);
         }
 
-        public OParl.Cache cache {public set; internal get;}
-
-        public Client() {
-            this.cache = new NoCache();
-        }
-
         /**
          * Opens a connection to a new OParl-endpoint and yields
          * it as an {@link OParl.System} Object.
@@ -243,9 +237,6 @@ namespace OParl {
         }
 
         public Object parse_url(string url) throws ParsingError requires (url != null) {
-            if (this.c.cache.has_object(url)) {
-                return this.c.cache.get_object(url);
-            }
             string data = this.c.resolve_url(url);
             var parser = new Json.Parser();
             try {
@@ -254,7 +245,6 @@ namespace OParl {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(url));
             }
             var o = (Object)make_object(parser.get_root());
-            this.c.cache.set_object(o);
             return o;
         }
 
