@@ -100,10 +100,11 @@ namespace OParl {
          * Returns the organization that is superordinated to this
          * organization
          */
-        public Organization get_sub_organization_of() throws ParsingError {
+        public Organization? get_sub_organization_of() throws ParsingError {
             if (!sub_organization_of_resolved) {
                 var r = new Resolver(this.client);
-                this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
+                if (this.sub_organization_of_url != "")
+                    this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
                 sub_organization_of_resolved = true;
             }
             return this.sub_organization_of_p;
