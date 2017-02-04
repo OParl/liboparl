@@ -210,8 +210,19 @@ namespace OParl {
         public Object make_object(Json.Node n) throws ParsingError {
             Json.Object el_obj = n.get_object();
             Json.Node type = el_obj.get_member("type");
-            if (type.get_node_type() != Json.NodeType.VALUE)
-                throw new ParsingError.EXPECTED_VALUE("I need a string-value as type");
+            if (type.get_node_type() != Json.NodeType.VALUE) {
+                Json.Node ident = el_obj.get_member("id");
+                if (ident.get_node_type() != Json.NodeType.VALUE) {
+                    throw new ParsingError.EXPECTED_VALUE(
+                        "I need a string-value as type in object with id %s",
+                        ident.get_string()
+                    );
+                } else {
+                    throw new ParsingError.EXPECTED_VALUE(
+                        "Tried to resolve an object that does not have a valid Id"
+                    );
+                }
+            }
             string typestr = type.get_string().replace("https://schema.oparl.org/1.0/","");
 
             Type t = Type.from_name("OParl"+typestr);
