@@ -102,10 +102,6 @@ namespace OParl {
          */
         public HashTable<string, string> vendor_attributes {get; protected set;}
 
-        internal Object() {
-            this.vendor_attributes = new HashTable<string,string>(str_hash, str_equal);
-        }
-
         /**
          * A reference to the client that made this object.
          */
@@ -197,6 +193,8 @@ namespace OParl {
                         if (item.get_node_type() == Json.NodeType.VALUE &&
                                 item.get_value_type() == typeof(string) &&
                                 ":" in name) {
+                            if (this.vendor_attributes == null)
+                                this.vendor_attributes = new HashTable<string,string>(str_hash, str_equal);
                             this.vendor_attributes.set(name, item.get_string());
                         }
                         break;
