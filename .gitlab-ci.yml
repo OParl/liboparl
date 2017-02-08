@@ -12,7 +12,7 @@ build:
     - sudo apt update && sudo apt -y install meson valac gobject-introspection valadoc libgirepository1.0-dev libjson-glib-dev
   script: 
     - mkdir build && cd build && meson .. && ninja
-    - cd test && ./oparl_test
+    - ./oparl_test
   artifacts:
     paths:
       - liboparl.so
