@@ -29,7 +29,7 @@ namespace OParl {
      * {@link OParl.Paper} and an agenda item is expressed throug
      * a {@link OParl.Consultation}
      */
-    public class AgendaItem : Object, Parsable {
+    public class AgendaItem : EmbeddedObject, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
@@ -106,6 +106,8 @@ namespace OParl {
          */
         public Meeting get_meeting() throws ParsingError {
             if (!meeting_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
                 meeting_resolved = true;
@@ -122,6 +124,8 @@ namespace OParl {
          */
         public Consultation get_consultation() throws ParsingError {
             if (!consultation_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
                 consultation_resolved = true;

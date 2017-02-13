@@ -23,7 +23,7 @@ namespace OParl {
     /**
      * Represents a legislative term
      */
-    public class LegislativeTerm : Object, Parsable {
+    public class LegislativeTerm : EmbeddedObject, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
@@ -43,6 +43,8 @@ namespace OParl {
          */
         public Body get_body() throws ParsingError {
             if (!body_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.body_p = (Body)r.parse_url(this.body_url);
                 body_resolved = true;

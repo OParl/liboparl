@@ -23,7 +23,7 @@ namespace OParl {
     /**
      * Represents physical locations.
      */
-    public class Location : Object, Parsable {
+    public class Location : EmbeddedObject, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
@@ -70,6 +70,8 @@ namespace OParl {
          */
         public unowned List<Body> get_bodies() throws ParsingError {
             if (!bodies_resolved && bodies_url != null) {
+                this.autoload();
+
                 this.bodies_p = new List<Body>();
                 var pr = new Resolver(this.client);
                 foreach (Object o in pr.parse_url_array(this.bodies_url)) {
@@ -88,6 +90,8 @@ namespace OParl {
          */
         public unowned List<Organization> get_organizations() throws ParsingError {
             if (!organizations_resolved && organizations_url != null) {
+                this.autoload();
+
                 this.organizations_p = new List<Organization>();
                 var pr = new Resolver(this.client);
                 foreach (Object o in pr.parse_url_array(this.organizations_url)) {
@@ -106,6 +110,8 @@ namespace OParl {
          */
         public unowned List<Meeting> get_meetings() throws ParsingError {
             if (!meetings_resolved && meetings_url != null) {
+                this.autoload();
+
                 this.meetings_p = new List<Meeting>();
                 var pr = new Resolver(this.client);
                 foreach (Object o in pr.parse_url_array(this.meetings_url)) {
@@ -124,6 +130,8 @@ namespace OParl {
          */
         public unowned List<Paper> get_papers() throws ParsingError {
             if (!papers_resolved && papers_url != null) {
+                this.autoload();
+
                 this.papers_p = new List<Paper>();
                 var pr = new Resolver(this.client);
                 foreach (Object o in pr.parse_url_array(this.papers_url)) {

@@ -24,7 +24,7 @@ namespace OParl {
      * Represents the membership of an {@link OParl.Person} in
      * an {@link OParl.Organization}.
      */
-    public class Membership : Object, Parsable {
+    public class Membership : EmbeddedObject, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
@@ -61,6 +61,8 @@ namespace OParl {
          */
         public Person get_person() throws ParsingError {
             if (!person_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.person_p = (Person)r.parse_url(this.person_url);
                 person_resolved = true;
@@ -85,6 +87,8 @@ namespace OParl {
          */
         public Organization get_organization() throws ParsingError {
             if (!organization_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.organization_p = (Organization)r.parse_url(this.organization_url);
                 organization_resolved = true;
@@ -102,6 +106,8 @@ namespace OParl {
          */
         public Organization? get_on_behalf_of() throws ParsingError {
             if (!on_behalf_of_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 if (this.on_behalf_of_url != "")
                     this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);

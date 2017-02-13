@@ -24,7 +24,7 @@ namespace OParl {
      * A Consultation represents the consultation of a
      * {@link OParl.Paper} in regards of an {@link OParl.AgendaItem}
      */
-    public class Consultation : Object, Parsable {
+    public class Consultation : EmbeddedObject, Parsable {
         private new static HashTable<string,string> name_map;
 
         /**
@@ -47,6 +47,8 @@ namespace OParl {
          */
         public Paper get_paper() throws ParsingError {
             if (!paper_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.paper_p = (Paper)r.parse_url(this.paper_url);
                 paper_resolved = true;
@@ -72,6 +74,8 @@ namespace OParl {
          */
         public AgendaItem get_agenda_item() throws ParsingError {
             if (!agenda_item_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
                 agenda_item_resolved = true;
@@ -87,6 +91,8 @@ namespace OParl {
          */
         public Meeting get_meeting() throws ParsingError {
             if (!meeting_resolved) {
+                this.autoload();
+
                 var r = new Resolver(this.client);
                 this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
                 meeting_resolved = true;
@@ -102,6 +108,8 @@ namespace OParl {
          */
         public unowned List<Organization> get_organization() throws ParsingError {
             if (!organization_resolved && organization_url != null) {
+                this.autoload();
+
                 this.organization_p = new List<Organization>();
                 var pr = new Resolver(this.client);
                 foreach (Object o in pr.parse_url_array(this.organization_url)) {

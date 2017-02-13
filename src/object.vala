@@ -136,10 +136,10 @@ namespace OParl {
                 switch(name) {
                     // Direct Read-in
                     // - strings
-                    case "id": 
+                    case "id":
                     case "name":
                     case "shortName":
-                    case "license": 
+                    case "license":
                     case "web":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
                             throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
@@ -288,7 +288,7 @@ namespace OParl {
                 }
             }
             return this.validation_results;
-        } 
+        }
 
         /**
          * Each object should implement this method as means to resolve the
@@ -341,6 +341,17 @@ namespace OParl {
          */
         public virtual List<OParl.Object> get_neighbors() throws ParsingError {
             return new List<OParl.Object>();
+        }
+    }
+
+    public abstract class EmbeddedObject : Object {
+        public bool fully_loaded { get; protected set; }
+
+        public void autoload() throws OParl.ParsingError {
+            if (!this.fully_loaded) {
+                this.refresh();
+                this.fully_loaded = true;
+            }
         }
     }
 }
