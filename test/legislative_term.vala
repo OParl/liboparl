@@ -31,6 +31,8 @@ namespace OParlTest {
             LegislativeTermTest.test_input.insert("https://oparl.example.org/", Fixtures.system_sane);
             LegislativeTermTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             LegislativeTermTest.test_input.insert("https://oparl.example.org/body/0", Fixtures.body_sane);
+            LegislativeTermTest.test_input.insert("https://oparl.example.org/term/21", Fixtures.legislative_term_sane_1);
+            LegislativeTermTest.test_input.insert("https://oparl.example.org/term/22", Fixtures.legislative_term_sane_2);
         }
 
         public static void add_tests () {
