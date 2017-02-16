@@ -34,6 +34,7 @@ namespace OParlTest {
             LocationTest.test_input.insert("https://oparl.example.org/organization/0", Fixtures.organization_sane);
             LocationTest.test_input.insert("https://oparl.example.org/meeting/0", Fixtures.meeting_sane);
             LocationTest.test_input.insert("https://oparl.example.org/paper/0", Fixtures.paper_sane);
+            LocationTest.test_input.insert("https://oparl.example.org/location/0", Fixtures.location_sane);
         }
 
         public static void add_tests () {
