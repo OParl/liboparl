@@ -112,7 +112,7 @@ endif
 
 oparl_dep = declare_dependency(
     link_with: oparl_lib,
-    include_directories:  meson.current_build_dir()
+    include_directories:  include_directories(meson.current_build_dir())
 )
 
 libs = oparl_lib    # the library/libraries users need to link against
