@@ -33,6 +33,7 @@ namespace OParlTest {
             AgendaItemTest.test_input.insert("https://oparl.example.org/meeting/0", Fixtures.meeting_sane);
             AgendaItemTest.test_input.insert("https://oparl.example.org/consultation/0", Fixtures.consultation_sane);
             AgendaItemTest.test_input.insert("https://oparl.example.org/body/0/meetings/", Fixtures.meeting_list_sane);
+            AgendaItemTest.test_input.insert("https://oparl.example.org/agendaitem/0", Fixtures.agenda_item_sane);
         }
 
         public static void add_tests () {

@@ -86,6 +86,9 @@ namespace OParl {
             get {
                 return this.auxiliary_file_p;
             }
+            internal set {
+                this.auxiliary_file_p = value.copy();
+            }
         }
 
         private File? resolution_file_p = null;
@@ -95,6 +98,9 @@ namespace OParl {
         public File resolution_file {
             get {
                 return this.resolution_file_p;
+            }
+            internal set {
+                this.resolution_file_p = value;
             }
         }
 
