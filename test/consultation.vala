@@ -34,6 +34,7 @@ namespace OParlTest {
             ConsultationTest.test_input.insert("https://oparl.example.org/agendaitem/0", Fixtures.agenda_item_sane);
             ConsultationTest.test_input.insert("https://oparl.example.org/organization/0", Fixtures.organization_sane);
             ConsultationTest.test_input.insert("https://oparl.example.org/body/0/papers/", Fixtures.paper_list_sane);
+            ConsultationTest.test_input.insert("https://oparl.example.org/consultation/0", Fixtures.consultation_sane);
         }
 
         public static void add_tests () {
