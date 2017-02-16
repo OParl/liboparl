@@ -110,6 +110,11 @@ if opt_build_valadoc == true
   )
 endif
 
+oparl_dep = declare_dependency(
+    link_with: oparl_lib,
+    include_directories:  meson.current_build_dir()
+)
+
 libs = oparl_lib    # the library/libraries users need to link against
 h = ['..','pkgconfig'] # subdirectories of ${prefix}/${includedir} to add to header path
 pkgconfig.generate(libraries : libs,
