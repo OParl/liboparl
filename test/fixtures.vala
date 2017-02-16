@@ -186,6 +186,30 @@ namespace OParlTest.Fixtures {
     }
     """;
 
+    public const string membership_sane_1 = """
+    {
+        "id": "https://oparl.example.org/membership/0",
+        "type": "https://schema.oparl.org/1.0/Membership",
+        "organization": "https://oparl.example.org/organization/0",
+        "role": "Vorsitzende",
+        "votingRight": true,
+        "startDate": "2013-12-03"
+    }
+    """;
+
+    public const string membership_sane_2 = """
+    {
+        "id": "https://oparl.example.org/membership/1",
+        "type": "https://schema.oparl.org/1.0/Membership",
+        "organization": "https://oparl.example.org/organization/0",
+        "onBehalfOf": "https://oparl.example.org/organization/0",
+        "role": "Sachkundige Bürgerin",
+        "votingRight": false,
+        "startDate": "2013-12-02",
+        "endDate": "2014-07-27"
+    }
+    """;
+
     public const string person_sane = """
     {
         "id": "https://oparl.example.org/person/0",
@@ -206,24 +230,8 @@ namespace OParlTest.Fixtures {
             "Bezirksbürgermeister"
         ],
         "membership": [
-            {
-                "id": "https://oparl.example.org/membership/0",
-                "type": "https://schema.oparl.org/1.0/Membership",
-                "organization": "https://oparl.example.org/organization/0",
-                "role": "Vorsitzende",
-                "votingRight": true,
-                "startDate": "2013-12-03"
-            },
-            {
-                "id": "https://oparl.example.org/membership/1",
-                "type": "https://schema.oparl.org/1.0/Membership",
-                "organization": "https://oparl.example.org/organization/0",
-                "onBehalfOf": "https://oparl.example.org/organization/0",
-                "role": "Sachkundige Bürgerin",
-                "votingRight": false,
-                "startDate": "2013-12-02",
-                "endDate": "2014-07-27"
-            }
+            """ + membership_sane_1 + """,
+            """ + membership_sane_2 + """
         ],
         "created": "2011-11-11T11:11:00+00:00",
         "modified": "2012-08-16T14:05:27+00:00"

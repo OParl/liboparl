@@ -32,6 +32,8 @@ namespace OParlTest {
             MembershipTest.test_input.insert("https://oparl.example.org/bodies", Fixtures.body_list_sane);
             MembershipTest.test_input.insert("https://oparl.example.org/organization/0", Fixtures.organization_sane);
             MembershipTest.test_input.insert("https://oparl.example.org/body/0/people/", Fixtures.person_list_sane);
+            MembershipTest.test_input.insert("https://oparl.example.org/membership/0", Fixtures.membership_sane_1);
+            MembershipTest.test_input.insert("https://oparl.example.org/membership/1", Fixtures.membership_sane_2);
         }
 
         public static void add_tests () {
