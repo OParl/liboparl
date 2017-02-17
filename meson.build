@@ -19,7 +19,7 @@
 # If not, see http://www.gnu.org/licenses/.
 #*********************************************************************
 
-project ('oparl', 'vala', 'c')
+project ('oparl', 'vala', 'c', meson_version: '>=0.38.0', license: 'LGPL')
 
 # build options
 opt_build_valadoc = get_option('build_valadoc')
