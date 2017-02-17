@@ -50,7 +50,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.paper_p = (Paper)r.parse_url(this.paper_url);
+                if (this.paper_url != "")
+                    this.paper_p = (Paper)r.parse_url(this.paper_url);
+                else
+                    warning("Consultation has no paper: %s", id);
                 paper_resolved = true;
             }
             return this.paper_p;
