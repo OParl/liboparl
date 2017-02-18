@@ -200,7 +200,6 @@ namespace OParlTest {
                     Body b = s.get_body().nth_data(0);
                     Organization o = b.get_organization().nth_data(0);
                     unowned List<ValidationResult> l = o.validate();
-                    stdout.printf(l.nth_data(0).description+"\n");
                     assert (l.length() == 1);
                     assert (l.nth_data(0).description == "Invalid period");
                 } catch (ParsingError e) {
