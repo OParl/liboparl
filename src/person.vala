@@ -95,7 +95,10 @@ namespace OParl {
         public Location get_location() throws ParsingError {
             if (!location_resolved) {
                 var r = new Resolver(this.client);
-                this.location_p = (Location)r.parse_url(this.location_url);
+                if (this.location_url != "")
+                    this.location_p = (Location)r.parse_url(this.location_url);
+                else
+                    warning("Person without location url: %s", this.id);
                 location_resolved = true;
             }
             return this.location_p;
@@ -110,7 +113,10 @@ namespace OParl {
         public Body get_body() throws ParsingError {
             if (!body_resolved) {
                 var r = new Resolver(this.client);
-                this.body_p = (Body)r.parse_url(this.body_url);
+                if (this.body_url != "")
+                    this.body_p = (Body)r.parse_url(this.body_url);
+                else
+                    warning("Person without body url: %s", this.id);
                 body_resolved = true;
             }
             return this.body_p;

@@ -202,7 +202,10 @@ namespace OParl {
         public Body get_body() throws ParsingError {
             if (!body_resolved) {
                 var r = new Resolver(this.client);
-                this.body_p = (Body)r.parse_url(this.body_url);
+                if (this.body_url != "")
+                    this.body_p = (Body)r.parse_url(this.body_url);
+                else
+                    warning("Paper has no body: %s", this.id);
                 body_resolved = true;
             }
             return this.body_p;

@@ -91,7 +91,8 @@ namespace OParl {
         public File? get_master_file() throws ParsingError {
             if (!master_file_resolved) {
                 var r = new Resolver(this.client);
-                this.master_file_p = (File)r.parse_url(this.master_file_url);
+                if (this.master_file_url != "")
+                    this.master_file_p = (File)r.parse_url(this.master_file_url);
                 master_file_resolved = true;
             }
             return this.master_file_p;

@@ -70,7 +70,10 @@ namespace OParl {
         public Body get_body() throws ParsingError {
             if (!body_resolved) {
                 var r = new Resolver(this.client);
-                this.body_p = (Body)r.parse_url(this.body_url);
+                if (this.body_url != "")
+                    this.body_p = (Body)r.parse_url(this.body_url);
+                else
+                    warning("Organization without body url: %s", this.id);
                 body_resolved = true;
             }
             return this.body_p;
@@ -84,10 +87,11 @@ namespace OParl {
          *
          * Links to an external OParl-System.
          */
-        public Body get_external_body() throws ParsingError {
+        public Body? get_external_body() throws ParsingError {
             if (!external_body_resolved) {
                 var r = new Resolver(this.client);
-                this.external_body_p = (Body)r.parse_url(this.external_body_url);
+                if (this.external_body_url != "")
+                    this.external_body_p = (Body)r.parse_url(this.external_body_url);
                 external_body_resolved = true;
             }
             return this.external_body_p;
@@ -147,9 +151,13 @@ namespace OParl {
         public unowned List<Meeting> get_meeting() throws ParsingError {
             if (!meeting_resolved && meeting_url != null) {
                 this.meeting_p = new List<Meeting>();
-                var pr = new Resolver(this.client, this.meeting_url);
-                foreach (Object o in pr.resolve()) {
-                    this.meeting_p.append((Meeting)o);
+                if (this.meeting_url != "") {
+                    var pr = new Resolver(this.client, this.meeting_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.meeting_p.append((Meeting)o);
+                    }
+                } else {
+                    warning("Organization without meeting url: %s", this.id);
                 }
                 meeting_resolved = true;
             }

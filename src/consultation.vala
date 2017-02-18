@@ -80,7 +80,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
+                if (this.agenda_item_url != "")
+                    this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
+                else
+                    warning("Consultation without paper url: %s", this.id);
                 agenda_item_resolved = true;
             }
             return this.agenda_item_p;
@@ -97,7 +100,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                if (this.meeting_url != "")
+                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                else
+                    warning("Consultation without meeting url: %s", this.id);
                 meeting_resolved = true;
             }
             return this.meeting_p;

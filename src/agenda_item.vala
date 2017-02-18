@@ -115,7 +115,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                if (this.meeting_url != "")
+                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                else
+                    warning("Agenda item has no meeting: %s", this.id);
                 meeting_resolved = true;
             }
             return this.meeting_p;
@@ -133,7 +136,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
+                if (this.consultation_url != "")
+                    this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
+                else
+                    warning("Agenda item has no consultation: %s", this.id);
                 consultation_resolved = true;
             }
             return this.consultation_p;

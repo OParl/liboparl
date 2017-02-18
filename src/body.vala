@@ -86,7 +86,7 @@ namespace OParl {
          */
         public string classification {get; internal set;}
 
-        internal string organization_url {get;set;}
+        internal string organization_url {get;set;default="";}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         /**
@@ -95,16 +95,20 @@ namespace OParl {
         public unowned List<Organization> get_organization() throws ParsingError {
             if (!organization_resolved && organization_url != null) {
                 this.organization_p = new List<Organization>();
-                var pr = new Resolver(this.client, this.organization_url);
-                foreach (Object o in pr.resolve()) {
-                    this.organization_p.append((Organization)o);
+                if (this.organization_url != "") {
+                    var pr = new Resolver(this.client, this.organization_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.organization_p.append((Organization)o);
+                    }
+                } else {
+                    warning("Body without organization url: %s", this.id);
                 }
                 organization_resolved = true;
             }
             return this.organization_p;
         }
 
-        internal string person_url {get;set;}
+        internal string person_url {get;set;default="";}
         private bool person_resolved {get;set; default=false;}
         private List<Person>? person_p = null;
         /**
@@ -113,16 +117,20 @@ namespace OParl {
         public unowned List<Person> get_person() throws ParsingError {
             if (!person_resolved && person_url != null) {
                 this.person_p = new List<Person>();
-                var pr = new Resolver(this.client, this.person_url);
-                foreach (Object o in pr.resolve()) {
-                    this.person_p.append((Person)o);
+                if (this.person_url != "") {
+                    var pr = new Resolver(this.client, this.person_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.person_p.append((Person)o);
+                    }
+                } else {
+                    warning("Body without person url: %s", this.id);
                 }
                 person_resolved = true;
             }
             return this.person_p;
         }
 
-        internal string meeting_url {get;set;}
+        internal string meeting_url {get;set;default="";}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
         /**
@@ -131,16 +139,20 @@ namespace OParl {
         public unowned List<Meeting> get_meeting() throws ParsingError {
             if (!meeting_resolved && meeting_url != null) {
                 this.meeting_p = new List<Meeting>();
-                var pr = new Resolver(this.client, this.meeting_url);
-                foreach (Object o in pr.resolve()) {
-                    this.meeting_p.append((Meeting)o);
+                if (this.meeting_url != "") {
+                    var pr = new Resolver(this.client, this.meeting_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.meeting_p.append((Meeting)o);
+                    }
+                } else {
+                    warning("Body without meeting url: %s",this.id);
                 }
                 meeting_resolved = true;
             }
             return this.meeting_p;
         }
 
-        internal string paper_url {get;set;}
+        internal string paper_url {get;set;default="";}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
         /**
@@ -149,9 +161,13 @@ namespace OParl {
         public unowned List<Paper> get_paper() throws ParsingError {
             if (!paper_resolved && paper_url != null) {
                 this.paper_p = new List<Paper>();
-                var pr = new Resolver(this.client, this.paper_url);
-                foreach (Object o in pr.resolve()) {
-                    this.paper_p.append((Paper)o);
+                if (this.paper_url != "") {
+                    var pr = new Resolver(this.client, this.paper_url);
+                    foreach (Object o in pr.resolve()) {
+                        this.paper_p.append((Paper)o);
+                    }
+                } else {
+                    warning("Body without paper url: %s", this.id);
                 }
                 paper_resolved = true;
             }
@@ -187,7 +203,10 @@ namespace OParl {
         public System get_system() throws ParsingError {
             if (!system_resolved) {
                 var r = new Resolver(this.client);
-                this.system_p = (System)r.parse_url(this.system_url);
+                if (this.system_url != "")
+                    this.system_p = (System)r.parse_url(this.system_url);
+                else
+                    warning("Body without system url: %s", this.id);
                 system_resolved = true;
             }
             return this.system_p;

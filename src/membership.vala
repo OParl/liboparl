@@ -64,7 +64,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.person_p = (Person)r.parse_url(this.person_url);
+                if (this.person_url != "")
+                    this.person_p = (Person)r.parse_url(this.person_url);
+                else
+                    warning("Membership without person url: %s", this.id);
                 person_resolved = true;
             }
             return this.person_p;
@@ -90,7 +93,10 @@ namespace OParl {
                 this.autoload();
 
                 var r = new Resolver(this.client);
-                this.organization_p = (Organization)r.parse_url(this.organization_url);
+                if (this.organization_url != "")
+                    this.organization_p = (Organization)r.parse_url(this.organization_url);
+                else
+                    warning("Membership without organization url: %s", this.id);
                 organization_resolved = true;
             }
             return this.organization_p;
