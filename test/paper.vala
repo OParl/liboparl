@@ -61,8 +61,7 @@ namespace OParlTest {
                     assert (p.get_body() is Body);
                     assert (p.name == "Antwort auf Anfrage 1200/2014");
                     assert (p.reference == "1234/2014");
-                    GLib.Date x = p.date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2014-04-04");
+                    assert (p.date.to_string() == "2014-04-04T00:00:00+0000");
                     assert (p.paper_type == "Beantwortung einer Anfrage");
                     assert (p.get_related_paper() != null);
                     assert (p.get_related_paper().nth_data(0) is Paper);

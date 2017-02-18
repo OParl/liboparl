@@ -60,10 +60,8 @@ namespace OParlTest {
                     assert (o.get_body() is OParl.Body);
                     assert (o.name == "Ausschuss für Haushalt und Finanzen");
                     assert (o.short_name == "Finanzausschuss");
-                    GLib.Date x = o.start_date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-07-17");
-                    GLib.Date e = o.end_date;
-                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-17");
+                    assert (o.start_date.to_string() == "2012-07-17T00:00:00+0000");
+                    assert (o.end_date.to_string() == "2014-07-17T00:00:00+0000");
                     assert (o.organization_type == "Gremium");
                     assert (o.location != null);
                     assert (o.location is Location);

@@ -65,10 +65,8 @@ namespace OParlTest {
                     assert (m.get_person() is OParl.Person);
                     assert (m.role == "Sachkundige Bürgerin");
                     assert (m.voting_right == false);
-                    GLib.Date x = m.start_date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2013-12-02");
-                    GLib.Date e = m.end_date;
-                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2014-07-27");
+                    assert (m.start_date.to_string() == "2013-12-02T00:00:00+0000");
+                    assert (m.end_date.to_string() == "2014-07-27T00:00:00+0000");
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }

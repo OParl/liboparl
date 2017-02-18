@@ -40,7 +40,7 @@ namespace OParl {
         /**
          * Date used as the start for ultimatums e.t.c
          */
-        public GLib.Date date {get; internal set;}
+        public GLib.DateTime date {get; internal set;}
 
         private File? main_file_p = null;
         /**
@@ -263,10 +263,10 @@ namespace OParl {
                         if (item.get_value_type() != typeof(string)) {
                             throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
-                        var dt = GLib.Date();
-                        dt.set_parse(item.get_string());
-                        if (dt.valid())
-                            this.set_property(Paper.name_map.get(name), dt);
+                        var tv = GLib.TimeVal();
+                        tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
+                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        this.set_property(Paper.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
                     case "relatedPaper":

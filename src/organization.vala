@@ -54,12 +54,12 @@ namespace OParl {
         /**
          * The date on which this organization was founded
          */
-        public GLib.Date start_date {get; internal set;}
+        public GLib.DateTime start_date {get; internal set;}
 
         /**
          * The date on which this organization ceased to exist
          */
-        public GLib.Date end_date {get; internal set;}
+        public GLib.DateTime end_date {get; internal set;}
 
         internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
@@ -235,10 +235,10 @@ namespace OParl {
                         if (item.get_value_type() != typeof(string)) {
                             throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
-                        var dt = GLib.Date();
-                        dt.set_parse(item.get_string());
-                        if (dt.valid())
-                            this.set_property(Organization.name_map.get(name), dt);
+                        var tv = GLib.TimeVal();
+                        tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
+                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        this.set_property(Organization.name_map.get(name), dt);
                         break;
                     // To Resolve as external objectlist
                     case "meeting":

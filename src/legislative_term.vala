@@ -29,11 +29,11 @@ namespace OParl {
         /**
          * The date at which the legislative term started
          */
-        public GLib.Date start_date {get; internal set;}
+        public GLib.DateTime start_date {get; internal set;}
         /**
          * The date at which the legislative term ended
          */
-        public GLib.Date end_date {get; internal set;}
+        public GLib.DateTime end_date {get; internal set;}
 
         internal string body_url {get;set; default="";}
         private bool body_resolved {get;set; default=false;}
@@ -89,11 +89,10 @@ namespace OParl {
                         if (item.get_value_type() != typeof(string)) {
                             throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
                         }
-                        var dt = GLib.Date();
-                        var splitdate = item.get_string().split("T",2);
-                        dt.set_parse(splitdate[0]);
-                        if (dt.valid())
-                            this.set_property(LegislativeTerm.name_map.get(name), dt);
+                        var tv = GLib.TimeVal();
+                        tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
+                        var dt = new GLib.DateTime.from_timeval_utc(tv);
+                        this.set_property(LegislativeTerm.name_map.get(name), dt);
                         break;
                     // External object
                     case "body":

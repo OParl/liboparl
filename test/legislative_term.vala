@@ -58,10 +58,8 @@ namespace OParlTest {
                     assert (l.get_body() != null);
                     assert (l.get_body() is OParl.Body);
                     assert (l.name == "21. Wahlperiode");
-                    GLib.Date x = l.start_date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2010-12-03");
-                    GLib.Date e = l.end_date;
-                    assert("%04u-%02u-%02u".printf(e.get_year(), e.get_month(), e.get_day()) == "2013-12-03");
+                    assert (l.start_date.to_string() == "2010-12-03T00:00:00+0000");
+                    assert (l.end_date.to_string() == "2013-12-03T00:00:00+0000");
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }

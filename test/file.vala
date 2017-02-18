@@ -61,8 +61,7 @@ namespace OParlTest {
                     assert (f.name == "Nachtrags-Tagesordnung");
                     assert (f.file_name == "nachtrag-TO.pdf");
                     assert (f.mime_type == "application/pdf");
-                    GLib.Date x = f.date;
-                    assert("%04u-%02u-%02u".printf(x.get_year(), x.get_month(), x.get_day()) == "2012-01-08");
+                    assert (f.date.to_string() == "2012-01-08T00:00:00+0000");
                     assert (f.sha1_checksum == "da39a3ee5e6b4b0d3255bfef95601890afd80709");
                     assert (f.size == 82930);
                     assert (f.access_url == "https://oparl.example.org/file/0.pdf");
