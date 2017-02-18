@@ -344,9 +344,25 @@ namespace OParl {
         }
     }
 
+    /**
+     * All OParl.Objects that can be loaded as embedded
+     * object inherit from this class. They may have fields
+     * that have been loaded incompletely as defined by the
+     * spec. This class provides the means to load them
+     * fully on the fly if needed.
+     */
     public abstract class EmbeddedObject : Object {
+        /**
+         * If the object has been loaded as an embedded object
+         * and thus has some unloaded fields, this property will
+         * be {{{false}}}
+         */
         public bool fully_loaded { get; protected set; }
 
+        /**
+         * Causes the object to refresh and thus load omitted
+         * fields
+         */
         public void autoload() throws OParl.ParsingError {
             if (!this.fully_loaded) {
                 this.refresh();
