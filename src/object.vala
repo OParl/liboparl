@@ -127,7 +127,7 @@ namespace OParl {
         internal virtual void parse(Object target, Json.Node n) throws ParsingError {
             // Prepare object
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
             unowned Json.Object o = n.get_object();
 
             // Read in Member values

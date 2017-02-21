@@ -37,6 +37,7 @@ namespace OParl {
      */
     public errordomain ParsingError {
         EXPECTED_OBJECT,
+        EXPECTED_ROOT_OBJECT,
         EXPECTED_ARRAY,
         EXPECTED_VALUE,
         NO_DATA,
@@ -209,9 +210,10 @@ namespace OParl {
 
         public Object make_object(Json.Node n) throws ParsingError {
             Json.Object el_obj = n.get_object();
+            Json.Node ident = null;
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE) {
-                Json.Node ident = el_obj.get_member("id");
+                ident = el_obj.get_member("id");
                 if (ident.get_node_type() != Json.NodeType.VALUE) {
                     throw new ParsingError.EXPECTED_VALUE(
                         "I need a string-value as type in object with id %s",
@@ -231,7 +233,11 @@ namespace OParl {
             }
             var target = (Object)GLib.Object.new(t);
             target.set_client(this.c);
-            (target as Parsable).parse(n);
+            try {
+                (target as Parsable).parse(n);
+            } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
+                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse: %s", ident.get_string());
+            }
             return target;
         }
 
@@ -239,7 +245,7 @@ namespace OParl {
             for (int i = 0; i < arr.get_length(); i++) {
                 var element = arr.get_element(i);
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
-                    throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
+                    throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse: %s", element.dup_string());
                 }
                 Object target = (Object)make_object(element);
                 this.result.append(target);
@@ -270,7 +276,7 @@ namespace OParl {
 
         private void parse(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse %s", n.dup_string());
 
             unowned Json.Object o = n.get_object();
 
