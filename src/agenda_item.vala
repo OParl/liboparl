@@ -179,20 +179,20 @@ namespace OParl {
                     case "resolutionText":
                     case "number":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(AgendaItem.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "public":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
                         }
                         this.set_property(AgendaItem.name_map.get(name), item.get_boolean());
                         break;
@@ -200,10 +200,10 @@ namespace OParl {
                     case "start":
                     case "end":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
@@ -214,17 +214,17 @@ namespace OParl {
                     case "meeting":
                     case "consultation":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(AgendaItem.name_map.get(name)+"_url", item.get_string());
                         break;
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object term in r.parse_data(item.get_array())) {
@@ -234,7 +234,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "resolutionFile":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.resolution_file_p = (File)r.make_object(item);
