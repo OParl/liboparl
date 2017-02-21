@@ -278,18 +278,21 @@ namespace OParl {
             unowned Json.Node item;
             item = o.get_member("data");
             if (item.get_node_type() != Json.NodeType.ARRAY) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array");
+                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array in %s", this.url);
             }
             this.parse_data(item.get_array());
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object");
+                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in %s", this.url);
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {
+                var old_url = url;
+                item = links.get_member("next");
+                if (item.get_node_type() != Json.NodeType.VALUE) {
+                    throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in %s", old_url);
+                }
                 string url = links.get_string_member("next");
-                if (url != null)
-                    throw new ParsingError.URL_NULL("Next-links in lists must not be null.");
                 string data = this.c.resolve_url(url);
                 var parser = new Json.Parser();
                 try {
