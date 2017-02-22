@@ -157,37 +157,37 @@ namespace OParl {
                     // - strings
                     case "role":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(Consultation.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "authoritative":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
                         }
                         this.set_property(Consultation.name_map.get(name), item.get_boolean());
                         break;
                     // To Resolve as array of url
                     case "organization":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
                         for (int i = 0; i < arr.get_length(); i++) {
                             var element = arr.get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value".printf(name));
+                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value in '%s'".printf(name, this.id));
                             }
                             if (element.get_value_type() != typeof(string)) {
-                                throw new ParsingError.INVALID_TYPE("Element '%s' must be a string".printf(name));
+                                throw new ParsingError.INVALID_TYPE("Element '%s' must be a string in '%s'".printf(name, this.id));
                             }
                             res[i] = element.get_string();
                         }
@@ -197,10 +197,10 @@ namespace OParl {
                     case "agendaItem":
                     case "paper":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(Consultation.name_map.get(name)+"_url", item.get_string());
                         break;
