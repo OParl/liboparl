@@ -190,10 +190,10 @@ namespace OParl {
                     case "subLocality":
                     case "locality":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(Location.name_map.get(name), item.get_string(),null);
                         break;
@@ -203,13 +203,13 @@ namespace OParl {
                     case "meetings":
                     case "papers":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
                         arr.foreach_element((_,i,element) => {
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
                                 return;
                             }
                             res[i] = element.get_string();
@@ -219,7 +219,7 @@ namespace OParl {
                     // Json object
                     case "geojson":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a object".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a object in '%s'".printf(name, this.id));
                         }
                         this.set(Location.name_map.get(name), item.get_object());
                         break;
