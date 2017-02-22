@@ -205,20 +205,20 @@ namespace OParl {
                     // - strings
                     case "meetingState":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         this.set(Meeting.name_map.get(name), item.get_string(),null);
                         break;
                     // - booleans
                     case "cancelled":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
                         }
                         this.set_property(Meeting.name_map.get(name), item.get_boolean());
                         break;
@@ -226,10 +226,10 @@ namespace OParl {
                     case "start":
                     case "end":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
@@ -240,13 +240,13 @@ namespace OParl {
                     case "organization":
                     case "participant":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
                         arr.foreach_element((_,i,element) => {
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
                                 return;
                             }
                             res[i] = element.get_string();
@@ -256,7 +256,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "agendaItem":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object term in r.parse_data(item.get_array())) {
@@ -265,7 +265,7 @@ namespace OParl {
                         break;
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object file in r.parse_data(item.get_array())) {
@@ -275,28 +275,28 @@ namespace OParl {
                     // To Resolve as internal object
                     case "location":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.location_p = (Location)r.make_object(item);
                         break;
                     case "resultsProtocol":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.results_protocol_p = (File)r.make_object(item);
                         break;
                     case "verbatimProtocol":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.verbatim_protocol_p = (File)r.make_object(item);
                         break;
                     case "invitation":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object in '%s'".printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.invitation_p = (File)r.make_object(item);
