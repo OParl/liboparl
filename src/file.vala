@@ -228,20 +228,20 @@ namespace OParl {
                     case "externalServiceUrl":
                     case "fileLicense":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s".printf(name, this.id));
                         }
                         this.set(File.name_map.get(name), item.get_string(),null);
                         break;
                     // - dates
                     case "date":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s".printf(name, this.id));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
@@ -251,20 +251,20 @@ namespace OParl {
                     // - integers
                     case "size":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(int64)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be an integer".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be an integer in '%s".printf(name, this.id));
                         }
                         this.set_property(File.name_map.get(name), item.get_int());
                         break;
                     // Url
                     case "masterFile":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s".printf(name, this.id));
                         }
                         this.set(File.name_map.get(name)+"_url", item.get_string());
                         break;
@@ -273,17 +273,17 @@ namespace OParl {
                     case "agendaItem":
                     case "paper":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s".printf(name, this.id));
                         }
                         var arr = item.get_array();
                         var res = new string[arr.get_length()];
                         for (int i = 0; i < arr.get_length(); i++) {
                             var element = arr.get_element(i);
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value".printf(name));
+                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value in '%s".printf(name, this.id));
                             }
                             if (element.get_value_type() != typeof(string)) {
-                                throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string".printf(name));
+                                throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string in '%s".printf(name, this.id));
                             }
                             res[i] = element.get_string();
                         }
