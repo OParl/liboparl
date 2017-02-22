@@ -31,7 +31,7 @@ namespace OParl {
          * Contains a unique identifier, the object's URL to be precise.
          * This field is ''mandatory'' for any Object
          */
-        public string id {get; protected set;}
+        public string id {get; protected set; default="unknown id";}
 
         /**
          * Used to contain the name of an object. This field is mandatory
@@ -142,23 +142,23 @@ namespace OParl {
                     case "license":
                     case "web":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         target.set(Object.name_map.get(name), item.get_string(),null);
                         break;
                     // - string[]
                     case "keyword":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array".printf(name));
+                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
                         }
                         Json.Array arr = item.get_array();
                         string[] res = new string[arr.get_length()];
                         item.get_array().foreach_element((_,i,element) => {
                             if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value".printf(name));
+                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
                                 return;
                             }
                             res[i] = element.get_string();
@@ -169,10 +169,10 @@ namespace OParl {
                     case "created":
                     case "modified":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
                         }
                         var tv = GLib.TimeVal();
                         tv.from_iso8601(item.get_string());
@@ -182,10 +182,10 @@ namespace OParl {
                     // - booleans
                     case "deleted":
                         if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value".printf(name));
+                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
                         }
                         if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean ".printf(name));
+                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
                         }
                         target.set_property(Object.name_map.get(name), item.get_boolean());
                         break;
