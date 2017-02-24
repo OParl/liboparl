@@ -275,8 +275,22 @@ namespace OParl {
                 try {
                     rootbody = this.root_body();
                 } catch (ParsingError e) {}
-                System rootsystem = this.root_system();
-                if (rootbody.license == null && rootsystem.license == null ) {
+                System rootsystem = null;
+                try {
+                    rootsystem = this.root_system();
+                } catch (ParsingError e) {}
+
+                if (rootbody == null || rootsystem == null) {
+                    this.validation_results.append(new ValidationResult(
+                        ErrorSeverity.ERROR,
+                        "Can't resolve root body or root system",
+                        "Every object needs to have license information. Typically, most "+
+                        "objects inherit their license from a superordinated Body or "+
+                        "system object of which neither could be resolved in this instance.",
+                        this.id
+                    ));
+                }
+                else if (rootbody.license == null && rootsystem.license == null ) {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                "Invalid 'license'",
