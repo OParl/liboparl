@@ -275,10 +275,8 @@ namespace OParl {
                 try {
                     rootbody = this.root_body();
                 } catch (ParsingError e) {}
-                System rootsystem = null;
-                try {
-                    rootsystem = this.root_system();
-                } catch (ParsingError e) {}
+
+                System rootsystem = this.root_system(); // root_system already gracefully evaluates to null
 
                 if (rootbody == null || rootsystem == null) {
                     this.validation_results.append(new ValidationResult(
@@ -331,6 +329,11 @@ namespace OParl {
          */
         public void refresh() throws OParl.ParsingError {
             var r = new Resolver(this.client);
+
+            if (this.id == null) {
+                throw new ParsingError.EXPECTED_VALUE("Expected valid id attribute in '%s', encountered: '%s'".printf(name, this.id));
+            }
+
             Object updated_obj = r.parse_url(this.id);
 
             Type type = updated_obj.get_type();
