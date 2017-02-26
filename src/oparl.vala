@@ -177,6 +177,9 @@ namespace OParl {
          * one single library, we let you decide how to handle HTTP requests in the
          * application.
          * Please be aware that liboparl likes to be fed with nice unicode-strings.
+         *
+         * Signal has an output parameter that needs to be set to the HTTP-status
+         * code that the executed request returned.
          */
         public signal string? resolve_url (string url, out int status);
     }
