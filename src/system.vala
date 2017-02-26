@@ -130,39 +130,15 @@ namespace OParl {
                     case "website": 
                     case "vendor": 
                     case "product": 
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(System.name_map.get(name), item.get_string(),null);
+                        this.parse_string(this, name, item, System.name_map);
                         break;
                     // string[]
                     case "otherOparlVersions":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
-                        }
-                        Json.Array arr = item.get_array();
-                        string[] res = new string[arr.get_length()];
-                        item.get_array().foreach_element((_,i,element) => {
-                            if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
-                                return;
-                            }
-                            res[i] = element.get_string();
-                        });
-                        this.set(System.name_map.get(name), res);
+                        this.parse_array_of_string(this, name, item, System.name_map);
                         break;
                     // To Resolve
                     case "body":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(System.name_map.get(name)+"_url", item.get_string());
+                        this.parse_external(this, name, item, System.name_map);
                         break;
                 }
             }
