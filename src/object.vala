@@ -124,6 +124,10 @@ namespace OParl {
             name_map.insert("deleted","deleted");
         }
 
+        /**
+         * Verify the validity of a string attribute in an incoimg
+         * JSON object and write it into the given target if all checks succeed
+         */
         protected void parse_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
@@ -134,6 +138,10 @@ namespace OParl {
             target.set(name_map.get(name), item.get_string(),null);
         }
 
+        /**
+         * Verify the validity of an array of string in an incoimg
+         * JSON object and write it into the given target if all checks succeed
+         */
         protected void parse_array_of_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.ARRAY) {
                 throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
@@ -150,6 +158,10 @@ namespace OParl {
             this.set(name_map.get(name), res);
         }
 
+        /**
+         * Verify the validity of a datetime in an incoimg
+         * JSON object and write it into the given target if all checks succeed
+         */
         protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
@@ -163,6 +175,10 @@ namespace OParl {
             target.set_property(name_map.get(name), dt);
         }
 
+        /**
+         * Verify the validity of a boolean in an incoimg
+         * JSON object and write it into the given target if all checks succeed
+         */
         protected void parse_bool(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
