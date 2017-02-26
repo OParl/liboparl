@@ -166,7 +166,7 @@ namespace OParl {
          * Verify the validity of a datetime in an incoimg
          * JSON object and write it into the given target if all checks succeed
          */
-        protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+        protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map, bool is_date=false) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
             }
@@ -174,9 +174,21 @@ namespace OParl {
                 throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
             }
             var tv = GLib.TimeVal();
-            tv.from_iso8601(item.get_string());
+            if (is_date) {
+                tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
+            } else {
+                tv.from_iso8601(item.get_string());
+            }
             var dt = new GLib.DateTime.from_timeval_utc(tv);
             target.set_property(name_map.get(name), dt);
+        }
+
+        /**
+         * Verify the validity of a date in an incoimg
+         * JSON object and write it into the given target if all checks succeed
+         */
+        protected void parse_date(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+            this.parse_datetime(target, name, item, name_map, true);
         }
 
         /**
@@ -191,6 +203,16 @@ namespace OParl {
                 throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
             }
             target.set_property(name_map.get(name), item.get_boolean());
+        }
+
+        protected void parse_int(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+            if (item.get_node_type() != Json.NodeType.VALUE) {
+                throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
+            }
+            if (item.get_value_type() != typeof(int64)) {
+                throw new ParsingError.INVALID_TYPE("Attribute '%s' must be an integer in '%s".printf(name, this.id));
+            }
+            target.set_property(name_map.get(name), item.get_int());
         }
 
         /**
