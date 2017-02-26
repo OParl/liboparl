@@ -199,59 +199,23 @@ namespace OParl {
                     case "organizationType":
                     case "website":
                     case "classification":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(Organization.name_map.get(name), item.get_string(),null);
+                        this.parse_string(this, name, item, Organization.name_map);
                         break;
                     // - string[]
                     case "post":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
-                        }
-                        Json.Array arr = item.get_array();
-                        string[] res = new string[arr.get_length()];
-                        for (int i = 0; i < arr.get_length(); i++) {
-                            var element = arr.get_element(i);
-                            if (element.get_node_type() != Json.NodeType.VALUE) {
-                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value in '%s'".printf(name, this.id));
-                            }
-                            if (element.get_value_type() != typeof(string)) {
-                                throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string in '%s'".printf(name, this.id));
-                            }
-                            res[i] = element.get_string();
-                        }
-                        this.set(Organization.name_map.get(name), res);
+                        this.parse_array_of_string(this, name, item, Organization.name_map);
                         break;
                     // - dates
                     case "startDate":
                     case "endDate":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        var tv = GLib.TimeVal();
-                        tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
-                        this.set_property(Organization.name_map.get(name), dt);
+                        this.parse_date(this, name, item, Organization.name_map);
                         break;
                     // To Resolve as external objectlist
                     case "meeting":
                     case "body":
                     case "subOrganizationOf":
                     case "externalBody":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(Organization.name_map.get(name)+"_url", item.get_string());
+                        this.parse_external(this, name, item, Organization.name_map);
                         break;
                     // To Resolve as internal object
                     case "location":
