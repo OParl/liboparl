@@ -218,19 +218,7 @@ namespace OParl {
                     // To Resolve as external objectlist
                     case "organization":
                     case "participant":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
-                        }
-                        var arr = item.get_array();
-                        var res = new string[arr.get_length()];
-                        arr.foreach_element((_,i,element) => {
-                            if (element.get_node_type() != Json.NodeType.VALUE) {
-                                GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
-                                return;
-                            }
-                            res[i] = element.get_string();
-                        });
-                        this.set(Meeting.name_map.get(name)+"_url", res);
+                        this.parse_external_list(this, name, item, Meeting.name_map);
                         break;
                     // To Resolve as internal objectlist
                     case "agendaItem":

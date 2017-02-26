@@ -85,9 +85,13 @@ namespace OParlTest {
             Test.add_func ("/oparl/meeting/wrong_id_type", () => {
                 var client = new Client();
                 client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/meeting/0\"", "1"
-                    );
+                    var data = MeetingTest.test_input.get(url);
+                    if (url == "https://oparl.example.org/body/0/meetings/")
+                        return data.replace(
+                            "\"https://oparl.example.org/meeting/0\"", "1"
+                        );
+                    else
+                        return data;
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");

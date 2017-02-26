@@ -104,7 +104,7 @@ namespace OParlTest {
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
-                    assert(e.message.contains("'organization'"));
+                    assert(e.message.contains("'organizations'"));
                 }
             });
 

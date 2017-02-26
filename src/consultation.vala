@@ -164,22 +164,7 @@ namespace OParl {
                         break;
                     // To Resolve as array of url
                     case "organization":
-                        if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
-                        }
-                        var arr = item.get_array();
-                        var res = new string[arr.get_length()];
-                        for (int i = 0; i < arr.get_length(); i++) {
-                            var element = arr.get_element(i);
-                            if (element.get_node_type() != Json.NodeType.VALUE) {
-                                throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value in '%s'".printf(name, this.id));
-                            }
-                            if (element.get_value_type() != typeof(string)) {
-                                throw new ParsingError.INVALID_TYPE("Element '%s' must be a string in '%s'".printf(name, this.id));
-                            }
-                            res[i] = element.get_string();
-                        }
-                        this.set(Consultation.name_map.get(name)+"_url", res);
+                        this.parse_external_list(this, name, item, Consultation.name_map);
                         break;
                     case "meeting":
                     case "agendaItem":

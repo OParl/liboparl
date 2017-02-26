@@ -122,7 +122,7 @@ namespace OParlTest {
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
-                    assert(e.message.contains("'meeting'"));
+                    assert(e.message.contains("'meetings'"));
                 }
             });
 
