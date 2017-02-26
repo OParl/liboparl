@@ -189,13 +189,7 @@ namespace OParl {
                     case "postalCode":
                     case "subLocality":
                     case "locality":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(Location.name_map.get(name), item.get_string(),null);
+                        this.parse_string(this, name, item, Location.name_map);
                         break;
                     // Array of url
                     case "bodies":
