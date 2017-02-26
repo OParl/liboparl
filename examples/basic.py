@@ -29,16 +29,22 @@ from gi.repository import OParl
 
 import urllib.request
 
-def resolve(_, url):
+def resolve(_, url, status):
     try:
-        x = urllib.request.urlopen(url).read()
-        return x.decode('utf-8')
+        req = urllib.request.urlopen(url)
+        status= req.getcode()
+        data = req.read()
+        return data.decode('utf-8')
+    except urllib.error.HTTPError as e:
+        status = e.getcode()
+        return None
     except Exception as e:
+        status = -1
         return None
 
 print ("Gonna ask an OParl system for its name…")
 client = OParl.Client()
 client.connect("resolve_url", resolve) 
-system = client.open("https://dev.oparl.org/api/v1/system?format=json")
+system = client.open("https://dev.oparl.org/api/v1/system")
 print ("It says, it's name is: '"+system.get_name()+"'")
 print (" - Yours, liboparl")

@@ -132,7 +132,8 @@ namespace OParl {
         public System open(string url) throws ParsingError requires (url!=null) {
             if (!Client.initialized)
                 Client.init();
-            string data = this.resolve_url(url);
+            int status;
+            string data = this.resolve_url(url, out status);
             if (data != null) {
                 var system = new System();
                 var parser = new Json.Parser();
@@ -175,9 +176,9 @@ namespace OParl {
          * to not limit you as a programmer and not pull in dependencies by relying on
          * one single library, we let you decide how to handle HTTP requests in the
          * application.
-         * Please be aware that liboparl likes to be feeded with nice unicode-strings.
+         * Please be aware that liboparl likes to be fed with nice unicode-strings.
          */
-        public signal string? resolve_url (string url);
+        public signal string? resolve_url (string url, out int status);
     }
 
     /**
@@ -197,7 +198,8 @@ namespace OParl {
         public unowned List<Object> resolve() throws ParsingError {
             if (this.url == null)
                 throw new ParsingError.URL_NULL("URLs must not be null.");
-            string data = this.c.resolve_url(this.url);
+            int status;
+            string data = this.c.resolve_url(this.url, out status);
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -254,7 +256,8 @@ namespace OParl {
         }
 
         public Object parse_url(string url) throws ParsingError requires (url != null) {
-            string data = this.c.resolve_url(url);
+            int status;
+            string data = this.c.resolve_url(url, out status);
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -299,7 +302,8 @@ namespace OParl {
                     throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in %s", old_url);
                 }
                 string url = links.get_string_member("next");
-                string data = this.c.resolve_url(url);
+                int status;
+                string data = this.c.resolve_url(url, out status);
                 var parser = new Json.Parser();
                 try {
                     parser.load_from_data(data);
