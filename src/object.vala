@@ -189,6 +189,24 @@ namespace OParl {
             target.set_property(name_map.get(name), item.get_boolean());
         }
 
+        /**
+         * Verify the validity of a string that represents an external object or
+         * an external object list. Beware: liboparl does not know anything about
+         * the validity of URLs. The resolve_url signal hands this over to you at resolve time.
+         * There you may check the URLs validity with the HTTP library of your choice
+         * When the check succeed the string will be written into a property with the
+         * name of the field suffixed with "_url"
+         */
+        protected void parse_external(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+            if (item.get_node_type() != Json.NodeType.VALUE) {
+                throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
+            }
+            if (item.get_value_type() != typeof(string)) {
+                throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
+            }
+            this.set(name_map.get(name)+"_url", item.get_string());
+        }
+
         internal virtual void parse(Object target, Json.Node n) throws ParsingError {
             // Prepare object
             if (n.get_node_type() != Json.NodeType.OBJECT)
