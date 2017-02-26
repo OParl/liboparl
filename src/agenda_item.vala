@@ -178,48 +178,21 @@ namespace OParl {
                     case "result":
                     case "resolutionText":
                     case "number":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(AgendaItem.name_map.get(name), item.get_string(),null);
+                        this.parse_string(this, name, item, AgendaItem.name_map);
                         break;
                     // - booleans
                     case "public":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
-                        }
-                        this.set_property(AgendaItem.name_map.get(name), item.get_boolean());
+                        this.parse_bool(this, name, item, AgendaItem.name_map);
                         break;
                     // - dates
                     case "start":
                     case "end":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        var tv = GLib.TimeVal();
-                        tv.from_iso8601(item.get_string());
-                        var dt = new GLib.DateTime.from_timeval_utc(tv);
-                        this.set_property(AgendaItem.name_map.get(name), dt);
+                        this.parse_datetime(this, name, item, AgendaItem.name_map);
                         break;
                     // To Resolve as external object/objectlist
                     case "meeting":
                     case "consultation":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(AgendaItem.name_map.get(name)+"_url", item.get_string());
+                        this.parse_external(this, name, item, AgendaItem.name_map);
                         break;
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
