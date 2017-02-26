@@ -124,17 +124,17 @@ namespace OParl {
             name_map.insert("deleted","deleted");
         }
 
-        protected void parse_string(Object target, string name, Json.Node item, HashTable name_map) throws OParl.ParsingError {
+        protected void parse_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
             }
             if (item.get_value_type() != typeof(string)) {
                 throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
             }
-            target.set(Object.name_map.get(name), item.get_string(),null);
+            target.set(name_map.get(name), item.get_string(),null);
         }
 
-        protected void parse_array_of_string(Object target, string name, Json.Node item, HashTable name_map) throws OParl.ParsingError {
+        protected void parse_array_of_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.ARRAY) {
                 throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
             }
@@ -147,10 +147,10 @@ namespace OParl {
                 }
                 res[i] = element.get_string();
             });
-            this.set(Object.name_map.get(name), res);
+            this.set(name_map.get(name), res);
         }
 
-        protected void parse_datetime(Object target, string name, Json.Node item, HashTable name_map) throws OParl.ParsingError {
+        protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
             }
@@ -160,17 +160,17 @@ namespace OParl {
             var tv = GLib.TimeVal();
             tv.from_iso8601(item.get_string());
             var dt = new GLib.DateTime.from_timeval_utc(tv);
-            target.set_property(Object.name_map.get(name), dt);
+            target.set_property(name_map.get(name), dt);
         }
 
-        protected void parse_bool(Object target, string name, Json.Node item, HashTable name_map) throws OParl.ParsingError {
+        protected void parse_bool(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             if (item.get_node_type() != Json.NodeType.VALUE) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
             }
             if (item.get_value_type() != typeof(bool)) {
                 throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
             }
-            target.set_property(Object.name_map.get(name), item.get_boolean());
+            target.set_property(name_map.get(name), item.get_boolean());
         }
 
         internal virtual void parse(Object target, Json.Node n) throws ParsingError {
