@@ -156,23 +156,11 @@ namespace OParl {
                     // Direct Read-In
                     // - strings
                     case "role":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(Consultation.name_map.get(name), item.get_string(),null);
+                        this.parse_string(this, name, item, Consultation.name_map);
                         break;
                     // - booleans
                     case "authoritative":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(bool)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
-                        }
-                        this.set_property(Consultation.name_map.get(name), item.get_boolean());
+                        this.parse_bool(this, name, item, Consultation.name_map);
                         break;
                     // To Resolve as array of url
                     case "organization":
@@ -196,15 +184,8 @@ namespace OParl {
                     case "meeting":
                     case "agendaItem":
                     case "paper":
-                        if (item.get_node_type() != Json.NodeType.VALUE) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
-                        }
-                        if (item.get_value_type() != typeof(string)) {
-                            throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
-                        }
-                        this.set(Consultation.name_map.get(name)+"_url", item.get_string());
+                        this.parse_external(this, name, item, Consultation.name_map);
                         break;
-
                 }
             }
         }
