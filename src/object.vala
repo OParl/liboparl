@@ -148,13 +148,17 @@ namespace OParl {
             }
             Json.Array arr = item.get_array();
             string[] res = new string[arr.get_length()];
-            item.get_array().foreach_element((_,i,element) => {
+            for (int i = 0; i < item.get_array().get_length(); i++ ) {
+                var element = item.get_array().get_element(i);
                 if (element.get_node_type() != Json.NodeType.VALUE) {
                     GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
                     return;
                 }
+                if (element.get_value_type() != typeof(string)) {
+                    throw new ParsingError.INVALID_TYPE("Arrayelement of '%s' must be a string in '%s'".printf(name, this.id));
+                }
                 res[i] = element.get_string();
-            });
+            }
             this.set(name_map.get(name), res);
         }
 
