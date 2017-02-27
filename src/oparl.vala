@@ -122,6 +122,8 @@ namespace OParl {
             t = typeof(System);
         }
 
+        public bool strict {get; set; default=true;}
+
         /**
          * Opens a connection to a new OParl-endpoint and yields
          * it as an {@link OParl.System} Object.
@@ -182,6 +184,14 @@ namespace OParl {
          * code that the executed request returned.
          */
         public signal string? resolve_url (string url, out int status);
+
+        /**
+         * When this OParl.Client is not in strict mode, this signal will be triggered
+         * whenever a non-critical spec-violation occurs. It will yield a ValidationResult
+         * with further information on the topic and the id of the object that the error
+         * was detected in.
+         */
+        public signal void shit_happened(ValidationResult vr);
     }
 
     /**
