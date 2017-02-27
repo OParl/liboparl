@@ -59,7 +59,7 @@ namespace OParl {
     /**
      * Represents a semantical inconsistency errors/warnings that may occur in an {@link OParl.Object}
      */
-    public class ValidationResult {
+    public class ValidationResult : GLib.Object {
         public ErrorSeverity severity {get; internal set; default=ErrorSeverity.WARNING;}
         public string description {get; internal set; default="";}
         public string long_description {get; internal set; default="";}
