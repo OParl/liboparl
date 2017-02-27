@@ -185,7 +185,8 @@ namespace OParl {
          * Please be aware that liboparl likes to be fed with nice unicode-strings.
          *
          * Signal has an output parameter that needs to be set to the HTTP-status
-         * code that the executed request returned.
+         * code that the executed request returned. If no valid HTTP-status is
+         * achievable, -1 is expected as status value.
          */
         public signal string? resolve_url (string url, out int status);
 
