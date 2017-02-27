@@ -22,8 +22,8 @@
 project ('oparl', 'vala', 'c', meson_version: '>=0.38.0', license: 'LGPL')
 
 compiler = meson.get_compiler('vala')
-if compiler.version() < '0.32.0'
-    error('vala must be > 0.32.0')
+if compiler.version().version_compare('<0.32.0')
+    error('vala must be >= 0.32.0')
 endif
 
 # build options
