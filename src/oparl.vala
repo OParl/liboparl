@@ -73,6 +73,10 @@ namespace OParl {
         }
     }
 
+    /**
+     * An OParl object that has a method to unmarshall a JSON-representation
+     * of itself
+     */
     public interface Parsable {
         internal abstract void parse (Json.Node n) throws ParsingError;
     }
