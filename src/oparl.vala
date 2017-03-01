@@ -136,8 +136,10 @@ namespace OParl {
          * OParl endpoint.
          */
         public System open(string url) throws ParsingError requires (url!=null) {
-            if (!Client.initialized)
-                Client.init();
+            lock(Client.initialized) {
+                if (!Client.initialized)
+                    Client.init();
+            }
             int status;
             string data = this.resolve_url(url, out status);
             if (data != null) {
