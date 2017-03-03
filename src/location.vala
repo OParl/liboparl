@@ -69,15 +69,17 @@ namespace OParl {
          * Backreferences to bodies
          */
         public unowned List<Body> get_bodies() throws ParsingError {
-            if (!bodies_resolved && bodies_url != null) {
-                this.autoload();
+            lock (bodies_resolved) {
+                if (!bodies_resolved && bodies_url != null) {
+                    this.autoload();
 
-                this.bodies_p = new List<Body>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.bodies_url)) {
-                    this.bodies_p.append((Body)o);
+                    this.bodies_p = new List<Body>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.bodies_url)) {
+                        this.bodies_p.append((Body)o);
+                    }
+                    bodies_resolved = true;
                 }
-                bodies_resolved = true;
             }
             return this.bodies_p;
         }
@@ -89,15 +91,17 @@ namespace OParl {
          * Backreferences to organizations
          */
         public unowned List<Organization> get_organizations() throws ParsingError {
-            if (!organizations_resolved && organizations_url != null) {
-                this.autoload();
+            lock (organizations_resolved) {
+                if (!organizations_resolved && organizations_url != null) {
+                    this.autoload();
 
-                this.organizations_p = new List<Organization>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.organizations_url)) {
-                    this.organizations_p.append((Organization)o);
+                    this.organizations_p = new List<Organization>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.organizations_url)) {
+                        this.organizations_p.append((Organization)o);
+                    }
+                    organizations_resolved = true;
                 }
-                organizations_resolved = true;
             }
             return this.organizations_p;
         }
@@ -109,15 +113,17 @@ namespace OParl {
          * Backreferences to meetings
          */
         public unowned List<Meeting> get_meetings() throws ParsingError {
-            if (!meetings_resolved && meetings_url != null) {
-                this.autoload();
+            lock (meetings_resolved) {
+                if (!meetings_resolved && meetings_url != null) {
+                    this.autoload();
 
-                this.meetings_p = new List<Meeting>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.meetings_url)) {
-                    this.meetings_p.append((Meeting)o);
+                    this.meetings_p = new List<Meeting>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.meetings_url)) {
+                        this.meetings_p.append((Meeting)o);
+                    }
+                    meetings_resolved = true;
                 }
-                meetings_resolved = true;
             }
             return this.meetings_p;
         }
@@ -129,15 +135,17 @@ namespace OParl {
          * Backreferences to papers
          */
         public unowned List<Paper> get_papers() throws ParsingError {
-            if (!papers_resolved && papers_url != null) {
-                this.autoload();
+            lock (papers_resolved) {
+                if (!papers_resolved && papers_url != null) {
+                    this.autoload();
 
-                this.papers_p = new List<Paper>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.papers_url)) {
-                    this.papers_p.append((Paper)o);
+                    this.papers_p = new List<Paper>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.papers_url)) {
+                        this.papers_p.append((Paper)o);
+                    }
+                    papers_resolved = true;
                 }
-                papers_resolved = true;
             }
             return this.papers_p;
         }

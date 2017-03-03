@@ -89,11 +89,13 @@ namespace OParl {
          * The file that was used to derive this file from.
          */
         public File? get_master_file() throws ParsingError {
-            if (!master_file_resolved) {
-                var r = new Resolver(this.client);
-                if (this.master_file_url != "")
-                    this.master_file_p = (File)r.parse_url(this.master_file_url);
-                master_file_resolved = true;
+            lock (master_file_resolved) {
+                if (!master_file_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.master_file_url != "")
+                        this.master_file_p = (File)r.parse_url(this.master_file_url);
+                    master_file_resolved = true;
+                }
             }
             return this.master_file_p;
         }
@@ -105,13 +107,15 @@ namespace OParl {
          * Files that have been derived from this file.
          */
         public unowned List<File> get_derivative_file() throws ParsingError {
-            if (!derivative_file_resolved && derivative_file_url != null) {
-                this.derivative_file_p = new List<File>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.derivative_file_url)) {
-                    this.derivative_file_p.append((File)o);
+            lock (derivative_file_resolved) {
+                if (!derivative_file_resolved && derivative_file_url != null) {
+                    this.derivative_file_p = new List<File>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.derivative_file_url)) {
+                        this.derivative_file_p.append((File)o);
+                    }
+                    derivative_file_resolved = true;
                 }
-                derivative_file_resolved = true;
             }
             return this.derivative_file_p;
         }
@@ -125,13 +129,15 @@ namespace OParl {
          * This field if only set if the file was embedded in a {@link OParl.Meeting}
          */
         public unowned List<Meeting> get_meeting() throws ParsingError {
-            if (!meeting_resolved && meeting_url != null) {
-                this.meeting_p = new List<Meeting>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.meeting_url)) {
-                    this.meeting_p.append((Meeting)o);
+            lock (meeting_resolved) {
+                if (!meeting_resolved && meeting_url != null) {
+                    this.meeting_p = new List<Meeting>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.meeting_url)) {
+                        this.meeting_p.append((Meeting)o);
+                    }
+                    meeting_resolved = true;
                 }
-                meeting_resolved = true;
             }
             return this.meeting_p;
         }
@@ -145,13 +151,15 @@ namespace OParl {
          * This field if only set if the file was embedded in a {@link OParl.AgendaItem}
          */
         public unowned List<AgendaItem> get_agenda_item() throws ParsingError {
-            if (!agenda_item_resolved && agenda_item_url != null) {
-                this.agenda_item_p = new List<AgendaItem>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.agenda_item_url)) {
-                    this.agenda_item_p.append((AgendaItem)o);
+            lock (agenda_item_resolved) {
+                if (!agenda_item_resolved && agenda_item_url != null) {
+                    this.agenda_item_p = new List<AgendaItem>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.agenda_item_url)) {
+                        this.agenda_item_p.append((AgendaItem)o);
+                    }
+                    agenda_item_resolved = true;
                 }
-                agenda_item_resolved = true;
             }
             return this.agenda_item_p;
         }
@@ -165,13 +173,15 @@ namespace OParl {
          * This field if only set if the file was embedded in a {@link OParl.Paper}
          */
         public unowned List<Paper> get_paper() throws ParsingError {
-            if (!paper_resolved && paper_url != null) {
-                this.paper_p = new List<Paper>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.paper_url)) {
-                    this.paper_p.append((Paper)o);
+            lock (paper_resolved) {
+                if (!paper_resolved && paper_url != null) {
+                    this.paper_p = new List<Paper>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.paper_url)) {
+                        this.paper_p.append((Paper)o);
+                    }
+                    paper_resolved = true;
                 }
-                paper_resolved = true;
             }
             return this.paper_p;
         }

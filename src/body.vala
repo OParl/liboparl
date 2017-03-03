@@ -93,17 +93,19 @@ namespace OParl {
          * All groups of persons inside this body
          */
         public unowned List<Organization> get_organization() throws ParsingError {
-            if (!organization_resolved && organization_url != null) {
-                this.organization_p = new List<Organization>();
-                if (this.organization_url != "") {
-                    var pr = new Resolver(this.client, this.organization_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.organization_p.append((Organization)o);
+            lock (organization_resolved) {
+                if (!organization_resolved && organization_url != null) {
+                    this.organization_p = new List<Organization>();
+                    if (this.organization_url != "") {
+                        var pr = new Resolver(this.client, this.organization_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.organization_p.append((Organization)o);
+                        }
+                    } else {
+                        warning("Body without organization url: %s", this.id);
                     }
-                } else {
-                    warning("Body without organization url: %s", this.id);
+                    organization_resolved = true;
                 }
-                organization_resolved = true;
             }
             return this.organization_p;
         }
@@ -115,17 +117,19 @@ namespace OParl {
          * All persons inside this body
          */
         public unowned List<Person> get_person() throws ParsingError {
-            if (!person_resolved && person_url != null) {
-                this.person_p = new List<Person>();
-                if (this.person_url != "") {
-                    var pr = new Resolver(this.client, this.person_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.person_p.append((Person)o);
+            lock (person_resolved) {
+                if (!person_resolved && person_url != null) {
+                    this.person_p = new List<Person>();
+                    if (this.person_url != "") {
+                        var pr = new Resolver(this.client, this.person_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.person_p.append((Person)o);
+                        }
+                    } else {
+                        warning("Body without person url: %s", this.id);
                     }
-                } else {
-                    warning("Body without person url: %s", this.id);
+                    person_resolved = true;
                 }
-                person_resolved = true;
             }
             return this.person_p;
         }
@@ -137,17 +141,19 @@ namespace OParl {
          * All meetings conducted by this body
          */
         public unowned List<Meeting> get_meeting() throws ParsingError {
-            if (!meeting_resolved && meeting_url != null) {
-                this.meeting_p = new List<Meeting>();
-                if (this.meeting_url != "") {
-                    var pr = new Resolver(this.client, this.meeting_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.meeting_p.append((Meeting)o);
+            lock (meeting_resolved) {
+                if (!meeting_resolved && meeting_url != null) {
+                    this.meeting_p = new List<Meeting>();
+                    if (this.meeting_url != "") {
+                        var pr = new Resolver(this.client, this.meeting_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.meeting_p.append((Meeting)o);
+                        }
+                    } else {
+                        warning("Body without meeting url: %s",this.id);
                     }
-                } else {
-                    warning("Body without meeting url: %s",this.id);
+                    meeting_resolved = true;
                 }
-                meeting_resolved = true;
             }
             return this.meeting_p;
         }
@@ -159,17 +165,19 @@ namespace OParl {
          * All papers ever used by this body
          */
         public unowned List<Paper> get_paper() throws ParsingError {
-            if (!paper_resolved && paper_url != null) {
-                this.paper_p = new List<Paper>();
-                if (this.paper_url != "") {
-                    var pr = new Resolver(this.client, this.paper_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.paper_p.append((Paper)o);
+            lock (paper_resolved) {
+                if (!paper_resolved && paper_url != null) {
+                    this.paper_p = new List<Paper>();
+                    if (this.paper_url != "") {
+                        var pr = new Resolver(this.client, this.paper_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.paper_p.append((Paper)o);
+                        }
+                    } else {
+                        warning("Body without paper url: %s", this.id);
                     }
-                } else {
-                    warning("Body without paper url: %s", this.id);
+                    paper_resolved = true;
                 }
-                paper_resolved = true;
             }
             return this.paper_p;
         }
@@ -201,13 +209,15 @@ namespace OParl {
          * The system that this body belongs to
          */
         public System get_system() throws ParsingError {
-            if (!system_resolved) {
-                var r = new Resolver(this.client);
-                if (this.system_url != "")
-                    this.system_p = (System)r.parse_url(this.system_url);
-                else
-                    warning("Body without system url: %s", this.id);
-                system_resolved = true;
+            lock (system_resolved) {
+                if (!system_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.system_url != "")
+                        this.system_p = (System)r.parse_url(this.system_url);
+                    else
+                        warning("Body without system url: %s", this.id);
+                    system_resolved = true;
+                }
             }
             return this.system_p;
         }

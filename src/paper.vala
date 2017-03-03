@@ -92,13 +92,15 @@ namespace OParl {
          * The person(s) that created this document
          */
         public unowned List<Person> get_originator_person() throws ParsingError {
-            if (!originator_person_resolved && originator_person_url != null) {
-                this.originator_person_p = new List<Person>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.originator_person_url)) {
-                    this.originator_person_p.append((Person)o);
+            lock (originator_person_resolved) {
+                if (!originator_person_resolved && originator_person_url != null) {
+                    this.originator_person_p = new List<Person>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.originator_person_url)) {
+                        this.originator_person_p.append((Person)o);
+                    }
+                    originator_person_resolved = true;
                 }
-                originator_person_resolved = true;
             }
             return this.originator_person_p;
         }
@@ -110,13 +112,15 @@ namespace OParl {
          * Organizations that are responsible for the content
          */
         public unowned List<Organization> get_under_direction_of() throws ParsingError {
-            if (!under_direction_of_resolved && under_direction_of_url != null) {
-                this.under_direction_of_p = new List<Organization>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.under_direction_of_url)) {
-                    this.under_direction_of_p.append((Organization)o);
+            lock (under_direction_of_resolved) {
+                if (!under_direction_of_resolved && under_direction_of_url != null) {
+                    this.under_direction_of_p = new List<Organization>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.under_direction_of_url)) {
+                        this.under_direction_of_p.append((Organization)o);
+                    }
+                    under_direction_of_resolved = true;
                 }
-                under_direction_of_resolved = true;
             }
             return this.under_direction_of_p;
         }
@@ -128,13 +132,15 @@ namespace OParl {
          * If the creator of the document is one or more organization(s), they will be in this field.
          */
         public unowned List<Organization> get_originator_organization() throws ParsingError {
-            if (!originator_organization_resolved && originator_organization_url != null) {
-                this.originator_organization_p = new List<Organization>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.originator_organization_url)) {
-                    this.originator_organization_p.append((Organization)o);
+            lock (originator_organization_resolved) {
+                if (!originator_organization_resolved && originator_organization_url != null) {
+                    this.originator_organization_p = new List<Organization>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.originator_organization_url)) {
+                        this.originator_organization_p.append((Organization)o);
+                    }
+                    originator_organization_resolved = true;
                 }
-                originator_organization_resolved = true;
             }
             return this.originator_organization_p;
         }
@@ -146,13 +152,15 @@ namespace OParl {
          * Documents to be regarded superordinated to this document.
          */
         public unowned List<Paper> get_superordinated_paper() throws ParsingError {
-            if (!superordinated_paper_resolved && superordinated_paper_url != null) {
-                this.superordinated_paper_p = new List<Paper>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.superordinated_paper_url)) {
-                    this.superordinated_paper_p.append((Paper)o);
+            lock (superordinated_paper_resolved) {
+                if (!superordinated_paper_resolved && superordinated_paper_url != null) {
+                    this.superordinated_paper_p = new List<Paper>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.superordinated_paper_url)) {
+                        this.superordinated_paper_p.append((Paper)o);
+                    }
+                    superordinated_paper_resolved = true;
                 }
-                superordinated_paper_resolved = true;
             }
             return this.superordinated_paper_p;
         }
@@ -164,13 +172,15 @@ namespace OParl {
          * Documents to be regarded subordinated to this document.
          */
         public unowned List<Paper> get_subordinated_paper() throws ParsingError {
-            if (!subordinated_paper_resolved && subordinated_paper_url != null) {
-                this.subordinated_paper_p = new List<Paper>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.subordinated_paper_url)) {
-                    this.subordinated_paper_p.append((Paper)o);
+            lock (subordinated_paper_resolved) {
+                if (!subordinated_paper_resolved && subordinated_paper_url != null) {
+                    this.subordinated_paper_p = new List<Paper>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.subordinated_paper_url)) {
+                        this.subordinated_paper_p.append((Paper)o);
+                    }
+                    subordinated_paper_resolved = true;
                 }
-                subordinated_paper_resolved = true;
             }
             return this.subordinated_paper_p;
         }
@@ -182,13 +192,15 @@ namespace OParl {
          * Related documents.
          */
         public unowned List<Paper> get_related_paper() throws ParsingError {
-            if (!related_paper_resolved && related_paper_url != null) {
-                this.related_paper_p = new List<Paper>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.related_paper_url)) {
-                    this.related_paper_p.append((Paper)o);
+            lock (related_paper_resolved) {
+                if (!related_paper_resolved && related_paper_url != null) {
+                    this.related_paper_p = new List<Paper>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.related_paper_url)) {
+                        this.related_paper_p.append((Paper)o);
+                    }
+                    related_paper_resolved = true;
                 }
-                related_paper_resolved = true;
             }
             return this.related_paper_p;
         }
@@ -200,13 +212,15 @@ namespace OParl {
          * The body that this document belongs to
          */
         public Body get_body() throws ParsingError {
-            if (!body_resolved) {
-                var r = new Resolver(this.client);
-                if (this.body_url != "")
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                else
-                    warning("Paper has no body: %s", this.id);
-                body_resolved = true;
+            lock (body_resolved) {
+                if (!body_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.body_url != "")
+                        this.body_p = (Body)r.parse_url(this.body_url);
+                    else
+                        warning("Paper has no body: %s", this.id);
+                    body_resolved = true;
+                }
             }
             return this.body_p;
         }

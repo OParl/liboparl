@@ -130,13 +130,15 @@ namespace OParl {
          * All organizations that attend the meeting
          */
         public unowned List<Organization> get_organization() throws ParsingError {
-            if (!organization_resolved && organization_url != null) {
-                this.organization_p = new List<Organization>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.organization_url)) {
-                    this.organization_p.append((Organization)o);
+            lock (organization_resolved) {
+                if (!organization_resolved && organization_url != null) {
+                    this.organization_p = new List<Organization>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.organization_url)) {
+                        this.organization_p.append((Organization)o);
+                    }
+                    organization_resolved = true;
                 }
-                organization_resolved = true;
             }
             return this.organization_p;
         }
@@ -148,13 +150,15 @@ namespace OParl {
          * All persons that participate in the meeting
          */
         public unowned List<Person> get_participant() throws ParsingError {
-            if (!participant_resolved && participant_url != null) {
-                this.participant_p = new List<Person>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.participant_url)) {
-                    this.participant_p.append((Person)o);
+            lock (participant_resolved) {
+                if (!participant_resolved && participant_url != null) {
+                    this.participant_p = new List<Person>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.participant_url)) {
+                        this.participant_p.append((Person)o);
+                    }
+                    participant_resolved = true;
                 }
-                participant_resolved = true;
             }
             return this.participant_p;
         }

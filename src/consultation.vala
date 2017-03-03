@@ -46,15 +46,17 @@ namespace OParl {
          * Returns paper that this consultation references
          */
         public Paper get_paper() throws ParsingError {
-            if (!paper_resolved) {
-                this.autoload();
+            lock (paper_resolved) {
+                if (!paper_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.paper_url != "")
-                    this.paper_p = (Paper)r.parse_url(this.paper_url);
-                else
-                    warning("Consultation has no paper: %s", id);
-                paper_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.paper_url != "")
+                        this.paper_p = (Paper)r.parse_url(this.paper_url);
+                    else
+                        warning("Consultation has no paper: %s", id);
+                    paper_resolved = true;
+                }
             }
             return this.paper_p;
         }
@@ -76,15 +78,17 @@ namespace OParl {
          * Returns the agenda item that this consultation references
          */
         public AgendaItem get_agenda_item() throws ParsingError {
-            if (!agenda_item_resolved) {
-                this.autoload();
+            lock (agenda_item_resolved) {
+                if (!agenda_item_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.agenda_item_url != "")
-                    this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
-                else
-                    warning("Consultation without paper url: %s", this.id);
-                agenda_item_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.agenda_item_url != "")
+                        this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
+                    else
+                        warning("Consultation without paper url: %s", this.id);
+                    agenda_item_resolved = true;
+                }
             }
             return this.agenda_item_p;
         }
@@ -96,15 +100,17 @@ namespace OParl {
          * The meeting that this consultation happen(s/ed) at
          */
         public Meeting get_meeting() throws ParsingError {
-            if (!meeting_resolved) {
-                this.autoload();
+            lock (meeting_resolved) {
+                if (!meeting_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.meeting_url != "")
-                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
-                else
-                    warning("Consultation without meeting url: %s", this.id);
-                meeting_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.meeting_url != "")
+                        this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                    else
+                        warning("Consultation without meeting url: %s", this.id);
+                    meeting_resolved = true;
+                }
             }
             return this.meeting_p;
         }
@@ -116,15 +122,17 @@ namespace OParl {
          * The organizations conducting the consultation.
          */
         public unowned List<Organization> get_organization() throws ParsingError {
-            if (!organization_resolved && organization_url != null) {
-                this.autoload();
+            lock (organization_resolved) {
+                if (!organization_resolved && organization_url != null) {
+                    this.autoload();
 
-                this.organization_p = new List<Organization>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.organization_url)) {
-                    this.organization_p.append((Organization)o);
+                    this.organization_p = new List<Organization>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.organization_url)) {
+                        this.organization_p.append((Organization)o);
+                    }
+                    organization_resolved = true;
                 }
-                organization_resolved = true;
             }
             return this.organization_p;
         }

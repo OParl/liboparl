@@ -42,15 +42,17 @@ namespace OParl {
          * The body that references this legislative term
          */
         public Body get_body() throws ParsingError {
-            if (!body_resolved) {
-                this.autoload();
+            lock (body_resolved) {
+                if (!body_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.body_url != "")
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                else
-                    warning("Legislative term without body url: %s", this.id);
-                body_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.body_url != "")
+                        this.body_p = (Body)r.parse_url(this.body_url);
+                    else
+                        warning("Legislative term without body url: %s", this.id);
+                    body_resolved = true;
+                }
             }
             return this.body_p;
         }

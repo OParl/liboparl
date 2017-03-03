@@ -68,13 +68,15 @@ namespace OParl {
          * The body that this organization belongs to.
          */
         public Body get_body() throws ParsingError {
-            if (!body_resolved) {
-                var r = new Resolver(this.client);
-                if (this.body_url != "")
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                else
-                    warning("Organization without body url: %s", this.id);
-                body_resolved = true;
+            lock (body_resolved) {
+                if (!body_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.body_url != "")
+                        this.body_p = (Body)r.parse_url(this.body_url);
+                    else
+                        warning("Organization without body url: %s", this.id);
+                    body_resolved = true;
+                }
             }
             return this.body_p;
         }
@@ -88,11 +90,13 @@ namespace OParl {
          * Links to an external OParl-System.
          */
         public Body? get_external_body() throws ParsingError {
-            if (!external_body_resolved) {
-                var r = new Resolver(this.client);
-                if (this.external_body_url != "")
-                    this.external_body_p = (Body)r.parse_url(this.external_body_url);
-                external_body_resolved = true;
+            lock (external_body_resolved) {
+                if (!external_body_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.external_body_url != "")
+                        this.external_body_p = (Body)r.parse_url(this.external_body_url);
+                    external_body_resolved = true;
+                }
             }
             return this.external_body_p;
         }
@@ -105,11 +109,13 @@ namespace OParl {
          * organization
          */
         public Organization? get_sub_organization_of() throws ParsingError {
-            if (!sub_organization_of_resolved) {
-                var r = new Resolver(this.client);
-                if (this.sub_organization_of_url != "")
-                    this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
-                sub_organization_of_resolved = true;
+            lock (sub_organization_of_resolved) {
+                if (!sub_organization_of_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.sub_organization_of_url != "")
+                        this.sub_organization_of_p = (Organization)r.parse_url(this.sub_organization_of_url);
+                    sub_organization_of_resolved = true;
+                }
             }
             return this.sub_organization_of_p;
         }
@@ -121,13 +127,15 @@ namespace OParl {
          * All memberships that are known for this organization
          */
         public unowned List<Membership> get_membership() throws ParsingError {
-            if (!membership_resolved && membership_url != null) {
-                this.membership_p = new List<Membership>();
-                var pr = new Resolver(this.client);
-                foreach (Object o in pr.parse_url_array(this.membership_url)) {
-                    this.membership_p.append((Membership)o);
+            lock (membership_resolved) {
+                if (!membership_resolved && membership_url != null) {
+                    this.membership_p = new List<Membership>();
+                    var pr = new Resolver(this.client);
+                    foreach (Object o in pr.parse_url_array(this.membership_url)) {
+                        this.membership_p.append((Membership)o);
+                    }
+                    membership_resolved = true;
                 }
-                membership_resolved = true;
             }
             return this.membership_p;
         }
@@ -149,17 +157,19 @@ namespace OParl {
          * All meetings that this organization participated in
          */
         public unowned List<Meeting> get_meeting() throws ParsingError {
-            if (!meeting_resolved && meeting_url != null) {
-                this.meeting_p = new List<Meeting>();
-                if (this.meeting_url != "") {
-                    var pr = new Resolver(this.client, this.meeting_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.meeting_p.append((Meeting)o);
+            lock (meeting_resolved) {
+                if (!meeting_resolved && meeting_url != null) {
+                    this.meeting_p = new List<Meeting>();
+                    if (this.meeting_url != "") {
+                        var pr = new Resolver(this.client, this.meeting_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.meeting_p.append((Meeting)o);
+                        }
+                    } else {
+                        warning("Organization without meeting url: %s", this.id);
                     }
-                } else {
-                    warning("Organization without meeting url: %s", this.id);
+                    meeting_resolved = true;
                 }
-                meeting_resolved = true;
             }
             return this.meeting_p;
         }

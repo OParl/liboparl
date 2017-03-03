@@ -60,15 +60,17 @@ namespace OParl {
          * The person that this membership concerns
          */
         public Person get_person() throws ParsingError {
-            if (!person_resolved) {
-                this.autoload();
+            lock (person_resolved) {
+                if (!person_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.person_url != "")
-                    this.person_p = (Person)r.parse_url(this.person_url);
-                else
-                    warning("Membership without person url: %s", this.id);
-                person_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.person_url != "")
+                        this.person_p = (Person)r.parse_url(this.person_url);
+                    else
+                        warning("Membership without person url: %s", this.id);
+                    person_resolved = true;
+                }
             }
             return this.person_p;
         }
@@ -89,15 +91,17 @@ namespace OParl {
          * The organization that this membership concerns
          */
         public Organization get_organization() throws ParsingError {
-            if (!organization_resolved) {
-                this.autoload();
+            lock (organization_resolved) {
+                if (!organization_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.organization_url != "")
-                    this.organization_p = (Organization)r.parse_url(this.organization_url);
-                else
-                    warning("Membership without organization url: %s", this.id);
-                organization_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.organization_url != "")
+                        this.organization_p = (Organization)r.parse_url(this.organization_url);
+                    else
+                        warning("Membership without organization url: %s", this.id);
+                    organization_resolved = true;
+                }
             }
             return this.organization_p;
         }
@@ -111,13 +115,15 @@ namespace OParl {
          * organization.
          */
         public Organization? get_on_behalf_of() throws ParsingError {
-            if (!on_behalf_of_resolved) {
-                this.autoload();
+            lock (on_behalf_of_resolved) {
+                if (!on_behalf_of_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.on_behalf_of_url != "")
-                    this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
-                on_behalf_of_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.on_behalf_of_url != "")
+                        this.on_behalf_of_p = (Organization)r.parse_url(this.on_behalf_of_url);
+                    on_behalf_of_resolved = true;
+                }
             }
             return this.on_behalf_of_p;
         }

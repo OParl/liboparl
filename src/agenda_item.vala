@@ -111,15 +111,17 @@ namespace OParl {
          * The meeting this agenda item is discussed in
          */
         public Meeting get_meeting() throws ParsingError {
-            if (!meeting_resolved) {
-                this.autoload();
+            lock (meeting_resolved) {
+                if (!meeting_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.meeting_url != "")
-                    this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
-                else
-                    warning("Agenda item has no meeting: %s", this.id);
-                meeting_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.meeting_url != "")
+                        this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
+                    else
+                        warning("Agenda item has no meeting: %s", this.id);
+                    meeting_resolved = true;
+                }
             }
             return this.meeting_p;
         }
@@ -132,15 +134,17 @@ namespace OParl {
          * to make a resolution to this agenda item.
          */
         public Consultation get_consultation() throws ParsingError {
-            if (!consultation_resolved) {
-                this.autoload();
+            lock (consultation_resolved) {
+                if (!consultation_resolved) {
+                    this.autoload();
 
-                var r = new Resolver(this.client);
-                if (this.consultation_url != "")
-                    this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
-                else
-                    warning("Agenda item has no consultation: %s", this.id);
-                consultation_resolved = true;
+                    var r = new Resolver(this.client);
+                    if (this.consultation_url != "")
+                        this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
+                    else
+                        warning("Agenda item has no consultation: %s", this.id);
+                    consultation_resolved = true;
+                }
             }
             return this.consultation_p;
         }

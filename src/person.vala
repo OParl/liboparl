@@ -93,13 +93,15 @@ namespace OParl {
          * The contact address of this Person
          */
         public Location get_location() throws ParsingError {
-            if (!location_resolved) {
-                var r = new Resolver(this.client);
-                if (this.location_url != "")
-                    this.location_p = (Location)r.parse_url(this.location_url);
-                else
-                    warning("Person without location url: %s", this.id);
-                location_resolved = true;
+            lock (location_resolved) {
+                if (!location_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.location_url != "")
+                        this.location_p = (Location)r.parse_url(this.location_url);
+                    else
+                        warning("Person without location url: %s", this.id);
+                    location_resolved = true;
+                }
             }
             return this.location_p;
         }
@@ -111,13 +113,15 @@ namespace OParl {
          * The body that this person belongs to
          */
         public Body get_body() throws ParsingError {
-            if (!body_resolved) {
-                var r = new Resolver(this.client);
-                if (this.body_url != "")
-                    this.body_p = (Body)r.parse_url(this.body_url);
-                else
-                    warning("Person without body url: %s", this.id);
-                body_resolved = true;
+            lock (body_resolved) {
+                if (!body_resolved) {
+                    var r = new Resolver(this.client);
+                    if (this.body_url != "")
+                        this.body_p = (Body)r.parse_url(this.body_url);
+                    else
+                        warning("Person without body url: %s", this.id);
+                    body_resolved = true;
+                }
             }
             return this.body_p;
         }

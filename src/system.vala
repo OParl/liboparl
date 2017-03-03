@@ -78,17 +78,19 @@ namespace OParl {
          * A list of all bodies that exist on this system.
          */
         public unowned List<Body>? get_body() throws ParsingError {
-            if (!body_resolved) {
-                this.body_p = new List<Body>();
-                if (this.body_url != "") {
-                    var pr = new Resolver(this.client, this.body_url);
-                    foreach (Object o in pr.resolve()) {
-                        this.body_p.append((Body)o);
+            lock (body_resolved) {
+                if (!body_resolved) {
+                    this.body_p = new List<Body>();
+                    if (this.body_url != "") {
+                        var pr = new Resolver(this.client, this.body_url);
+                        foreach (Object o in pr.resolve()) {
+                            this.body_p.append((Body)o);
+                        }
+                    } else {
+                        warning("System without body-list: %s", this.id);
                     }
-                } else {
-                    warning("System without body-list: %s", this.id);
+                    body_resolved = true;
                 }
-                body_resolved = true;
             }
             return this.body_p;
         }
