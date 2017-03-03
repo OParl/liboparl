@@ -160,7 +160,7 @@ namespace OParl {
             } else if (this.get_papers().length() > 0) {
                 return this.get_papers().nth_data(0).root_body();
             }  else {
-                return null;
+                throw new ParsingError.EXPECTED_OBJECT("Can't determine root_body: missing backreference in '%s'", this.id);
             }
         }
 
