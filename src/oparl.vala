@@ -209,6 +209,8 @@ namespace OParl {
         private string? url;
         private Client c;
 
+        public signal void new_page(List<Object> result);
+
         public Resolver(Client c, string? url="") {
             this.url = url;
             this.c = c;
@@ -309,7 +311,8 @@ namespace OParl {
             if (item.get_node_type() != Json.NodeType.ARRAY) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array in %s", this.url);
             }
-            this.parse_data(item.get_array());
+            var result = this.parse_data(item.get_array()).copy();
+            this.new_page(result);
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in %s", this.url);
