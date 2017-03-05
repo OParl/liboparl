@@ -43,8 +43,7 @@ namespace OParl {
         NO_DATA,
         INVALID_TYPE,
         INVALID_JSON,
-        URL_NULL,
-        BROKEN_THREAD
+        URL_NULL
     }
 
     /**
@@ -206,8 +205,7 @@ namespace OParl {
      * Resolves an objectlist-URL to a list of OParl.Objects
      */
     private class Resolver {
-        internal List<Object> result;
-        internal List<ParsingError> errors;
+        private List<Object> result;
         private string? url;
         private Client c;
 
@@ -265,71 +263,14 @@ namespace OParl {
             return target;
         }
 
-        /**
-         * A Threadcontext for parsing lists
-         */
-        private class ThreadContext {
-            private Resolver r;
-            private Json.Node element;
-            public ThreadContext (Resolver r, Json.Node element) {
-                this.r = r;
-                this.element = element;
-            }
-            public int? run() {
-                try {
-                    Object target = (Object)r.make_object(element);
-                    r.add_result_object(target);
-                    return 0;
-                } catch (OParl.ParsingError e) {
-                    r.add_result_error(e);
-                    return 0;
-                }
-            }
-        }
-
-        internal void add_result_object(Object o) {
-            lock (this.result)
-                this.result.append(o);
-        }
-        internal void add_result_error(ParsingError e) {
-            lock (this.errors)
-                this.errors.append(e);
-        }
-
         public unowned List<Object> parse_data(Json.Array arr) throws ParsingError {
-            if (Thread.supported()) {
-                var threads = new List<Thread<int?>>();
-                for (int i = 0; i < arr.get_length(); i++) {
-                    var element = arr.get_element(i);
-                    if (element.get_node_type() != Json.NodeType.OBJECT) {
-                        throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse: %s", element.dup_string());
-                    }
-                    var tc = new Resolver.ThreadContext(this, element);
-                    try {
-                        Thread<int?> t = new Thread<int?>.try("Resolve List", tc.run);
-                        threads.append(t);
-                    } catch (GLib.Error e) {
-                        throw new ParsingError.BROKEN_THREAD("Could not launch parsing thread");
-                    }
+            for (int i = 0; i < arr.get_length(); i++) {
+                var element = arr.get_element(i);
+                if (element.get_node_type() != Json.NodeType.OBJECT) {
+                    throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse: %s", element.dup_string());
                 }
-                foreach (var t in threads) {
-                    t.join();
-                }
-                if (this.errors.length() != 0) {
-                    foreach (ParsingError e in this.errors) {
-                        throw e;
-                    }
-                    this.errors = new List<ParsingError>();
-                }
-            } else {
-                for (int i = 0; i < arr.get_length(); i++) {
-                    var element = arr.get_element(i);
-                    if (element.get_node_type() != Json.NodeType.OBJECT) {
-                        throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse: %s", element.dup_string());
-                    }
-                    Object target = (Object)this.make_object(element);
-                    this.result.append(target);
-                }
+                Object target = (Object)make_object(element);
+                this.result.append(target);
             }
             return this.result;
         }
