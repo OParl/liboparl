@@ -198,7 +198,7 @@ namespace OParl {
          * with further information on the topic and the id of the object that the error
          * was detected in.
          */
-        public signal void shit_happened(ValidationResult vr);
+        public signal void shit_happened(ValidationResult vr, string? id);
     }
 
     /**
