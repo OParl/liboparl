@@ -86,6 +86,7 @@ namespace OParl {
          */
         public string classification {get; internal set;}
 
+        public signal void incoming_organizations(List<Organization> organizations);
         internal string organization_url {get;set;default="";}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
@@ -98,6 +99,13 @@ namespace OParl {
                     this.organization_p = new List<Organization>();
                     if (this.organization_url != "") {
                         var pr = new Resolver(this.client, this.organization_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Organization>();
+                            foreach (Object o in list) {
+                                outlist.append((Organization)o);
+                            }
+                            this.incoming_organizations(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.organization_p.append((Organization)o);
                         }
@@ -110,6 +118,7 @@ namespace OParl {
             return this.organization_p;
         }
 
+        public signal void incoming_persons(List<Person> persons);
         internal string person_url {get;set;default="";}
         private bool person_resolved {get;set; default=false;}
         private List<Person>? person_p = null;
@@ -122,6 +131,13 @@ namespace OParl {
                     this.person_p = new List<Person>();
                     if (this.person_url != "") {
                         var pr = new Resolver(this.client, this.person_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Person>();
+                            foreach (Object o in list) {
+                                outlist.append((Person)o);
+                            }
+                            this.incoming_persons(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.person_p.append((Person)o);
                         }
@@ -134,6 +150,7 @@ namespace OParl {
             return this.person_p;
         }
 
+        public signal void incoming_meetings(List<Meeting> meetings);
         internal string meeting_url {get;set;default="";}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
@@ -146,6 +163,13 @@ namespace OParl {
                     this.meeting_p = new List<Meeting>();
                     if (this.meeting_url != "") {
                         var pr = new Resolver(this.client, this.meeting_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Meeting>();
+                            foreach(Object o in list) {
+                                outlist.append((Meeting)o);
+                            }
+                            this.incoming_meetings(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.meeting_p.append((Meeting)o);
                         }
@@ -158,6 +182,7 @@ namespace OParl {
             return this.meeting_p;
         }
 
+        public signal void incoming_papers(List<Paper> papers);
         internal string paper_url {get;set;default="";}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
@@ -170,6 +195,13 @@ namespace OParl {
                     this.paper_p = new List<Paper>();
                     if (this.paper_url != "") {
                         var pr = new Resolver(this.client, this.paper_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Paper>();
+                            foreach (Object o in list) {
+                                outlist.append((Paper)o);
+                            }
+                            this.incoming_papers(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.paper_p.append((Paper)o);
                         }
