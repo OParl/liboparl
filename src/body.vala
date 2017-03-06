@@ -87,6 +87,7 @@ namespace OParl {
         public string classification {get; internal set;}
 
         public signal void incoming_organizations(List<Organization> organizations);
+        public signal void finished_organizations();
         internal string organization_url {get;set;default="";}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
@@ -117,10 +118,12 @@ namespace OParl {
                     this.incoming_organizations(this.organization_p);
                 }
             }
+            this.finished_organizations();
             return this.organization_p;
         }
 
         public signal void incoming_persons(List<Person> persons);
+        public signal void finished_persons();
         internal string person_url {get;set;default="";}
         private bool person_resolved {get;set; default=false;}
         private List<Person>? person_p = null;
@@ -151,10 +154,12 @@ namespace OParl {
                     this.incoming_persons(this.person_p);
                 }
             }
+            this.finished_persons();
             return this.person_p;
         }
 
         public signal void incoming_meetings(List<Meeting> meetings);
+        public signal void finished_meetings();
         internal string meeting_url {get;set;default="";}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
@@ -185,10 +190,12 @@ namespace OParl {
                     this.incoming_meetings(this.meeting_p);
                 }
             }
+            this.finished_meetings();
             return this.meeting_p;
         }
 
         public signal void incoming_papers(List<Paper> papers);
+        public signal void finished_papers();
         internal string paper_url {get;set;default="";}
         private bool paper_resolved {get;set; default=false;}
         private List<Paper>? paper_p = null;
@@ -219,6 +226,7 @@ namespace OParl {
                     this.incoming_papers(this.paper_p);
                 }
             }
+            this.finished_papers();
             return this.paper_p;
         }
 
