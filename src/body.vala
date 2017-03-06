@@ -113,6 +113,8 @@ namespace OParl {
                         warning("Body without organization url: %s", this.id);
                     }
                     organization_resolved = true;
+                } else if (organization_resolved) {
+                    this.incoming_organizations(this.organization_p);
                 }
             }
             return this.organization_p;
@@ -145,6 +147,8 @@ namespace OParl {
                         warning("Body without person url: %s", this.id);
                     }
                     person_resolved = true;
+                } else if (person_resolved) {
+                    this.incoming_persons(this.person_p);
                 }
             }
             return this.person_p;
@@ -177,6 +181,8 @@ namespace OParl {
                         warning("Body without meeting url: %s",this.id);
                     }
                     meeting_resolved = true;
+                } else if (meeting_resolved) {
+                    this.incoming_meetings(this.meeting_p);
                 }
             }
             return this.meeting_p;
@@ -209,6 +215,8 @@ namespace OParl {
                         warning("Body without paper url: %s", this.id);
                     }
                     paper_resolved = true;
+                } else if (paper_resolved) {
+                    this.incoming_papers(this.paper_p);
                 }
             }
             return this.paper_p;
