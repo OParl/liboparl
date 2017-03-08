@@ -150,6 +150,16 @@ namespace OParl {
             }
         }
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Meeting}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
+        public signal void incoming_meetings(List<Meeting> meetings);
+        /**
+         * Triggered when the last page of meetings has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
+        public signal void finished_meetings();
         internal string meeting_url {get;set;}
         private bool meeting_resolved {get;set; default=false;}
         private List<Meeting>? meeting_p = null;
@@ -162,6 +172,13 @@ namespace OParl {
                     this.meeting_p = new List<Meeting>();
                     if (this.meeting_url != "") {
                         var pr = new Resolver(this.client, this.meeting_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Meeting>();
+                            foreach (Object o in list) {
+                                outlist.append((Meeting)o);
+                            }
+                            this.incoming_meetings(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.meeting_p.append((Meeting)o);
                         }
@@ -169,8 +186,11 @@ namespace OParl {
                         warning("Organization without meeting url: %s", this.id);
                     }
                     meeting_resolved = true;
+                } else if (meeting_resolved) {
+                    this.incoming_meetings(this.meeting_p);
                 }
             }
+            this.finished_meetings();
             return this.meeting_p;
         }
 
