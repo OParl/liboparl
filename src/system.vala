@@ -71,7 +71,15 @@ namespace OParl {
          */
         public string product {get; internal set;}
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Body}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void incoming_bodies(List<Body> bodies);
+        /**
+         * Triggered when the last page of bodies has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void finished_bodies();
         internal string body_url {get;set;}
         private bool body_resolved {get;set; default=false;}
