@@ -71,6 +71,8 @@ namespace OParl {
          */
         public string product {get; internal set;}
 
+        public signal void incoming_bodies(List<Body> bodies);
+        public signal void finished_bodies();
         internal string body_url {get;set;}
         private bool body_resolved {get;set; default=false;}
         private List<Body>? body_p = null;
@@ -83,6 +85,13 @@ namespace OParl {
                     this.body_p = new List<Body>();
                     if (this.body_url != "") {
                         var pr = new Resolver(this.client, this.body_url);
+                        pr.new_page.connect((list)=>{
+                            var outlist = new List<Body>();
+                            foreach (Object o in list) {
+                                outlist.append((Body)o);
+                            }
+                            this.incoming_bodies(outlist);
+                        });
                         foreach (Object o in pr.resolve()) {
                             this.body_p.append((Body)o);
                         }
@@ -90,8 +99,11 @@ namespace OParl {
                         warning("System without body-list: %s", this.id);
                     }
                     body_resolved = true;
+                } else if (body_resolved) {
+                    this.incoming_bodies(this.body_p);
                 }
             }
+            this.finished_bodies();
             return this.body_p;
         }
 
