@@ -86,7 +86,15 @@ namespace OParl {
          */
         public string classification {get; internal set;}
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Organization}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void incoming_organizations(List<Organization> organizations);
+        /**
+         * Triggered when the last page of organizations has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void finished_organizations();
         internal string organization_url {get;set;default="";}
         private bool organization_resolved {get;set; default=false;}
@@ -122,7 +130,15 @@ namespace OParl {
             return this.organization_p;
         }
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Person}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void incoming_persons(List<Person> persons);
+        /**
+         * Triggered when the last page of persons has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void finished_persons();
         internal string person_url {get;set;default="";}
         private bool person_resolved {get;set; default=false;}
@@ -158,7 +174,15 @@ namespace OParl {
             return this.person_p;
         }
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Meeting}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void incoming_meetings(List<Meeting> meetings);
+        /**
+         * Triggered when the last page of meetings has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void finished_meetings();
         internal string meeting_url {get;set;default="";}
         private bool meeting_resolved {get;set; default=false;}
@@ -194,7 +218,15 @@ namespace OParl {
             return this.meeting_p;
         }
 
+        /**
+         * Triggered whenever a new page of {@link OParl.Paper}s has arrived.
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void incoming_papers(List<Paper> papers);
+        /**
+         * Triggered when the last page of papers has been resolved successfully
+         * See OParl specification to see how paginated lists work.
+         */
         public signal void finished_papers();
         internal string paper_url {get;set;default="";}
         private bool paper_resolved {get;set; default=false;}
