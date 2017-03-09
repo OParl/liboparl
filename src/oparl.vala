@@ -301,7 +301,7 @@ namespace OParl {
 
         private void parse(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse %s", n.dup_string());
+                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse in '%s'", n.dup_string());
 
             unowned Json.Object o = n.get_object();
 
@@ -309,20 +309,20 @@ namespace OParl {
             unowned Json.Node item;
             item = o.get_member("data");
             if (item.get_node_type() != Json.NodeType.ARRAY) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array in %s", this.url);
+                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array in '%s'", this.url);
             }
             var result = this.parse_data(item.get_array()).copy();
             this.new_page(result);
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in %s", this.url);
+                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in '%s'", this.url);
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {
                 var old_url = url;
                 item = links.get_member("next");
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in %s", old_url);
+                    throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in '%s'", old_url);
                 }
                 string url = links.get_string_member("next");
                 int status;
