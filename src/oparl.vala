@@ -162,6 +162,10 @@ namespace OParl {
          * returns the resulting OParl object
          */
         public OParl.Object hydrate(string json) throws OParl.ParsingError {
+            lock(Client.initialized) {
+                if (!Client.initialized)
+                    Client.init();
+            }
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(json);
