@@ -43,7 +43,8 @@ namespace OParl {
         NO_DATA,
         INVALID_TYPE,
         INVALID_JSON,
-        URL_NULL
+        URL_NULL,
+        URL_LOOP
     }
 
     /**
@@ -233,7 +234,9 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(this.url));
             }
-            this.parse(parser.get_root());
+            var visited_urls = new List<string>();
+            visited_urls.append(this.url);
+            this.parse(parser.get_root(), visited_urls);
             return this.result;
         }
 
@@ -304,7 +307,7 @@ namespace OParl {
             return this.result;
         }
 
-        private void parse(Json.Node n) throws ParsingError {
+        private void parse(Json.Node n, List<string> visited_urls) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse in '%s'", n.dup_string());
 
@@ -330,6 +333,10 @@ namespace OParl {
                     throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in '%s'", old_url);
                 }
                 string url = links.get_string_member("next");
+                if (visited_urls.index(url) != -1) {
+                    throw new ParsingError.URL_LOOP("The list '%s' links 'next' to one its previous pages", old_url);
+                }
+                visited_urls.append(url);
                 int status;
                 string data = this.c.resolve_url(url, out status);
                 var parser = new Json.Parser();
@@ -338,7 +345,7 @@ namespace OParl {
                 } catch (GLib.Error e) {
                     throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl pagination-list at '%s' against a linter".printf(url));
                 }
-                this.parse(parser.get_root());
+                this.parse(parser.get_root(), visited_urls);
             }
         }
     }
