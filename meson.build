@@ -85,7 +85,7 @@ endif
 add_global_arguments(['-DGETTEXT_PACKAGE="liboparl"'], language: 'c')
 oparl_lib = library('oparl-'+api, oparl_lib_source,
                     dependencies: [glib, gobject, gio, json_glib],
-                    vala_args: ['--gir=../OParl-'+api+'.gir'],
+                    vala_args: ['--gir=../OParl-'+api+'.gir','-X','-DGETTEXT_PACKAGE="liboparl"'],
                     install: true)
 
 g_ir_compiler = find_program('g-ir-compiler')
