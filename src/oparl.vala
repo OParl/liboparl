@@ -175,8 +175,7 @@ namespace OParl {
 
                 return system;
             }
-
-            throw new ParsingError.NO_DATA("You did not supply valid data");
+            throw new ParsingError.NO_DATA(_("You did not supply valid data"));
         }
 
         /**
