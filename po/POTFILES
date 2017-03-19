@@ -1,0 +1,14 @@
+src/oparl.vala
+src/body.vala
+src/person.vala
+src/membership.vala
+src/meeting.vala
+src/system.vala
+src/object.vala
+src/organization.vala
+src/agenda_item.vala
+src/paper.vala
+src/consultation.vala
+src/legislative_term.vala
+src/location.vala
+src/file.vala

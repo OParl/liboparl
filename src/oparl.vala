@@ -32,6 +32,9 @@
  * Specification [PDF]: [[https://oparl.org/wp-content/themes/oparl/spec/OParl-1.0.pdf]]
  */
 namespace OParl {
+    [CCode (cname="GETTEXT_PACKAGE")]
+    extern const string GETTEXT_PACKAGE;
+
     /**
      * Syntactical errors that may occur when parsing an {@link OParl.Object}
      */
@@ -151,12 +154,12 @@ namespace OParl {
                 try {
                     parser.load_from_data(data);
                 } catch (GLib.Error e) {
-                    throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter".printf(url));
+                    throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter").printf(url));
                 }
                 system.parse(parser.get_root());
                 return system;
             }
-            throw new ParsingError.NO_DATA("You did not supply valid data");
+            throw new ParsingError.NO_DATA(_("You did not supply valid data"));
         }
 
         /**
@@ -172,7 +175,7 @@ namespace OParl {
             try {
                 parser.load_from_data(json);
             } catch (GLib.Error e) {
-                throw new ParsingError.INVALID_JSON("JSON could not be parsed:\n %s".printf(json));
+                throw new ParsingError.INVALID_JSON(_("JSON could not be parsed:\n %s").printf(json));
             }
             // TODO: check wheter object belongs to this client. if it does not throw exception
             var resolver = new Resolver(this);
@@ -225,14 +228,14 @@ namespace OParl {
 
         public unowned List<Object> resolve() throws ParsingError {
             if (this.url == null)
-                throw new ParsingError.URL_NULL("URLs must not be null.");
+                throw new ParsingError.URL_NULL(_("URLs must not be null."));
             int status;
             string data = this.c.resolve_url(this.url, out status);
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
             } catch (GLib.Error e) {
-                throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(this.url));
+                throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl Object at '%s' against a linter").printf(this.url));
             }
             var visited_urls = new List<string>();
             visited_urls.append(this.url);
@@ -248,12 +251,12 @@ namespace OParl {
                 ident = el_obj.get_member("id");
                 if (ident.get_node_type() != Json.NodeType.VALUE) {
                     throw new ParsingError.EXPECTED_VALUE(
-                        "I need a string-value as type in object with id %s",
+                        _("I need a string-value as type in object with id %s"),
                         ident.get_string()
                     );
                 } else {
                     throw new ParsingError.EXPECTED_VALUE(
-                        "Tried to resolve an object that does not have a valid Id"
+                        _("Tried to resolve an object that does not have a valid Id")
                     );
                 }
             }
@@ -261,14 +264,14 @@ namespace OParl {
 
             Type t = Type.from_name("OParl"+typestr);
             if (!(t.is_a(typeof(OParl.Object)))) {
-                throw new ParsingError.INVALID_TYPE("The type of this object is no valid OParl type: %s".printf(typestr));
+                throw new ParsingError.INVALID_TYPE(_("The type of this object is no valid OParl type: %s").printf(typestr));
             }
             var target = (Object)GLib.Object.new(t);
             target.set_client(this.c);
             try {
                 (target as Parsable).parse(n);
             } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse: %s", ident.get_string());
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: %s"), ident.get_string());
             }
             return target;
         }
@@ -277,7 +280,7 @@ namespace OParl {
             for (int i = 0; i < arr.get_length(); i++) {
                 var element = arr.get_element(i);
                 if (element.get_node_type() != Json.NodeType.OBJECT) {
-                    throw new ParsingError.EXPECTED_OBJECT("I need an Object to parse: %s", element.dup_string());
+                    throw new ParsingError.EXPECTED_OBJECT(_("I need an Object to parse: %s"), element.dup_string());
                 }
                 Object target = (Object)make_object(element);
                 this.result.append(target);
@@ -292,7 +295,7 @@ namespace OParl {
             try {
                 parser.load_from_data(data);
             } catch (GLib.Error e) {
-                throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl Object at '%s' against a linter".printf(url));
+                throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl Object at '%s' against a linter").printf(url));
             }
             var o = (Object)make_object(parser.get_root());
             return o;
@@ -309,7 +312,7 @@ namespace OParl {
 
         private void parse(Json.Node n, List<string> visited_urls) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse in '%s'", n.dup_string());
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse in '%s'"), n.dup_string());
 
             unowned Json.Object o = n.get_object();
 
@@ -317,24 +320,24 @@ namespace OParl {
             unowned Json.Node item;
             item = o.get_member("data");
             if (item.get_node_type() != Json.NodeType.ARRAY) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute data must be an array in '%s'", this.url);
+                throw new ParsingError.EXPECTED_VALUE(_("Attribute data must be an array in '%s'"), this.url);
             }
             var result = this.parse_data(item.get_array()).copy();
             this.new_page(result);
             item = o.get_member("links");
             if (item.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in '%s'", this.url);
+                throw new ParsingError.EXPECTED_VALUE(_("Attribute links must be an object in '%s'"), this.url);
             }
             Json.Object links = item.get_object();
             if (links.has_member("next")) {
                 var old_url = url;
                 item = links.get_member("next");
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Next-links must be strings in '%s'", old_url);
+                    throw new ParsingError.EXPECTED_VALUE(_("Next-links must be strings in '%s'"), old_url);
                 }
                 string url = links.get_string_member("next");
                 if (visited_urls.index(url) != -1) {
-                    throw new ParsingError.URL_LOOP("The list '%s' links 'next' to one its previous pages", old_url);
+                    throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one its previous pages"), old_url);
                 }
                 visited_urls.append(url);
                 int status;
@@ -343,7 +346,7 @@ namespace OParl {
                 try {
                     parser.load_from_data(data);
                 } catch (GLib.Error e) {
-                    throw new ParsingError.INVALID_JSON("JSON could not be parsed. Please check the OParl pagination-list at '%s' against a linter".printf(url));
+                    throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl pagination-list at '%s' against a linter").printf(url));
                 }
                 this.parse(parser.get_root(), visited_urls);
             }

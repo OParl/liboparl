@@ -40,6 +40,8 @@ gobject = dependency('gobject-2.0')
 json_glib = dependency('json-glib-1.0')
 gio = dependency('gio-2.0')
 
+subdir('po')
+
 oparl_lib_source = [
     'src/oparl.vala',
     'src/body.vala',
@@ -82,7 +84,7 @@ endif
 
 oparl_lib = library('oparl-'+api, oparl_lib_source,
                     dependencies: [glib, gobject, gio, json_glib],
-                    vala_args: ['--gir=../OParl-'+api+'.gir'],
+                    vala_args: ['--gir=../OParl-'+api+'.gir','-X','-DGETTEXT_PACKAGE="liboparl"'],
                     install: true)
 
 g_ir_compiler = find_program('g-ir-compiler')
