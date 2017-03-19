@@ -33,7 +33,7 @@
  */
 namespace OParl {
     [CCode (cname="GETTEXT_PACKAGE")]
-    const string GETTEXT_PACKAGE = "liboparl";
+    extern const string GETTEXT_PACKAGE;
 
     /**
      * Syntactical errors that may occur when parsing an {@link OParl.Object}
