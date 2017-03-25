@@ -114,6 +114,7 @@ if opt_build_valadoc == true
                  command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
                 '--pkg','json-glib-1.0', '--force'],
                  output: 'devhelp',
+                 build_by_default: true
   )
 endif
 
