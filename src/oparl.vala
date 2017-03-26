@@ -163,7 +163,7 @@ namespace OParl {
          * Takes a json-encoded OParl object as string, parses it and
          * returns the resulting OParl object
          */
-        public OParl.Object hydrate(string json) throws OParl.ParsingError {
+        public List<OParl.Object> hydrate(string json) throws OParl.ParsingError {
             lock(Client.initialized) {
                 if (!Client.initialized)
                     Client.init();
@@ -174,9 +174,16 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON("JSON could not be parsed:\n %s".printf(json));
             }
+            // TODO: evaluate wheter the following todo is really necessary
             // TODO: check wheter object belongs to this client. if it does not throw exception
             var resolver = new Resolver(this);
-            return resolver.make_object(parser.get_root());
+            var ret = new List<OParl.Object>();
+            try {
+                ret.append(resolver.make_object(parser.get_root()));
+                return ret;
+            } catch (ParsingError.INVALID_TYPE e) {
+                return resolver.parse_page(parser.get_root());
+            }
         }
 
         /**
@@ -247,7 +254,7 @@ namespace OParl {
             if (type.get_node_type() != Json.NodeType.VALUE) {
                 ident = el_obj.get_member("id");
                 if (ident.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(
+                    throw new ParsingError.INVALID_TYPE(
                         "I need a string-value as type in object with id %s",
                         ident.get_string()
                     );
@@ -298,16 +305,25 @@ namespace OParl {
             return o;
         }
 
-
-        public unowned List<Object> parse_url_array(string[] urls) throws ParsingError {
-            foreach(string url in urls) {
-                Object target = this.parse_url(url);
-                this.result.append(target);
+        public List<OParl.Object> parse_page(Json.Node n) throws OParl.ParsingError {
+            this.parse(n, new List<string>(), false);
+            var result = new List<Object>();
+            foreach(OParl.Object o in this.result) {
+                result.append(o);
             }
-            return this.result;
+            return result;
         }
 
-        private void parse(Json.Node n, List<string> visited_urls) throws ParsingError {
+        public List<Object> parse_url_array(string[] urls) throws ParsingError {
+            var result = new List<Object>();
+            foreach(string url in urls) {
+                Object target = this.parse_url(url);
+                result.append(target);
+            }
+            return result;
+        }
+
+        private void parse(Json.Node n, List<string> visited_urls, bool follow_next=true) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
                 throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse in '%s'", n.dup_string());
 
@@ -326,7 +342,7 @@ namespace OParl {
                 throw new ParsingError.EXPECTED_VALUE("Attribute links must be an object in '%s'", this.url);
             }
             Json.Object links = item.get_object();
-            if (links.has_member("next")) {
+            if (follow_next && links.has_member("next")) {
                 var old_url = url;
                 item = links.get_member("next");
                 if (item.get_node_type() != Json.NodeType.VALUE) {
