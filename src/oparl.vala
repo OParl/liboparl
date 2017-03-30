@@ -248,8 +248,18 @@ namespace OParl {
         }
 
         public Object make_object(Json.Node n) throws ParsingError {
+            if (n.get_node_type() != Json.NodeType.OBJECT) {
+                throw new ParsingError.EXPECTED_OBJECT(
+                    "Can't make an object from a non-object"
+                );
+            }
             Json.Object el_obj = n.get_object();
             Json.Node ident = null;
+            if (!el_obj.has_member("type")) {
+                throw new ParsingError.INVALID_TYPE(
+                    "Tried to make an object from a json without type"
+                );
+            }
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE) {
                 ident = el_obj.get_member("id");
