@@ -498,9 +498,7 @@ namespace OParl {
         /**
          * Returns a list of all Objects that this Object is connected with
          */
-        public virtual List<OParl.Object> get_neighbors() throws ParsingError {
-            return new List<OParl.Object>();
-        }
+        public abstract List<OParl.Object> get_neighbors() throws ParsingError; 
     }
 
     /**

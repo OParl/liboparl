@@ -197,7 +197,7 @@ namespace OParl {
         /**
          * {@inheritDoc}
          */
-        public new List<OParl.Object> get_neighbors() throws ParsingError {
+        public override List<OParl.Object> get_neighbors() throws ParsingError {
             var l = new List<OParl.Object>();
 
             var person = this.get_person();
