@@ -477,6 +477,9 @@ namespace OParl {
             }
 
             Object updated_obj = r.parse_url(this.id);
+            if (updated_obj == null) {
+                throw new ParsingError.EXPECTED_OBJECT("Could not parse updated object for '%s'", this.id);
+            }
 
             Type type = updated_obj.get_type();
 
