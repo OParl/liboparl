@@ -525,5 +525,12 @@ namespace OParl {
 
             return l;
         }
+
+        /**
+         * Returns true if the given object is subordinate to this body
+         */
+        public bool is_root_of(Object o) throws ParsingError {
+            return o.root_body() == this;
+        }
     }
 }
