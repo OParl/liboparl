@@ -66,7 +66,7 @@ namespace OParl {
         public string long_description {get; internal set; default="";}
         public string object_id {get; internal set; default="";}
 
-        protected ValidationResult(ErrorSeverity s, string desc, string longdesc, string id) {
+        internal ValidationResult(ErrorSeverity s, string desc, string longdesc, string id) {
             this.severity = s;
             this.description = desc;
             this.long_description = longdesc;
