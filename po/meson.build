@@ -20,5 +20,5 @@
 #*********************************************************************
 
 i18n = import('i18n')
-i18n.gettext('liboparl', langs:['en','de'])
+i18n.gettext('liboparl', preset:'glib',langs:['en','de'])
 
