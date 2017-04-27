@@ -221,7 +221,7 @@ namespace OParl {
         }
 
         /**
-         * See {@link Object.validation}
+         * {@inheritDoc}
          */
         public new unowned List<ValidationResult> validate() {
             base.validate();
