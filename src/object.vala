@@ -477,6 +477,9 @@ namespace OParl {
             }
 
             Object updated_obj = r.parse_url(this.id);
+            if (updated_obj == null) {
+                throw new ParsingError.EXPECTED_OBJECT("Could not parse updated object for '%s'", this.id);
+            }
 
             Type type = updated_obj.get_type();
 
@@ -498,9 +501,7 @@ namespace OParl {
         /**
          * Returns a list of all Objects that this Object is connected with
          */
-        public virtual List<OParl.Object> get_neighbors() throws ParsingError {
-            return new List<OParl.Object>();
-        }
+        public abstract List<OParl.Object> get_neighbors() throws ParsingError; 
     }
 
     /**

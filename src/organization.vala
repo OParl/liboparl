@@ -264,7 +264,7 @@ namespace OParl {
         }
 
         /**
-         * See {@link Object.validation}
+         * {@inheritDoc}
          */
         public new unowned List<ValidationResult> validate() {
             base.validate();
@@ -282,7 +282,7 @@ namespace OParl {
         /**
          * {@inheritDoc}
          */
-        public new List<OParl.Object> get_neighbors() throws ParsingError {
+        public override List<OParl.Object> get_neighbors() throws ParsingError {
             var l = new List<OParl.Object>();
 
             var body = this.get_body();
