@@ -272,11 +272,7 @@ namespace OParl {
             if (type.get_node_type() != Json.NodeType.VALUE) {
                 ident = el_obj.get_member("id");
                 if (ident.get_node_type() != Json.NodeType.VALUE) {
-<<<<<<< HEAD
                     throw new ParsingError.EXPECTED_VALUE(
-=======
-                    throw new ParsingError.INVALID_TYPE(
->>>>>>> :burn: - tried to introduce i18n
                         _("I need a string-value as type in object with id %s"),
                         ident.get_string()
                     );
