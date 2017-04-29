@@ -98,6 +98,11 @@ namespace OParl {
         private static bool initialized = false;
 
         private static void init() {
+            Intl.setlocale(LocaleCategory.MESSAGES, "");
+            Intl.textdomain(GETTEXT_PACKAGE);
+            Intl.bind_textdomain_codeset(GETTEXT_PACKAGE, "utf-8");
+            Intl.bindtextdomain(GETTEXT_PACKAGE, "/usr/local/share/locale");
+
             Object.populate_name_map();
             System.populate_name_map();
             Body.populate_name_map();
