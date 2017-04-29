@@ -51,10 +51,10 @@ The following libraries have to be present for liboparl to run:
 Building
 --------
 
-[Meson](http://mesonbuild.com) is used as the buildsystem for liboparl. The build dependencies
+[Meson > 0.40.0](http://mesonbuild.com) is used as the buildsystem for liboparl. The build dependencies
 are the following:
 
-  * valac - Vala compiler
+  * valac > 0.32 - Vala compiler
   * valadoc - Vala documentation tool
   * g-ir-compiler - GObject introspection compiler
   * json-glib-dev - Dev headers for json-glib
