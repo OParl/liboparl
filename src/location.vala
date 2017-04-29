@@ -160,7 +160,7 @@ namespace OParl {
             } else if (this.get_papers().length() > 0) {
                 return this.get_papers().nth_data(0).root_body();
             }  else {
-                throw new ParsingError.EXPECTED_OBJECT("Can't determine root_body: missing backreference in '%s'", this.id);
+                throw new ParsingError.EXPECTED_OBJECT(_("Can't determine root_body: missing backreference in '%s'"), this.id);
             }
         }
 
@@ -182,7 +182,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -209,7 +209,7 @@ namespace OParl {
                     // Json object
                     case "geojson":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a object in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a object in '%s'").printf(name, this.id));
                         }
                         this.set(Location.name_map.get(name), item.get_object());
                         break;

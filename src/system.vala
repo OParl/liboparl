@@ -104,7 +104,7 @@ namespace OParl {
                             this.body_p.append((Body)o);
                         }
                     } else {
-                        warning("System without body-list: %s", this.id);
+                        warning(_("System without body-list: %s"), this.id);
                     }
                     body_resolved = true;
                 } else if (body_resolved) {
@@ -138,7 +138,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -174,8 +174,8 @@ namespace OParl {
             if (this.oparl_version == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing oparlVersion field",
-                               "The field 'oparlVersion' must be set.",
+                               _("Missing oparlVersion field"),
+                               _("The field 'oparlVersion' must be set."),
                                this.id
                 ));
             }
@@ -183,24 +183,24 @@ namespace OParl {
             if (this.oparl_version == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty oparlVersion field",
-                               "The field 'oparlVersion' must not be an empty string.",
+                               _("Empty oparlVersion field"),
+                               _("The field 'oparlVersion' must not be an empty string."),
                                this.id
                 ));
             }
             if (this.body_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing body field",
-                               "The field 'body' must be set.",
+                               _("Missing body field"),
+                               _("The field 'body' must be set."),
                                this.id
                 ));
             }
             if (this.body_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty body field",
-                               "The field 'body' must not be an empty string.",
+                               _("Empty body field"),
+                               _("The field 'body' must not be an empty string."),
                                this.id
                 ));
             }

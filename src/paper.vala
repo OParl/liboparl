@@ -218,7 +218,7 @@ namespace OParl {
                     if (this.body_url != "")
                         this.body_p = (Body)r.parse_url(this.body_url);
                     else
-                        warning("Paper has no body: %s", this.id);
+                        warning(_("Paper has no body: %s"), this.id);
                     body_resolved = true;
                 }
             }
@@ -250,7 +250,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError{
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -279,7 +279,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object af in r.parse_data(item.get_array())) {
@@ -288,7 +288,7 @@ namespace OParl {
                         break;
                     case "consultation":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object cons in r.parse_data(item.get_array())) {
@@ -298,7 +298,7 @@ namespace OParl {
                         break;
                     case "location":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object loc in r.parse_data(item.get_array())) {
@@ -308,7 +308,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "mainFile":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_OBJECT(_("Attribute '%s' must be an object in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.main_file_p = (File)r.make_object(item);

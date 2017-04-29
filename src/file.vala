@@ -220,7 +220,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -269,17 +269,17 @@ namespace OParl {
             if (this.access_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'accessUrl' field",
-                               "The 'accessUrl'-field must be present in each File",
+                               _("Missing 'accessUrl' field"),
+                               _("The 'accessUrl'-field must be present in each File"),
                                this.id
                 ));
             }
             if (this.access_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty 'accessUrl'",
-                               "The 'accessUrl'-field contains an empty string. Each File must "+
-                               " supply an URL to access its contents.",
+                               _("Empty 'accessUrl'"),
+                               _("The 'accessUrl'-field contains an empty string. Each File must ")+
+                               _(" supply an URL to access its contents."),
                                this.id
                 ));
             }

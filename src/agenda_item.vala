@@ -119,7 +119,7 @@ namespace OParl {
                     if (this.meeting_url != "")
                         this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
                     else
-                        warning("Agenda item has no meeting: %s", this.id);
+                        warning(_("Agenda item has no meeting: %s"), this.id);
                     meeting_resolved = true;
                 }
             }
@@ -142,7 +142,7 @@ namespace OParl {
                     if (this.consultation_url != "")
                         this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
                     else
-                        warning("Agenda item has no consultation: %s", this.id);
+                        warning(_("Agenda item has no consultation: %s"), this.id);
                     consultation_resolved = true;
                 }
             }
@@ -170,7 +170,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -201,7 +201,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object term in r.parse_data(item.get_array())) {
@@ -211,7 +211,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "resolutionFile":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT("Attribute '%s' must be an object in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_OBJECT(_("Attribute '%s' must be an object in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.resolution_file_p = (File)r.make_object(item);
@@ -228,8 +228,8 @@ namespace OParl {
             if (this.start.compare(this.end) > 0) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.INFO,
-                               "Invalid period",
-                               "The 'start' timestamp must be older date than the 'end' timestamp",
+                               _("Invalid period"),
+                               _("The 'start' timestamp must be older date than the 'end' timestamp"),
                                this.id
                 ));
             }

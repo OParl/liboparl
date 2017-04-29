@@ -50,7 +50,7 @@ namespace OParl {
                     if (this.body_url != "")
                         this.body_p = (Body)r.parse_url(this.body_url);
                     else
-                        warning("Legislative term without body url: %s", this.id);
+                        warning(_("Legislative term without body url: %s"), this.id);
                     body_resolved = true;
                 }
             }
@@ -74,7 +74,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -103,8 +103,8 @@ namespace OParl {
             if (this.start_date.compare(this.end_date) > 0) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.INFO,
-                               "Invalid period",
-                               "The startDate must be an earlier date than the endDate",
+                               _("Invalid period"),
+                               _("The startDate must be an earlier date than the endDate"),
                                this.id
                 ));
             }

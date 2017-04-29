@@ -119,7 +119,7 @@ namespace OParl {
                             this.organization_p.append((Organization)o);
                         }
                     } else {
-                        warning("Body without organization url: %s", this.id);
+                        warning(_("Body without organization url: %s"), this.id);
                     }
                     organization_resolved = true;
                 } else if (organization_resolved) {
@@ -163,7 +163,7 @@ namespace OParl {
                             this.person_p.append((Person)o);
                         }
                     } else {
-                        warning("Body without person url: %s", this.id);
+                        warning(_("Body without person url: %s"), this.id);
                     }
                     person_resolved = true;
                 } else if (person_resolved) {
@@ -207,7 +207,7 @@ namespace OParl {
                             this.meeting_p.append((Meeting)o);
                         }
                     } else {
-                        warning("Body without meeting url: %s",this.id);
+                        warning(_("Body without meeting url: %s"),this.id);
                     }
                     meeting_resolved = true;
                 } else if (meeting_resolved) {
@@ -251,7 +251,7 @@ namespace OParl {
                             this.paper_p.append((Paper)o);
                         }
                     } else {
-                        warning("Body without paper url: %s", this.id);
+                        warning(_("Body without paper url: %s"), this.id);
                     }
                     paper_resolved = true;
                 } else if (paper_resolved) {
@@ -295,7 +295,7 @@ namespace OParl {
                     if (this.system_url != "")
                         this.system_p = (System)r.parse_url(this.system_url);
                     else
-                        warning("Body without system url: %s", this.id);
+                        warning(_("Body without system url: %s"), this.id);
                     system_resolved = true;
                 }
             }
@@ -366,7 +366,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "legislativeTerm":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an array in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         this.legislative_term_p = new List<LegislativeTerm>();
                         var r = new Resolver(this.client);
@@ -377,7 +377,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "location":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be an object in '%s'".printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an object in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
                         this.location_p = (Location)r.make_object(item);
@@ -394,93 +394,93 @@ namespace OParl {
             if (this.name == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Invalid 'name'",
-                               "The 'name'-field contains an empty string. Each Body must "+
-                               " contain a human readable name.",
+                               _("Invalid 'name'"),
+                               _("The 'name'-field contains an empty string. Each Body must ")+
+                               _(" contain a human readable name."),
                                this.id
                 ));
             }
             if (this.name == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "No 'name'",
-                               "The 'name'-field must be present in a Body.",
+                               _("No 'name'"),
+                               _("The 'name'-field must be present in a Body."),
                                this.id
                 ));
             }
             if (this.organization_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty 'organization'",
-                               "The 'organization'-field contains an empty string. Each Body must "+
-                               " supply its organizations.",
+                               _("Empty 'organization'"),
+                               _("The 'organization'-field contains an empty string. Each Body must ")+
+                               _(" supply its organizations."),
                                this.id
                 ));
             }
             if (this.organization_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'organization' field",
-                               "The 'organization'-field must be present in each Body",
+                               _("Missing 'organization' field"),
+                               _("The 'organization'-field must be present in each Body"),
                                this.id
                 ));
             }
             if (this.person_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty 'person'",
-                               "The 'person'-field contains an empty string. Each Body must "+
-                               " supply its persons.",
+                               _("Empty 'person'"),
+                               _("The 'person'-field contains an empty string. Each Body must ")+
+                               _(" supply its persons."),
                                this.id
                 ));
             }
             if (this.person_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'person' field",
-                               "The 'person'-field must be present in each Body",
+                               _("Missing 'person' field"),
+                               _("The 'person'-field must be present in each Body"),
                                this.id
                 ));
             }
             if (this.meeting_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty 'meeting'",
-                               "The 'meeting'-field contains an empty string. Each Body must "+
-                               " supply its meetings.",
+                               _("Empty 'meeting'"),
+                               _("The 'meeting'-field contains an empty string. Each Body must ")+
+                               _(" supply its meetings."),
                                this.id
                 ));
             }
             if (this.meeting_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'meeting' field",
-                               "The 'meeting'-field must be present in each Body",
+                               _("Missing 'meeting' field"),
+                               _("The 'meeting'-field must be present in each Body"),
                                this.id
                 ));
             }
             if (this.paper_url == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Empty 'paper'",
-                               "The 'paper'-field contains an empty string. Each Body must "+
-                               " supply its papers.",
+                               _("Empty 'paper'"),
+                               _("The 'paper'-field contains an empty string. Each Body must ")+
+                               _(" supply its papers."),
                                this.id
                 ));
             }
             if (this.paper_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'paper' field",
-                               "The 'paper'-field must be present in each Body",
+                               _("Missing 'paper' field"),
+                               _("The 'paper'-field must be present in each Body"),
                                this.id
                 ));
             }
             if (this.legislative_term_p == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Missing 'legislativeTerm' field",
-                               "The 'legislativeTerm'-field must be present in each Body",
+                               _("Missing 'legislativeTerm' field"),
+                               _("The 'legislativeTerm'-field must be present in each Body"),
                                this.id
                 ));
             }

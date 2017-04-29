@@ -147,10 +147,10 @@ namespace OParl {
         protected void parse_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
                 }
                 target.set(name_map.get(name), item.get_string(),null);
             } catch (ParsingError e) {
@@ -165,18 +165,18 @@ namespace OParl {
         protected void parse_array_of_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.ARRAY) {
-                    throw new ParsingError.EXPECTED_ARRAY("Attribute '%s' must be an array in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                 }
                 Json.Array arr = item.get_array();
                 string[] res = new string[arr.get_length()];
                 for (int i = 0; i < item.get_array().get_length(); i++ ) {
                     var element = item.get_array().get_element(i);
                     if (element.get_node_type() != Json.NodeType.VALUE) {
-                        GLib.warning("Omitted array-element in '%s' because it was no Json-Value in '%s'".printf(name, this.id));
+                        GLib.warning(_("Omitted array-element in '%s' because it was no Json-Value in '%s'").printf(name, this.id));
                         return;
                     }
                     if (element.get_value_type() != typeof(string)) {
-                        throw new ParsingError.INVALID_TYPE("Arrayelement of '%s' must be a string in '%s'".printf(name, this.id));
+                        throw new ParsingError.INVALID_TYPE(_("Arrayelement of '%s' must be a string in '%s'").printf(name, this.id));
                     }
                     res[i] = element.get_string();
                 }
@@ -193,10 +193,10 @@ namespace OParl {
         protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map, bool is_date=false) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
                 }
                 var tv = GLib.TimeVal();
                 if (is_date) {
@@ -226,10 +226,10 @@ namespace OParl {
         protected void parse_bool(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
                 }
                 if (item.get_value_type() != typeof(bool)) {
-                    throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a boolean in '%s'".printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a boolean in '%s'").printf(name, this.id));
                 }
                 target.set_property(name_map.get(name), item.get_boolean());
             } catch (ParsingError e) {
@@ -240,10 +240,10 @@ namespace OParl {
         protected void parse_int(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s").printf(name, this.id));
                 }
                 if (item.get_value_type() != typeof(int64)) {
-                    throw new ParsingError.INVALID_TYPE("Attribute '%s' must be an integer in '%s".printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be an integer in '%s").printf(name, this.id));
                 }
                 target.set_property(name_map.get(name), item.get_int());
             } catch (ParsingError e) {
@@ -262,10 +262,10 @@ namespace OParl {
         protected void parse_external(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a value in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE("Attribute '%s' must be a string in '%s'".printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
                 }
                 this.set(name_map.get(name)+"_url", item.get_string());
             } catch (ParsingError e) {
@@ -279,17 +279,17 @@ namespace OParl {
         protected void parse_external_list(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.ARRAY) {
-                    throw new ParsingError.EXPECTED_VALUE("Attribute '%s' must be a array in '%s'".printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a array in '%s'").printf(name, this.id));
                 }
                 var arr = item.get_array();
                 var res = new string[arr.get_length()];
                 for (int i = 0; i < arr.get_length(); i++) {
                     var element = arr.get_element(i);
                     if (element.get_node_type() != Json.NodeType.VALUE) {
-                        throw new ParsingError.EXPECTED_VALUE("Element of '%s' must be a value in '%s'".printf(name, this.id));
+                        throw new ParsingError.EXPECTED_VALUE(_("Element of '%s' must be a value in '%s'").printf(name, this.id));
                     }
                     if (element.get_value_type() != typeof(string)) {
-                        throw new ParsingError.INVALID_TYPE("Element of '%s' must be a string in '%s'".printf(name, this.id));
+                        throw new ParsingError.INVALID_TYPE(_("Element of '%s' must be a string in '%s'").printf(name, this.id));
                     }
                     res[i] = element.get_string();
                 }
@@ -302,7 +302,7 @@ namespace OParl {
         internal virtual void parse(Object target, Json.Node n) throws ParsingError {
             // Prepare object
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values
@@ -355,28 +355,28 @@ namespace OParl {
             if (this.id == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Invalid 'id'",
-                               "The 'id'-field contains no id. The id field must contain a valid"+
-                               "url that can be used to retrieve the object via HTTP.",
-                               "<id invalid>"
+                               _("Invalid 'id'"),
+                               _("The 'id'-field contains no id. The id field must contain a valid")+
+                               _("url that can be used to retrieve the object via HTTP."),
+                               _("<id invalid>")
                 ));
             }
             if (this.id == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Invalid 'id'",
-                               "The 'id'-field is an empty string. The id field must contain a valid"+
-                               "url that can be used to retrieve the object via HTTP.",
-                               "<id invalid>"
+                               _("Invalid 'id'"),
+                               _("The 'id'-field is an empty string. The id field must contain a valid")+
+                               _("url that can be used to retrieve the object via HTTP."),
+                               _("<id invalid>")
                 ));
             }
             if (this.license == null && (this is System)) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
-                               "Invalid 'license'",
-                               "The 'license'-field does not contain any value. It is recommended to "+
-                               "specify the license for all subordinated objects either in the System"+
-                               " object or in the Body objects",
+                               _("Invalid 'license'"),
+                               _("The 'license'-field does not contain any value. It is recommended to ")+
+                               _("specify the license for all subordinated objects either in the System")+
+                               _(" object or in the Body objects"),
                                this.id
                 ));
             }
@@ -387,18 +387,18 @@ namespace OParl {
                 } catch (ParsingError e) {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Body with no 'system'",
-                               "This Body does not have a System.",
+                               _("Body with no 'system'"),
+                               _("This Body does not have a System."),
                                this.id
                     ));
                 }
                 if (rootsystem.license == null) {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
-                               "Invalid 'license'",
-                               "The 'license'-field does not contain any value. It is recommended to "+
-                               "specify the license for all subordinated objects either in the System"+
-                               " object or in the Body objects",
+                               _("Invalid 'license'"),
+                               _("The 'license'-field does not contain any value. It is recommended to ")+
+                               _("specify the license for all subordinated objects either in the System")+
+                               _(" object or in the Body objects"),
                                this.id
                     ));
                 }
@@ -406,9 +406,9 @@ namespace OParl {
             if (this.license == "") {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Invalid 'license'",
-                               "The 'license'-field contains an empty string. Please specify a valid "+
-                               "license",
+                               _("Invalid 'license'"),
+                               _("The 'license'-field contains an empty string. Please specify a valid ")+
+                               _("license"),
                                this.id
                 ));
             }
@@ -423,20 +423,20 @@ namespace OParl {
                 if (rootbody == null || rootsystem == null) {
                     this.validation_results.append(new ValidationResult(
                         ErrorSeverity.ERROR,
-                        "Can't resolve root body or root system",
-                        "Every object needs to have license information. Typically, most "+
-                        "objects inherit their license from a superordinated Body or "+
-                        "system object of which neither could be resolved in this instance.",
+                        _("Can't resolve root body or root system"),
+                        _("Every object needs to have license information. Typically, most ")+
+                        _("objects inherit their license from a superordinated Body or ")+
+                        _("system object of which neither could be resolved in this instance."),
                         this.id
                     ));
                 }
                 else if (rootbody.license == null && rootsystem.license == null ) {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
-                               "Invalid 'license'",
-                               "Neither the superordinated Body nor the superordinated Body "+
-                               "specify a license for this object. Please either add a license "+
-                               "to this object or add one to the containing System or Body",
+                               _("Invalid 'license'"),
+                               _("Neither the superordinated Body nor the superordinated Body ")+
+                               _("specify a license for this object. Please either add a license ")+
+                               _("to this object or add one to the containing System or Body"),
                                this.id
                     ));
                 }
@@ -473,12 +473,12 @@ namespace OParl {
             var r = new Resolver(this.client);
 
             if (this.id == null) {
-                throw new ParsingError.EXPECTED_VALUE("Expected valid id attribute in '%s', encountered: '%s'".printf(name, this.id));
+                throw new ParsingError.EXPECTED_VALUE(_("Expected valid id attribute in '%s', encountered: '%s'").printf(name, this.id));
             }
 
             Object updated_obj = r.parse_url(this.id);
             if (updated_obj == null) {
-                throw new ParsingError.EXPECTED_OBJECT("Could not parse updated object for '%s'", this.id);
+                throw new ParsingError.EXPECTED_OBJECT(_("Could not parse updated object for '%s'"), this.id);
             }
 
             Type type = updated_obj.get_type();

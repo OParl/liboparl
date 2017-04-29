@@ -54,7 +54,7 @@ namespace OParl {
                     if (this.paper_url != "")
                         this.paper_p = (Paper)r.parse_url(this.paper_url);
                     else
-                        warning("Consultation has no paper: %s", id);
+                        warning(_("Consultation has no paper: %s"), id);
                     paper_resolved = true;
                 }
             }
@@ -86,7 +86,7 @@ namespace OParl {
                     if (this.agenda_item_url != "")
                         this.agenda_item_p = (AgendaItem)r.parse_url(this.agenda_item_url);
                     else
-                        warning("Consultation without paper url: %s", this.id);
+                        warning(_("Consultation without paper url: %s"), this.id);
                     agenda_item_resolved = true;
                 }
             }
@@ -108,7 +108,7 @@ namespace OParl {
                     if (this.meeting_url != "")
                         this.meeting_p = (Meeting)r.parse_url(this.meeting_url);
                     else
-                        warning("Consultation without meeting url: %s", this.id);
+                        warning(_("Consultation without meeting url: %s"), this.id);
                     meeting_resolved = true;
                 }
             }
@@ -154,7 +154,7 @@ namespace OParl {
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT("I need an Object to parse");
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse"));
             unowned Json.Object o = n.get_object();
 
             // Read in Member values

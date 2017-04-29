@@ -82,7 +82,7 @@ if (host_machine.system() == 'darwin')
     libtype = 'dylib'
 endif
 
-add_global_arguments(['-DGETTEXT_PACKAGE=liboparl'], language: 'c')
+add_global_arguments(['-DGETTEXT_PACKAGE="liboparl"'], language: 'c')
 oparl_lib = library('oparl-'+api, oparl_lib_source,
                     dependencies: [glib, gobject, gio, json_glib],
                     vala_args: ['--gir=../OParl-'+api+'.gir'],
