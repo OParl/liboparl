@@ -16,7 +16,7 @@ Meta-Features
 
   * [x] Unittests
   * [x] API-Documentation (GNOME Devhelp book format)
-  * [ ] i18n
+  * [x] i18n
 
 Characteristics
 ---------------

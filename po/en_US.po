@@ -1,24 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# linoparl english translation
+# Copyright (C) Daniel 'grindhold' Brendle
 # This file is distributed under the same license as the liboparl package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Daniel 'grindhold' Brendle <grindhold [at] skarphed [dot] org>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 21:35+0200\n"
-"PO-Revision-Date: 2017-04-27 21:37+0200\n"
+"POT-Creation-Date: 2017-04-29 11:21+0200\n"
+"PO-Revision-Date: 2017-04-29 12:03+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_US\n"
 
-#: src/oparl.vala:157
+#: src/oparl.vala:162
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl endpoint at '%s' against a "
@@ -27,11 +27,11 @@ msgstr ""
 "JSON could not be parsed. Please check the OParl endpoint at '%s' against a "
 "linter"
 
-#: src/oparl.vala:162
+#: src/oparl.vala:167
 msgid "You did not supply valid data"
 msgstr "You did not supply valid data"
 
-#: src/oparl.vala:178
+#: src/oparl.vala:183
 #, c-format
 msgid ""
 "JSON could not be parsed:\n"
@@ -40,11 +40,11 @@ msgstr ""
 "JSON could not be parsed:\n"
 " %s"
 
-#: src/oparl.vala:231
+#: src/oparl.vala:243
 msgid "URLs must not be null."
 msgstr "URLs must not be null."
 
-#: src/oparl.vala:238 src/oparl.vala:298
+#: src/oparl.vala:250 src/oparl.vala:320
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl Object at '%s' against a "
@@ -53,51 +53,51 @@ msgstr ""
 "JSON could not be parsed. Please check the OParl Object at '%s' against a "
 "linter"
 
-#: src/oparl.vala:254
+#: src/oparl.vala:276
 #, c-format
 msgid "I need a string-value as type in object with id %s"
 msgstr "I need a string-value as type in object with id %s"
 
-#: src/oparl.vala:259
+#: src/oparl.vala:281
 msgid "Tried to resolve an object that does not have a valid Id"
 msgstr "Tried to resolve an object that does not have a valid Id"
 
-#: src/oparl.vala:267
+#: src/oparl.vala:289
 #, c-format
 msgid "The type of this object is no valid OParl type: %s"
 msgstr "The type of this object is no valid OParl type: %s"
 
-#: src/oparl.vala:274 src/oparl.vala:283
+#: src/oparl.vala:296 src/oparl.vala:305
 #, c-format
 msgid "I need an Object to parse: %s"
 msgstr "I need an Object to parse: %s"
 
-#: src/oparl.vala:315
+#: src/oparl.vala:346
 #, c-format
 msgid "I need an Object to parse in '%s'"
 msgstr "I need an Object to parse in '%s'"
 
-#: src/oparl.vala:323
+#: src/oparl.vala:354
 #, c-format
 msgid "Attribute data must be an array in '%s'"
 msgstr "Attribute data must be an array in '%s'"
 
-#: src/oparl.vala:329
+#: src/oparl.vala:360
 #, c-format
 msgid "Attribute links must be an object in '%s'"
 msgstr "Attribute links must be an object in '%s'"
 
-#: src/oparl.vala:336
+#: src/oparl.vala:367
 #, c-format
 msgid "Next-links must be strings in '%s'"
 msgstr "Next-links must be strings in '%s'"
 
-#: src/oparl.vala:340
+#: src/oparl.vala:371
 #, c-format
 msgid "The list '%s' links 'next' to one its previous pages"
 msgstr "The list '%s' links 'next' to one its previous pages"
 
-#: src/oparl.vala:349
+#: src/oparl.vala:380
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl pagination-list at '%s' "
@@ -105,3 +105,451 @@ msgid ""
 msgstr ""
 "JSON could not be parsed. Please check the OParl pagination-list at '%s' "
 "against a linter"
+
+#: src/body.vala:122
+#, c-format
+msgid "Body without organization url: %s"
+msgstr "Body without organization url: %s"
+
+#: src/body.vala:166
+#, c-format
+msgid "Body without person url: %s"
+msgstr "Body without person url: %s"
+
+#: src/body.vala:210
+#, c-format
+msgid "Body without meeting url: %s"
+msgstr "Body without meeting url: %s"
+
+#: src/body.vala:254
+#, c-format
+msgid "Body without paper url: %s"
+msgstr "Body without paper url: %s"
+
+#: src/body.vala:298
+#, c-format
+msgid "Body without system url: %s"
+msgstr "Body without system url: %s"
+
+#: src/body.vala:369 src/person.vala:200 src/meeting.vala:230
+#: src/meeting.vala:239 src/object.vala:168 src/agenda_item.vala:204
+#: src/paper.vala:282 src/paper.vala:291
+#, c-format
+msgid "Attribute '%s' must be an array in '%s'"
+msgstr "Attribute '%s' must be an array in '%s'"
+
+#: src/body.vala:380 src/meeting.vala:249 src/meeting.vala:256
+#: src/meeting.vala:263 src/meeting.vala:270 src/organization.vala:253
+#: src/agenda_item.vala:214 src/paper.vala:311
+#, c-format
+msgid "Attribute '%s' must be an object in '%s'"
+msgstr "Attribute '%s' must be an object in '%s'"
+
+#: src/body.vala:397
+msgid "Invalid 'name'"
+msgstr "Invalid 'name'"
+
+#: src/body.vala:398
+msgid "The 'name'-field contains an empty string. Each Body must "
+msgstr "The 'name'-field contains an empty string. Each Body must "
+
+#: src/body.vala:399
+msgid " contain a human readable name."
+msgstr " contain a human readable name."
+
+#: src/body.vala:406
+msgid "No 'name'"
+msgstr "No 'name'j"
+
+#: src/body.vala:407
+msgid "The 'name'-field must be present in a Body."
+msgstr "The 'name'-field must be present in a Body."
+
+#: src/body.vala:414
+msgid "Empty 'organization'"
+msgstr "Empty 'organization'"
+
+#: src/body.vala:415
+msgid "The 'organization'-field contains an empty string. Each Body must "
+msgstr "The 'organization'-field contains an empty string. Each Body must "
+
+#: src/body.vala:416
+msgid " supply its organizations."
+msgstr " supply its organizations."
+
+#: src/body.vala:423
+msgid "Missing 'organization' field"
+msgstr "Missing 'organization' field"
+
+#: src/body.vala:424
+msgid "The 'organization'-field must be present in each Body"
+msgstr "The 'organization'-field must be present in each Body"
+
+#: src/body.vala:431
+msgid "Empty 'person'"
+msgstr "Empty 'person'"
+
+#: src/body.vala:432
+msgid "The 'person'-field contains an empty string. Each Body must "
+msgstr "The 'person'-field contains an empty string. Each Body must "
+
+#: src/body.vala:433
+msgid " supply its persons."
+msgstr " supply its persons."
+
+#: src/body.vala:440
+msgid "Missing 'person' field"
+msgstr "Missing 'person' field"
+
+#: src/body.vala:441
+msgid "The 'person'-field must be present in each Body"
+msgstr "The 'person'-field must be present in each Body"
+
+#: src/body.vala:448
+msgid "Empty 'meeting'"
+msgstr "Empty 'meeting'"
+
+#: src/body.vala:449
+msgid "The 'meeting'-field contains an empty string. Each Body must "
+msgstr "The 'meeting'-field contains an empty string. Each Body must "
+
+#: src/body.vala:450
+msgid " supply its meetings."
+msgstr " supply its meetings."
+
+#: src/body.vala:457
+msgid "Missing 'meeting' field"
+msgstr "Missing 'meeting' field"
+
+#: src/body.vala:458
+msgid "The 'meeting'-field must be present in each Body"
+msgstr "The 'meeting'-field must be present in each Body"
+
+#: src/body.vala:465
+msgid "Empty 'paper'"
+msgstr "Empty 'paper'"
+
+#: src/body.vala:466
+msgid "The 'paper'-field contains an empty string. Each Body must "
+msgstr "The 'paper'-field contains an empty string. Each Body must "
+
+#: src/body.vala:467
+msgid " supply its papers."
+msgstr " supply its papers."
+
+#: src/body.vala:474
+msgid "Missing 'paper' field"
+msgstr "Missing 'paper' field"
+
+#: src/body.vala:475
+msgid "The 'paper'-field must be present in each Body"
+msgstr "The 'paper'-field must be present in each Body"
+
+#: src/body.vala:482
+msgid "Missing 'legislativeTerm' field"
+msgstr "Missing 'legislativeTerm' field"
+
+#: src/body.vala:483
+msgid "The 'legislativeTerm'-field must be present in each Body"
+msgstr "The 'legislativeTerm'-field must be present in each Body"
+
+#: src/person.vala:102
+#, c-format
+msgid "Person without location url: %s"
+msgstr "Person without location url: %s"
+
+#: src/person.vala:122
+#, c-format
+msgid "Person without body url: %s"
+msgstr "Person without body url: %s"
+
+#. Prepare object
+#: src/person.vala:167 src/membership.vala:150 src/meeting.vala:201
+#: src/system.vala:141 src/object.vala:305 src/organization.vala:220
+#: src/agenda_item.vala:173 src/paper.vala:253 src/consultation.vala:157
+#: src/legislative_term.vala:77 src/location.vala:185 src/file.vala:223
+msgid "I need an Object to parse"
+msgstr "I need an Object to parse"
+
+#: src/membership.vala:71
+#, c-format
+msgid "Membership without person url: %s"
+msgstr "Membership without person url: %s"
+
+#: src/membership.vala:102
+#, c-format
+msgid "Membership without organization url: %s"
+msgstr "Membership without organization url: %s"
+
+#: src/membership.vala:189 src/meeting.vala:287 src/organization.vala:274
+#: src/agenda_item.vala:231 src/legislative_term.vala:106
+msgid "Invalid period"
+msgstr "Invalid period"
+
+#: src/membership.vala:190 src/organization.vala:275
+#: src/legislative_term.vala:107
+msgid "The startDate must be an earlier date than the endDate"
+msgstr "The startDate must be an earlier date than the endDate"
+
+#: src/meeting.vala:288 src/agenda_item.vala:232
+msgid "The 'start' timestamp must be older date than the 'end' timestamp"
+msgstr "The 'start' timestamp must be older date than the 'end' timestamp"
+
+#: src/system.vala:107
+#, c-format
+msgid "System without body-list: %s"
+msgstr "System without body-list: %s"
+
+#: src/system.vala:177
+msgid "Missing oparlVersion field"
+msgstr "Missing oparlVersion field"
+
+#: src/system.vala:178
+msgid "The field 'oparlVersion' must be set."
+msgstr "The field 'oparlVersion' must be set."
+
+#: src/system.vala:186
+msgid "Empty oparlVersion field"
+msgstr "Empty oparlVersion field"
+
+#: src/system.vala:187
+msgid "The field 'oparlVersion' must not be an empty string."
+msgstr "The field 'oparlVersion' must not be an empty string."
+
+#: src/system.vala:194
+msgid "Missing body field"
+msgstr "Missing body field"
+
+#: src/system.vala:195
+msgid "The field 'body' must be set."
+msgstr "The field 'body' must be set."
+
+#: src/system.vala:202
+msgid "Empty body field"
+msgstr "Empty body field"
+
+#: src/system.vala:203
+msgid "The field 'body' must not be an empty string."
+msgstr "The field 'body' must not be an empty string."
+
+#: src/object.vala:150 src/object.vala:196 src/object.vala:229
+#: src/object.vala:265
+#, c-format
+msgid "Attribute '%s' must be a value in '%s'"
+msgstr "Attribute '%s' must be a value in '%s'"
+
+#: src/object.vala:153 src/object.vala:199 src/object.vala:268
+#, c-format
+msgid "Attribute '%s' must be a string in '%s'"
+msgstr "Attribute '%s' must be a string in '%s'"
+
+#: src/object.vala:175
+#, c-format
+msgid "Omitted array-element in '%s' because it was no Json-Value in '%s'"
+msgstr "Omitted array-element in '%s' because it was no Json-Value in '%s'"
+
+#: src/object.vala:179
+#, c-format
+msgid "Arrayelement of '%s' must be a string in '%s'"
+msgstr "Arrayelement of '%s' must be a string in '%s'"
+
+#: src/object.vala:232
+#, c-format
+msgid "Attribute '%s' must be a boolean in '%s'"
+msgstr "Attribute '%s' must be a boolean in '%s'"
+
+#: src/object.vala:243
+#, c-format
+msgid "Attribute '%s' must be a value in '%s"
+msgstr "Attribute '%s' must be a value in '%s'"
+
+#: src/object.vala:246
+#, c-format
+msgid "Attribute '%s' must be an integer in '%s"
+msgstr "Attribute '%s' must be an integer in '%s"
+
+#: src/object.vala:282
+#, c-format
+msgid "Attribute '%s' must be a array in '%s'"
+msgstr "Attribute '%s' must be a array in '%s'"
+
+#: src/object.vala:289
+#, c-format
+msgid "Element of '%s' must be a value in '%s'"
+msgstr "Element of '%s' must be a value in '%s'"
+
+#: src/object.vala:292
+#, c-format
+msgid "Element of '%s' must be a string in '%s'"
+msgstr "Element of '%s' must be a string in '%s'"
+
+#: src/object.vala:358 src/object.vala:367
+msgid "Invalid 'id'"
+msgstr "Invalid 'id'"
+
+#: src/object.vala:359
+msgid "The 'id'-field contains no id. The id field must contain a valid"
+msgstr "The 'id'-field contains no id. The id field must contain a valid"
+
+#: src/object.vala:360 src/object.vala:369
+msgid "url that can be used to retrieve the object via HTTP."
+msgstr "url that can be used to retrieve the object via HTTP."
+
+#: src/object.vala:361 src/object.vala:370
+msgid "<id invalid>"
+msgstr "<id invalid>"
+
+#: src/object.vala:368
+msgid "The 'id'-field is an empty string. The id field must contain a valid"
+msgstr "The 'id'-field is an empty string. The id field must contain a valid"
+
+#: src/object.vala:376 src/object.vala:398 src/object.vala:409
+#: src/object.vala:436
+msgid "Invalid 'license'"
+msgstr "Invalid 'license'"
+
+#: src/object.vala:377 src/object.vala:399
+msgid "The 'license'-field does not contain any value. It is recommended to "
+msgstr "The 'license'-field does not contain any value. It is recommended to "
+
+#: src/object.vala:378 src/object.vala:400
+msgid "specify the license for all subordinated objects either in the System"
+msgstr "specify the license for all subordinated objects either in the System"
+
+#: src/object.vala:379 src/object.vala:401
+msgid " object or in the Body objects"
+msgstr " object or in the Body objects"
+
+#: src/object.vala:390
+msgid "Body with no 'system'"
+msgstr "Body with no 'system'"
+
+#: src/object.vala:391
+msgid "This Body does not have a System."
+msgstr "This Body does not have a System."
+
+#: src/object.vala:410
+msgid "The 'license'-field contains an empty string. Please specify a valid "
+msgstr "The 'license'-field contains an empty string. Please specify a valid "
+
+#: src/object.vala:411
+msgid "license"
+msgstr "license"
+
+#: src/object.vala:426
+msgid "Can't resolve root body or root system"
+msgstr "Can't resolve root body or root system"
+
+#: src/object.vala:427
+msgid "Every object needs to have license information. Typically, most "
+msgstr "Every object needs to have license information. Typically, most "
+
+#: src/object.vala:428
+msgid "objects inherit their license from a superordinated Body or "
+msgstr "objects inherit their license from a superordinated Body or "
+
+#: src/object.vala:429
+msgid "system object of which neither could be resolved in this instance."
+msgstr "system object of which neither could be resolved in this instance."
+
+#: src/object.vala:437
+msgid "Neither the superordinated Body nor the superordinated Body "
+msgstr "Neither the superordinated Body nor the superordinated Body "
+
+#: src/object.vala:438
+msgid "specify a license for this object. Please either add a license "
+msgstr "specify a license for this object. Please either add a license "
+
+#: src/object.vala:439
+msgid "to this object or add one to the containing System or Body"
+msgstr "to this object or add one to the containing System or Bodyj"
+
+#: src/object.vala:476
+#, c-format
+msgid "Expected valid id attribute in '%s', encountered: '%s'"
+msgstr "Expected valid id attribute in '%s', encountered: '%s'"
+
+#: src/object.vala:481
+#, c-format
+msgid "Could not parse updated object for '%s'"
+msgstr "Could not parse updated object for '%s'"
+
+#: src/organization.vala:77
+#, c-format
+msgid "Organization without body url: %s"
+msgstr "Organization without body url: %s"
+
+#: src/organization.vala:186
+#, c-format
+msgid "Organization without meeting url: %s"
+msgstr "Organization without meeting url: %s"
+
+#: src/agenda_item.vala:122
+#, c-format
+msgid "Agenda item has no meeting: %s"
+msgstr "Agenda item has no meeting: %s"
+
+#: src/agenda_item.vala:145
+#, c-format
+msgid "Agenda item has no consultation: %s"
+msgstr "Agenda item has no consultation: %s"
+
+#: src/paper.vala:221
+#, c-format
+msgid "Paper has no body: %s"
+msgstr "Paper has no body: %s"
+
+#: src/paper.vala:301
+#, c-format
+msgid "Attribute '%s' must be an array in '%s"
+msgstr "Attribute '%s' must be an array in '%s"
+
+#: src/consultation.vala:57
+#, c-format
+msgid "Consultation has no paper: %s"
+msgstr "Consultation has no paper: %s"
+
+#: src/consultation.vala:89
+#, c-format
+msgid "Consultation without paper url: %s"
+msgstr "Consultation without paper url: %s"
+
+#: src/consultation.vala:111
+#, c-format
+msgid "Consultation without meeting url: %s"
+msgstr "Consultation without meeting url: %s"
+
+#: src/legislative_term.vala:53
+#, c-format
+msgid "Legislative term without body url: %s"
+msgstr "Legislative term without body url: %s"
+
+#: src/location.vala:163
+#, c-format
+msgid "Can't determine root_body: missing backreference in '%s'"
+msgstr "Can't determine root_body: missing backreference in '%s'"
+
+#: src/location.vala:212
+#, c-format
+msgid "Attribute '%s' must be a object in '%s'"
+msgstr "Attribute '%s' must be a object in '%s'"
+
+#: src/file.vala:272
+msgid "Missing 'accessUrl' field"
+msgstr "Missing 'accessUrl' field"
+
+#: src/file.vala:273
+msgid "The 'accessUrl'-field must be present in each File"
+msgstr "The 'accessUrl'-field must be present in each File"
+
+#: src/file.vala:280
+msgid "Empty 'accessUrl'"
+msgstr "Empty 'accessUrl'"
+
+#: src/file.vala:281
+msgid "The 'accessUrl'-field contains an empty string. Each File must "
+msgstr "The 'accessUrl'-field contains an empty string. Each File must "
+
+#: src/file.vala:282
+msgid " supply an URL to access its contents."
+msgstr " supply an URL to access its contents."
