@@ -1,7 +1,7 @@
 liboparl
 ========
 
-You are laying eyes on liboparl. A client implementation of the OParl-1.0 specification.
+You are laying eyes on liboparl. A client implementation of the [OParl-1.0 specification](https://github.com/OParl/spec).
 It's your easy way to access endpoints in a straightforward fashion.
 
 Features
