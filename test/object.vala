@@ -46,6 +46,10 @@ namespace OParlTest {
                 } catch (ParsingError e) {
                     GLib.assert_not_reached();
                 }
+
+                assert(client.oparl_version != null);
+                assert(client.oparl_version == "https://schema.oparl.org/1.0/");
+
                 assert (s.id == "https://oparl.example.org/");
                 assert (s.name == "Testsystem und so");
                 assert (s.short_name == "Testsystem");
