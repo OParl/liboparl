@@ -317,7 +317,7 @@ namespace OParl {
                     // Direct Read-in
                     // - type
                     case "type":
-                        this.set("oparl_type", item.get_string());
+                        this.oparl_type = item.get_string();
                         break;
 
                     // - strings
