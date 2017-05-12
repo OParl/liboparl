@@ -138,6 +138,8 @@ namespace OParl {
 
         public bool strict {get; set; default=true;}
 
+        public string oparl_version { get; protected set; default="https://schema.oparl.org/1.0/"; }
+
         /**
          * Opens a connection to a new OParl-endpoint and yields
          * it as an {@link OParl.System} Object.
@@ -152,19 +154,28 @@ namespace OParl {
             }
             int status;
             string data = this.resolve_url(url, out status);
+
             if (data != null) {
                 var system = new System();
                 var parser = new Json.Parser();
                 system.set_client(this);
+
                 try {
                     parser.load_from_data(data);
                 } catch (GLib.Error e) {
                     throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter").printf(url));
                 }
+
                 system.parse(parser.get_root());
+
+                if (system.oparl_version != null) {
+                    this.oparl_version = system.oparl_version;
+                }
+
                 return system;
             }
-            throw new ParsingError.NO_DATA(_("You did not supply valid data"));
+
+            throw new ParsingError.NO_DATA("You did not supply valid data");
         }
 
         /**
@@ -283,7 +294,7 @@ namespace OParl {
                 }
             }
 
-            string typestr = type.get_string().replace("https://schema.oparl.org/1.0/","");
+            string typestr = type.get_string().replace(c.oparl_version,"");
 
             Type t = Type.from_name("OParl"+typestr);
             if (!(t.is_a(typeof(OParl.Object)))) {
