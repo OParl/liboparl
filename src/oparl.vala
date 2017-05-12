@@ -282,6 +282,7 @@ namespace OParl {
                     );
                 }
             }
+
             string typestr = type.get_string().replace("https://schema.oparl.org/1.0/","");
 
             Type t = Type.from_name("OParl"+typestr);
@@ -290,11 +291,13 @@ namespace OParl {
             }
             var target = (Object)GLib.Object.new(t);
             target.set_client(this.c);
+
             try {
                 (target as Parsable).parse(n);
             } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
                 throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: %s"), ident.get_string());
             }
+
             return target;
         }
 
