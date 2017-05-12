@@ -34,6 +34,11 @@ namespace OParl {
         public string id {get; protected set; default="unknown id";}
 
         /**
+         * Contains the original type attribute of an object
+         */
+        public string oparl_type { get; protected set; default="invalid type"; }
+
+        /**
          * Used to contain the name of an object. This field is mandatory
          * for most objects.
          */
@@ -310,6 +315,11 @@ namespace OParl {
                 unowned Json.Node item = o.get_member(name);
                 switch(name) {
                     // Direct Read-in
+                    // - type
+                    case "type":
+                        this.set("oparl_type", item.get_string());
+                        break;
+
                     // - strings
                     case "id":
                     case "name":
