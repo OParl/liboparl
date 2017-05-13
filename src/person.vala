@@ -89,6 +89,7 @@ namespace OParl {
         internal string location_url {get;set; default="";}
         private bool location_resolved {get;set; default=false;}
         private Location? location_p = null;
+
         /**
          * The contact address of this Person
          */
@@ -98,8 +99,7 @@ namespace OParl {
                     var r = new Resolver(this.client);
                     if (this.location_url != "")
                         this.location_p = (Location)r.parse_url(this.location_url);
-                    else
-                        warning(_("Person without location url: %s"), this.id);
+
                     location_resolved = true;
                 }
             }
@@ -230,6 +230,24 @@ namespace OParl {
             }
 
             return l;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public new unowned List<ValidationResult> validate() {
+            base.validate();
+
+            if (this.location_url == "") {
+                this.validation_results.append(new ValidationResult(
+                    ErrorSeverity.INFO,
+                    _("Missing location"),
+                    _("The Person doesn't have any attached location data"),
+                    this.id
+                ));
+            }
+
+            return this.validation_results;
         }
     }
 }
