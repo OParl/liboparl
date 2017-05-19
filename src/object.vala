@@ -537,9 +537,13 @@ namespace OParl {
          * fields
          */
         public void autoload() throws OParl.ParsingError {
-            if (!this.fully_loaded) {
-                this.refresh();
-                this.fully_loaded = true;
+            try {
+                if (!this.fully_loaded) {
+                    this.refresh();
+                    this.fully_loaded = true;
+                }
+            } catch (ParsingError e) {
+                this.handle_parse_error(e);
             }
         }
     }
