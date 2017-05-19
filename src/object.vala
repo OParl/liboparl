@@ -133,7 +133,7 @@ namespace OParl {
          * Triggers {@OParl.Client.shit_happened if the client is in non-strict-mode.
          * Otherwise it raises the error regularly
          */
-        private void handle_parse_error(ParsingError e) throws ParsingError {
+        protected void handle_parse_error(ParsingError e) throws ParsingError {
             if (this.client.strict)
                 throw e;
             else
