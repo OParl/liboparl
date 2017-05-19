@@ -183,7 +183,11 @@ namespace OParl {
          */
         public new unowned List<ValidationResult> validate() {
             base.validate();
-            if (this.start_date.compare(this.end_date) > 0) {
+
+            if (this.start_date != null
+            && this.end_date != null
+            && this.start_date.compare(this.end_date) > 0)
+            {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.INFO,
                                _("Invalid period"),
@@ -191,6 +195,7 @@ namespace OParl {
                                this.id
                 ));
             }
+
             return this.validation_results;
         }
 
