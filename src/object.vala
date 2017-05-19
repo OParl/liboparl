@@ -203,12 +203,15 @@ namespace OParl {
                 if (item.get_value_type() != typeof(string)) {
                     throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
                 }
+
                 var tv = GLib.TimeVal();
+
                 if (is_date) {
                     tv.from_iso8601(item.get_string()+"T00:00:00+00:00");
                 } else {
                     tv.from_iso8601(item.get_string());
                 }
+
                 var dt = new GLib.DateTime.from_timeval_utc(tv);
                 target.set_property(name_map.get(name), dt);
             } catch (ParsingError e) {
@@ -511,7 +514,7 @@ namespace OParl {
         /**
          * Returns a list of all Objects that this Object is connected with
          */
-        public abstract List<OParl.Object> get_neighbors() throws ParsingError; 
+        public abstract List<OParl.Object> get_neighbors() throws ParsingError;
     }
 
     /**
