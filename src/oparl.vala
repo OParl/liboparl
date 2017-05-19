@@ -193,7 +193,7 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON(_("JSON could not be parsed:\n %s").printf(json));
             }
-            // TODO: evaluate wheter the following todo is really necessary
+            // TODO: evaluate wheter the following todo is really necessary [It is necessary - eFrane]
             // TODO: check wheter object belongs to this client. if it does not throw exception
             var resolver = new Resolver(this);
             var ret = new List<OParl.Object>();
