@@ -31,7 +31,7 @@ namespace OParl {
          * Contains a unique identifier, the object's URL to be precise.
          * This field is ''mandatory'' for any Object
          */
-        public string id {get; protected set; default="unknown id";}
+        public string id {get; protected set; default=null;}
 
         /**
          * Contains the original type attribute of an object
