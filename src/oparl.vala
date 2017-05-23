@@ -382,7 +382,7 @@ namespace OParl {
                 }
                 string url = links.get_string_member("next");
                 if (visited_urls.index(url) != -1) {
-                    throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one its previous pages"), old_url);
+                    throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), old_url);
                 }
                 visited_urls.append(url);
                 int status;
