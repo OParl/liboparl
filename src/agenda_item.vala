@@ -201,7 +201,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "auxiliaryFile":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array.").printf(name));
                         }
                         var r = new Resolver(this.client);
                         foreach (Object term in r.parse_data(item.get_array())) {
@@ -211,7 +211,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "resolutionFile":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_OBJECT(_("Attribute '%s' must be an object in '%s'").printf(name, this.id));
+                            throw new ParsingError.EXPECTED_OBJECT(_("Attribute '%s' must be an object.").printf(name));
                         }
                         var r = new Resolver(this.client);
                         this.resolution_file_p = (File)r.make_object(item);

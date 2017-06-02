@@ -209,7 +209,7 @@ namespace OParl {
                     // Json object
                     case "geojson":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a object in '%s'").printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a object.").printf(name));
                         }
                         this.set(Location.name_map.get(name), item.get_object());
                         break;

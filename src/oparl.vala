@@ -152,6 +152,7 @@ namespace OParl {
                 if (!Client.initialized)
                     Client.init();
             }
+
             int status;
             string data = this.resolve_url(url, out status);
 

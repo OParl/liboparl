@@ -134,15 +134,18 @@ namespace OParl {
          * Otherwise it raises the error regularly
          */
         protected void handle_parse_error(ParsingError e) throws ParsingError {
-            if (this.client.strict)
+            if (this.client.strict) {
+                string annotated_message = e.message + _("Error occured in '%s'.").printf(this.id);
+                e.message = annotated_message;
                 throw e;
-            else
+            } else {
                 this.client.shit_happened(new ValidationResult(
                     ErrorSeverity.ERROR,
                     e.message,
                     "",
                     this.id
                 ));
+            }
         }
 
         /**
@@ -152,10 +155,10 @@ namespace OParl {
         protected void parse_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string.").printf(name));
                 }
                 target.set(name_map.get(name), item.get_string(),null);
             } catch (ParsingError e) {
@@ -170,18 +173,18 @@ namespace OParl {
         protected void parse_array_of_string(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.ARRAY) {
-                    throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array.").printf(name));
                 }
                 Json.Array arr = item.get_array();
                 string[] res = new string[arr.get_length()];
                 for (int i = 0; i < item.get_array().get_length(); i++ ) {
                     var element = item.get_array().get_element(i);
                     if (element.get_node_type() != Json.NodeType.VALUE) {
-                        GLib.warning(_("Omitted array-element in '%s' because it was no Json-Value in '%s'").printf(name, this.id));
+                        GLib.warning(_("Omitted array-element in '%s' because it was no Json-Value.").printf(name));
                         return;
                     }
                     if (element.get_value_type() != typeof(string)) {
-                        throw new ParsingError.INVALID_TYPE(_("Arrayelement of '%s' must be a string in '%s'").printf(name, this.id));
+                        throw new ParsingError.INVALID_TYPE(_("Arrayelement of '%s' must be a string.").printf(name));
                     }
                     res[i] = element.get_string();
                 }
@@ -198,10 +201,10 @@ namespace OParl {
         protected void parse_datetime(Object target, string name, Json.Node item, HashTable<string,string> name_map, bool is_date=false) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string.").printf(name));
                 }
 
                 var tv = GLib.TimeVal();
@@ -234,10 +237,10 @@ namespace OParl {
         protected void parse_bool(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
                 }
                 if (item.get_value_type() != typeof(bool)) {
-                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a boolean in '%s'").printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a boolean.").printf(name));
                 }
                 target.set_property(name_map.get(name), item.get_boolean());
             } catch (ParsingError e) {
@@ -248,10 +251,10 @@ namespace OParl {
         protected void parse_int(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
                 }
                 if (item.get_value_type() != typeof(int64)) {
-                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be an integer in '%s").printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be an integer.").printf(name));
                 }
                 target.set_property(name_map.get(name), item.get_int());
             } catch (ParsingError e) {
@@ -270,10 +273,10 @@ namespace OParl {
         protected void parse_external(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
                 }
                 if (item.get_value_type() != typeof(string)) {
-                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string in '%s'").printf(name, this.id));
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string.").printf(name));
                 }
                 this.set(name_map.get(name)+"_url", item.get_string());
             } catch (ParsingError e) {
@@ -287,17 +290,17 @@ namespace OParl {
         protected void parse_external_list(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.ARRAY) {
-                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a array in '%s'").printf(name, this.id));
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a array.").printf(name));
                 }
                 var arr = item.get_array();
                 var res = new string[arr.get_length()];
                 for (int i = 0; i < arr.get_length(); i++) {
                     var element = arr.get_element(i);
                     if (element.get_node_type() != Json.NodeType.VALUE) {
-                        throw new ParsingError.EXPECTED_VALUE(_("Element of '%s' must be a value in '%s'").printf(name, this.id));
+                        throw new ParsingError.EXPECTED_VALUE(_("Element of '%s' must be a value.").printf(name));
                     }
                     if (element.get_value_type() != typeof(string)) {
-                        throw new ParsingError.INVALID_TYPE(_("Element of '%s' must be a string in '%s'").printf(name, this.id));
+                        throw new ParsingError.INVALID_TYPE(_("Element of '%s' must be a string.").printf(name));
                     }
                     res[i] = element.get_string();
                 }
@@ -484,14 +487,19 @@ namespace OParl {
          */
         public void refresh() throws OParl.ParsingError {
             var r = new Resolver(this.client);
+            Object updated_obj = null;
 
-            if (this.id == null) {
-                throw new ParsingError.EXPECTED_VALUE(_("Expected valid id attribute in '%s', encountered: '%s'").printf(name, this.id));
-            }
+            try {
+                if (this.id == null) {
+                    throw new ParsingError.EXPECTED_VALUE(_("Expected valid id attribute, encountered: '%s'.").printf(name));
+                }
 
-            Object updated_obj = r.parse_url(this.id);
-            if (updated_obj == null) {
-                throw new ParsingError.EXPECTED_OBJECT(_("Could not parse updated object for '%s'"), this.id);
+                updated_obj = r.parse_url(this.id);
+                if (updated_obj == null) {
+                    throw new ParsingError.EXPECTED_OBJECT(_("Could not parse updated object."));
+                }
+            } catch (OParl.ParsingError e) {
+                this.handle_parse_error(e);
             }
 
             Type type = updated_obj.get_type();

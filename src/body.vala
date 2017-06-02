@@ -366,7 +366,7 @@ namespace OParl {
                     // To Resolve as internal objectlist
                     case "legislativeTerm":
                         if (item.get_node_type() != Json.NodeType.ARRAY) {
-                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an array.").printf(name));
                         }
                         this.legislative_term_p = new List<LegislativeTerm>();
                         var r = new Resolver(this.client);
@@ -377,7 +377,7 @@ namespace OParl {
                     // To resolve as internal object
                     case "location":
                         if (item.get_node_type() != Json.NodeType.OBJECT) {
-                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an object in '%s'").printf(name, this.id));
+                            throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be an object.").printf(name));
                         }
                         var r = new Resolver(this.client);
                         this.location_p = (Location)r.make_object(item);
