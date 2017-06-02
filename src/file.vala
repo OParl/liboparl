@@ -278,8 +278,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Empty 'accessUrl'"),
-                               _("The 'accessUrl'-field contains an empty string. Each File must ")+
-                               _(" supply an URL to access its contents."),
+                               _("The 'accessUrl'-field contains an empty string. Each File must "
+                               + " supply an URL to access its contents."),
                                this.id
                 ));
             }

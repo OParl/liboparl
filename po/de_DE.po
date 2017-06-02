@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 11:00+0200\n"
+"POT-Creation-Date: 2017-06-02 11:12+0200\n"
 "PO-Revision-Date: 2017-04-29 12:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -539,14 +539,16 @@ msgid "Empty 'accessUrl'"
 msgstr "Leere 'accessUrl'"
 
 #: src/file.vala:281
-msgid "The 'accessUrl'-field contains an empty string. Each File must "
+#, fuzzy
+msgid ""
+"The 'accessUrl'-field contains an empty string. Each File must  supply an "
+"URL to access its contents."
 msgstr ""
 "Das Feld 'accessUrl' beinhaltet eine leere Zeichenkette. Jedes Datei-Objekt "
 "muss"
 
-#: src/file.vala:282
-msgid " supply an URL to access its contents."
-msgstr " eine URL zu seinem Inhalt mitliefern."
+#~ msgid " supply an URL to access its contents."
+#~ msgstr " eine URL zu seinem Inhalt mitliefern."
 
 #~ msgid " contain a human readable name."
 #~ msgstr " einen menschenlesbaren Namen haben."
