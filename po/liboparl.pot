@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 11:21+0200\n"
+"POT-Creation-Date: 2017-06-02 10:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,80 +17,76 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/oparl.vala:162
+#: src/oparl.vala:166
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl endpoint at '%s' against a "
 "linter"
 msgstr ""
 
-#: src/oparl.vala:167
-msgid "You did not supply valid data"
-msgstr ""
-
-#: src/oparl.vala:183
+#: src/oparl.vala:194
 #, c-format
 msgid ""
 "JSON could not be parsed:\n"
 " %s"
 msgstr ""
 
-#: src/oparl.vala:243
+#: src/oparl.vala:254
 msgid "URLs must not be null."
 msgstr ""
 
-#: src/oparl.vala:250 src/oparl.vala:320
+#: src/oparl.vala:261 src/oparl.vala:334
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl Object at '%s' against a "
 "linter"
 msgstr ""
 
-#: src/oparl.vala:276
+#: src/oparl.vala:287
 #, c-format
 msgid "I need a string-value as type in object with id %s"
 msgstr ""
 
-#: src/oparl.vala:281
+#: src/oparl.vala:292
 msgid "Tried to resolve an object that does not have a valid Id"
 msgstr ""
 
-#: src/oparl.vala:289
+#: src/oparl.vala:301
 #, c-format
 msgid "The type of this object is no valid OParl type: %s"
 msgstr ""
 
-#: src/oparl.vala:296 src/oparl.vala:305
+#: src/oparl.vala:309 src/oparl.vala:319
 #, c-format
 msgid "I need an Object to parse: %s"
 msgstr ""
 
-#: src/oparl.vala:346
+#: src/oparl.vala:360
 #, c-format
 msgid "I need an Object to parse in '%s'"
 msgstr ""
 
-#: src/oparl.vala:354
+#: src/oparl.vala:368
 #, c-format
 msgid "Attribute data must be an array in '%s'"
 msgstr ""
 
-#: src/oparl.vala:360
+#: src/oparl.vala:374
 #, c-format
 msgid "Attribute links must be an object in '%s'"
 msgstr ""
 
-#: src/oparl.vala:367
+#: src/oparl.vala:381
 #, c-format
 msgid "Next-links must be strings in '%s'"
 msgstr ""
 
-#: src/oparl.vala:371
+#: src/oparl.vala:385
 #, c-format
-msgid "The list '%s' links 'next' to one its previous pages"
+msgid "The list '%s' links 'next' to one of its previous pages"
 msgstr ""
 
-#: src/oparl.vala:380
+#: src/oparl.vala:394
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl pagination-list at '%s' "
@@ -123,7 +119,7 @@ msgid "Body without system url: %s"
 msgstr ""
 
 #: src/body.vala:369 src/person.vala:200 src/meeting.vala:230
-#: src/meeting.vala:239 src/object.vala:168 src/agenda_item.vala:204
+#: src/meeting.vala:239 src/object.vala:173 src/agenda_item.vala:204
 #: src/paper.vala:282 src/paper.vala:291
 #, c-format
 msgid "Attribute '%s' must be an array in '%s'"
@@ -244,11 +240,6 @@ msgstr ""
 msgid "The 'legislativeTerm'-field must be present in each Body"
 msgstr ""
 
-#: src/person.vala:102
-#, c-format
-msgid "Person without location url: %s"
-msgstr ""
-
 #: src/person.vala:122
 #, c-format
 msgid "Person without body url: %s"
@@ -256,10 +247,18 @@ msgstr ""
 
 #. Prepare object
 #: src/person.vala:167 src/membership.vala:150 src/meeting.vala:201
-#: src/system.vala:141 src/object.vala:305 src/organization.vala:220
+#: src/system.vala:141 src/object.vala:313 src/organization.vala:220
 #: src/agenda_item.vala:173 src/paper.vala:253 src/consultation.vala:157
 #: src/legislative_term.vala:77 src/location.vala:185 src/file.vala:223
 msgid "I need an Object to parse"
+msgstr ""
+
+#: src/person.vala:244
+msgid "Missing location"
+msgstr ""
+
+#: src/person.vala:245
+msgid "The Person doesn't have any attached location data"
 msgstr ""
 
 #: src/membership.vala:71
@@ -272,12 +271,12 @@ msgstr ""
 msgid "Membership without organization url: %s"
 msgstr ""
 
-#: src/membership.vala:189 src/meeting.vala:287 src/organization.vala:274
+#: src/membership.vala:193 src/meeting.vala:287 src/organization.vala:274
 #: src/agenda_item.vala:231 src/legislative_term.vala:106
 msgid "Invalid period"
 msgstr ""
 
-#: src/membership.vala:190 src/organization.vala:275
+#: src/membership.vala:194 src/organization.vala:275
 #: src/legislative_term.vala:107
 msgid "The startDate must be an earlier date than the endDate"
 msgstr ""
@@ -323,144 +322,120 @@ msgstr ""
 msgid "The field 'body' must not be an empty string."
 msgstr ""
 
-#: src/object.vala:150 src/object.vala:196 src/object.vala:229
-#: src/object.vala:265
+#: src/object.vala:155 src/object.vala:201 src/object.vala:237
+#: src/object.vala:273
 #, c-format
 msgid "Attribute '%s' must be a value in '%s'"
 msgstr ""
 
-#: src/object.vala:153 src/object.vala:199 src/object.vala:268
+#: src/object.vala:158 src/object.vala:204 src/object.vala:276
 #, c-format
 msgid "Attribute '%s' must be a string in '%s'"
 msgstr ""
 
-#: src/object.vala:175
+#: src/object.vala:180
 #, c-format
 msgid "Omitted array-element in '%s' because it was no Json-Value in '%s'"
 msgstr ""
 
-#: src/object.vala:179
+#: src/object.vala:184
 #, c-format
 msgid "Arrayelement of '%s' must be a string in '%s'"
 msgstr ""
 
-#: src/object.vala:232
+#: src/object.vala:240
 #, c-format
 msgid "Attribute '%s' must be a boolean in '%s'"
 msgstr ""
 
-#: src/object.vala:243
+#: src/object.vala:251
 #, c-format
 msgid "Attribute '%s' must be a value in '%s"
 msgstr ""
 
-#: src/object.vala:246
+#: src/object.vala:254
 #, c-format
 msgid "Attribute '%s' must be an integer in '%s"
 msgstr ""
 
-#: src/object.vala:282
+#: src/object.vala:290
 #, c-format
 msgid "Attribute '%s' must be a array in '%s'"
 msgstr ""
 
-#: src/object.vala:289
+#: src/object.vala:297
 #, c-format
 msgid "Element of '%s' must be a value in '%s'"
 msgstr ""
 
-#: src/object.vala:292
+#: src/object.vala:300
 #, c-format
 msgid "Element of '%s' must be a string in '%s'"
 msgstr ""
 
-#: src/object.vala:358 src/object.vala:367
+#: src/object.vala:371 src/object.vala:380
 msgid "Invalid 'id'"
 msgstr ""
 
-#: src/object.vala:359
-msgid "The 'id'-field contains no id. The id field must contain a valid"
+#: src/object.vala:372 src/object.vala:381
+msgid ""
+"The 'id'-field contains no id. The id field must contain a validurl that can "
+"be used to retrieve the object via HTTP."
 msgstr ""
 
-#: src/object.vala:360 src/object.vala:369
-msgid "url that can be used to retrieve the object via HTTP."
-msgstr ""
-
-#: src/object.vala:361 src/object.vala:370
+#: src/object.vala:374 src/object.vala:383
 msgid "<id invalid>"
 msgstr ""
 
-#: src/object.vala:368
-msgid "The 'id'-field is an empty string. The id field must contain a valid"
-msgstr ""
-
-#: src/object.vala:376 src/object.vala:398 src/object.vala:409
-#: src/object.vala:436
+#: src/object.vala:389 src/object.vala:411 src/object.vala:422
+#: src/object.vala:449
 msgid "Invalid 'license'"
 msgstr ""
 
-#: src/object.vala:377 src/object.vala:399
-msgid "The 'license'-field does not contain any value. It is recommended to "
+#: src/object.vala:390 src/object.vala:412
+msgid ""
+"The 'license'-field does not contain any value. It is recommended to specify "
+"the license for all subordinated objects either in the System object or in "
+"the Body objects"
 msgstr ""
 
-#: src/object.vala:378 src/object.vala:400
-msgid "specify the license for all subordinated objects either in the System"
-msgstr ""
-
-#: src/object.vala:379 src/object.vala:401
-msgid " object or in the Body objects"
-msgstr ""
-
-#: src/object.vala:390
+#: src/object.vala:403
 msgid "Body with no 'system'"
 msgstr ""
 
-#: src/object.vala:391
+#: src/object.vala:404
 msgid "This Body does not have a System."
 msgstr ""
 
-#: src/object.vala:410
-msgid "The 'license'-field contains an empty string. Please specify a valid "
-msgstr ""
-
-#: src/object.vala:411
-msgid "license"
-msgstr ""
-
-#: src/object.vala:426
-msgid "Can't resolve root body or root system"
-msgstr ""
-
-#: src/object.vala:427
-msgid "Every object needs to have license information. Typically, most "
-msgstr ""
-
-#: src/object.vala:428
-msgid "objects inherit their license from a superordinated Body or "
-msgstr ""
-
-#: src/object.vala:429
-msgid "system object of which neither could be resolved in this instance."
-msgstr ""
-
-#: src/object.vala:437
-msgid "Neither the superordinated Body nor the superordinated Body "
-msgstr ""
-
-#: src/object.vala:438
-msgid "specify a license for this object. Please either add a license "
+#: src/object.vala:423
+msgid ""
+"The 'license'-field contains an empty string. Please specify a valid license"
 msgstr ""
 
 #: src/object.vala:439
-msgid "to this object or add one to the containing System or Body"
+msgid "Can't resolve root body or root system"
 msgstr ""
 
-#: src/object.vala:476
+#: src/object.vala:440
+msgid ""
+"Every object needs to have license information. Typically, most objects "
+"inherit their license from a superordinated Body or system object of which "
+"neither could be resolved in this instance."
+msgstr ""
+
+#: src/object.vala:450
+msgid ""
+"Neither the superordinated Body nor the superordinated Body specify a "
+"license for this object. Please either add a license to this object or add "
+"one to the containing System or Body"
+msgstr ""
+
+#: src/object.vala:489
 #, c-format
 msgid "Expected valid id attribute in '%s', encountered: '%s'"
 msgstr ""
 
-#: src/object.vala:481
+#: src/object.vala:494
 #, c-format
 msgid "Could not parse updated object for '%s'"
 msgstr ""

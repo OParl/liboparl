@@ -369,8 +369,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Invalid 'id'"),
-                               _("The 'id'-field contains no id. The id field must contain a valid")+
-                               _("url that can be used to retrieve the object via HTTP."),
+                               _("The 'id'-field contains no id. The id field must contain a valid"
+                               + "url that can be used to retrieve the object via HTTP."),
                                _("<id invalid>")
                 ));
             }
@@ -378,8 +378,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Invalid 'id'"),
-                               _("The 'id'-field is an empty string. The id field must contain a valid")+
-                               _("url that can be used to retrieve the object via HTTP."),
+                               _("The 'id'-field contains no id. The id field must contain a valid"
+                               + "url that can be used to retrieve the object via HTTP."),
                                _("<id invalid>")
                 ));
             }
@@ -387,9 +387,9 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                _("Invalid 'license'"),
-                               _("The 'license'-field does not contain any value. It is recommended to ")+
-                               _("specify the license for all subordinated objects either in the System")+
-                               _(" object or in the Body objects"),
+                               _("The 'license'-field does not contain any value. It is recommended to "
+                               + "specify the license for all subordinated objects either in the System"
+                               + " object or in the Body objects"),
                                this.id
                 ));
             }
@@ -409,9 +409,9 @@ namespace OParl {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.WARNING,
                                _("Invalid 'license'"),
-                               _("The 'license'-field does not contain any value. It is recommended to ")+
-                               _("specify the license for all subordinated objects either in the System")+
-                               _(" object or in the Body objects"),
+                               _("The 'license'-field does not contain any value. It is recommended to "
+                               + "specify the license for all subordinated objects either in the System"
+                               + " object or in the Body objects"),
                                this.id
                     ));
                 }
@@ -420,8 +420,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Invalid 'license'"),
-                               _("The 'license'-field contains an empty string. Please specify a valid ")+
-                               _("license"),
+                               _("The 'license'-field contains an empty string. Please specify a valid "
+                               + "license"),
                                this.id
                 ));
             }
@@ -437,9 +437,9 @@ namespace OParl {
                     this.validation_results.append(new ValidationResult(
                         ErrorSeverity.ERROR,
                         _("Can't resolve root body or root system"),
-                        _("Every object needs to have license information. Typically, most ")+
-                        _("objects inherit their license from a superordinated Body or ")+
-                        _("system object of which neither could be resolved in this instance."),
+                        _("Every object needs to have license information. Typically, most "
+                        + "objects inherit their license from a superordinated Body or "
+                        + "system object of which neither could be resolved in this instance."),
                         this.id
                     ));
                 }
@@ -447,9 +447,9 @@ namespace OParl {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Invalid 'license'"),
-                               _("Neither the superordinated Body nor the superordinated Body ")+
-                               _("specify a license for this object. Please either add a license ")+
-                               _("to this object or add one to the containing System or Body"),
+                               _("Neither the superordinated Body nor the superordinated Body "
+                               + "specify a license for this object. Please either add a license "
+                               + "to this object or add one to the containing System or Body"),
                                this.id
                     ));
                 }
