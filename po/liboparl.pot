@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 10:58+0200\n"
+"POT-Creation-Date: 2017-06-02 11:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,11 +137,9 @@ msgid "Invalid 'name'"
 msgstr ""
 
 #: src/body.vala:398
-msgid "The 'name'-field contains an empty string. Each Body must "
-msgstr ""
-
-#: src/body.vala:399
-msgid " contain a human readable name."
+msgid ""
+"The 'name'-field contains an empty string. Each Body must  contain a human "
+"readable name."
 msgstr ""
 
 #: src/body.vala:406
@@ -157,11 +155,9 @@ msgid "Empty 'organization'"
 msgstr ""
 
 #: src/body.vala:415
-msgid "The 'organization'-field contains an empty string. Each Body must "
-msgstr ""
-
-#: src/body.vala:416
-msgid " supply its organizations."
+msgid ""
+"The 'organization'-field contains an empty string. Each Body must  supply "
+"its organizations."
 msgstr ""
 
 #: src/body.vala:423
@@ -177,11 +173,9 @@ msgid "Empty 'person'"
 msgstr ""
 
 #: src/body.vala:432
-msgid "The 'person'-field contains an empty string. Each Body must "
-msgstr ""
-
-#: src/body.vala:433
-msgid " supply its persons."
+msgid ""
+"The 'person'-field contains an empty string. Each Body must supply its "
+"persons."
 msgstr ""
 
 #: src/body.vala:440
@@ -197,11 +191,9 @@ msgid "Empty 'meeting'"
 msgstr ""
 
 #: src/body.vala:449
-msgid "The 'meeting'-field contains an empty string. Each Body must "
-msgstr ""
-
-#: src/body.vala:450
-msgid " supply its meetings."
+msgid ""
+"The 'meeting'-field contains an empty string. Each Body must supply its "
+"meetings."
 msgstr ""
 
 #: src/body.vala:457
@@ -217,11 +209,8 @@ msgid "Empty 'paper'"
 msgstr ""
 
 #: src/body.vala:466
-msgid "The 'paper'-field contains an empty string. Each Body must "
-msgstr ""
-
-#: src/body.vala:467
-msgid " supply its papers."
+msgid ""
+"The 'paper'-field contains an empty string. Each Body must supply its papers."
 msgstr ""
 
 #: src/body.vala:474

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 10:58+0200\n"
+"POT-Creation-Date: 2017-06-02 11:00+0200\n"
 "PO-Revision-Date: 2017-04-29 12:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -148,13 +148,12 @@ msgid "Invalid 'name'"
 msgstr "Ungültiger 'name'"
 
 #: src/body.vala:398
-msgid "The 'name'-field contains an empty string. Each Body must "
+#, fuzzy
+msgid ""
+"The 'name'-field contains an empty string. Each Body must  contain a human "
+"readable name."
 msgstr ""
 "Das Feld 'name' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
-
-#: src/body.vala:399
-msgid " contain a human readable name."
-msgstr " einen menschenlesbaren Namen haben."
 
 #: src/body.vala:406
 msgid "No 'name'"
@@ -169,14 +168,13 @@ msgid "Empty 'organization'"
 msgstr "Leere 'organization'"
 
 #: src/body.vala:415
-msgid "The 'organization'-field contains an empty string. Each Body must "
+#, fuzzy
+msgid ""
+"The 'organization'-field contains an empty string. Each Body must  supply "
+"its organizations."
 msgstr ""
 "Das 'organization'-Feld beinhaltet eine leere Zeichenkette. Jede "
 "Körperschaft muss"
-
-#: src/body.vala:416
-msgid " supply its organizations."
-msgstr " seine Organisationen enthalten."
 
 #: src/body.vala:423
 msgid "Missing 'organization' field"
@@ -191,13 +189,12 @@ msgid "Empty 'person'"
 msgstr "Leere 'person'"
 
 #: src/body.vala:432
-msgid "The 'person'-field contains an empty string. Each Body must "
+#, fuzzy
+msgid ""
+"The 'person'-field contains an empty string. Each Body must supply its "
+"persons."
 msgstr ""
 "Das Feld 'person' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
-
-#: src/body.vala:433
-msgid " supply its persons."
-msgstr " ihre Personen enthalten."
 
 #: src/body.vala:440
 msgid "Missing 'person' field"
@@ -212,14 +209,13 @@ msgid "Empty 'meeting'"
 msgstr "Leeres 'meeting'"
 
 #: src/body.vala:449
-msgid "The 'meeting'-field contains an empty string. Each Body must "
+#, fuzzy
+msgid ""
+"The 'meeting'-field contains an empty string. Each Body must supply its "
+"meetings."
 msgstr ""
 "Das Feld 'meeting ' beinhaltet eine leere Zeichenkette. Jede Körperschaft "
 "muss"
-
-#: src/body.vala:450
-msgid " supply its meetings."
-msgstr " ihre Meetings enthalten."
 
 #: src/body.vala:457
 msgid "Missing 'meeting' field"
@@ -234,13 +230,11 @@ msgid "Empty 'paper'"
 msgstr "Leeres 'paper'"
 
 #: src/body.vala:466
-msgid "The 'paper'-field contains an empty string. Each Body must "
+#, fuzzy
+msgid ""
+"The 'paper'-field contains an empty string. Each Body must supply its papers."
 msgstr ""
 "Das Feld 'paper' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
-
-#: src/body.vala:467
-msgid " supply its papers."
-msgstr " ihre Paper enthalten."
 
 #: src/body.vala:474
 msgid "Missing 'paper' field"
@@ -553,6 +547,21 @@ msgstr ""
 #: src/file.vala:282
 msgid " supply an URL to access its contents."
 msgstr " eine URL zu seinem Inhalt mitliefern."
+
+#~ msgid " contain a human readable name."
+#~ msgstr " einen menschenlesbaren Namen haben."
+
+#~ msgid " supply its organizations."
+#~ msgstr " seine Organisationen enthalten."
+
+#~ msgid " supply its persons."
+#~ msgstr " ihre Personen enthalten."
+
+#~ msgid " supply its meetings."
+#~ msgstr " ihre Meetings enthalten."
+
+#~ msgid " supply its papers."
+#~ msgstr " ihre Paper enthalten."
 
 #~ msgid "Every object needs to have license information. Typically, most "
 #~ msgstr ""

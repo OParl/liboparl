@@ -395,8 +395,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Invalid 'name'"),
-                               _("The 'name'-field contains an empty string. Each Body must ")+
-                               _(" contain a human readable name."),
+                               _("The 'name'-field contains an empty string. Each Body must "
+                               + " contain a human readable name."),
                                this.id
                 ));
             }
@@ -412,8 +412,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Empty 'organization'"),
-                               _("The 'organization'-field contains an empty string. Each Body must ")+
-                               _(" supply its organizations."),
+                               _("The 'organization'-field contains an empty string. Each Body must "
+                               + " supply its organizations."),
                                this.id
                 ));
             }
@@ -429,8 +429,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Empty 'person'"),
-                               _("The 'person'-field contains an empty string. Each Body must ")+
-                               _(" supply its persons."),
+                               _("The 'person'-field contains an empty string. Each Body must"
+                               + " supply its persons."),
                                this.id
                 ));
             }
@@ -446,8 +446,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Empty 'meeting'"),
-                               _("The 'meeting'-field contains an empty string. Each Body must ")+
-                               _(" supply its meetings."),
+                               _("The 'meeting'-field contains an empty string. Each Body must "
+                               + "supply its meetings."),
                                this.id
                 ));
             }
@@ -463,8 +463,8 @@ namespace OParl {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Empty 'paper'"),
-                               _("The 'paper'-field contains an empty string. Each Body must ")+
-                               _(" supply its papers."),
+                               _("The 'paper'-field contains an empty string. Each Body must "
+                               + "supply its papers."),
                                this.id
                 ));
             }
