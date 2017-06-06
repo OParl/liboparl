@@ -56,7 +56,7 @@ are the following:
 
   * valac > 0.32 - Vala compiler
   * valadoc - Vala documentation tool
-  * g-ir-compiler - GObject introspection compiler
+  * g-ir-compiler - GObject introspection compiler (package `gobject-introspection` in ubuntu)
   * json-glib-dev - Dev headers for json-glib
   * libgirepository1.0-dev - Dev headers for gobject introspection
 
