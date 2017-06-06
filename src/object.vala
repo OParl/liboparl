@@ -130,7 +130,7 @@ namespace OParl {
         }
 
         /**
-         * Triggers {@OParl.Client.shit_happened if the client is in non-strict-mode.
+         * Triggers {@link OParl.Client.shit_happened} if the client is in non-strict-mode.
          * Otherwise it raises the error regularly
          */
         protected void handle_parse_error(ParsingError e) throws ParsingError {
