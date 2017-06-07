@@ -47,10 +47,18 @@ namespace OParl {
                     this.autoload();
 
                     var r = new Resolver(this.client);
-                    if (this.body_url != "")
-                        this.body_p = (Body)r.parse_url(this.body_url);
-                    else
-                        warning(_("Legislative term without body url: %s"), this.id);
+
+                    try {
+                        if (this.body_url != "") {
+                            this.body_p = (Body)r.parse_url(this.body_url);
+                        } else {
+                            throw new ParsingError.EXPECTED_OBJECT(_("Legislative term without body url"));
+                        }
+                    } catch (ParsingError e) {
+                        this.handle_parse_error(e);
+                    }
+
+
                     body_resolved = true;
                 }
             }
