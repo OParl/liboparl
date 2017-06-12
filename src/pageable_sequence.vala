@@ -29,7 +29,20 @@ namespace OParl {
      *
      * Internally, pageable sequences pass most of the actual list handling
      * to a Glib.Sequence and just take care of the nitty gritty that is
-     * on-demand page loading
+     * on-demand page loading.
+     *
+     * Usage:
+     *
+     * var seq = new PageableSequence<Meeting>(client, "https://oparl.example/api/meeting/")
+     *
+     * for obj in seq {
+     *      // will iterate over all meetings in the list,
+     *      // may have occasional delays during iteration
+     *      // when new pages are fetched
+     * }
+     *
+     * TODO: signal for on-requesting-next-page
+     * TODO: signal for new-objects-received
      */
     class PageableSequence<T> : GLib.Object {
         private T type;
@@ -79,17 +92,33 @@ namespace OParl {
             this.client = c;
             this.current_pages.append(current_page);
             this.active_pages = active_pages;
-
-            this.refresh();
         }
 
-        internal void refresh() {
-            // this is a dumb implementation which just wipes all the current objects
-            // and refreshes with the objects loaded from the currently active pages
-
-
+        public function bool has_next_object() {
+            // TODO: check the various conditions for next object truthiness
+            return true;
         }
 
+        public function Iterator iterator() {
+            return new Iterator(this);
+        }
 
+        public class Iterator {
+            private int index;
+            private PageableSequence sequence;
+
+            public Iterator(PageableSequence sequence) {
+                this.sequence = sequence;
+                this.index = 0;
+            }
+
+            public bool next() {
+                return this.sequence.has_next_object();
+            }
+
+            public OParl.Object get() {
+                // return current object
+            }
+        }
     }
 }
