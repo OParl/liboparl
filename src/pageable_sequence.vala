@@ -136,7 +136,7 @@ namespace OParl {
             return true;
         }
 
-        private void parse_data(string data) {
+        private void parse_json(string data) {
             var parser = new Json.Parser();
 
             try {
@@ -161,8 +161,10 @@ namespace OParl {
                 throw new ParsingError.EXPECTED_VALUE(_("Attribute data must be an array in '%s'"), this.next_page);
             }
 
+            uint new_elements_count = 0;
             for (entity in item) {
                 this.objects.append((T)this.make_object(entity));
+                new_elements_count += 1;
             }
 
             // check for pagination information
@@ -173,7 +175,7 @@ namespace OParl {
 
             // TODO: should we check for the other links? are they useful?
 
-            this.parse_pagination(o);
+            this.parse_pagination(o, new_elements_count);
         }
 
         private Object make_object(Json.Node n) throws ParsingError {
@@ -253,15 +255,17 @@ namespace OParl {
         }
 
         public function T? get(int index) {
-            unowned T? obj;
-
-            if ((index < this.objects.count())
-            || (index >= this.objects.count() && this.fetch_next_page())
-            ) {
-                obj = this.objects[index];
+            if (index in this.objects) {
+                return this.objects[index];
             }
 
-            return obj;
+            while (this.fetch_next_page()) {
+                if (index in this.objects) {
+                    return this.objects[index];
+                }
+            }
+
+            return null;
         }
 
         public function Iterator iterator() {
