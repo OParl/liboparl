@@ -268,7 +268,7 @@ namespace OParl {
             return this;
         }
 
-        public function T? next_object() {
+        public function T? next_value() {
             unowned T? next = this[index];
             this.iterator_index += 1;
 
