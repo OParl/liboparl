@@ -43,6 +43,7 @@ namespace OParl {
      *
      * TODO: signal for on-requesting-next-page
      * TODO: signal for new-objects-received
+     * TODO: probably should take care that the errors we throw here are passed through Object.handle_parse_error
      */
     class PageableSequence<T> : GLib.Object {
         private T type;
@@ -55,9 +56,9 @@ namespace OParl {
         private Sequence<OParl.Object> objects { get; set; default: null; };
 
         /**
-         * URLs to the currently in-memory pages
+         * URLs to the loaded pages
          */
-        public List<string> current_pages { get; internal set; };
+        public List<string> current_pages { get; internal set; default: null; };
 
         /**
          * The next page to load if the last object is reached
@@ -65,16 +66,13 @@ namespace OParl {
         public string next_page? { get; internal set; default: ""; };
 
         /**
-         * The next page to load if the first object is reached
-         */
-        public string previous_page? { get; internal set; default: ""; };
-
-        /**
          * Total (known) object count of the sequence
          * (see: https://dev.oparl.org/spezifikation/#paginierung)
          *
          * If requested lists contain 'pagination' attributes,
-         * the actual reported value is used
+         * the actual reported value is used.
+         *
+         * You should not rely on the accuracy of this value.
          */
         public uint total_element_count { get; internal set; default: 0 };
 
@@ -83,7 +81,9 @@ namespace OParl {
          * (see: https://dev.oparl.org/spezifikation/#paginierung)
          *
          * If requested lists contain 'pagination' attributes,
-         * the actual reported value is used
+         * the actual reported value is used.
+         *
+         * You should not rely on the accuracy of this value.
          */
         public uint total_page_count { get; internal set; default: 0; }
 
@@ -92,7 +92,9 @@ namespace OParl {
          * (see: https://dev.oparl.org/spezifikation/#paginierung)
          *
          * If requested lists contain 'pagination' attributes,
-         * the actual reported value is used
+         * the actual reported value is used.
+         *
+         * You should not rely on the accuracy of this value.
          */
         public uint element_count_per_page {  get; internal set; default: 100; };
 
@@ -101,7 +103,9 @@ namespace OParl {
          * (see: https://dev.oparl.org/spezifikation/#paginierung)
          *
          * If requested lists contain 'pagination' attributes,
-         * the actual reported value is used
+         * the actual reported value is used.
+         *
+         * You should not rely on the accuracy of this value.
          */
         public uint current_page {  get; internal set; default: 0; }
 
@@ -120,9 +124,17 @@ namespace OParl {
                 return false;
             }
 
-            var new_objects = new List<T>();
+            if (this.current_pages.contains(this.next_page)) {
+                throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), this.next_page))
+            }
 
             string data = this.client.resolve_url(this.next_page, out status);
+            this.parse_json(data);
+
+            return true;
+        }
+
+        private void parse_data(string data) {
             var parser = new Json.Parser();
 
             try {
@@ -162,7 +174,7 @@ namespace OParl {
             this.parse_pagination(o);
         }
 
-        public Object make_object(Json.Node n) throws ParsingError {
+        private Object make_object(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_OBJECT(
                     "Can't make an object from a non-object"
@@ -208,24 +220,32 @@ namespace OParl {
             return target;
         }
 
-        private void parse_pagination(Json.Object o) {
+        private void parse_pagination(Json.Object o, uint new_elements_count) {
             if (o.has_member("pagination")) {
                 unowned pagination = o.get_member("pagination");
 
                 if (pagination.has_member("totalElements")) {
                     this.total_element_count = (uint)pagination.get_int_member("totalElements");
+                } else {
+                    this.total_element_count = (uint)this.objects.count();
                 }
 
                 if (pagination.has_member("elementsPerPage")) {
                     this.element_count_per_page = (uint)pagination.get_int_member("elementsPerPage");
+                } else {
+                    this.element_count_per_page = new_elements_count;
                 }
 
                 if (pagination.has_member("currentPage")) {
                     this.current_page = (uint)pagination.get_int_member("currentPage");
+                } else {
+                    this.current_page = (uint)(this.current_pages.count() - 1);
                 }
 
                 if (pagination.has_member("totalPages")) {
                     this.total_page_count = (uint)pagination.get_int_member("totalPages");
+                } else {
+                    this.total_page_count = (uint)this.current_pages.count();
                 }
             }
         }
