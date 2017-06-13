@@ -109,6 +109,8 @@ namespace OParl {
          */
         public uint current_page {  get; internal set; default: 0; }
 
+        private int iterator_index { get; set; default: 0; };
+
         public PageableSequence(Client c, string first_page) {
             this.objects = new Sequence<T>();
             this.current_pages = new List<string>();
@@ -250,31 +252,27 @@ namespace OParl {
             }
         }
 
-        public function bool has_next_object() {
-            // TODO: check the various conditions for next object truthiness
-            return true;
+        public function T? get(int index) {
+            unowned T? obj;
+
+            if ((index < this.objects.count())
+            || (index >= this.objects.count() && this.fetch_next_page())
+            ) {
+                obj = this.objects[index];
+            }
+
+            return obj;
         }
 
         public function Iterator iterator() {
-            return new Iterator(this);
+            return this;
         }
 
-        public class Iterator {
-            private int index;
-            private PageableSequence sequence;
+        public function T? next_object() {
+            unowned T? next = this[index];
+            this.iterator_index += 1;
 
-            public Iterator(PageableSequence sequence) {
-                this.sequence = sequence;
-                this.index = 0;
-            }
-
-            public bool next() {
-                return this.sequence.has_next_object();
-            }
-
-            public OParl.Object get() {
-                // return current object
-            }
+            return next;
         }
     }
 }
