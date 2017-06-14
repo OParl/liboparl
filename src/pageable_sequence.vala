@@ -46,24 +46,22 @@ namespace OParl {
      * TODO: probably should take care that the errors we throw here are passed through Object.handle_parse_error
      */
     class PageableSequence<T> : GLib.Object {
-        private T type;
-
         internal Client client;
 
         /**
          * The actual objects of this sequence
          */
-        private Sequence<OParl.Object> objects { get; set; default: null; };
+        private GLib.List<T> objects;
 
         /**
          * URLs to the loaded pages
          */
-        public List<string> current_pages { get; internal set; default: null; };
+        private GLib.List<string> current_pages;
 
         /**
          * The next page to load if the last object is reached
          */
-        public string next_page? { get; internal set; default: ""; };
+        public string next_page { get; internal set; default = ""; }
 
         /**
          * Total (known) object count of the sequence
@@ -74,7 +72,7 @@ namespace OParl {
          *
          * You should not rely on the accuracy of this value.
          */
-        public uint total_element_count { get; internal set; default: 0 };
+        public uint total_element_count { get; internal set; default = 0; }
 
         /**
          * Total (known) page count of the sequence
@@ -85,7 +83,7 @@ namespace OParl {
          *
          * You should not rely on the accuracy of this value.
          */
-        public uint total_page_count { get; internal set; default: 0; }
+        public uint total_page_count { get; internal set; default = 0; }
 
         /**
          * (known) object count per page of the sequence
@@ -96,7 +94,7 @@ namespace OParl {
          *
          * You should not rely on the accuracy of this value.
          */
-        public uint element_count_per_page {  get; internal set; default: 100; };
+        public uint element_count_per_page {  get; internal set; default = 100; }
 
         /**
          * Current page number
@@ -107,12 +105,12 @@ namespace OParl {
          *
          * You should not rely on the accuracy of this value.
          */
-        public uint current_page {  get; internal set; default: 0; }
+        public uint current_page {  get; internal set; default = 0; }
 
-        private int iterator_index { get; set; default: 0; };
+        private int iterator_index { get; set; default = 0; }
 
-        public PageableSequence(Client c, string first_page) {
-            this.objects = new Sequence<T>();
+        public PageableSequence(Client c, string first_page) throws ParsingError {
+            this.objects = new List<T>();
             this.current_pages = new List<string>();
 
             this.client = c;
@@ -121,22 +119,23 @@ namespace OParl {
             this.fetch_next_page();
         }
 
-        private function bool fetch_next_page() throws ParsingError {
-            if (!this.next_page) {
+        private bool fetch_next_page() throws ParsingError {
+            if (this.next_page == "") {
                 return false;
             }
 
-            if (this.current_pages.contains(this.next_page)) {
-                throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), this.next_page))
+            if (this.current_pages.index(this.next_page) != -1) {
+                throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages").printf(this.next_page));
             }
 
+            int status;
             string data = this.client.resolve_url(this.next_page, out status);
             this.parse_json(data);
 
             return true;
         }
 
-        private void parse_json(string data) {
+        private void parse_json(string data) throws ParsingError {
             var parser = new Json.Parser();
 
             try {
@@ -147,30 +146,36 @@ namespace OParl {
 
             this.current_pages.append(this.next_page);
 
-            unowned root = parser.get_root();
+            unowned Json.Node root = parser.get_root();
             if (root.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse in '%s'"), root.dup_string());
             }
 
             unowned Json.Object o = root.get_object();
-            unowned Json.Node item;
 
             // check for list of objects on page
-            item = o.get_member("data");
-            if (item.get_node_type() != Json.NodeType.Array) {
+            if (o.get_member("data").get_node_type() != Json.NodeType.ARRAY) {
                 throw new ParsingError.EXPECTED_VALUE(_("Attribute data must be an array in '%s'"), this.next_page);
             }
 
-            uint new_elements_count = 0;
-            for (entity in item) {
-                this.objects.append((T)this.make_object(entity));
-                new_elements_count += 1;
+            Json.Array list_data = o.get_member("data").get_array();
+            uint new_elements_count = list_data.get_length();
+            for (int i = 0; i < list_data.get_length(); i++) {
+                var element = list_data.get_element(i);
+
+                if (element.get_node_type() != Json.NodeType.OBJECT) {
+                    throw new ParsingError.EXPECTED_OBJECT(_("I need an Object to parse: %s"), element.dup_string());
+                }
+
+                this.objects.append((T)this.make_object(element));
             }
 
             // check for pagination information
-            item = o.get_member("links");
-            if (item.has_member("next")) {
-                this.next_page = item.get_string_member("next");
+            Json.Object links = o.get_member("links").get_object();
+            if (links.has_member("next")) {
+                this.next_page = links.get_string_member("next");
+            } else {
+                this.next_page = "";
             }
 
             // TODO: should we check for the other links? are they useful?
@@ -180,12 +185,12 @@ namespace OParl {
 
         private void parse_pagination(Json.Object o, uint new_elements_count) {
             if (o.has_member("pagination")) {
-                unowned pagination = o.get_member("pagination");
+                Json.Object pagination = o.get_member("pagination").get_object();
 
                 if (pagination.has_member("totalElements")) {
                     this.total_element_count = (uint)pagination.get_int_member("totalElements");
                 } else {
-                    this.total_element_count = (uint)this.objects.count();
+                    this.total_element_count = (uint)this.objects.length();
                 }
 
                 if (pagination.has_member("elementsPerPage")) {
@@ -197,13 +202,13 @@ namespace OParl {
                 if (pagination.has_member("currentPage")) {
                     this.current_page = (uint)pagination.get_int_member("currentPage");
                 } else {
-                    this.current_page = (uint)(this.current_pages.count() - 1);
+                    this.current_page = (uint)(this.current_pages.length() - 1);
                 }
 
                 if (pagination.has_member("totalPages")) {
                     this.total_page_count = (uint)pagination.get_int_member("totalPages");
                 } else {
-                    this.total_page_count = (uint)this.current_pages.count();
+                    this.total_page_count = (uint)this.current_pages.length();
                 }
             }
         }
@@ -223,7 +228,7 @@ namespace OParl {
                 );
             }
 
-            Json.Node type = el_obj.get_member("type");
+            Json.Node type = el_obj.get_member("");
             if (type.get_node_type() != Json.NodeType.VALUE) {
                 ident = el_obj.get_member("id");
                 if (ident.get_node_type() != Json.NodeType.VALUE) {
@@ -238,7 +243,7 @@ namespace OParl {
                 }
             }
 
-            string typestr = type.get_string().replace(c.oparl_version,"");
+            string typestr = type.get_string().replace(this.client.oparl_version,"");
 
             Type t = Type.from_name("OParl"+typestr);
             if (!(t.is_a(typeof(OParl.Object)))) {
@@ -246,7 +251,7 @@ namespace OParl {
             }
 
             var target = (Object)GLib.Object.new(t);
-            target.set_client(this.c);
+            target.set_client(this.client);
 
             try {
                 (target as Parsable).parse(n);
@@ -257,26 +262,26 @@ namespace OParl {
             return target;
         }
 
-        public function T? get(int index) {
-            if (index in this.objects) {
-                return this.objects[index];
+        public new unowned T? get(int index) throws ParsingError {
+            if (this.objects.length() < index) {
+                return this.objects.nth(index);
             }
 
             while (this.fetch_next_page()) {
-                if (index in this.objects) {
-                    return this.objects[index];
+                if (this.objects.length() < index) {
+                    return this.objects.nth(index);
                 }
             }
 
             return null;
         }
 
-        public function Iterator iterator() {
+        public PageableSequence iterator() {
             return this;
         }
 
-        public function T? next_value() {
-            unowned T? next = this[index];
+        public T? next_value() throws ParsingError{
+            unowned T? next = this[iterator_index];
             this.iterator_index += 1;
 
             return next;
