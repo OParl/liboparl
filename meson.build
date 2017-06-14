@@ -56,7 +56,8 @@ oparl_lib_source = [
     'src/consultation.vala',
     'src/legislative_term.vala',
     'src/location.vala',
-    'src/file.vala'
+    'src/file.vala',
+    'src/pageable_sequence.vala'
 ]
 
 oparl_test_source = [
