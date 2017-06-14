@@ -178,52 +178,6 @@ namespace OParl {
             this.parse_pagination(o, new_elements_count);
         }
 
-        private Object make_object(Json.Node n) throws ParsingError {
-            if (n.get_node_type() != Json.NodeType.OBJECT) {
-                throw new ParsingError.EXPECTED_OBJECT(
-                    "Can't make an object from a non-object"
-                );
-            }
-            Json.Object el_obj = n.get_object();
-            Json.Node ident = null;
-            if (!el_obj.has_member("type")) {
-                throw new ParsingError.INVALID_TYPE(
-                    "Tried to make an object from a json without type"
-                );
-            }
-            Json.Node type = el_obj.get_member("type");
-            if (type.get_node_type() != Json.NodeType.VALUE) {
-                ident = el_obj.get_member("id");
-                if (ident.get_node_type() != Json.NodeType.VALUE) {
-                    throw new ParsingError.EXPECTED_VALUE(
-                        _("I need a string-value as type in object with id %s"),
-                        ident.get_string()
-                    );
-                } else {
-                    throw new ParsingError.EXPECTED_VALUE(
-                        _("Tried to resolve an object that does not have a valid Id")
-                    );
-                }
-            }
-
-            string typestr = type.get_string().replace(c.oparl_version,"");
-
-            Type t = Type.from_name("OParl"+typestr);
-            if (!(t.is_a(typeof(OParl.Object)))) {
-                throw new ParsingError.INVALID_TYPE(_("The type of this object is no valid OParl type: %s").printf(typestr));
-            }
-            var target = (Object)GLib.Object.new(t);
-            target.set_client(this.c);
-
-            try {
-                (target as Parsable).parse(n);
-            } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
-                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: %s"), ident.get_string());
-            }
-
-            return target;
-        }
-
         private void parse_pagination(Json.Object o, uint new_elements_count) {
             if (o.has_member("pagination")) {
                 unowned pagination = o.get_member("pagination");
@@ -252,6 +206,55 @@ namespace OParl {
                     this.total_page_count = (uint)this.current_pages.count();
                 }
             }
+        }
+
+        private Object make_object(Json.Node n) throws ParsingError {
+            if (n.get_node_type() != Json.NodeType.OBJECT) {
+                throw new ParsingError.EXPECTED_OBJECT(
+                    "Can't make an object from a non-object"
+                );
+            }
+
+            Json.Object el_obj = n.get_object();
+            Json.Node ident = null;
+            if (!el_obj.has_member("type")) {
+                throw new ParsingError.INVALID_TYPE(
+                    "Tried to make an object from a json without type"
+                );
+            }
+
+            Json.Node type = el_obj.get_member("type");
+            if (type.get_node_type() != Json.NodeType.VALUE) {
+                ident = el_obj.get_member("id");
+                if (ident.get_node_type() != Json.NodeType.VALUE) {
+                    throw new ParsingError.EXPECTED_VALUE(
+                        _("I need a string-value as type in object with id %s"),
+                        ident.get_string()
+                    );
+                } else {
+                    throw new ParsingError.EXPECTED_VALUE(
+                        _("Tried to resolve an object that does not have a valid Id")
+                    );
+                }
+            }
+
+            string typestr = type.get_string().replace(c.oparl_version,"");
+
+            Type t = Type.from_name("OParl"+typestr);
+            if (!(t.is_a(typeof(OParl.Object)))) {
+                throw new ParsingError.INVALID_TYPE(_("The type of this object is no valid OParl type: %s").printf(typestr));
+            }
+
+            var target = (Object)GLib.Object.new(t);
+            target.set_client(this.c);
+
+            try {
+                (target as Parsable).parse(n);
+            } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: %s"), ident.get_string());
+            }
+
+            return target;
         }
 
         public function T? get(int index) {
