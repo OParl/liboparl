@@ -137,7 +137,6 @@ namespace OParl {
 
         private void parse_json(string data) throws ParsingError {
             var parser = new Json.Parser();
-
             try {
                 parser.load_from_data(data);
             } catch (GLib.Error e) {
@@ -153,13 +152,20 @@ namespace OParl {
 
             unowned Json.Object o = root.get_object();
 
+            uint new_elements_count = this.parse_object_data(o);
+            this.parse_pagination(o, new_elements_count);
+
+            this.parse_links(o);
+        }
+
+        private uint parse_object_data(Json.Object o) throws ParsingError {
             // check for list of objects on page
             if (o.get_member("data").get_node_type() != Json.NodeType.ARRAY) {
                 throw new ParsingError.EXPECTED_VALUE(_("Attribute data must be an array in '%s'"), this.next_page);
             }
 
             Json.Array list_data = o.get_member("data").get_array();
-            uint new_elements_count = list_data.get_length();
+
             for (int i = 0; i < list_data.get_length(); i++) {
                 var element = list_data.get_element(i);
 
@@ -170,17 +176,7 @@ namespace OParl {
                 this.objects.append((T)this.make_object(element));
             }
 
-            // check for pagination information
-            Json.Object links = o.get_member("links").get_object();
-            if (links.has_member("next")) {
-                this.next_page = links.get_string_member("next");
-            } else {
-                this.next_page = "";
-            }
-
-            // TODO: should we check for the other links? are they useful?
-
-            this.parse_pagination(o, new_elements_count);
+            return list_data.get_length();
         }
 
         private void parse_pagination(Json.Object o, uint new_elements_count) {
@@ -213,6 +209,25 @@ namespace OParl {
             }
         }
 
+        private void parse_links(Json.Object o) {
+            if (!o.has_member("links")) {
+                this.next_page = "";
+            }
+
+            // check for link information
+            Json.Object links = o.get_member("links").get_object();
+            if (links.has_member("next")) {
+                this.next_page = links.get_string_member("next");
+            } else {
+                this.next_page = "";
+            }
+
+            // TODO: should we check for the other links? are they useful?
+        }
+
+        /**
+         * Turn a Json.Node into an OParl.Object
+         */
         private Object make_object(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_OBJECT(
