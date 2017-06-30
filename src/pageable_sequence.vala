@@ -45,7 +45,7 @@ namespace OParl {
      * TODO: signal for new-objects-received
      * TODO: probably should take care that the errors we throw here are passed through Object.handle_parse_error
      */
-    class PageableSequence<T> : GLib.Object {
+    public class PageableSequence<T> : GLib.Object {
         internal Client client;
 
         /**
@@ -61,7 +61,22 @@ namespace OParl {
         /**
          * The next page to load if the last object is reached
          */
-        public string next_page { get; internal set; default = ""; }
+        public string next_page {
+            get { return next_page; }
+            internal set {
+                bool needs_fetch = next_page == "";
+                next_page = value;
+
+                if (needs_fetch) {
+                    try {
+                        this.fetch_next_page();
+                    } catch (ParsingError e) {
+                        // silently dropped
+                    }
+                }
+            }
+            default = "";
+        }
 
         /**
          * Total (known) object count of the sequence
@@ -109,7 +124,9 @@ namespace OParl {
 
         private int iterator_index { get; set; default = 0; }
 
-        public PageableSequence(Client c, string first_page) throws ParsingError {
+        //public signal new_page
+
+        public PageableSequence(Client c, string first_page = "") throws ParsingError {
             this.objects = new List<T>();
             this.current_pages = new List<string>();
 
