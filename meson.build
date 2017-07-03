@@ -144,5 +144,6 @@ if opt_build_valadoc == true
 endif
 
 run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.vapi')
+run_command('cp', meson.current_source_dir()+'/oparl-'+api+'.deps', meson.current_build_dir()+'/oparl-'+api+'.deps')
 install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
 install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
