@@ -285,6 +285,26 @@ namespace OParl {
         }
 
         /**
+         * This implementation of parse external can work with pageablesequence
+         */
+        protected void parse_external_paginated(Object target, string name, PageableSequence sequence, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+            try {
+                if (item.get_node_type() != Json.NodeType.VALUE) {
+                    throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
+                }
+                if (item.get_value_type() != typeof(string)) {
+                    throw new ParsingError.INVALID_TYPE(_("Attribute '%s' must be a string.").printf(name));
+                }
+
+                sequence.next_page = item.get_string();
+
+                this.set(name_map.get(name), sequence);
+            } catch (ParsingError e) {
+                this.handle_parse_error(e);
+            }
+        }
+
+        /**
          * Parses an array of URLs into a property
          */
         protected void parse_external_list(Object target, string name, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {

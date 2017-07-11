@@ -122,8 +122,6 @@ namespace OParl {
          */
         public uint current_page {  get; internal set; default = 0; }
 
-        private int iterator_index { get; set; default = 0; }
-
         //public signal new_page
 
         public PageableSequence(Client c, string first_page = "") throws ParsingError {
@@ -136,7 +134,7 @@ namespace OParl {
             this.fetch_next_page();
         }
 
-        private bool fetch_next_page() throws ParsingError {
+        internal bool fetch_next_page() throws ParsingError {
             if (this.next_page == "") {
                 return false;
             }
@@ -150,6 +148,10 @@ namespace OParl {
             this.parse_json(data);
 
             return true;
+        }
+
+        internal uint current_object_count() {
+            return (uint)this.objects.length();
         }
 
         private void parse_json(string data) throws ParsingError {
@@ -294,13 +296,13 @@ namespace OParl {
             return target;
         }
 
-        public new unowned T? get(int index) throws ParsingError {
-            if (this.objects.length() < index) {
+        public new T? get(int index) throws ParsingError {
+            if (index < this.objects.length()) {
                 return this.objects.nth(index);
             }
 
             while (this.fetch_next_page()) {
-                if (this.objects.length() < index) {
+                if (index < this.objects.length()) {
                     return this.objects.nth(index);
                 }
             }
@@ -309,14 +311,24 @@ namespace OParl {
         }
 
         public PageableSequence iterator() {
-            return this;
+            return new Iterator(this);
         }
 
-        public T? next_value() throws ParsingError{
-            unowned T? next = this[iterator_index];
-            this.iterator_index += 1;
+        public class Iterator {
+            private int iterator_index { get; set; default = 0; }
+            private PageableSequence<T> sequence;
 
-            return next;
+            public Iterator(PageableSequence<T> sequence) {
+                this.sequence = sequence;
+            }
+
+            public T? get() {
+                return this[this.iterator_index++];
+            }
+
+            public bool next() {
+                return (this.iterator_index < this.sequence.current_object_count()) || this.sequence.fetch_next_page();
+            }
         }
     }
 }

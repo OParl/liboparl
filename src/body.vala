@@ -86,49 +86,18 @@ namespace OParl {
          */
         public string classification {get; internal set;}
 
-        /**
-         * Triggered whenever a new page of {@link OParl.Organization}s has arrived.
-         * See OParl specification to see how paginated lists work.
-         */
-        public signal void incoming_organizations(List<Organization> organizations);
-        /**
-         * Triggered when the last page of organizations has been resolved successfully
-         * See OParl specification to see how paginated lists work.
-         */
-        public signal void finished_organizations();
+        //  /**
+        //   * Triggered whenever a new page of {@link OParl.Organization}s has arrived.
+        //   * See OParl specification to see how paginated lists work.
+        //   */
+        //  public signal void incoming_organizations(List<Organization> organizations);
+        //  /**
+        //   * Triggered when the last page of organizations has been resolved successfully
+        //   * See OParl specification to see how paginated lists work.
+        //   */
+        //  public signal void finished_organizations();
         internal string organization_url {get;set;default="";}
-        private bool organization_resolved {get;set; default=false;}
-        private List<Organization>? organization_p = null;
-        /**
-         * All groups of persons inside this body
-         */
-        public unowned List<Organization> get_organization() throws ParsingError {
-            lock (organization_resolved) {
-                if (!organization_resolved && organization_url != null) {
-                    this.organization_p = new List<Organization>();
-                    if (this.organization_url != "") {
-                        var pr = new Resolver(this.client, this.organization_url);
-                        pr.new_page.connect((list)=>{
-                            var outlist = new List<Organization>();
-                            foreach (Object o in list) {
-                                outlist.append((Organization)o);
-                            }
-                            this.incoming_organizations(outlist);
-                        });
-                        foreach (Object o in pr.resolve()) {
-                            this.organization_p.append((Organization)o);
-                        }
-                    } else {
-                        warning(_("Body without organization url: %s"), this.id);
-                    }
-                    organization_resolved = true;
-                } else if (organization_resolved) {
-                    this.incoming_organizations(this.organization_p);
-                }
-            }
-            this.finished_organizations();
-            return this.organization_p;
-        }
+        public PageableSequence<Organization>? organization { get; internal set; }
 
         /**
          * Triggered whenever a new page of {@link OParl.Person}s has arrived.
@@ -356,8 +325,16 @@ namespace OParl {
                         this.parse_array_of_string(this, name, item, Body.name_map);
                         break;
                     // To Resolve as external objectlist
-                    case "system":
                     case "organization":
+                        this.parse_external_paginated(
+                            this,
+                            name,
+                            new PageableSequence<Organization?>(this.client, ""),
+                            item,
+                            Body.name_map
+                        );
+                        break;
+                    case "system":
                     case "person":
                     case "meeting":
                     case "paper":
@@ -408,16 +385,7 @@ namespace OParl {
                                this.id
                 ));
             }
-            if (this.organization_url == "") {
-                this.validation_results.append(new ValidationResult(
-                               ErrorSeverity.ERROR,
-                               _("Empty 'organization'"),
-                               _("The 'organization'-field contains an empty string. Each Body must "
-                               + " supply its organizations."),
-                               this.id
-                ));
-            }
-            if (this.organization_url == null) {
+            if (this.organization == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Missing 'organization' field"),
@@ -511,7 +479,7 @@ namespace OParl {
                 l.append(p);
             }
 
-            foreach (Organization o in this.get_organization()) {
+            foreach (Organization o in this.organization) {
                 l.append(o);
             }
 
