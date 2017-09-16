@@ -275,9 +275,23 @@ namespace OParl {
             Json.Object el_obj = n.get_object();
             Json.Node ident = null;
             if (!el_obj.has_member("type")) {
-                throw new ParsingError.INVALID_TYPE(
-                    "Tried to make an object from a json without type"
-                );
+                var url = "";
+                if (el_obj.has_member("id")) {
+                    ident = el_obj.get_member("id");
+                    if (ident.get_node_type() == Json.NodeType.VALUE) {
+                        url = ident.get_string();
+                    }
+                }
+                if (url == "") {
+                    throw new ParsingError.INVALID_TYPE(
+                        "Tried to make an object from a json without type"
+                    );
+                } else {
+                    throw new ParsingError.INVALID_TYPE(
+                        "Tried to make an object from a json without type: '%s'",
+                        url
+                    );
+                }
             }
             Json.Node type = el_obj.get_member("type");
             if (type.get_node_type() != Json.NodeType.VALUE) {
