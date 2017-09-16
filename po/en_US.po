@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 12:54+0200\n"
-"PO-Revision-Date: 2017-04-29 12:03+0200\n"
+"PO-Revision-Date: 2017-09-16 18:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/oparl.vala:167
@@ -333,7 +333,7 @@ msgstr "The field 'body' must not be an empty string."
 #: src/object.vala:138
 #, c-format
 msgid "Error occured in '%s'."
-msgstr ""
+msgstr "Error occured in '%s'."
 
 #: src/object.vala:158 src/object.vala:204 src/object.vala:240
 #: src/object.vala:254 src/object.vala:276
@@ -407,6 +407,9 @@ msgid ""
 "the license for all subordinated objects either in the System object or in "
 "the Body objects"
 msgstr ""
+"The 'license'-field does not contain any value. It is recommended to specify "
+"the license for all subordinated objects either in the System object or in "
+"the Body objects"
 
 #: src/object.vala:406
 msgid "Body with no 'system'"
@@ -432,6 +435,9 @@ msgid ""
 "inherit their license from a superordinated Body or system object of which "
 "neither could be resolved in this instance."
 msgstr ""
+"Every object needs to have license information. Typically, most objects "
+"inherit their license from a superordinated Body or system object of which "
+"neither could be resolved in this instance."
 
 #: src/object.vala:453
 msgid ""
@@ -439,6 +445,9 @@ msgid ""
 "license for this object. Please either add a license to this object or add "
 "one to the containing System or Body"
 msgstr ""
+"Neither the superordinated Body nor the superordinated Body specify a "
+"license for this object. Please either add a license to this object or add "
+"one to the containing System or Body"
 
 #: src/object.vala:494
 #, fuzzy, c-format

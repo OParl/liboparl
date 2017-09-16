@@ -269,7 +269,7 @@ namespace OParl {
         public Object make_object(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_OBJECT(
-                    "Can't make an object from a non-object"
+                    _("Can't make an object from a non-object")
                 );
             }
             Json.Object el_obj = n.get_object();
@@ -284,11 +284,11 @@ namespace OParl {
                 }
                 if (url == "") {
                     throw new ParsingError.INVALID_TYPE(
-                        "Tried to make an object from a json without type"
+                        _("Tried to make an object from a json without type")
                     );
                 } else {
                     throw new ParsingError.INVALID_TYPE(
-                        "Tried to make an object from a json without type: '%s'",
+                        _("Tried to make an object from a json without type")+": '%s'",
                         url
                     );
                 }
