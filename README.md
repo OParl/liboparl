@@ -89,7 +89,7 @@ Feel free to add examples for your favorite language.
 Note: If you installed the library in /usr/local, you have to export the following
 environment variables for the examples to work:
 
-```
-$ export LD_LIBRARY_PATH=/usr/local/lib 
-$ export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
+```bash
+export LD_LIBRARY_PATH=/usr/local/lib 
+export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
 ```
