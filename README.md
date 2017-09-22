@@ -62,19 +62,19 @@ are the following:
 
 Clone and build the library as follows:
 
-```
-$ git clone https://github.com/oparl/liboparl
-$ cd liboparl
-$ mkdir build
-$ cd build
-$ meson ..
-$ ninja
+```bash
+git clone https://github.com/oparl/liboparl
+cd liboparl
+mkdir build
+cd build
+meson ..
+ninja
 ```
 
-If you desire to install the library, execute:
+If you desire to install the library, execute as root:
 
-```
-# ninja install
+```bash
+ninja install
 ```
 
 Running the examples
