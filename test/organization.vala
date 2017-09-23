@@ -41,9 +41,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -84,11 +82,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_body_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/body/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -101,11 +95,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_start_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"2012-07-17\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"2012-07-17\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -118,11 +108,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_end_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"2014-07-17\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"2014-07-17\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -135,11 +121,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_organization_type_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"Gremium\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"Gremium\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -154,11 +136,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_meeting_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/organization/0/meetings\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"https://oparl.example.org/organization/0/meetings\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -173,11 +151,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/wrong_classification_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"Ausschuss\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"Ausschuss\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -190,11 +164,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/organization/validation_date", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return OrganizationTest.test_input.get(url).replace(
-                        "\"2012-07-17\"","\"2016-01-04\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, OrganizationTest.test_input, "\"2012-07-17\"","\"2016-01-04\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -208,4 +178,3 @@ namespace OParlTest {
         }
     }
 }
-

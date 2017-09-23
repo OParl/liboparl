@@ -41,9 +41,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -74,11 +72,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/membership/1\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"https://oparl.example.org/membership/1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -92,11 +86,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_organization_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/organization/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"https://oparl.example.org/organization/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -110,11 +100,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_role_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"Sachkundige Bürgerin\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"Sachkundige Bürgerin\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -128,11 +114,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_voting_right_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "false", "\"foobar\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, MembershipTest.test_input, "false", "\"foobar\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -146,11 +128,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_start_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"2013-12-02\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"2013-12-02\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -164,11 +142,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/membership/wrong_end_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MembershipTest.test_input.get(url).replace(
-                        "\"2014-07-27\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"2014-07-27\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);

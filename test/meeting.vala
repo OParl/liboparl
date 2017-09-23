@@ -41,9 +41,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/meeting/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, MeetingTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -87,11 +85,10 @@ namespace OParlTest {
                 client.resolve_url.connect((url)=>{
                     var data = MeetingTest.test_input.get(url);
                     if (url == "https://oparl.example.org/body/0/meetings/")
-                        return data.replace(
+                        data = data.replace(
                             "\"https://oparl.example.org/meeting/0\"", "1"
                         );
-                    else
-                        return data;
+                    return new ResolveUrlResult(data, true, 200);
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
@@ -105,11 +102,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/meeting/wrong_cancelled_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url).replace(
-                        "\"cancelled\": false", "\"cancelled\": \"1\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, MeetingTest.test_input, "\"cancelled\": false", "\"cancelled\": \"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -122,11 +115,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/meeting/wrong_start_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url).replace(
-                        "\"2013-01-04T08:00:00+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MeetingTest.test_input, "\"2013-01-04T08:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -139,11 +128,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/meeting/wrong_end_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url).replace(
-                        "\"2013-01-04T12:00:00+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, MeetingTest.test_input, "\"2013-01-04T12:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -157,11 +142,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/meeting/validation_date", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return MeetingTest.test_input.get(url).replace(
-                        "\"2013-01-04T12:00:00+00:00\"","\"2013-01-04T06:00:00+00:00\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, MeetingTest.test_input, "\"2013-01-04T12:00:00+00:00\"", "\"2013-01-04T06:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);

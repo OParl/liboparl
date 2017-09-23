@@ -43,9 +43,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -91,12 +89,11 @@ namespace OParlTest {
                 client.resolve_url.connect((url)=>{
                     var data = PaperTest.test_input.get(url);
                     if (url == "https://oparl.example.org/body/0/papers/") {
-                        return data.replace(
+                        data = data.replace(
                             "\"https://oparl.example.org/paper/0\"", "1"
                         );
-                    } else {
-                        return data;
                     }
+                    return new ResolveUrlResult(data, true, 200);
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
@@ -110,11 +107,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/wrong_body_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/body/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -127,11 +120,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/wrong_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url).replace(
-                        "\"Antwort auf Anfrage 1200/2014\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, "\"Antwort auf Anfrage 1200/2014\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -144,11 +133,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/wrong_reference_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url).replace(
-                        "\"1234/2014\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, "\"1234/2014\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -161,11 +146,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/wrong_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url).replace(
-                        "\"2014-04-04\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, "\"2014-04-04\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -178,11 +159,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/paper/wrong_paper_type_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PaperTest.test_input.get(url).replace(
-                        "\"Beantwortung einer Anfrage\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PaperTest.test_input, "\"Beantwortung einer Anfrage\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
