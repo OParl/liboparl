@@ -35,9 +35,7 @@ namespace OParlTest {
 
         public static ulong mock_connect_extra(ref Client client, GLib.HashTable<string,string> test_input, string old_value, string new_value) {
             return client.resolve_url.connect((url) => {
-                string resolved_data = test_input.get(url);
-                if (resolved_data != null)
-                resolved_data = resolved_data.replace(old_value, new_value);
+                string resolved_data = test_input.get(url).replace(old_value, new_value);
                 return new ResolveUrlResult(resolved_data, true, 200);
             });
         }
