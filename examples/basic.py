@@ -45,6 +45,6 @@ def resolve(_, url, status):
 print ("Gonna ask an OParl system for its name…")
 client = OParl.Client()
 client.connect("resolve_url", resolve) 
-system = client.open("https://dev.oparl.org/api/v1/system")
+system = client.open("https://dev.oparl.org/api/oparl/v1/system")
 print ("It says, it's name is: '"+system.get_name()+"'")
 print (" - Yours, liboparl")
