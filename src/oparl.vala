@@ -410,7 +410,7 @@ namespace OParl {
                     throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), old_url);
                 }
                 visited_urls.append(url);
-                string data = this.c.resolve_url(this.url).resolved_data;
+                string data = this.c.resolve_url(url).resolved_data;
                 var parser = new Json.Parser();
                 try {
                     parser.load_from_data(data);
