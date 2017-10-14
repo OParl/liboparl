@@ -126,7 +126,7 @@ namespace OParl {
             return this.meeting_p;
         }
 
-        internal string consultation_url {get;set; default="";}
+        public string consultation_url {get; internal set; default="";}
         private bool consultation_resolved {get;set; default=false;}
         private Consultation? consultation_p = null;
         /**
