@@ -39,7 +39,7 @@ namespace OParl {
          */
         public bool authoritative {get; internal set;}
 
-        internal string paper_url {get;set; default="";}
+        public string paper_url {get; internal set; default="";}
         private bool paper_resolved {get;set; default=false;}
         private Paper? paper_p = null;
         /**
