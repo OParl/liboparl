@@ -37,9 +37,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -74,11 +72,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_oparl_version_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"https://schema.oparl.org/1.0/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"https://schema.oparl.org/1.0/\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -89,11 +83,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_contact_email_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"info@example.org\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"info@example.org\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -104,11 +94,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_contact_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"Allgemeiner OParl Kontakt\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"Allgemeiner OParl Kontakt\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -119,11 +105,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_website_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"http://www.example.org/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"http://www.example.org/\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -134,11 +116,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_vendor_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"http://example-software.com/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"http://example-software.com/\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -149,11 +127,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_product_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "\"http://example-software.com/oparl-server/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "\"http://example-software.com/oparl-server/\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -164,11 +138,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/system/wrong_other_oparl_versions_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return SystemTest.test_input.get(url).replace(
-                        "[\"https://oparl2.example.org/\"]", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, SystemTest.test_input, "[\"https://oparl2.example.org/\"]");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();

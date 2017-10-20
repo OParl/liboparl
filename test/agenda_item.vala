@@ -41,9 +41,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -83,11 +81,7 @@ namespace OParlTest {
                 Test.skip("Due to fixture conflict with file_sane fixture");
 
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/agendaitem/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/agendaitem/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -102,11 +96,7 @@ namespace OParlTest {
             Test.add_func ("/oparl/agenda_item/wrong_meeting_type", () => {
                 Test.skip("Due to fixture conflict with meeting_sane fixture");
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/meeting/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/meeting/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -120,11 +110,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_number_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"10.1\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"10.1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -138,11 +124,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"Satzungsänderung für Ausschreibungen\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Satzungsänderung für Ausschreibungen\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -156,11 +138,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_public_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "true", "\"1\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, AgendaItemTest.test_input, "true", "\"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -174,11 +152,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_consultation_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/consultation/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/consultation/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -192,11 +166,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_result_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"Geändert beschlossen\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Geändert beschlossen\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -210,11 +180,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_resolution_text_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"Der Beschluss weicht wie folgt vom Antrag ab: ...\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Der Beschluss weicht wie folgt vom Antrag ab: ...\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -228,11 +194,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_start_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"2012-02-06T12:01:00+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"2012-02-06T12:01:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -246,11 +208,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/agenda_item/wrong_end_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return AgendaItemTest.test_input.get(url).replace(
-                        "\"2012-02-08T14:05:27+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"2012-02-08T14:05:27+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);

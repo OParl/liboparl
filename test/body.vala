@@ -41,9 +41,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -90,11 +88,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/body/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -106,11 +100,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_system_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"https://oparl.example.org/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -122,11 +112,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_contact_email_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"ris@beispielstadt.de\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"ris@beispielstadt.de\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -138,11 +124,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_contact_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"RIS-Betreuung\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"RIS-Betreuung\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -154,11 +136,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_ags_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"05315000\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"05315000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -170,11 +148,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_rgs_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"053150000000\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"053150000000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -186,11 +160,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_classification_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"Kreisfreie Stadt\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"Kreisfreie Stadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -206,11 +176,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_website_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"http://www.beispielstadt.de/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"http://www.beispielstadt.de/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -222,11 +188,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_license_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"http://creativecommons.org/licenses/by/4.0/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"http://creativecommons.org/licenses/by/4.0/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -238,11 +200,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_license_valid_since_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"2015-01-01T14:28:31.568+0000\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"2015-01-01T14:28:31.568+0000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -254,11 +212,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/body/wrong_oparl_since_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return BodyTest.test_input.get(url).replace(
-                        "\"2014-01-01T14:28:31.568+0000\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, BodyTest.test_input, "\"2014-01-01T14:28:31.568+0000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
