@@ -135,18 +135,23 @@ namespace OParl {
          */
         public Consultation get_consultation() throws ParsingError {
             lock (consultation_resolved) {
+                if (consultation_url == "") {
+                    // consulations on agenda items are optional and
+                    // should not throw errors
+                    consultation_p = null;
+                    consultation_resolved = true;
+                }
+
                 if (!consultation_resolved) {
                     this.autoload();
 
                     var r = new Resolver(this.client);
-                    if (this.consultation_url != "")
-                        this.consultation_p = (Consultation)r.parse_url(this.consultation_url);
-                    else
-                        warning(_("Agenda item has no consultation: %s"), this.id);
+                    consultation_p = (Consultation)r.parse_url(this.consultation_url);
+
                     consultation_resolved = true;
                 }
             }
-            return this.consultation_p;
+            return consultation_p;
         }
 
         internal new static void populate_name_map() {
