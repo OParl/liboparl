@@ -247,7 +247,7 @@ namespace OParl {
         /**
          * Turn a Json.Node into an OParl.Object
          */
-        private Object make_object(Json.Node n) throws ParsingError {
+        private T make_object(Json.Node n) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_OBJECT(
                     "Can't make an object from a non-object"
@@ -284,8 +284,8 @@ namespace OParl {
                 throw new ParsingError.INVALID_TYPE(_("The type of this object is no valid OParl type: %s").printf(typestr));
             }
 
-            var target = (Object)GLib.Object.new(t);
-            target.set_client(this.client);
+            var target = (T)GLib.Object.new(t);
+            (target as OParl.Object).set_client(this.client);
 
             try {
                 (target as Parsable).parse(n);
@@ -310,7 +310,7 @@ namespace OParl {
             return null;
         }
 
-        public PageableSequence iterator() {
+        public Iterator iterator() {
             return new Iterator(this);
         }
 

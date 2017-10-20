@@ -329,7 +329,7 @@ namespace OParl {
                         this.parse_external_paginated(
                             this,
                             name,
-                            new PageableSequence<Organization?>(this.client, ""),
+                            new PageableSequence<Organization>(this.client, ""),
                             item,
                             Body.name_map
                         );
