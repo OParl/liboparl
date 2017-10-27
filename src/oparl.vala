@@ -244,6 +244,19 @@ namespace OParl {
          * was detected in.
          */
         public signal void shit_happened(ValidationResult vr);
+
+        /**
+         * Mainly for debugging purposes.
+         * Returns the parsed object for an url
+        */
+        public Object parse_url(string url) throws OParl.ParsingError {
+            if (url == "") {
+                throw new ParsingError.NO_DATA(_("You did not supply valid data"));
+            }
+
+            var r = new Resolver(this);
+            return r.parse_url(url);
+        }
     }
 
     /**
