@@ -246,9 +246,11 @@ namespace OParl {
         public signal void shit_happened(ValidationResult vr);
 
         /**
-         * Mainly for debugging purposes.
-         * Returns the parsed object for an url
-        */
+         * Returns the parsed object for an url.
+         *
+         * Do not use this to get from one object to an associated object, use
+         * the properly typed and cached object methods instead. 
+         */
         public Object parse_url(string url) throws OParl.ParsingError {
             if (url == "") {
                 throw new ParsingError.NO_DATA(_("You did not supply valid data"));
