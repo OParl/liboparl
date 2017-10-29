@@ -34,6 +34,30 @@ pkgconfig = import('pkgconfig')
 
 api = '0.2'
 revision = api + '.1'
+deps_file = 'oparl-'+api+'.deps'
+
+if get_option('buildtype') == 'debug'
+    # try to use debug versioning based on git-describe
+    git_describe = run_command(
+        'git',
+        [
+            '-C',
+            meson.current_source_dir(),
+            'describe',
+            '--tags',
+        ]
+    )
+
+    if git_describe.returncode() == 0
+        version = git_describe.stdout().strip().split('v')
+
+        api = ''.join([version[1]])
+        revision = api
+
+        message('Using debug versioning')
+        message('Version was set to: ' + api)
+    endif
+endif
 
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
@@ -145,6 +169,6 @@ if opt_build_valadoc == true
 endif
 
 run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.vapi')
-run_command('cp', meson.current_source_dir()+'/oparl-'+api+'.deps', meson.current_build_dir()+'/oparl-'+api+'.deps')
-install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
+run_command('cp', meson.current_source_dir() + '/' + deps_file, meson.current_build_dir() + '/' + deps_file)
+install_data(deps_file, install_dir: get_option('datadir') + '/vala/vapi')
 install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
