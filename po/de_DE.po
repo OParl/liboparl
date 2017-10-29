@@ -1,21 +1,21 @@
-# linoparl german translation
-# Copyright (C) Daniel 'grindhold' Brendle
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the liboparl package.
-# Daniel 'grindhold' Brendle <grindhold [at] skarphed [dot] org>, 2017.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 12:54+0200\n"
-"PO-Revision-Date: 2017-09-16 18:18+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: de_DE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Stefan Graupner <efrane@meanderingsoul.com>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oparl/teams/80023/de/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/oparl.vala:167
@@ -24,8 +24,8 @@ msgid ""
 "JSON could not be parsed. Please check the OParl endpoint at '%s' against a "
 "linter"
 msgstr ""
-"Das JSON konnte nicht eingelesen werden. Bitte prüfen sie den OParl-Endpunkt "
-"'%s' mit einem JSON-Validator"
+"Das JSON konnte nicht eingelesen werden. Bitte prüfen sie den OParl-Endpunkt"
+" '%s' mit einem JSON-Validator"
 
 #: src/oparl.vala:195
 #, c-format
@@ -56,7 +56,8 @@ msgstr "Der Typ muss als Zeichenkette angegeben werdn im Objekt mit der Id %s"
 
 #: src/oparl.vala:293
 msgid "Tried to resolve an object that does not have a valid Id"
-msgstr "Es wurde versucht, ein Objekt aufzulösen, das keine gültige Id besitzt"
+msgstr ""
+"Es wurde versucht, ein Objekt aufzulösen, das keine gültige Id besitzt"
 
 #: src/oparl.vala:302
 #, c-format
@@ -89,11 +90,9 @@ msgid "Next-links must be strings in '%s'"
 msgstr "Next-Links müssen Zeichenketten sein in '%s'"
 
 #: src/oparl.vala:386
-#, fuzzy, c-format
+#, c-format
 msgid "The list '%s' links 'next' to one of its previous pages"
-msgstr ""
-"Die Liste '%s' linkt mit ihrem 'next'-Attribut auf eine ihrer vorherigen "
-"Seiten"
+msgstr "Die Liste '1%s' verlinkt 'next' auf eine ihrer vorherigen Seiten"
 
 #: src/oparl.vala:395
 #, c-format
@@ -131,28 +130,26 @@ msgstr "Körperschaft ohne System-URL: %s"
 
 #: src/body.vala:369 src/meeting.vala:230 src/meeting.vala:239
 #: src/object.vala:176 src/agenda_item.vala:204
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an array."
-msgstr "Das Attribut '%s' in '%s' muss eine Liste sein"
+msgstr "Attribut '1%s' muss ein Array sein."
 
 #: src/body.vala:380 src/meeting.vala:249 src/meeting.vala:256
 #: src/meeting.vala:263 src/meeting.vala:270 src/organization.vala:253
 #: src/agenda_item.vala:214
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an object."
-msgstr "Attribut '%s' in '%s' muss ein Objekt sein"
+msgstr "Attribut '%s' muss ein Objekt sein."
 
 #: src/body.vala:397
 msgid "Invalid 'name'"
 msgstr "Ungültiger 'name'"
 
 #: src/body.vala:398
-#, fuzzy
 msgid ""
 "The 'name'-field contains an empty string. Each Body must  contain a human "
 "readable name."
 msgstr ""
-"Das Feld 'name' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
 
 #: src/body.vala:406
 msgid "No 'name'"
@@ -167,13 +164,10 @@ msgid "Empty 'organization'"
 msgstr "Leere 'organization'"
 
 #: src/body.vala:415
-#, fuzzy
 msgid ""
 "The 'organization'-field contains an empty string. Each Body must  supply "
 "its organizations."
 msgstr ""
-"Das 'organization'-Feld beinhaltet eine leere Zeichenkette. Jede "
-"Körperschaft muss"
 
 #: src/body.vala:423
 msgid "Missing 'organization' field"
@@ -188,12 +182,10 @@ msgid "Empty 'person'"
 msgstr "Leere 'person'"
 
 #: src/body.vala:432
-#, fuzzy
 msgid ""
 "The 'person'-field contains an empty string. Each Body must supply its "
 "persons."
 msgstr ""
-"Das Feld 'person' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
 
 #: src/body.vala:440
 msgid "Missing 'person' field"
@@ -208,13 +200,10 @@ msgid "Empty 'meeting'"
 msgstr "Leeres 'meeting'"
 
 #: src/body.vala:449
-#, fuzzy
 msgid ""
 "The 'meeting'-field contains an empty string. Each Body must supply its "
 "meetings."
 msgstr ""
-"Das Feld 'meeting ' beinhaltet eine leere Zeichenkette. Jede Körperschaft "
-"muss"
 
 #: src/body.vala:457
 msgid "Missing 'meeting' field"
@@ -229,11 +218,10 @@ msgid "Empty 'paper'"
 msgstr "Leeres 'paper'"
 
 #: src/body.vala:466
-#, fuzzy
 msgid ""
-"The 'paper'-field contains an empty string. Each Body must supply its papers."
+"The 'paper'-field contains an empty string. Each Body must supply its "
+"papers."
 msgstr ""
-"Das Feld 'paper' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
 
 #: src/body.vala:474
 msgid "Missing 'paper' field"
@@ -270,9 +258,8 @@ msgid "Attribute '%s' must be an array in '%s'"
 msgstr "Attribut '%s' in '%s' muss ein Array sein"
 
 #: src/person.vala:244
-#, fuzzy
 msgid "Missing location"
-msgstr "Fehlende 'organization'"
+msgstr ""
 
 #: src/person.vala:245
 msgid "The Person doesn't have any attached location data"
@@ -303,7 +290,8 @@ msgstr ""
 #: src/meeting.vala:288 src/agenda_item.vala:232
 msgid "The 'start' timestamp must be older date than the 'end' timestamp"
 msgstr ""
-"Das Feld 'start' muss einen älteren Zeitstempel beinhalten als das Feld 'end'"
+"Das Feld 'start' muss einen älteren Zeitstempel beinhalten als das Feld "
+"'end'"
 
 #: src/system.vala:107
 #, c-format
@@ -349,62 +337,59 @@ msgstr "Fehler in '%s' festgestellt."
 
 #: src/object.vala:158 src/object.vala:204 src/object.vala:240
 #: src/object.vala:254 src/object.vala:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a value."
-msgstr "Das Attribut '%s' in '%s' muss ein Wert sein"
+msgstr ""
 
 #: src/object.vala:161 src/object.vala:207 src/object.vala:279
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a string."
-msgstr "Das Attribut '%s' in '%s' muss eine Zeichenkette sein"
+msgstr ""
 
 #: src/object.vala:183
-#, fuzzy, c-format
+#, c-format
 msgid "Omitted array-element in '%s' because it was no Json-Value."
 msgstr ""
-"Das Listenelement '%s' in '%s' wurde übersprungen, da es kein gültiger JSON-"
-"Wert ist."
 
 #: src/object.vala:187
-#, fuzzy, c-format
+#, c-format
 msgid "Arrayelement of '%s' must be a string."
-msgstr "Das Listenelement von '%s' in '%s' muss eine Zeichenkette sein"
+msgstr ""
 
 #: src/object.vala:243
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a boolean."
-msgstr "Das Attribut '%s' in '%s' muss ein boolescher Wert sein"
+msgstr ""
 
 #: src/object.vala:257
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an integer."
-msgstr "Das Attribut '%s' in '%s' muss eine Ganzzahl sein"
+msgstr ""
 
 #: src/object.vala:293
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a array."
-msgstr "Das Attribut '%s' in '%s' muss eine Liste sein"
+msgstr ""
 
 #: src/object.vala:300
-#, fuzzy, c-format
+#, c-format
 msgid "Element of '%s' must be a value."
-msgstr "Das Element von '%s' in '%s' muss ein Wert sein"
+msgstr ""
 
 #: src/object.vala:303
-#, fuzzy, c-format
+#, c-format
 msgid "Element of '%s' must be a string."
-msgstr "Das Elememnt von '%s' in '%s' muss eine Zeichenkette sein"
+msgstr ""
 
 #: src/object.vala:374 src/object.vala:383
 msgid "Invalid 'id'"
 msgstr "Ungültige 'id'"
 
 #: src/object.vala:375 src/object.vala:384
-#, fuzzy
 msgid ""
-"The 'id'-field contains no id. The id field must contain a validurl that can "
-"be used to retrieve the object via HTTP."
-msgstr "Das Feld 'id' enthält keine ID. Das Feld 'id' muss eine gültige"
+"The 'id'-field contains no id. The id field must contain a validurl that can"
+" be used to retrieve the object via HTTP."
+msgstr ""
 
 #: src/object.vala:377 src/object.vala:386
 msgid "<id invalid>"
@@ -417,13 +402,13 @@ msgstr "Ungültige 'license'"
 
 #: src/object.vala:393 src/object.vala:415
 msgid ""
-"The 'license'-field does not contain any value. It is recommended to specify "
-"the license for all subordinated objects either in the System object or in "
+"The 'license'-field does not contain any value. It is recommended to specify"
+" the license for all subordinated objects either in the System object or in "
 "the Body objects"
 msgstr ""
 "Das 'license'-Feld enthält keinen Wert. Es wird empfohlen, die Lizenz für "
-"alle untergeordneten Objekte entweder im System- oder im Körperschaftsobjekt "
-"zu spezifizieren"
+"alle untergeordneten Objekte entweder im System- oder im Körperschaftsobjekt"
+" zu spezifizieren"
 
 #: src/object.vala:406
 msgid "Body with no 'system'"
@@ -434,12 +419,9 @@ msgid "This Body does not have a System."
 msgstr " Diese Körperschaft verweist nicht auf ein System."
 
 #: src/object.vala:426
-#, fuzzy
 msgid ""
 "The 'license'-field contains an empty string. Please specify a valid license"
 msgstr ""
-"Das Feld 'license' beinhaltet eine leere Zeichenkette. Bitte spezifizieren "
-"Sie eine gültige"
 
 #: src/object.vala:442
 msgid "Can't resolve root body or root system"
@@ -468,14 +450,13 @@ msgstr ""
 "dem System oder der Körperschaft eine Lizenz hinzu."
 
 #: src/object.vala:494
-#, fuzzy, c-format
+#, c-format
 msgid "Expected valid id attribute, encountered: '%s'."
-msgstr "Erwarte gültiges 'id'-Attribut in '%s', gefunden: '%s'"
+msgstr ""
 
 #: src/object.vala:499
-#, fuzzy
 msgid "Could not parse updated object."
-msgstr "Das aktualisierte Objekt fuer '%s' konnte nicht eingelesen werden"
+msgstr ""
 
 #: src/organization.vala:77
 #, c-format
@@ -540,9 +521,9 @@ msgstr ""
 "Rückreferenz in '%s'"
 
 #: src/location.vala:212
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a object."
-msgstr "Das Attribut '%s' in '%s' muss ein Objekt sein"
+msgstr ""
 
 #: src/file.vala:272
 msgid "Missing 'accessUrl' field"
@@ -557,85 +538,7 @@ msgid "Empty 'accessUrl'"
 msgstr "Leere 'accessUrl'"
 
 #: src/file.vala:281
-#, fuzzy
 msgid ""
 "The 'accessUrl'-field contains an empty string. Each File must  supply an "
 "URL to access its contents."
 msgstr ""
-"Das Feld 'accessUrl' beinhaltet eine leere Zeichenkette. Jedes Datei-Objekt "
-"muss"
-
-#~ msgid "Attribute '%s' must be a value in '%s'"
-#~ msgstr "Das Attribut '%s' in '%s' muss ein Wert sein"
-
-#~ msgid " supply an URL to access its contents."
-#~ msgstr " eine URL zu seinem Inhalt mitliefern."
-
-#~ msgid " contain a human readable name."
-#~ msgstr " einen menschenlesbaren Namen haben."
-
-#~ msgid " supply its organizations."
-#~ msgstr " seine Organisationen enthalten."
-
-#~ msgid " supply its persons."
-#~ msgstr " ihre Personen enthalten."
-
-#~ msgid " supply its meetings."
-#~ msgstr " ihre Meetings enthalten."
-
-#~ msgid " supply its papers."
-#~ msgstr " ihre Paper enthalten."
-
-#~ msgid "Every object needs to have license information. Typically, most "
-#~ msgstr ""
-#~ "Jedes Objekt benötigt Lizenzinformationen. Typischerweise erben die "
-#~ "meisten"
-
-#~ msgid "objects inherit their license from a superordinated Body or "
-#~ msgstr " Objekte ihre Lizenz von ihrer übergeordneten Körperschaft oder"
-
-#~ msgid "system object of which neither could be resolved in this instance."
-#~ msgstr ""
-#~ " System, wobei für dieses Objekt weder das eine noch das andere aufgelöst "
-#~ "werden konnte."
-
-#~ msgid "Neither the superordinated Body nor the superordinated Body "
-#~ msgstr " Weder das übergeordnete System noch die übergeordnete Körperschaft"
-
-#~ msgid "specify a license for this object. Please either add a license "
-#~ msgstr ""
-#~ " spezifizieren eine Lizenz für dieses Objekt. Bitte fügen sie eine Lizenz"
-
-#~ msgid "to this object or add one to the containing System or Body"
-#~ msgstr ""
-#~ " an dieses Objekt oder an die übergeordnete Körperschaft oder das System "
-#~ "an"
-
-#~ msgid ""
-#~ "The 'license'-field does not contain any value. It is recommended to "
-#~ msgstr "Das Feld 'license' enthält keinen Wert. Es wird empfohlen,"
-
-#~ msgid ""
-#~ "specify the license for all subordinated objects either in the System"
-#~ msgstr " die Lizenz für alle untergeordneten Objekte entweder im System,"
-
-#~ msgid " object or in the Body objects"
-#~ msgstr " oder im Körperschaftsobjekt festzulegen."
-
-#~ msgid "license"
-#~ msgstr "Lizenz"
-
-#~ msgid "The 'id'-field is an empty string. The id field must contain a valid"
-#~ msgstr ""
-#~ "Das Feld 'id' ist eine leere Zeichenkette. Das Feld 'id' muss eine gültige"
-
-#~ msgid "url that can be used to retrieve the object via HTTP."
-#~ msgstr ""
-#~ " URL beinhalten, die verwendet werden kann um das Objekt über HTTP "
-#~ "abzufragen."
-
-#~ msgid "You did not supply valid data"
-#~ msgstr "Es wurden keine gültigen Daten uebergeben"
-
-#~ msgid "Person without location url: %s"
-#~ msgstr "Person ohne location URL: %s"
