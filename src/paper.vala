@@ -105,7 +105,7 @@ namespace OParl {
             return this.originator_person_p;
         }
 
-        internal string[] under_direction_of_url {get;set;}
+        public string[] under_direction_of_url {get;internal set;}
         private bool under_direction_of_resolved {get;set; default=false;}
         private List<Organization>? under_direction_of_p = null;
         /**
