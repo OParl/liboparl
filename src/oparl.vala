@@ -249,7 +249,7 @@ namespace OParl {
          * Returns the parsed object for an url.
          *
          * Do not use this to get from one object to an associated object, use
-         * the properly typed and cached object methods instead. 
+         * the properly typed and cached object methods instead.
          */
         public Object parse_url(string url) throws OParl.ParsingError {
             if (url == "") {
@@ -397,7 +397,7 @@ namespace OParl {
 
         private void parse(Json.Node n, List<string> visited_urls, bool follow_next=true) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse in '%s'"), n.dup_string());
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: '%s'"), n.dup_string());
 
             unowned Json.Object o = n.get_object();
 
