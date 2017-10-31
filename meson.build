@@ -45,13 +45,12 @@ if get_option('buildtype') == 'debug'
             meson.current_source_dir(),
             'describe',
             '--tags',
+            '--abbrev=0'
         ]
     )
 
     if git_describe.returncode() == 0
-        version = git_describe.stdout().strip().split('v')
-
-        api = ''.join([version[1]])
+        api = ''.join(git_describe.stdout().strip().split('v'))
         revision = api
 
         message('Using debug versioning')
