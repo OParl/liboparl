@@ -25,18 +25,18 @@ namespace OParlTest {
     public class TestHelper {
         public static ulong mock_connect(ref Client client, GLib.HashTable<string,string> test_input, string? replaced) {
             return client.resolve_url.connect((url) => {
-                string resolved_data = test_input.get(url);
+                string data = test_input.get(url);
                 if (replaced != null) {
-                    resolved_data = resolved_data.replace(replaced, "1");
+                    data = data.replace(replaced, "1");
                 }
-                return new ResolveUrlResult(resolved_data, true, 200);
+                return new ResolveUrlResult(data, true, 200);
             });
         }
 
         public static ulong mock_connect_extra(ref Client client, GLib.HashTable<string,string> test_input, string old_value, string new_value) {
             return client.resolve_url.connect((url) => {
-                string resolved_data = test_input.get(url).replace(old_value, new_value);
-                return new ResolveUrlResult(resolved_data, true, 200);
+                string data = test_input.get(url).replace(old_value, new_value);
+                return new ResolveUrlResult(data, true, 200);
             });
         }
     }

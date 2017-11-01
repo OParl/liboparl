@@ -92,12 +92,12 @@ namespace OParl {
      * request returned, or to -1 if a status code couldn't be determined
      */
     public class ResolveUrlResult : GLib.Object {
-        public string resolved_data {get; set;}
+        public string data {get; set;}
         public bool success {get; set;}
         public int status_code {get; set;}
 
-        public ResolveUrlResult(string resolved_data, bool success, int status_code) {
-            this.resolved_data = resolved_data;
+        public ResolveUrlResult(string data, bool success, int status_code) {
+            this.data = data;
             this.success = success;
             this.status_code = status_code;
         }
@@ -180,7 +180,7 @@ namespace OParl {
                 system.set_client(this);
 
                 try {
-                    parser.load_from_data(result.resolved_data);
+                    parser.load_from_data(result.data);
                 } catch (GLib.Error e) {
                     throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter").printf(url));
                 }
@@ -281,7 +281,7 @@ namespace OParl {
         public unowned List<Object> resolve() throws ParsingError {
             if (this.url == null)
                 throw new ParsingError.URL_NULL(_("URLs must not be null."));
-            string data = this.c.resolve_url(this.url).resolved_data;
+            string data = this.c.resolve_url(this.url).data;
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -367,7 +367,7 @@ namespace OParl {
         }
 
         public Object parse_url(string url) throws ParsingError requires (url != null) {
-            string data = this.c.resolve_url(url).resolved_data;
+            string data = this.c.resolve_url(url).data;
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -426,7 +426,7 @@ namespace OParl {
                     throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), old_url);
                 }
                 visited_urls.append(url);
-                string data = this.c.resolve_url(url).resolved_data;
+                string data = this.c.resolve_url(url).data;
                 var parser = new Json.Parser();
                 try {
                     parser.load_from_data(data);
