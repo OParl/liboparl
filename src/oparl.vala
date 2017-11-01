@@ -151,6 +151,7 @@ namespace OParl {
             t = typeof(Paper);
             t = typeof(Person);
             t = typeof(System);
+
             Client.initialized = true;
         }
 
