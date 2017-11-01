@@ -22,5 +22,5 @@
 langs = run_command('cat', [meson.current_source_dir() + '/LINGUAS']).stdout().split('\n')
 
 i18n = import('i18n')
-i18n.gettext('liboparl', preset:'glib', langs: langs)
+i18n.gettext('liboparl', preset:'glib', languages: langs)
 
