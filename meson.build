@@ -134,8 +134,7 @@ pkgconfig.generate(libraries : libs,
               filebase : meson.current_build_dir()+'/oparl-' + api,
               subdirs : h,
               requires : 'glib-2.0 gobject-2.0 gio-2.0 json-glib-1.0',
-              description : 'A library to access OParl civic information endpoints.',
-              install: true)
+              description : 'A library to access OParl civic information endpoints.')
 
 run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.h')
 install_headers(meson.current_build_dir()+'/oparl-'+api+'.h')
