@@ -143,9 +143,8 @@ namespace OParl {
                 throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages").printf(this.next_page));
             }
 
-            int status;
-            string data = this.client.resolve_url(this.next_page, out status);
-            this.parse_json(data);
+            ResolveUrlResult res = this.client.resolve_url(this.next_page);
+            this.parse_json(res.data);
 
             return true;
         }
