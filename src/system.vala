@@ -131,10 +131,6 @@ namespace OParl {
             name_map.insert("body", "body");
         }
 
-        public System() {
-            base();
-        }
-
         internal new void parse(Json.Node n) throws ParsingError {
             base.parse(this, n);
             if (n.get_node_type() != Json.NodeType.OBJECT)
@@ -146,12 +142,12 @@ namespace OParl {
                 unowned Json.Node item = o.get_member(name);
                 switch(name) {
                     // Direct Read-In
-                    case "oparlVersion": 
-                    case "contactEmail": 
-                    case "contactName": 
-                    case "website": 
-                    case "vendor": 
-                    case "product": 
+                    case "oparlVersion":
+                    case "contactEmail":
+                    case "contactName":
+                    case "website":
+                    case "vendor":
+                    case "product":
                         this.parse_string(this, name, item, System.name_map);
                         break;
                     // string[]
