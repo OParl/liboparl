@@ -19,7 +19,7 @@
 # If not, see http://www.gnu.org/licenses/.
 #*********************************************************************
 
-project ('oparl', 'vala', 'c', meson_version: '>=0.38.0', license: 'LGPL')
+project ('oparl', 'vala', 'c', meson_version: '>=0.40.0', license: 'LGPL')
 
 compiler = meson.get_compiler('vala')
 if compiler.version().version_compare('<0.32.0')
