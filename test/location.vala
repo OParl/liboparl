@@ -42,9 +42,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -80,11 +78,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_description_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -96,11 +90,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_street_address_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"Rathausplatz 1\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Rathausplatz 1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -112,11 +102,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_room_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"1337\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"1337\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -128,11 +114,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_postal_code_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"13337\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"13337\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -144,11 +126,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_sub_locality_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"Beispielbezirk\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Beispielbezirk\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);
@@ -160,11 +138,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/location/wrong_locality_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LocationTest.test_input.get(url).replace(
-                        "\"Beispielstadt\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Beispielstadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     s.get_body().nth_data(0);

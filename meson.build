@@ -76,6 +76,7 @@ oparl_test_source = [
     'test/paper.vala',
     'test/consultation.vala',
     'test/file.vala',
+    'test/test_helper.vala',
 ]
 
 libtype = 'so'

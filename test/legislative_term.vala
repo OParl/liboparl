@@ -40,9 +40,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -67,11 +65,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/term/21\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"https://oparl.example.org/term/21\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -84,11 +78,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/wrong_body_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/body/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -101,11 +91,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/wrong_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url).replace(
-                        "\"21. Wahlperiode\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"21. Wahlperiode\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -118,11 +104,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/wrong_start_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url).replace(
-                        "\"2010-12-03\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"2010-12-03\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -135,11 +117,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/legislative_term/wrong_end_date_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return LegislativeTermTest.test_input.get(url).replace(
-                        "\"2013-12-03\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"2013-12-03\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);

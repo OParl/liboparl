@@ -86,6 +86,24 @@ namespace OParl {
     }
 
     /**
+     * The return value of resolve_url.
+     *
+     * status_code needs to be set to the HTTP status code that the executed
+     * request returned, or to -1 if a status code couldn't be determined
+     */
+    public class ResolveUrlResult : GLib.Object {
+        public string resolved_data {get; set;}
+        public bool success {get; set;}
+        public int status_code {get; set;}
+
+        public ResolveUrlResult(string resolved_data, bool success, int status_code) {
+            this.resolved_data = resolved_data;
+            this.success = success;
+            this.status_code = status_code;
+        }
+    }
+
+    /**
      * The programmer's entrypoint into OParl endpoints
      *
      * When you want to start to work with OParl endpoints, the first
@@ -153,16 +171,15 @@ namespace OParl {
                     Client.init();
             }
 
-            int status;
-            string data = this.resolve_url(url, out status);
+            ResolveUrlResult result = this.resolve_url(url);
 
-            if (data != null) {
+            if (result.success) {
                 var system = new System();
                 var parser = new Json.Parser();
                 system.set_client(this);
 
                 try {
-                    parser.load_from_data(data);
+                    parser.load_from_data(result.resolved_data);
                 } catch (GLib.Error e) {
                     throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl endpoint at '%s' against a linter").printf(url));
                 }
@@ -217,12 +234,8 @@ namespace OParl {
          * one single library, we let you decide how to handle HTTP requests in the
          * application.
          * Please be aware that liboparl likes to be fed with nice unicode-strings.
-         *
-         * Signal has an output parameter that needs to be set to the HTTP-status
-         * code that the executed request returned. If no valid HTTP-status is
-         * achievable, -1 is expected as status value.
          */
-        public signal string? resolve_url (string url, out int status);
+        public signal ResolveUrlResult resolve_url (string url);
 
         /**
          * When this OParl.Client is not in strict mode, this signal will be triggered
@@ -231,6 +244,21 @@ namespace OParl {
          * was detected in.
          */
         public signal void shit_happened(ValidationResult vr);
+
+        /**
+         * Returns the parsed object for an url.
+         *
+         * Do not use this to get from one object to an associated object, use
+         * the properly typed and cached object methods instead.
+         */
+        public Object parse_url(string url) throws OParl.ParsingError {
+            if (url == "") {
+                throw new ParsingError.NO_DATA(_("You did not supply valid data"));
+            }
+
+            var r = new Resolver(this);
+            return r.parse_url(url);
+        }
     }
 
     /**
@@ -252,8 +280,7 @@ namespace OParl {
         public unowned List<Object> resolve() throws ParsingError {
             if (this.url == null)
                 throw new ParsingError.URL_NULL(_("URLs must not be null."));
-            int status;
-            string data = this.c.resolve_url(this.url, out status);
+            string data = this.c.resolve_url(this.url).resolved_data;
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -339,8 +366,7 @@ namespace OParl {
         }
 
         public Object parse_url(string url) throws ParsingError requires (url != null) {
-            int status;
-            string data = this.c.resolve_url(url, out status);
+            string data = this.c.resolve_url(url).resolved_data;
             var parser = new Json.Parser();
             try {
                 parser.load_from_data(data);
@@ -371,7 +397,7 @@ namespace OParl {
 
         private void parse(Json.Node n, List<string> visited_urls, bool follow_next=true) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT)
-                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse in '%s'"), n.dup_string());
+                throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: '%s'"), n.dup_string());
 
             unowned Json.Object o = n.get_object();
 
@@ -399,8 +425,7 @@ namespace OParl {
                     throw new ParsingError.URL_LOOP(_("The list '%s' links 'next' to one of its previous pages"), old_url);
                 }
                 visited_urls.append(url);
-                int status;
-                string data = this.c.resolve_url(url, out status);
+                string data = this.c.resolve_url(url).resolved_data;
                 var parser = new Json.Parser();
                 try {
                     parser.load_from_data(data);

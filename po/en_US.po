@@ -1,20 +1,24 @@
-# linoparl english translation
-# Copyright (C) Daniel 'grindhold' Brendle
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the liboparl package.
-# Daniel 'grindhold' Brendle <grindhold [at] skarphed [dot] org>, 2017.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 12:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Stefan Graupner <efrane@meanderingsoul.com>, 2017\n"
+"Language-Team: English (United States) (https://www.transifex.com/oparl/teams/80023/en_US/)\n"
 "PO-Revision-Date: 2017-09-16 18:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en_US\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
 "X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -89,9 +93,9 @@ msgid "Next-links must be strings in '%s'"
 msgstr "Next-links must be strings in '%s'"
 
 #: src/oparl.vala:386
-#, fuzzy, c-format
+#, c-format
 msgid "The list '%s' links 'next' to one of its previous pages"
-msgstr "The list '%s' links 'next' to one its previous pages"
+msgstr "The list '%s' links 'next' to one of its previous pages"
 
 #: src/oparl.vala:395
 #, c-format
@@ -129,27 +133,29 @@ msgstr "Body without system url: %s"
 
 #: src/body.vala:369 src/meeting.vala:230 src/meeting.vala:239
 #: src/object.vala:176 src/agenda_item.vala:204
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an array."
-msgstr "Attribute '%s' must be an array in '%s"
+msgstr "Attribute '%s' must be an array."
 
 #: src/body.vala:380 src/meeting.vala:249 src/meeting.vala:256
 #: src/meeting.vala:263 src/meeting.vala:270 src/organization.vala:253
 #: src/agenda_item.vala:214
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an object."
-msgstr "Attribute '%s' must be an object in '%s'"
+msgstr "Attribute '%s' must be an object."
 
 #: src/body.vala:397
 msgid "Invalid 'name'"
 msgstr "Invalid 'name'"
 
 #: src/body.vala:398
-#, fuzzy
 msgid ""
 "The 'name'-field contains an empty string. Each Body must  contain a human "
 "readable name."
+msgstr ""
+"The 'name'-field contains an empty string. Each Body must  contain a human "
 msgstr "The 'name'-field contains an empty string. Each Body must "
+"readable name."
 
 #: src/body.vala:406
 msgid "No 'name'"
@@ -164,11 +170,12 @@ msgid "Empty 'organization'"
 msgstr "Empty 'organization'"
 
 #: src/body.vala:415
-#, fuzzy
 msgid ""
 "The 'organization'-field contains an empty string. Each Body must  supply "
 "its organizations."
-msgstr "The 'organization'-field contains an empty string. Each Body must "
+msgstr ""
+"The 'organization'-field contains an empty string. Each Body must  supply "
+"its organizations."
 
 #: src/body.vala:423
 msgid "Missing 'organization' field"
@@ -183,11 +190,12 @@ msgid "Empty 'person'"
 msgstr "Empty 'person'"
 
 #: src/body.vala:432
-#, fuzzy
 msgid ""
 "The 'person'-field contains an empty string. Each Body must supply its "
 "persons."
-msgstr "The 'person'-field contains an empty string. Each Body must "
+msgstr ""
+"The 'person'-field contains an empty string. Each Body must supply its "
+"persons."
 
 #: src/body.vala:440
 msgid "Missing 'person' field"
@@ -202,11 +210,12 @@ msgid "Empty 'meeting'"
 msgstr "Empty 'meeting'"
 
 #: src/body.vala:449
-#, fuzzy
 msgid ""
 "The 'meeting'-field contains an empty string. Each Body must supply its "
 "meetings."
-msgstr "The 'meeting'-field contains an empty string. Each Body must "
+msgstr ""
+"The 'meeting'-field contains an empty string. Each Body must supply its "
+"meetings."
 
 #: src/body.vala:457
 msgid "Missing 'meeting' field"
@@ -221,10 +230,12 @@ msgid "Empty 'paper'"
 msgstr "Empty 'paper'"
 
 #: src/body.vala:466
-#, fuzzy
 msgid ""
-"The 'paper'-field contains an empty string. Each Body must supply its papers."
-msgstr "The 'paper'-field contains an empty string. Each Body must "
+"The 'paper'-field contains an empty string. Each Body must supply its "
+"papers."
+msgstr ""
+"The 'paper'-field contains an empty string. Each Body must supply its "
+"papers."
 
 #: src/body.vala:474
 msgid "Missing 'paper' field"
@@ -261,13 +272,12 @@ msgid "Attribute '%s' must be an array in '%s'"
 msgstr "Attribute '%s' must be an array in '%s'"
 
 #: src/person.vala:244
-#, fuzzy
 msgid "Missing location"
-msgstr "Missing 'organization' field"
+msgstr "Missing location"
 
 #: src/person.vala:245
 msgid "The Person doesn't have any attached location data"
-msgstr ""
+msgstr "The Person doesn't have any attached location data"
 
 #: src/membership.vala:71
 #, c-format
@@ -337,60 +347,61 @@ msgstr "Error occured in '%s'."
 
 #: src/object.vala:158 src/object.vala:204 src/object.vala:240
 #: src/object.vala:254 src/object.vala:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a value."
-msgstr "Attribute '%s' must be a value in '%s'"
+msgstr "Attribute '%s' must be a value."
 
 #: src/object.vala:161 src/object.vala:207 src/object.vala:279
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a string."
-msgstr "Attribute '%s' must be a string in '%s'"
+msgstr "Attribute '%s' must be a string."
 
 #: src/object.vala:183
-#, fuzzy, c-format
+#, c-format
 msgid "Omitted array-element in '%s' because it was no Json-Value."
-msgstr "Omitted array-element in '%s' because it was no Json-Value in '%s'"
+msgstr "Omitted array-element in '%s' because it was no Json-Value."
 
 #: src/object.vala:187
-#, fuzzy, c-format
+#, c-format
 msgid "Arrayelement of '%s' must be a string."
-msgstr "Arrayelement of '%s' must be a string in '%s'"
+msgstr "Arrayelement of '%s' must be a string."
 
 #: src/object.vala:243
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a boolean."
-msgstr "Attribute '%s' must be a boolean in '%s'"
+msgstr "Attribute '%s' must be a boolean."
 
 #: src/object.vala:257
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be an integer."
-msgstr "Attribute '%s' must be an integer in '%s"
+msgstr "Attribute '%s' must be an integer."
 
 #: src/object.vala:293
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a array."
-msgstr "Attribute '%s' must be a array in '%s'"
+msgstr "Attribute '%s' must be a array."
 
 #: src/object.vala:300
-#, fuzzy, c-format
+#, c-format
 msgid "Element of '%s' must be a value."
-msgstr "Element of '%s' must be a value in '%s'"
+msgstr "Element of '%s' must be a value."
 
 #: src/object.vala:303
-#, fuzzy, c-format
+#, c-format
 msgid "Element of '%s' must be a string."
-msgstr "Element of '%s' must be a string in '%s'"
+msgstr "Element of '%s' must be a string."
 
 #: src/object.vala:374 src/object.vala:383
 msgid "Invalid 'id'"
 msgstr "Invalid 'id'"
 
 #: src/object.vala:375 src/object.vala:384
-#, fuzzy
 msgid ""
-"The 'id'-field contains no id. The id field must contain a validurl that can "
-"be used to retrieve the object via HTTP."
-msgstr "The 'id'-field contains no id. The id field must contain a valid"
+"The 'id'-field contains no id. The id field must contain a validurl that can"
+" be used to retrieve the object via HTTP."
+msgstr ""
+"The 'id'-field contains no id. The id field must contain a validurl that can"
+" be used to retrieve the object via HTTP."
 
 #: src/object.vala:377 src/object.vala:386
 msgid "<id invalid>"
@@ -403,10 +414,12 @@ msgstr "Invalid 'license'"
 
 #: src/object.vala:393 src/object.vala:415
 msgid ""
-"The 'license'-field does not contain any value. It is recommended to specify "
-"the license for all subordinated objects either in the System object or in "
+"The 'license'-field does not contain any value. It is recommended to specify"
+" the license for all subordinated objects either in the System object or in "
 "the Body objects"
 msgstr ""
+"The 'license'-field does not contain any value. It is recommended to specify"
+" the license for all subordinated objects either in the System object or in "
 "The 'license'-field does not contain any value. It is recommended to specify "
 "the license for all subordinated objects either in the System object or in "
 "the Body objects"
@@ -420,10 +433,10 @@ msgid "This Body does not have a System."
 msgstr "This Body does not have a System."
 
 #: src/object.vala:426
-#, fuzzy
 msgid ""
 "The 'license'-field contains an empty string. Please specify a valid license"
-msgstr "The 'license'-field contains an empty string. Please specify a valid "
+msgstr ""
+"The 'license'-field contains an empty string. Please specify a valid license"
 
 #: src/object.vala:442
 msgid "Can't resolve root body or root system"
@@ -450,14 +463,13 @@ msgstr ""
 "one to the containing System or Body"
 
 #: src/object.vala:494
-#, fuzzy, c-format
+#, c-format
 msgid "Expected valid id attribute, encountered: '%s'."
-msgstr "Expected valid id attribute in '%s', encountered: '%s'"
+msgstr "Expected valid id attribute, encountered: '%s'."
 
 #: src/object.vala:499
-#, fuzzy
 msgid "Could not parse updated object."
-msgstr "Could not parse updated object for '%s'"
+msgstr "Could not parse updated object."
 
 #: src/organization.vala:77
 #, c-format
@@ -520,9 +532,9 @@ msgid "Can't determine root_body: missing backreference in '%s'"
 msgstr "Can't determine root_body: missing backreference in '%s'"
 
 #: src/location.vala:212
-#, fuzzy, c-format
+#, c-format
 msgid "Attribute '%s' must be a object."
-msgstr "Attribute '%s' must be a object in '%s'"
+msgstr "Attribute '%s' must be a object."
 
 #: src/file.vala:272
 msgid "Missing 'accessUrl' field"
@@ -537,76 +549,9 @@ msgid "Empty 'accessUrl'"
 msgstr "Empty 'accessUrl'"
 
 #: src/file.vala:281
-#, fuzzy
 msgid ""
 "The 'accessUrl'-field contains an empty string. Each File must  supply an "
 "URL to access its contents."
-msgstr "The 'accessUrl'-field contains an empty string. Each File must "
-
-#~ msgid "Attribute '%s' must be a value in '%s'"
-#~ msgstr "Attribute '%s' must be a value in '%s'"
-
-#~ msgid " supply an URL to access its contents."
-#~ msgstr " supply an URL to access its contents."
-
-#~ msgid " contain a human readable name."
-#~ msgstr " contain a human readable name."
-
-#~ msgid " supply its organizations."
-#~ msgstr " supply its organizations."
-
-#~ msgid " supply its persons."
-#~ msgstr " supply its persons."
-
-#~ msgid " supply its meetings."
-#~ msgstr " supply its meetings."
-
-#~ msgid " supply its papers."
-#~ msgstr " supply its papers."
-
-#~ msgid "Every object needs to have license information. Typically, most "
-#~ msgstr "Every object needs to have license information. Typically, most "
-
-#~ msgid "objects inherit their license from a superordinated Body or "
-#~ msgstr "objects inherit their license from a superordinated Body or "
-
-#~ msgid "system object of which neither could be resolved in this instance."
-#~ msgstr "system object of which neither could be resolved in this instance."
-
-#~ msgid "Neither the superordinated Body nor the superordinated Body "
-#~ msgstr "Neither the superordinated Body nor the superordinated Body "
-
-#~ msgid "specify a license for this object. Please either add a license "
-#~ msgstr "specify a license for this object. Please either add a license "
-
-#~ msgid "to this object or add one to the containing System or Body"
-#~ msgstr "to this object or add one to the containing System or Bodyj"
-
-#~ msgid ""
-#~ "The 'license'-field does not contain any value. It is recommended to "
-#~ msgstr ""
-#~ "The 'license'-field does not contain any value. It is recommended to "
-
-#~ msgid ""
-#~ "specify the license for all subordinated objects either in the System"
-#~ msgstr ""
-#~ "specify the license for all subordinated objects either in the System"
-
-#~ msgid " object or in the Body objects"
-#~ msgstr " object or in the Body objects"
-
-#~ msgid "license"
-#~ msgstr "license"
-
-#~ msgid "The 'id'-field is an empty string. The id field must contain a valid"
-#~ msgstr ""
-#~ "The 'id'-field is an empty string. The id field must contain a valid"
-
-#~ msgid "url that can be used to retrieve the object via HTTP."
-#~ msgstr "url that can be used to retrieve the object via HTTP."
-
-#~ msgid "You did not supply valid data"
-#~ msgstr "You did not supply valid data"
-
-#~ msgid "Person without location url: %s"
-#~ msgstr "Person without location url: %s"
+msgstr ""
+"The 'accessUrl'-field contains an empty string. Each File must  supply an "
+"URL to access its contents."

@@ -39,9 +39,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -81,11 +79,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/person/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, "\"https://oparl.example.org/person/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -98,11 +92,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/wrong_family_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url).replace(
-                        "\"Mustermann\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, "\"Mustermann\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -115,11 +105,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/wrong_given_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url).replace(
-                        "\"Max\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, "\"Max\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -134,11 +120,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/wrong_form_of_address_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url).replace(
-                        "\"Ratsfrau\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, "\"Ratsfrau\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -151,11 +133,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/person/wrong_gender_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return PersonTest.test_input.get(url).replace(
-                        "\"male\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, PersonTest.test_input, "\"male\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);

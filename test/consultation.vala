@@ -42,9 +42,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, ConsultationTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -74,11 +72,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/consultation/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/consultation/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -92,11 +86,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/wrong_agenda_item_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/agendaitem/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/agendaitem/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -110,11 +100,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/wrong_meeting_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/meeting/0\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/meeting/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -128,11 +114,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/wrong_authoritative_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url).replace(
-                        "false", "\"1\""
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, ConsultationTest.test_input, "false", "\"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -146,11 +128,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/consultation/wrong_role_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ConsultationTest.test_input.get(url).replace(
-                        "\"Beschlussfassung\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"Beschlussfassung\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
                     Body b = s.get_body().nth_data(0);
@@ -165,4 +143,3 @@ namespace OParlTest {
         }
     }
 }
-

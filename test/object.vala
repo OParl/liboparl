@@ -37,9 +37,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/sane_input", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/");
@@ -63,11 +61,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_id_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"https://oparl.example.org/\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"https://oparl.example.org/\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -78,11 +72,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"Testsystem und so\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"Testsystem und so\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -93,11 +83,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_short_name_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"Testsystem\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"Testsystem\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -108,11 +94,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_license_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"CC-BY-SA\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"CC-BY-SA\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -123,11 +105,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_created_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"2016-01-01T13:12:22+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"2016-01-01T13:12:22+00:00\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -138,11 +116,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_modified_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"2016-05-23T21:18:29+00:00\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"2016-05-23T21:18:29+00:00\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -153,11 +127,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_keyword_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "[\"some\",\"neat\",\"object\"]", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "[\"some\",\"neat\",\"object\"]");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -168,11 +138,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_web_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "\"https://foobar.invalid\"", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "\"https://foobar.invalid\"");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -183,11 +149,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/wrong_deleted_type", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "false", "1"
-                    );
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, "false");
                 try {
                     client.open("https://oparl.example.org/");
                     GLib.assert_not_reached();
@@ -198,9 +160,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/vendor_attributes", () => {
                 var client = new Client();
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url);
-                });
+                TestHelper.mock_connect(ref client, ObjectTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/va");
@@ -213,9 +173,7 @@ namespace OParlTest {
 
             Test.add_func ("/oparl/object/refresh", () => {
                 var client = new Client();
-                ulong handle = client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url);
-                });
+                ulong handle = TestHelper.mock_connect(ref client, ObjectTest.test_input, null);
                 System s;
                 try {
                     s = client.open("https://oparl.example.org/va");
@@ -224,11 +182,7 @@ namespace OParlTest {
                 }
                 assert (s.name == "Testsystem und so");
                 client.disconnect(handle);
-                client.resolve_url.connect((url)=>{
-                    return ObjectTest.test_input.get(url).replace(
-                        "Testsystem und so", "Systemtest"
-                    );
-                });
+                TestHelper.mock_connect_extra(ref client, ObjectTest.test_input, "Testsystem und so", "Systemtest");
                 try {
                     s.refresh();
                 } catch (ParsingError e) {
