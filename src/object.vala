@@ -285,9 +285,9 @@ namespace OParl {
         }
 
         /**
-         * This implementation of parse external can work with pageablesequence
+         * This implementation of parse_external can work with PageableSequence
          */
-        protected void parse_external_paginated(Object target, string name, PageableSequence sequence, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
+        protected void parse_external_paginated(Object target, string name, PageableSequence<OParl.Object> sequence, Json.Node item, HashTable<string,string> name_map) throws OParl.ParsingError {
             try {
                 if (item.get_node_type() != Json.NodeType.VALUE) {
                     throw new ParsingError.EXPECTED_VALUE(_("Attribute '%s' must be a value.").printf(name));
