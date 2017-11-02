@@ -92,9 +92,9 @@ namespace OParl {
      * request returned, or to -1 if a status code couldn't be determined
      */
     public class ResolveUrlResult : GLib.Object {
-        public string data {get; set;}
-        public bool success {get; set;}
-        public int status_code {get; set;}
+        public string data {get; internal set;}
+        public bool success {get; internal set;}
+        public int status_code {get; internal set;}
 
         public ResolveUrlResult(string data, bool success, int status_code) {
             this.data = data;
