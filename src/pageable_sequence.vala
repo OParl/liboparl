@@ -322,7 +322,7 @@ namespace OParl {
             }
 
             public T? get() {
-                return this[this.iterator_index++];
+                return this.sequence[this.iterator_index++];
             }
 
             public bool next() {
