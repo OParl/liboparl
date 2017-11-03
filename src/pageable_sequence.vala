@@ -310,10 +310,10 @@ namespace OParl {
         }
 
         public Iterator iterator() {
-            return new Iterator(this);
+            return new Iterator<T>(this);
         }
 
-        public class Iterator {
+        public class Iterator<T> {
             private int iterator_index { get; set; default = 0; }
             private PageableSequence<T> sequence;
 
