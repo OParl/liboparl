@@ -51,7 +51,7 @@ namespace OParlTest {
                     GLib.assert_not_reached();
                 }
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
 
                     assert (p.id == "https://oparl.example.org/paper/0");
@@ -97,7 +97,7 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -110,7 +110,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, PaperTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -123,7 +123,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, PaperTest.test_input, "\"Antwort auf Anfrage 1200/2014\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -136,7 +136,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, PaperTest.test_input, "\"1234/2014\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -149,7 +149,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, PaperTest.test_input, "\"2014-04-04\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -162,7 +162,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, PaperTest.test_input, "\"Beantwortung einer Anfrage\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_paper().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {

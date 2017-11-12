@@ -50,7 +50,7 @@ namespace OParlTest {
                     assert (s.name == "Beispiel-System");
                     assert (s.oparl_version == "https://schema.oparl.org/1.0/");
                     assert (s.get_body() != null);
-                    assert (s.get_body().nth_data(0) is OParl.Body);
+                    assert (s.get_body()[0] is OParl.Body);
                     assert (s.short_name == null);
                     assert (s.license == null);
                     assert (s.web == null);

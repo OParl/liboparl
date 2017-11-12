@@ -50,8 +50,8 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
-                    Organization o = b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    Organization o = b.get_organization()[0];
 
                     assert (o.id == "https://oparl.example.org/organization/0");
                     assert (o.get_body() != null);
@@ -85,8 +85,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'id'"));
@@ -98,8 +98,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"2012-07-17\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'startDate'"));
@@ -111,8 +111,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"2014-07-17\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'endDate'"));
@@ -124,8 +124,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"Gremium\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'organizationType'"));
@@ -139,8 +139,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"https://oparl.example.org/organization/0/meetings\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'meeting'"));
@@ -154,8 +154,8 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, OrganizationTest.test_input, "\"Ausschuss\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    b.get_organization()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'classification'"));
@@ -167,8 +167,8 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, OrganizationTest.test_input, "\"2012-07-17\"","\"2016-01-04\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
-                    Organization o = b.get_organization().nth_data(0);
+                    Body b = s.get_body()[0];
+                    Organization o = b.get_organization()[0];
                     unowned List<ValidationResult> l = o.validate();
                     assert (l.length() == 1);
                     assert (l.nth_data(0).description == "Invalid period");

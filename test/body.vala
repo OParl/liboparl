@@ -50,7 +50,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
 
                     assert (b.id == "https://oparl.example.org/body/0");
                     assert (b.get_system() != null);
@@ -70,8 +70,8 @@ namespace OParlTest {
                     assert (b.license_valid_since.to_string() == "2015-01-01T14:28:31+0000");
                     assert (b.oparl_since.to_string() == "2014-01-01T14:28:31+0000");
                     assert (b.get_organization() != null);
-                    assert (b.get_organization().nth_data(0) != null);
-                    assert (b.get_organization().nth_data(0) is Organization);
+                    assert (b.get_organization()[0] != null);
+                    assert (b.get_organization()[0] is Organization);
                     assert (b.get_person() != null);
                     assert (b.get_person().nth_data(0) != null);
                     assert (b.get_person().nth_data(0) is Person);
@@ -91,7 +91,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'id'"));
@@ -103,7 +103,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"https://oparl.example.org/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'id'"));
@@ -115,7 +115,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"ris@beispielstadt.de\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'contactEmail'"));
@@ -127,7 +127,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"RIS-Betreuung\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'contactName'"));
@@ -139,7 +139,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"05315000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'ags'"));
@@ -151,7 +151,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"053150000000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'rgs'"));
@@ -163,7 +163,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"Kreisfreie Stadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'classification'"));
@@ -179,7 +179,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"http://www.beispielstadt.de/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'website'"));
@@ -191,7 +191,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"http://creativecommons.org/licenses/by/4.0/\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'license'"));
@@ -203,7 +203,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"2015-01-01T14:28:31.568+0000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'licenseValidSince'"));
@@ -215,7 +215,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, BodyTest.test_input, "\"2014-01-01T14:28:31.568+0000\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'oparlSince'"));

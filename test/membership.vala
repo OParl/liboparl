@@ -50,7 +50,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     Membership m = p.membership.nth_data(1);
 
@@ -75,7 +75,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"https://oparl.example.org/membership/1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
@@ -89,7 +89,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"https://oparl.example.org/organization/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
@@ -103,7 +103,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"Sachkundige Bürgerin\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
@@ -117,7 +117,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, MembershipTest.test_input, "false", "\"foobar\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
@@ -131,7 +131,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"2013-12-02\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();
@@ -145,7 +145,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MembershipTest.test_input, "\"2014-07-27\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Person p = b.get_person().nth_data(0);
                     p.membership.nth_data(1);
                     GLib.assert_not_reached();

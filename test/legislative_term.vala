@@ -49,7 +49,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     LegislativeTerm l = b.legislative_term.nth_data(0);
 
                     assert (l.id == "https://oparl.example.org/term/21");
@@ -68,7 +68,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"https://oparl.example.org/term/21\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -81,7 +81,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"https://oparl.example.org/body/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -94,7 +94,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"21. Wahlperiode\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -107,7 +107,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"2010-12-03\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -120,7 +120,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LegislativeTermTest.test_input, "\"2013-12-03\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.legislative_term.nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {

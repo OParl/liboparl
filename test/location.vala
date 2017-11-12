@@ -51,7 +51,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Location l = b.location;
 
                     assert (l != null);
@@ -81,7 +81,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Rathaus der Beispielstadt, Ratshausplatz 1, 12345 Beispielstadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'description'"));
@@ -93,7 +93,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Rathausplatz 1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'streetAddress'"));
@@ -105,7 +105,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"1337\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'room'"));
@@ -117,7 +117,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"13337\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'postalCode'"));
@@ -129,7 +129,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Beispielbezirk\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'subLocality'"));
@@ -141,7 +141,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, LocationTest.test_input, "\"Beispielstadt\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    s.get_body().nth_data(0);
+                    s.get_body()[0];
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
                     assert(e.message.contains("'locality'"));

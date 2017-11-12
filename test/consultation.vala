@@ -50,7 +50,7 @@ namespace OParlTest {
                     GLib.assert_not_reached();
                 }
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     Consultation c = p.consultation.nth_data(0);
 
@@ -75,7 +75,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/consultation/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();
@@ -89,7 +89,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/agendaitem/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();
@@ -103,7 +103,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"https://oparl.example.org/meeting/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();
@@ -117,7 +117,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, ConsultationTest.test_input, "false", "\"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();
@@ -131,7 +131,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, ConsultationTest.test_input, "\"Beschlussfassung\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.consultation.nth_data(0);
                     GLib.assert_not_reached();

@@ -51,12 +51,12 @@ namespace OParl {
         /**
          * The actual objects of this sequence
          */
-        private GLib.List<T> objects;
+        internal GLib.List<T>? objects;
 
         /**
          * URLs to the loaded pages
          */
-        private GLib.List<string> current_pages;
+        internal GLib.List<string> current_pages;
 
         /**
          * The next page to load if the last object is reached
@@ -307,27 +307,6 @@ namespace OParl {
             }
 
             return null;
-        }
-
-        public Iterator iterator() {
-            return new Iterator<T>(this);
-        }
-
-        public class Iterator<T> {
-            private int iterator_index { get; set; default = 0; }
-            private PageableSequence<T> sequence;
-
-            public Iterator(PageableSequence<T> sequence) {
-                this.sequence = sequence;
-            }
-
-            public T? get() {
-                return this.sequence[this.iterator_index++];
-            }
-
-            public bool next() {
-                return (this.iterator_index < this.sequence.current_object_count()) || this.sequence.fetch_next_page();
-            }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     AgendaItem a = m.agenda_item.nth_data(0);
 
@@ -84,7 +84,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/agendaitem/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -99,7 +99,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/meeting/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -113,7 +113,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"10.1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -127,7 +127,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Satzungsänderung für Ausschreibungen\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -141,7 +141,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, AgendaItemTest.test_input, "true", "\"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -155,7 +155,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"https://oparl.example.org/consultation/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -169,7 +169,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Geändert beschlossen\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -183,7 +183,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"Der Beschluss weicht wie folgt vom Antrag ab: ...\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -197,7 +197,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"2012-02-06T12:01:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();
@@ -211,7 +211,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, AgendaItemTest.test_input, "\"2012-02-08T14:05:27+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     m.agenda_item.nth_data(0);
                     GLib.assert_not_reached();

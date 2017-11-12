@@ -50,7 +50,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
 
                     assert (m.id == "https://oparl.example.org/meeting/0");
@@ -92,7 +92,7 @@ namespace OParlTest {
                 });
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -105,7 +105,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, MeetingTest.test_input, "\"cancelled\": false", "\"cancelled\": \"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -118,7 +118,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MeetingTest.test_input, "\"2013-01-04T08:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -131,7 +131,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, MeetingTest.test_input, "\"2013-01-04T12:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     b.get_meeting().nth_data(0);
                     GLib.assert_not_reached();
                 } catch (ParsingError e) {
@@ -145,7 +145,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, MeetingTest.test_input, "\"2013-01-04T12:00:00+00:00\"", "\"2013-01-04T06:00:00+00:00\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Meeting m = b.get_meeting().nth_data(0);
                     unowned List<ValidationResult> l = m.validate();
                     assert (l.length() == 1);

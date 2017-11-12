@@ -97,7 +97,17 @@ namespace OParl {
         //   */
         //  public signal void finished_organizations();
         internal string organization_url {get;set;default="";}
-        public PageableSequence<Organization>? organization { get; internal set; }
+        private bool organization_resolved { get; set; default = false; }
+        public unowned PageableOrganization? organization_p { get; internal set; }
+        public unowned PageableOrganization? get_organization() throws ParsingError {
+            lock(organization_resolved) {
+                if (!organization_resolved && organization_url != null) {
+                    organization_p = new PageableOrganization(client, organization_url);
+                }
+
+                return organization_p;
+            }
+        }
 
         /**
          * Triggered whenever a new page of {@link OParl.Person}s has arrived.
@@ -385,7 +395,7 @@ namespace OParl {
                                this.id
                 ));
             }
-            if (this.organization == null) {
+            if (this.organization_url == null) {
                 this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,
                                _("Missing 'organization' field"),
@@ -479,7 +489,7 @@ namespace OParl {
                 l.append(p);
             }
 
-            foreach (Organization o in this.organization) {
+            foreach (Organization o in this.get_organization()) {
                 l.append(o);
             }
 
@@ -499,6 +509,40 @@ namespace OParl {
          */
         public bool is_root_of(Object o) throws ParsingError {
             return o.root_body() == this;
+        }
+    }
+
+    public class PageableBody  {
+        private PageableSequence<Body> sequence;
+
+        public PageableBody(Client c, string first_page = "") throws ParsingError {
+            this.sequence = new PageableSequence<Body>(c, first_page);
+        }
+
+        public new Body? get(int index) throws ParsingError {
+            return this.sequence[index];
+        }
+
+        public Iterator iterator() {
+            return new Iterator(this.sequence);
+        }
+
+        public class Iterator {
+            private int iterator_index { get; set; default = 0; }
+            private PageableSequence<Body> sequence;
+
+            public Iterator(PageableSequence<Body> sequence) {
+                this.sequence = sequence;
+            }
+
+            public Body? get() throws ParsingError {
+                return this.sequence[this.iterator_index++];
+            }
+
+            public bool next() throws ParsingError {
+                return (this.iterator_index < this.sequence.current_object_count())
+                    || this.sequence.fetch_next_page();
+            }
         }
     }
 }

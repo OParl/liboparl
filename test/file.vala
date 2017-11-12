@@ -51,7 +51,7 @@ namespace OParlTest {
                 }
 
                 try {
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     OParl.File f = p.auxiliary_file.nth_data(0);
 
@@ -88,7 +88,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"https://oparl.example.org/file/0\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -102,7 +102,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"Nachtrags-Tagesordnung\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -116,7 +116,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"nachtrag-TO.pdf\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -130,7 +130,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"application/pdf\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -144,7 +144,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"2012-01-08\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -158,7 +158,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"da39a3ee5e6b4b0d3255bfef95601890afd80709\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -172,7 +172,7 @@ namespace OParlTest {
                 TestHelper.mock_connect_extra(ref client, FileTest.test_input, "82930", "\"1\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -186,7 +186,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"https://oparl.example.org/file/0.pdf\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -200,7 +200,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"https://oparl.example.org/file/download/0.pdf\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -214,7 +214,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"https://www.youtube.com/watch?v=MKp30C3MwVk\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();
@@ -228,7 +228,7 @@ namespace OParlTest {
                 TestHelper.mock_connect(ref client, FileTest.test_input, "\"blablatextblabla\"");
                 try {
                     System s = client.open("https://oparl.example.org/");
-                    Body b = s.get_body().nth_data(0);
+                    Body b = s.get_body()[0];
                     Paper p = b.get_paper().nth_data(0);
                     p.auxiliary_file.nth_data(0);
                     GLib.assert_not_reached();

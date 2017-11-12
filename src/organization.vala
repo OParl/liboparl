@@ -311,4 +311,38 @@ namespace OParl {
             return l;
         }
     }
+
+    public class PageableOrganization {
+        private PageableSequence<Organization> sequence { get; set; }
+
+        public PageableOrganization(Client c, string first_page = "") throws ParsingError {
+            this.sequence = new PageableSequence<Organization>(c, first_page);
+        }
+
+        public new Organization? get(int index) throws ParsingError {
+            return this.sequence[index];
+        }
+
+        public Iterator iterator() {
+            return new Iterator(this.sequence);
+        }
+
+        public class Iterator {
+            private int iterator_index { get; set; default = 0; }
+            private PageableSequence<Organization> sequence;
+
+            public Iterator(PageableSequence<Organization> sequence) {
+                this.sequence = sequence;
+            }
+
+            public Organization? get() throws ParsingError {
+                return this.sequence[this.iterator_index++];
+            }
+
+            public bool next() throws ParsingError {
+                return (this.iterator_index < this.sequence.current_object_count())
+                    || this.sequence.fetch_next_page();
+            }
+        }
+    }
 }
