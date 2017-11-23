@@ -19,7 +19,10 @@
 # If not, see http://www.gnu.org/licenses/.
 #*********************************************************************
 
-langs = run_command('cat', [meson.current_source_dir() + '/LINGUAS']).stdout().split('\n')
+langs = run_command('python3', [
+    meson.current_source_dir() + '../scripts/get_available_po_files.py',
+    meson.current_source_dir()
+]).stdout()
 
 i18n = import('i18n')
 i18n.gettext('liboparl', preset:'glib', languages: langs)
