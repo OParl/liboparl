@@ -293,11 +293,7 @@ namespace OParl {
             return this.result;
         }
 
-        public Object make_object(Json.Node n) throws ParsingError {
-            return make_object_with_debug_url(n, null);
-        }
-
-        private Object make_object_with_debug_url(Json.Node n, string? debug_url) throws ParsingError {
+        public Object make_object(Json.Node n, string? debug_url = null) throws ParsingError {
             if (n.get_node_type() != Json.NodeType.OBJECT) {
                 throw new ParsingError.EXPECTED_OBJECT(
                     _("Can't make an object from a non-object")
@@ -378,7 +374,7 @@ namespace OParl {
             } catch (GLib.Error e) {
                 throw new ParsingError.INVALID_JSON(_("JSON could not be parsed. Please check the OParl Object at '%s' against a linter").printf(url));
             }
-            var o = (Object)make_object_with_debug_url(parser.get_root(), url);
+            var o = (Object)make_object(parser.get_root(), url);
             return o;
         }
 
