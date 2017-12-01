@@ -115,7 +115,7 @@ namespace OParl {
             return this.meeting_p;
         }
 
-        internal string[] organization_url {get;set;}
+        public string[] organization_url {get;internal set;}
         private bool organization_resolved {get;set; default=false;}
         private List<Organization>? organization_p = null;
         /**
