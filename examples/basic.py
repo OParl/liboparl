@@ -42,9 +42,13 @@ def resolve(_, url, status):
         status = -1
         return None
 
-print ("Gonna ask an OParl system for its name…")
-client = OParl.Client()
-client.connect("resolve_url", resolve) 
-system = client.open("https://dev.oparl.org/api/oparl/v1/system")
-print ("It says, it's name is: '"+system.get_name()+"'")
-print (" - Yours, liboparl")
+def main():
+    print ("Gonna ask an OParl system for its name…")
+    client = OParl.Client()
+    client.connect("resolve_url", resolve) 
+    system = client.open("https://dev.oparl.org/api/oparl/v1/system")
+    print ("It says, it's name is: '"+system.get_name()+"'")
+    print (" - Yours, liboparl")
+
+if __name__ == "__main__":
+    main()
