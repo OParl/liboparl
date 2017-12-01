@@ -57,8 +57,10 @@ are the following:
   * valac > 0.32 - Vala compiler
   * valadoc - Vala documentation tool
   * g-ir-compiler - GObject introspection compiler (package `gobject-introspection` in ubuntu)
-  * json-glib-dev - Dev headers for json-glib
+  * json-glib-dev - Dev headers for json-glib (package `libjson-glib-dev` in ubuntu)
   * libgirepository1.0-dev - Dev headers for gobject introspection
+
+Ubuntu: `sudo apt install valac valadoc gobject-introspection libjson-glib-dev libgirepository1.0-dev`
 
 Clone and build the library as follows:
 
