@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#********************************************************************
+# ********************************************************************
 # Copyright 2016-2017 Daniel 'grindhold' Brendle
 #
 # This file is part of liboparl.
@@ -18,37 +18,44 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with liboparl.
 # If not, see http://www.gnu.org/licenses/.
-#*********************************************************************
+# *********************************************************************
 
 """
 Example for using OParl in Python 3
+
+Requires `requests` to be installed.
 """
 import gi
+from requests import HTTPError
+
 gi.require_version('OParl', '0.2')
 from gi.repository import OParl
 
-import urllib.request
+import requests
 
-def resolve(_, url, status):
+
+def resolve(_, url: str):
+    req = requests.get(url)
+
+    content = req.content.decode('utf-8')
+
     try:
-        req = urllib.request.urlopen(url)
-        status= req.getcode()
-        data = req.read()
-        return data.decode('utf-8')
-    except urllib.error.HTTPError as e:
-        status = e.getcode()
-        return None
-    except Exception as e:
-        status = -1
-        return None
+        req.raise_for_status()
+    except HTTPError as e:
+        print("HTTP status code error: ", e)
+        return OParl.ResolveUrlResult(resolved_data=content, success=False, status_code=req.status_code)
+
+    return OParl.ResolveUrlResult(resolved_data=content, success=True, status_code=req.status_code)
+
 
 def main():
-    print ("Gonna ask an OParl system for its name…")
+    print("Gonna ask an OParl system for its name…")
     client = OParl.Client()
-    client.connect("resolve_url", resolve) 
+    client.connect("resolve_url", resolve)
     system = client.open("https://dev.oparl.org/api/oparl/v1/system")
-    print ("It says, it's name is: '"+system.get_name()+"'")
-    print (" - Yours, liboparl")
+    print("It says, it's name is: '" + system.get_name() + "'")
+    print(" - Yours, liboparl")
+
 
 if __name__ == "__main__":
     main()
