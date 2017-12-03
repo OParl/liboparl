@@ -45,7 +45,7 @@ Dependencies
 
 The following libraries have to be present for liboparl to run:
 
-  * glib-2.0
+  * glib-2.0 (Ubuntu: `gir1.2-json-1.0`)
   * json-glib-1.0
 
 Building
