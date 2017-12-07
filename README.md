@@ -1,6 +1,6 @@
 liboparl
 ========
-liboparl is a client library for [OParl](https://github.com/OParl/spec). It is based on glib to to easily integrate into other applications using gobject introspections.
+liboparl is a client library for [OParl](https://github.com/OParl/spec) that is easily integratable in various programming languages using gobject introspections.
 
 Features
 --------
