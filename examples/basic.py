@@ -26,12 +26,11 @@ Example for using OParl in Python 3
 Requires `requests` to be installed.
 """
 import gi
+import requests
 from requests import HTTPError
 
 gi.require_version('OParl', '0.2')
 from gi.repository import OParl
-
-import requests
 
 
 def resolve(_, url: str):
