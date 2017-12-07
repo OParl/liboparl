@@ -1,8 +1,6 @@
 liboparl
 ========
-
-You are laying eyes on liboparl. A client implementation of the [OParl-1.0 specification](https://github.com/OParl/spec).
-It's your easy way to access endpoints in a straightforward fashion.
+liboparl is a client library for [OParl](https://github.com/OParl/spec). It is based on glib to to easily integrate into other applications using gobject introspections.
 
 Features
 --------
