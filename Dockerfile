@@ -3,7 +3,7 @@ FROM ubuntu:17.10
 ENV LANG C.UTF-8
 
 RUN apt-get update && \
-    apt install -y valac valadoc gobject-introspection libjson-glib-dev libgirepository1.0-dev meson gettext git
+    apt-get install -y valac valadoc gobject-introspection libjson-glib-dev libgirepository1.0-dev meson gettext git
 
 ADD . /liboparl
 
