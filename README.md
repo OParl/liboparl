@@ -110,3 +110,8 @@ environment variables for the examples to work:
 export LD_LIBRARY_PATH=/usr/local/lib
 export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
 ```
+
+Docker
+--------
+
+This repository contains a dockerfile which installs liboparl on a ubuntu base image and is automatically updated on [Docker Hub](https://hub.docker.com/r/oparl/liboparl/). This is e.g. used for the [validator](https://github.com/OParl/validator/blob/master/Dockerfile)
