@@ -5,15 +5,27 @@ FROM ubuntu:17.10
 ARG locale='en_US.UTF-8'
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt update && apt install -y locales
-RUN echo "${locale} UTF-8" > /etc/locale.gen && \
+RUN apt update && apt install -y --no-install-recommends locales && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "${locale} UTF-8" > /etc/locale.gen && \
     locale-gen ${locale} && \
     dpkg-reconfigure locales && \
     /usr/sbin/update-locale LANG=${locale}
 ENV LC_ALL ${locale}
 
+# Install build deps and build liboparl
+
 RUN apt update && \
-    apt install -y valac valadoc gobject-introspection libjson-glib-dev libgirepository1.0-dev meson gettext git
+    apt install -y --no-install-recommends \
+    valac \
+    valadoc \
+    gobject-introspection \
+    libjson-glib-dev \
+    libgirepository1.0-dev \
+    meson \
+    gettext \
+    git && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /opt/liboparl
 ADD . /opt/liboparl
@@ -25,5 +37,19 @@ RUN mkdir build && \
     ninja && \
     ninja install
 
-RUN apt-get remove valac valadoc libjson-glib-dev libgirepository1.0-dev meson
-RUN rm -rf /opt/liboparl
+# Let's cleanup after ourselves
+
+RUN rm -rf /usr/share/meson && \
+    apt remove --purge -y \
+    build-essential \
+    valac \
+    valadoc \
+    libjson-glib-dev \
+    libgirepository1.0-dev \
+    meson \
+    gettext \
+    git && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /opt/liboparl && \
+    apt clean
