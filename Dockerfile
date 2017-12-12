@@ -33,7 +33,7 @@ ADD . /opt/liboparl
 WORKDIR /opt/liboparl
 RUN mkdir build && \
     cd build && \
-    meson && \
+    meson --buildtype=release --prefix=/usr && \
     ninja && \
     ninja install
 

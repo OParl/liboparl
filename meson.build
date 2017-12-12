@@ -146,11 +146,3 @@ run_command('touch', meson.current_build_dir()+'/oparl-'+api+'.vapi')
 run_command('cp', meson.current_source_dir()+'/oparl-'+api+'.deps', meson.current_build_dir()+'/oparl-'+api+'.deps')
 install_data('oparl-'+api+'.deps', install_dir: get_option('datadir') + '/vala/vapi')
 install_data(meson.current_build_dir()+'/oparl-'+api+'.vapi', install_dir: get_option('datadir') + '/vala/vapi')
-
-# if we're installing on ubuntu, the typlib needs to be copied manually
-if host_machine.system() == 'linux'
-    is_ubuntu = run_command('grep', '-i', 'ubuntu', '/etc/issue').returncode()
-    if is_ubuntu == 0
-        run_command('cp', meson.current_build_dir()+'OParl-0.*.typelib', '/usr/lib/x86_64-linux-gnu/girepository-1.0/')
-    endif
-endif
