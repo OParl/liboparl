@@ -50,6 +50,7 @@ RUN rm -rf /usr/share/meson && \
     gettext \
     git && \
     apt autoremove -y && \
+    apt install --no-install-recommends gir1.2-json-1.0 && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /opt/liboparl && \
     apt clean
