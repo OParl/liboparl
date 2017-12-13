@@ -65,12 +65,13 @@ Clone and build the library as follows:
 
 ```bash
 git clone https://github.com/oparl/liboparl
-cd liboparl
-mkdir build
-cd build
-meson ..
+mkdir liboparl/build
+cd liboparl/build
+meson
 ninja
 ```
+
+Add `--prefix=/usr` to install systemwide on ubuntu. Add `--buildtype=release` for a release build.
 
 If you desire to install the library, execute as root:
 
