@@ -25,6 +25,7 @@ RUN apt update && \
     meson \
     gettext \
     git && \
+    apt clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /opt/liboparl
@@ -49,8 +50,8 @@ RUN rm -rf /usr/share/meson && \
     meson \
     gettext \
     git && \
-    apt autoremove -y && \
-    apt install --no-install-recommends gir1.2-json-1.0 && \
+    apt autoremove -y && apt update && \
+    apt install -y --no-install-recommends gir1.2-json-1.0 && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /opt/liboparl && \
     apt clean
