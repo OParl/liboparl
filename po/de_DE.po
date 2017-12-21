@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboparl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 12:54+0200\n"
+"POT-Creation-Date: 2017-10-29 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stefan Graupner <efrane@meanderingsoul.com>, 2017\n"
 "Language-Team: German (Germany) (https://www.transifex.com/oparl/teams/80023/de_DE/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/oparl.vala:167
+#: src/oparl.vala:184
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl endpoint at '%s' against a "
@@ -27,7 +27,11 @@ msgstr ""
 "Das JSON konnte nicht eingelesen werden. Bitte prüfen sie den OParl-Endpunkt"
 " '%s' mit einem JSON-Validator"
 
-#: src/oparl.vala:195
+#: src/oparl.vala:195 src/oparl.vala:256
+msgid "You did not supply valid data"
+msgstr "Es wurden keine gültigen Daten übermittelt"
+
+#: src/oparl.vala:211
 #, c-format
 msgid ""
 "JSON could not be parsed:\n"
@@ -36,11 +40,11 @@ msgstr ""
 "JSON konnte nicht eingelesen werden:\n"
 " %s"
 
-#: src/oparl.vala:255
+#: src/oparl.vala:282
 msgid "URLs must not be null."
 msgstr "URLs dürfen nicht null sein."
 
-#: src/oparl.vala:262 src/oparl.vala:335
+#: src/oparl.vala:288 src/oparl.vala:374
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl Object at '%s' against a "
@@ -49,52 +53,62 @@ msgstr ""
 "JSON konnte nicht eingelesen werden. Bitte prüfen sie das Objekt '%s' gegen "
 "einen JSON-Validator"
 
-#: src/oparl.vala:288
+#: src/oparl.vala:299
+msgid "Can't make an object from a non-object"
+msgstr "Aus den vorhandenen Daten kann kein Objekt erstellt werden"
+
+#: src/oparl.vala:314 src/oparl.vala:318
+msgid "Tried to make an object from a json without type"
+msgstr ""
+"Es wurde versucht aus einem JSON-Kontext ohne \"type\"-Attribut ein Objekt "
+"zu erstellen"
+
+#: src/oparl.vala:328
 #, c-format
 msgid "I need a string-value as type in object with id %s"
 msgstr "Der Typ muss als Zeichenkette angegeben werdn im Objekt mit der Id %s"
 
-#: src/oparl.vala:293
+#: src/oparl.vala:333
 msgid "Tried to resolve an object that does not have a valid Id"
 msgstr ""
 "Es wurde versucht, ein Objekt aufzulösen, das keine gültige Id besitzt"
 
-#: src/oparl.vala:302
+#: src/oparl.vala:342
 #, c-format
 msgid "The type of this object is no valid OParl type: %s"
 msgstr "Der Typ dieses Objektes ist kein gültiger OParl-Typ: %s"
 
-#: src/oparl.vala:310 src/oparl.vala:320
+#: src/oparl.vala:350 src/oparl.vala:360
 #, c-format
 msgid "I need an Object to parse: %s"
 msgstr "Es wird ein Objekt zum einlesen benötigt: %s"
 
-#: src/oparl.vala:361
+#: src/oparl.vala:400
 #, c-format
-msgid "I need an Object to parse in '%s'"
+msgid "I need an Object to parse: '%s'"
 msgstr "Es wird ein Objekt zum einlesen benötigt: %s"
 
-#: src/oparl.vala:369
+#: src/oparl.vala:408
 #, c-format
 msgid "Attribute data must be an array in '%s'"
 msgstr "Das Attribut 'data' muss ein Array sein in '%s'"
 
-#: src/oparl.vala:375
+#: src/oparl.vala:414
 #, c-format
 msgid "Attribute links must be an object in '%s'"
 msgstr "Das Attribut 'links' muss ein Objekt sein in '%s'"
 
-#: src/oparl.vala:382
+#: src/oparl.vala:421
 #, c-format
 msgid "Next-links must be strings in '%s'"
 msgstr "Next-Links müssen Zeichenketten sein in '%s'"
 
-#: src/oparl.vala:386
+#: src/oparl.vala:425
 #, c-format
 msgid "The list '%s' links 'next' to one of its previous pages"
 msgstr "Die Liste '1%s' verlinkt 'next' auf eine ihrer vorherigen Seiten"
 
-#: src/oparl.vala:395
+#: src/oparl.vala:433
 #, c-format
 msgid ""
 "JSON could not be parsed. Please check the OParl pagination-list at '%s' "
@@ -129,14 +143,14 @@ msgid "Body without system url: %s"
 msgstr "Körperschaft ohne System-URL: %s"
 
 #: src/body.vala:369 src/meeting.vala:230 src/meeting.vala:239
-#: src/object.vala:176 src/agenda_item.vala:204
+#: src/object.vala:176 src/agenda_item.vala:209
 #, c-format
 msgid "Attribute '%s' must be an array."
-msgstr "Attribut '1%s' muss ein Array sein."
+msgstr "Das Attribut '%s' muss eine Liste sein."
 
 #: src/body.vala:380 src/meeting.vala:249 src/meeting.vala:256
 #: src/meeting.vala:263 src/meeting.vala:270 src/organization.vala:253
-#: src/agenda_item.vala:214
+#: src/agenda_item.vala:219
 #, c-format
 msgid "Attribute '%s' must be an object."
 msgstr "Attribut '%s' muss ein Objekt sein."
@@ -150,6 +164,8 @@ msgid ""
 "The 'name'-field contains an empty string. Each Body must  contain a human "
 "readable name."
 msgstr ""
+"Das Feld 'name' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss "
+"einen für Menschen lesbaren Name enthalten."
 
 #: src/body.vala:406
 msgid "No 'name'"
@@ -168,6 +184,8 @@ msgid ""
 "The 'organization'-field contains an empty string. Each Body must  supply "
 "its organizations."
 msgstr ""
+"Das 'organization'-Feld beinhaltet eine leere Zeichenkette. Jede "
+"Körperschaft muss ihre Organisationen als Liste verlinken."
 
 #: src/body.vala:423
 msgid "Missing 'organization' field"
@@ -186,6 +204,8 @@ msgid ""
 "The 'person'-field contains an empty string. Each Body must supply its "
 "persons."
 msgstr ""
+"Das Feld 'person' beinhaltet eine leere Zeichenkette. Jede Körperschaft muss"
+" ihre Personen als Liste verlinken."
 
 #: src/body.vala:440
 msgid "Missing 'person' field"
@@ -247,8 +267,8 @@ msgstr "Person ohne body URL: %s"
 #. Prepare object
 #: src/person.vala:167 src/membership.vala:150 src/meeting.vala:201
 #: src/system.vala:141 src/object.vala:316 src/organization.vala:220
-#: src/agenda_item.vala:173 src/paper.vala:253 src/consultation.vala:157
-#: src/legislative_term.vala:77 src/location.vala:185 src/file.vala:223
+#: src/agenda_item.vala:178 src/paper.vala:253 src/consultation.vala:157
+#: src/legislative_term.vala:85 src/location.vala:185 src/file.vala:223
 msgid "I need an Object to parse"
 msgstr "Es wird ein Objekt zum einlesen benötigt:"
 
@@ -276,18 +296,18 @@ msgid "Membership without organization url: %s"
 msgstr "Mitgliedschaft ohne organization URL: %s"
 
 #: src/membership.vala:193 src/meeting.vala:287 src/organization.vala:274
-#: src/agenda_item.vala:231 src/legislative_term.vala:106
+#: src/agenda_item.vala:236 src/legislative_term.vala:114
 msgid "Invalid period"
 msgstr "Ungültige Zeitspanne"
 
 #: src/membership.vala:194 src/organization.vala:275
-#: src/legislative_term.vala:107
+#: src/legislative_term.vala:115
 msgid "The startDate must be an earlier date than the endDate"
 msgstr ""
 "Das Feld 'startDate' muss einen älteren Zeitpunkt beinhalten als das Feld "
 "'endDate'"
 
-#: src/meeting.vala:288 src/agenda_item.vala:232
+#: src/meeting.vala:288 src/agenda_item.vala:237
 msgid "The 'start' timestamp must be older date than the 'end' timestamp"
 msgstr ""
 "Das Feld 'start' muss einen älteren Zeitstempel beinhalten als das Feld "
@@ -473,11 +493,6 @@ msgstr "Oranisation ohne meeting URL: %s"
 msgid "Agenda item has no meeting: %s"
 msgstr "Tagesordnungspunkt ohne Meetings: %s"
 
-#: src/agenda_item.vala:145
-#, c-format
-msgid "Agenda item has no consultation: %s"
-msgstr "Tagesordnungspunkt beinhaltet keine Beratung: %s"
-
 #: src/paper.vala:221
 #, c-format
 msgid "Paper has no body: %s"
@@ -508,10 +523,9 @@ msgstr "Beratung ohne paper URL: %s"
 msgid "Consultation without meeting url: %s"
 msgstr "Beratung ohne meeting URL: %s"
 
-#: src/legislative_term.vala:53
-#, c-format
-msgid "Legislative term without body url: %s"
-msgstr "Legislaturperiode ohne body URL: %s"
+#: src/legislative_term.vala:55
+msgid "Legislative term without body url"
+msgstr ""
 
 #: src/location.vala:163
 #, c-format
