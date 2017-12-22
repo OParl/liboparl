@@ -1,14 +1,20 @@
-FROM ubuntu:17.10
+FROM debian:testing-slim
 
 # Set system locale to something sensible (en_US.UTF-8)
 
 ARG locale='en_US.UTF-8'
-ENV LC_ALL ${locale}
 ENV DEBIAN_FRONTEND noninteractive
 
 ADD . /liboparl
 WORKDIR /liboparl
 RUN apt update && apt install -y --no-install-recommends \
+    locales && \
+    echo "${locale} UTF-8" > /etc/locale.gen && \
+    locale-gen ${locale} && \
+    dpkg-reconfigure locales && \
+    /usr/sbin/update-locale LANG=${locale} && \
+    export LC_ALL=${locale} && \
+    apt install -y --no-install-recommends \
     valac \
     valadoc \
     gobject-introspection \
@@ -16,12 +22,7 @@ RUN apt update && apt install -y --no-install-recommends \
     libgirepository1.0-dev \
     meson \
     gettext \
-    git \
-    locales && \
-    echo "${locale} UTF-8" > /etc/locale.gen && \
-    locale-gen ${locale} && \
-    dpkg-reconfigure locales && \
-    /usr/sbin/update-locale LANG=${locale} && \
+    git && \
     mkdir build && \
     cd build && \
     meson --buildtype=release --prefix=/usr && \
@@ -39,7 +40,9 @@ RUN apt update && apt install -y --no-install-recommends \
     gettext \
     git && \
     apt autoremove -y && \
-    apt install -y --no-install-recommends gir1.2-json-1.0 && \
+    apt install -y --no-install-recommends \
+    json-glib-1.0 \
+    gir1.2-json-1.0 && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /liboparl && \
     apt clean
