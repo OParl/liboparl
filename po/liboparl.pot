@@ -1,7 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# liboparl translations
+# Copyright (C) YEAR Daniel "grindhold" Brendle
 # This file is distributed under the same license as the liboparl package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Daniel "grindhold" Brendle <grindhold+oparl@skarphed.org>
 #
 #, fuzzy
 msgid ""
