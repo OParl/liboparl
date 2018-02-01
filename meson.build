@@ -32,8 +32,8 @@ opt_build_test    = get_option('build_test')
 
 pkgconfig = import('pkgconfig')
 
-api = '0.2'
-revision = api + '.1'
+api = '0.4'
+revision = api + '.0'
 
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
