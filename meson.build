@@ -113,7 +113,7 @@ if opt_build_valadoc == true
   valadoc = find_program('valadoc')
   custom_target('apidocs',
                  input: oparl_lib_source,
-                 command: [valadoc, '-o', 'devhelp/oparl-0.2', '--doclet', 'devhelp', '@INPUT@',
+                 command: [valadoc, '-o', 'devhelp/oparl-'+api, '--doclet', 'devhelp', '@INPUT@',
                 '--pkg','json-glib-1.0', '--force'],
                  output: 'devhelp',
                  build_by_default: true
