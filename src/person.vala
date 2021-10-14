@@ -200,9 +200,13 @@ namespace OParl {
                             throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
-                        foreach (Object memb in r.parse_data(item.get_array())) {
-                            (memb as Membership).set_person(this);
-                            this.membership_p.append((Membership)memb);
+                        foreach (Object obj in r.parse_data(item.get_array())) {
+                            var memb = (obj as Membership);
+                            if (memb == null) {
+                                throw new ParsingError.NO_DATA(_("Could not convert obj to membership. This is an internal error. Please report a bug."));
+                            }
+                            memb.set_person(this);
+                            this.membership_p.append(memb);
                         }
                         break;
                 }

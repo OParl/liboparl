@@ -291,8 +291,12 @@ namespace OParl {
                             throw new ParsingError.EXPECTED_ARRAY(_("Attribute '%s' must be an array in '%s'").printf(name, this.id));
                         }
                         var r = new Resolver(this.client);
-                        foreach (Object cons in r.parse_data(item.get_array())) {
-                            (cons as Consultation).set_paper(this);
+                        foreach (Object obj in r.parse_data(item.get_array())) {
+                            var cons = (obj as Consultation);
+                            if (cons == null) {
+                                throw new ParsingError.NO_DATA(_("Could not convert obj to consultation. This is an internal error. Please report a bug."));
+                            }
+                            cons.set_paper(this);
                             this.consultation_p.append((Consultation)cons);
                         }
                         break;

@@ -399,7 +399,11 @@ namespace OParl {
             if (this.license == null && this is Body) {
                 System rootsystem = null;
                 try {
-                    rootsystem = (this as Body).get_system();
+                    var body = (this as Body);
+                    if (body == null) {
+                         throw new ParsingError.NO_DATA(_("Could not convert obj to body. This is an internal error. Please report a bug."));
+                    }
+                    rootsystem = body.get_system();
                 } catch (ParsingError e) {
                     this.validation_results.append(new ValidationResult(
                                ErrorSeverity.ERROR,

@@ -81,7 +81,7 @@ namespace OParl {
      * An OParl object that has a method to unmarshall a JSON-representation
      * of itself
      */
-    public interface Parsable {
+    public interface Parsable : GLib.Object {
         internal abstract void parse (Json.Node n) throws ParsingError;
     }
 
@@ -269,7 +269,7 @@ namespace OParl {
         private string? url;
         private Client c;
 
-        public signal void new_page(List<Object> result);
+        public signal void new_page(List<weak Object> result);
 
         public Resolver(Client c, string? url="") {
             this.url = url;
@@ -345,8 +345,14 @@ namespace OParl {
             var target = (Object)GLib.Object.new(t);
             target.set_client(this.c);
 
+            Parsable parsable_target = (target as Parsable);
+
+            if (parsable_target == null) {
+                throw new ParsingError.NO_DATA(_("Could not convert target to parsable. This is an internal error. Please report a bug."));
+            }
+
             try {
-                (target as Parsable).parse(n);
+                parsable_target.parse(n);
             } catch (ParsingError.EXPECTED_ROOT_OBJECT e) {
                 throw new ParsingError.EXPECTED_ROOT_OBJECT(_("I need an Object to parse: %s"), ident.get_string());
             }

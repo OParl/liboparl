@@ -78,11 +78,11 @@ namespace OParl {
          */
         public GLib.DateTime end {get; internal set;}
 
-        private List<File>? auxiliary_file_p = new List<File>();
+        private List<weak File>? auxiliary_file_p = new List<weak File>();
         /**
          * Miscellaneous files concerning this agenda item
          */
-        public List<File> auxiliary_file {
+        public List<weak File> auxiliary_file {
             get {
                 return this.auxiliary_file_p;
             }
